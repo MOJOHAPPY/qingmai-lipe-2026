@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>清迈 + 丽贝岛 · 13 天悠闲版（2026 中秋国庆）</title>
+<meta name="description" content="兴趣班 + 市集 + 吃喝为主的清迈 8 天与丽贝岛慢节奏 3 天 · 3 人 · 已订机票酒店">
+<link rel="stylesheet" href="assets/leaflet/leaflet.css" />
+<script src="assets/leaflet/leaflet.js"></script>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --text: #1d1d1f;
+  --text2: #6e6e73;
+  --line: rgba(60,60,67,.12);
+  --accent: #0a84ff;
+  --shadow: 0 1px 3px rgba(0,0,0,.07), 0 1px 2px rgba(0,0,0,.05);
+  --radius: 14px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { height:100%; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: var(--bg); color: var(--text); line-height: 1.5;
+  -webkit-font-smoothing: antialiased; letter-spacing: -0.01em;
+}
+a { color: var(--accent); text-decoration:none; }
+
+/* ── 地图 ── */
+#map { width:100%; height:44vh; min-height:300px; position:sticky; top:0; z-index:100; }
+
+/* ── 标签栏 ── */
+.tabs {
+  position: sticky; top: 44vh; z-index: 99;
+  display:flex; gap:6px; padding:10px 14px; overflow-x:auto;
+  background: rgba(255,255,255,.92); backdrop-filter: blur(20px);
+  border-bottom:.5px solid var(--line); scrollbar-width:none;
+}
+.tabs::-webkit-scrollbar { display:none; }
+.tab {
+  flex-shrink:0; padding:7px 14px; border-radius:980px; border:1px solid var(--line);
+  background:#fff; color:var(--text2); font-size:13px; font-weight:600; cursor:pointer; white-space:nowrap;
+}
+.tab.active { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+/* ── 工具栏 ── */
+.toolbar { display:flex; flex-direction:column; gap:8px; padding:10px 14px; background:var(--bg); }
+.search {
+  width:100%; padding:9px 14px; border-radius:10px; border:1px solid var(--line);
+  background:#fff; font-size:14px; outline:none;
+}
+.chips { display:flex; gap:6px; overflow-x:auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:5px 11px; border-radius:980px; border:1px solid var(--line);
+  background:#fff; color:var(--text2); font-size:12px; cursor:pointer;
+}
+.chip.active { background:var(--text); border-color:var(--text); color:#fff; }
+
+/* ── 内容 ── */
+.content { max-width:680px; margin:0 auto; padding:14px 14px calc(40px + var(--safe-bottom)); }
+
+/* 总览 */
+.hero { text-align:center; padding:18px 12px 10px; }
+.hero h1 { font-size:24px; font-weight:800; letter-spacing:-.02em; }
+.hero .sub { font-size:14px; color:var(--text2); margin-top:4px; }
+.seg { background:var(--card); border-radius:var(--radius); padding:14px 16px; margin-bottom:10px; box-shadow:var(--shadow); }
+.seg .seg-name { font-weight:700; font-size:15px; }
+.seg .seg-days { font-size:12px; color:var(--text2); margin:2px 0 6px; }
+.seg .seg-sum { font-size:13px; color:var(--text); }
+.facts { display:grid; grid-template-columns:1fr 1fr; gap:8px; margin:10px 0; }
+.fact { background:var(--card); border-radius:12px; padding:10px 12px; box-shadow:var(--shadow); }
+.fact .l { font-size:11px; color:var(--text2); font-weight:600; }
+.fact .v { font-size:13px; font-weight:600; margin-top:2px; }
+.section-title { font-size:12px; font-weight:700; color:var(--text2); text-transform:uppercase; letter-spacing:.03em; margin:14px 2px 8px; }
+
+/* 每日路线 */
+.day-head { margin:4px 2px 10px; }
+.day-head h2 { font-size:19px; font-weight:800; }
+.day-head .date { font-size:13px; color:var(--text2); margin-top:2px; }
+.day-sum { font-size:13px; color:var(--text); background:var(--card); border-radius:12px; padding:10px 12px; box-shadow:var(--shadow); margin-bottom:12px; }
+
+.tl-item { display:flex; gap:10px; margin-bottom:10px; }
+.tl-dot { width:14px; flex-shrink:0; display:flex; flex-direction:column; align-items:center; }
+.tl-dot i { width:11px; height:11px; border-radius:50%; margin-top:6px; }
+.tl-dot .ln { flex:1; width:2px; background:var(--line); margin-top:2px; }
+.card { flex:1; background:var(--card); border-radius:12px; padding:10px 12px; box-shadow:var(--shadow); cursor:pointer; }
+.card .time { font-size:11px; font-weight:700; color:var(--text2); }
+.card .name { font-size:14px; font-weight:700; margin-top:2px; }
+.card .desc { font-size:12.5px; color:var(--text2); margin-top:4px; }
+.card .budget { font-size:12px; color:#1d9bf0; margin-top:5px; font-weight:600; }
+.chips-pay { display:flex; gap:4px; margin-top:6px; flex-wrap:wrap; }
+.paychip { font-size:10.5px; padding:2px 7px; border-radius:6px; background:#f2f2f7; color:var(--text2); font-weight:600; }
+.links { display:flex; gap:6px; margin-top:8px; flex-wrap:wrap; }
+.btn { font-size:11.5px; font-weight:600; padding:5px 10px; border-radius:8px; border:none; cursor:pointer; }
+.btn.xhs { background:#ff2442; color:#fff; }
+.btn.dp { background:#ff6633; color:#fff; }
+.btn.nav { background:#0a84ff; color:#fff; }
+.btn.dtl { background:#f2f2f7; color:var(--text); }
+.details { margin-top:8px; padding-top:8px; border-top:.5px solid var(--line); font-size:12.5px; color:var(--text); white-space:pre-line; }
+.details.closed { display:none; }
+.alt-note { font-size:11.5px; color:var(--text2); font-style:normal; }
+
+/* 行动面板 */
+.as-overlay { position:fixed; inset:0; background:rgba(0,0,0,.35); z-index:1000; display:none; }
+.as-overlay.show { display:block; }
+.as-sheet { position:absolute; bottom:0; left:0; right:0; background:#fff; border-radius:16px 16px 0 0; padding:10px 12px calc(14px + var(--safe-bottom)); max-width:680px; margin:0 auto; }
+.as-group { margin-bottom:8px; }
+.as-item { display:block; width:100%; text-align:left; padding:12px 14px; border:none; background:transparent; font-size:15px; font-weight:500; cursor:pointer; border-radius:10px; }
+.as-item:active { background:#f2f2f7; }
+.as-item.as-cancel { color:var(--text2); text-align:center; font-weight:600; }
+
+.map-note { position:absolute; bottom:14px; left:14px; z-index:500; background:rgba(255,255,255,.92); border-radius:8px; padding:6px 10px; font-size:11px; color:var(--text2); box-shadow:var(--shadow); pointer-events:none; }
+</style>
+</head>
+<body>
+<div id="map"></div>
+<div class="map-note" id="mapNote">点卡片可看详情与导航</div>
+<nav class="tabs" id="tabs"></nav>
+<div class="toolbar">
+  <input class="search" id="searchInput" type="search" placeholder="搜索地点，例如：泰餐课 / 夜市 / 瑜伽" autocomplete="off">
+  <div class="chips" id="chips"></div>
+</div>
+<main class="content" id="content"></main><script>
+const TRIP = __TRIP_DATA__;
+const DAYS = TRIP.days;
+
+/* ── 工具 ── */
+const $ = (sel) => document.querySelector(sel);
+const esc = (s) => String(s ?? "").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+const POI = Object.fromEntries(TRIP.pois.map(p => [p.id, p]));
+const CAT_LABEL = {
+  transport:"交通", hotel:"酒店", food:"美食", market:"市集", bar:"清吧", activity:"兴趣课",
+  nature:"自然", sight:"景点", shopping:"购物", spot:"街区"
+};
+const CAT_ORDER = ["activity","market","food","bar","shopping","nature","sight","spot","hotel","transport"];
+const catLabel = (c) => CAT_LABEL[c] || c;
+const dayColor = (d) => d.color || "#0a84ff";
+
+/* ── 地图 ── */
+const map = L.map("map", { zoomControl:false, attributionControl:true }).setView([15.8, 100.5], 6);
+const gaode = L.tileLayer("https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}", {
+  maxZoom: 18, subdomains: "1234", attribution: "&copy; 高德地图"
+});
+const osm = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+  maxZoom: 18, attribution: "&copy; OpenStreetMap"
+});
+gaode.addTo(map);
+L.control.layers({ "高德地图": gaode, "OpenStreetMap": osm }).addTo(map);
+const markerLayer = L.layerGroup().addTo(map);
+let currentDay = null;   // null = 总览
+let query = "";
+let cat = "all";
+
+/* ── 地点卡片 ── */
+function xhsUrl(p) { return "https://www.xiaohongshu.com/search_result?keyword=" + encodeURIComponent((p.name_zh || p.name) + " " + p.city); }
+function dpUrl(p) { return "https://www.dianping.com/search/keyword/0/" + encodeURIComponent(p.name_zh || p.name); }
+function gmapUrl(p) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(p.name + " " + p.city); }
+
+function detailHtml(p) {
+  let h = "";
+  if (p.plan) h += "<b>怎么安排：</b>" + esc(p.plan) + "\n";
+  if (p.tip) h += "<b>注意：</b>" + esc(p.tip) + "\n";
+  if (p.whyWorthIt) h += "<b>为什么去：</b>" + esc(p.whyWorthIt) + "\n";
+  if (Array.isArray(p.detailSections)) {
+    p.detailSections.forEach(sec => {
+      if (!sec || !sec.title) return;
+      h += "\n<b>" + esc(sec.title) + "：</b>\n" + (sec.items || []).map(i => "· " + esc(i)).join("\n");
+    });
+  }
+  return h.trim();
+}
+
+function locCard(p, time, isAlt) {
+  const uid = "d" + (currentDay || "ov") + "-" + p.id;
+  const dot = isAlt ? "transparent" : dayColor(DAYS.find(d => d.id === currentDay) || {});
+  const role = isAlt ? '<span class="alt-note">备选 · ' : "";
+  const roleEnd = isAlt ? "</span>" : "";
+  let links = "";
+  links += `<a class="btn xhs" href="${xhsUrl(p)}" target="_blank" rel="noopener">📕 小红书</a>`;
+  links += `<a class="btn dp" href="${dpUrl(p)}" target="_blank" rel="noopener">🍜 大众点评</a>`;
+  links += `<button class="btn nav" onclick="openNav('${p.id}')">🧭 导航</button>`;
+  if (detailHtml(p)) links += `<button class="btn dtl" onclick="toggle('${uid}')">详情</button>`;
+  const budget = p.budget ? `<div class="budget">${esc(p.budget)}</div>` : "";
+  return `<div class="tl-item">
+    <div class="tl-dot"><i style="background:${dot}"></i><div class="ln"></div></div>
+    <div class="card" onclick="if(!event.target.closest('.btn'))toggle('${uid}')">
+      <div class="time">${role}${esc(time)}${roleEnd}</div>
+      <div class="name">${esc(p.name_zh || p.name)}</div>
+      <div class="desc">${esc(p.note || p.desc || "")}</div>
+      ${budget}
+      <div class="links">${links}</div>
+      ${detailHtml(p) ? `<div class="details closed" id="${uid}">${detailHtml(p)}</div>` : ""}
+    </div>
+  </div>`;
+}
+
+/* ── 总览 ── */
+function overviewContent() {
+  let h = `<div class="hero"><h1>清迈 + 丽贝岛 · 13 天悠闲版</h1><div class="sub">兴趣班 + 市集 + 吃喝 · 3 人 · 2026 中秋国庆</div></div>`;
+  h += `<div class="facts">`;
+  TRIP.hardFacts.forEach(f => { h += `<div class="fact"><div class="l">${esc(f.label)}</div><div class="v">${esc(f.value)}</div></div>`; });
+  h += `</div>`;
+  h += `<div class="section-title">三段主线</div>`;
+  TRIP.segments.forEach(s => {
+    h += `<div class="seg"><div class="seg-name">${esc(s.name)}</div><div class="seg-days">${esc(s.days)}</div><div class="seg-sum">${esc(s.summary)}</div></div>`;
+  });
+  h += `<div class="section-title">全部地点（可搜索 / 按类别筛选）</div>`;
+  h += `<div id="poiList">`;
+  TRIP.pois.forEach(p => {
+    const time = "—";
+    h += locCard(p, time, true).replace('class="tl-item"', 'class="tl-item" data-cat="' + esc(p.category) + '" data-q="' + esc((p.name + " " + (p.name_zh||"") + " " + (p.note||"")).toLowerCase()) + '"');
+  });
+  h += `</div>`;
+  return h;
+}
+
+/* ── 每日路线 ── */
+function dayContent(d) {
+  let h = `<div class="day-head"><h2>${esc(d.title)}</h2><div class="date">${esc(d.date)}</div></div>`;
+  h += `<div class="day-sum">${esc(d.summary)}</div>`;
+  h += `<div class="section-title">行程</div><div id="poiList">`;
+  d.stops.forEach(s => {
+    const p = POI[s.poiId]; if (!p) return;
+    h += locCard(p, s.time, false).replace('class="tl-item"', 'class="tl-item" data-cat="' + esc(p.category) + '" data-q="' + esc((p.name + " " + (p.name_zh||"") + " " + (p.note||"")).toLowerCase()) + '"');
+  });
+  h += `</div>`;
+  if (d.candidates && d.candidates.length) {
+    h += `<div class="section-title">当天备选 / 可选</div>`;
+    d.candidates.forEach(id => {
+      const p = POI[id]; if (!p) return;
+      h += locCard(p, "备选", true).replace('class="tl-item"', 'class="tl-item" data-cat="' + esc(p.category) + '" data-q="' + esc((p.name + " " + (p.name_zh||"") + " " + (p.note||"")).toLowerCase()) + '"');
+    });
+  }
+  return h;
+}
+
+/* ── 渲染 ── */
+const tabsEl = $("#tabs");
+TRIP.days.forEach(d => {
+  const b = document.createElement("button");
+  b.className = "tab" + (d.id === "overview" ? " active" : "");
+  b.dataset.day = d.id;
+  b.textContent = d.label;
+  b.style.borderLeftColor = dayColor(d);
+  tabsEl.appendChild(b);
+});
+
+function buildChips() {
+  const chipEl = $("#chips");
+  const cats = ["all", ...TRIP.pois.map(p => p.category).filter((c,i,a) => a.indexOf(c) === i).sort((a,b) => CAT_ORDER.indexOf(a) - CAT_ORDER.indexOf(b))];
+  chipEl.innerHTML = "";
+  cats.forEach(c => {
+    const b = document.createElement("button");
+    b.className = "chip" + (c === cat ? " active" : "");
+    b.textContent = c === "all" ? "全部" : catLabel(c);
+    b.onclick = () => { cat = c; buildChips(); render(); };
+    chipEl.appendChild(b);
+  });
+}
+$("#searchInput").addEventListener("input", (e) => { query = e.target.value.trim().toLowerCase(); render(); });
+
+function applyFilter() {
+  document.querySelectorAll("#poiList .tl-item").forEach(el => {
+    const okCat = cat === "all" || el.dataset.cat === cat;
+    const okQ = !query || (el.dataset.q || "").indexOf(query) >= 0;
+    el.style.display = (okCat && okQ) ? "" : "none";
+  });
+}
+
+function render() {
+  const d = currentDay ? DAYS.find(x => x.id === currentDay) : null;
+  $("#content").innerHTML = d ? dayContent(d) : overviewContent();
+  applyFilter();
+  drawMarkers();
+}
+
+/* ── 地图标记 ── */
+function drawMarkers() {
+  markerLayer.clearLayers();
+  if (currentDay) {
+    const d = DAYS.find(x => x.id === currentDay);
+    const stops = d.stops.map(s => POI[s.poiId]).filter(Boolean);
+    stops.forEach((p, i) => {
+      const n = d.stops[i] && Number(d.stops[i].order) > 0 ? i + 1 : i + 1;
+      const icon = L.divIcon({
+        className: "", html: `<div style="width:24px;height:24px;border-radius:50%;background:${dayColor(d)};color:#fff;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.3)">${n}</div>`,
+        iconSize: [24,24], iconAnchor: [12,12]
+      });
+      L.marker([p.coords[0], p.coords[1]], { icon }).addTo(markerLayer).bindTooltip(p.name_zh || p.name);
+    });
+    const pts = stops.filter(p => p.coords).map(p => [p.coords[0], p.coords[1]]);
+    if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.25));
+  } else {
+    TRIP.days.filter(d => d.id !== "overview").forEach(d => {
+      const color = dayColor(d);
+      d.stops.forEach(s => {
+        const p = POI[s.poiId]; if (!p || !p.coords) return;
+        L.circleMarker([p.coords[0], p.coords[1]], { radius:6, color:"#fff", weight:2, fillColor:color, fillOpacity:.9 })
+          .addTo(markerLayer).bindTooltip((p.name_zh || p.name) + " · " + d.label);
+      });
+    });
+    const pts = TRIP.pois.filter(p => p.coords).map(p => [p.coords[0], p.coords[1]]);
+    if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(0.15));
+  }
+}
+
+/* ── 导航面板 ── */
+function openNav(id) {
+  const p = POI[id]; if (!p) return;
+  const q = encodeURIComponent(p.name + " " + p.city);
+  const enc = encodeURIComponent(p.name_zh || p.name);
+  const safe = (p.name_zh || p.name).replace(/'/g, "\\'");
+  const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+  const amapApp = IS_IOS ? "iosamap" : "androidamap";
+  $("#as-opts").innerHTML =
+    `<button class="as-item" onclick="window.open('https://maps.apple.com/?q=${p.coords[0]},${p.coords[1]}&name=${enc}');closeAS()">🍎 Apple 地图</button>` +
+    `<button class="as-item" onclick="window.open('${gmapUrl(p)}');closeAS()">🗺️ Google 地图</button>` +
+    `<button class="as-item" onclick="window.open('${amapApp}://viewMap?sourceApplication=trip&poiname=${encodeURIComponent(safe)}&lat=${p.coords[0]}&lon=${p.coords[1]}&dev=0');closeAS()">🧭 高德地图</button>`;
+  document.getElementById("asOverlay").classList.add("show");
+}
+function closeAS() { document.getElementById("asOverlay").classList.remove("show"); }
+function toggle(id) { const el = document.getElementById(id); if (el) el.classList.toggle("closed"); }
+
+/* ── 日签切换 ── */
+tabsEl.addEventListener("click", (e) => {
+  const t = e.target.closest(".tab"); if (!t) return;
+  currentDay = t.dataset.day === "overview" ? null : t.dataset.day;
+  tabsEl.querySelectorAll(".tab").forEach(x => x.classList.toggle("active", x === t));
+  render();
+});
+
+/* ── 启动 ── */
+buildChips();
+render();
+</script>
+<div class="as-overlay" id="asOverlay" onclick="if(event.target===this)closeAS()">
+  <div class="as-sheet">
+    <div class="as-group" id="as-opts"></div>
+    <div class="as-group"><button class="as-item as-cancel" onclick="closeAS()">取消</button></div>
+  </div>
+</div>
+</body>
+</html>

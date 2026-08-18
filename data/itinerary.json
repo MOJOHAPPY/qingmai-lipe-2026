@@ -1,0 +1,1038 @@
+[
+  {
+    "id": "day-0",
+    "date": "2026-09-24",
+    "title": "上海 → 昆明 · 机场过夜",
+    "city": "Kunming",
+    "summary": "浦东 14:00 起飞，18:55 到昆明长水；入住机场周边中转酒店，为第二天早班机留足余量。",
+    "anchors": [
+      "poi-kmg-airport"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-kmg-airport",
+        "order": 1,
+        "time": "18:55",
+        "role": "transit"
+      }
+    ],
+    "candidates": [
+      "poi-kmg-transit-hotel"
+    ],
+    "transitSegments": []
+  },
+  {
+    "id": "day-1",
+    "date": "2026-09-25",
+    "title": "抵达清迈 · 古城轻开局",
+    "city": "Chiang Mai",
+    "summary": "09:15 落地清迈，寄存行李后在塔佩门与柴迪隆寺慢慢走，晚上用一顿花园创意泰餐开场。",
+    "anchors": [
+      "poi-thapae-twins",
+      "poi-wat-chedi-luang",
+      "poi-house-by-ginger"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-cnx-airport",
+        "order": 1,
+        "time": "09:15",
+        "role": "arrival"
+      },
+      {
+        "poiId": "poi-thapae-twins",
+        "order": 0,
+        "time": "15:00",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-tha-phae-gate",
+        "order": 2,
+        "time": "15:30",
+        "role": "landmark"
+      },
+      {
+        "poiId": "poi-wat-chedi-luang",
+        "order": 3,
+        "time": "16:30",
+        "role": "landmark"
+      },
+      {
+        "poiId": "poi-house-by-ginger",
+        "order": 4,
+        "time": "18:30",
+        "role": "dinner"
+      }
+    ],
+    "candidates": [],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-cnx-airport",
+        "toPoiId": "poi-thapae-twins",
+        "mode": "Grab/出租车",
+        "minutes": 25,
+        "label": "机场到古城塔佩门一带约 20–25 分钟"
+      },
+      {
+        "fromPoiId": "poi-thapae-twins",
+        "toPoiId": "poi-tha-phae-gate",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "酒店就在塔佩门旁，寄存行李后步行即到"
+      },
+      {
+        "fromPoiId": "poi-tha-phae-gate",
+        "toPoiId": "poi-wat-chedi-luang",
+        "mode": "步行",
+        "minutes": 15,
+        "label": "沿 Ratchadamnoen 路向西直走约 1 公里"
+      },
+      {
+        "fromPoiId": "poi-wat-chedi-luang",
+        "toPoiId": "poi-house-by-ginger",
+        "mode": "步行",
+        "minutes": 12,
+        "label": "往东北方向穿古城到 Moon Muang 路"
+      }
+    ]
+  },
+  {
+    "id": "day-2",
+    "date": "2026-09-26",
+    "title": "市集日 · JJ 早市 + 银庙周六夜市",
+    "city": "Chiang Mai",
+    "summary": "上午去清迈最大的周末创意市集，中午吃咖喱面，下午回酒店午休后去 333 射击场，傍晚在银庙与 Wualai 夜市收尾。",
+    "anchors": [
+      "poi-jing-jai",
+      "poi-333-shooting-thaphae",
+      "poi-wualai-walking-street"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-thapae-twins",
+        "order": 0,
+        "time": "08:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-jing-jai",
+        "order": 1,
+        "time": "09:00",
+        "role": "market"
+      },
+      {
+        "poiId": "poi-khao-soi-khun-yai",
+        "order": 2,
+        "time": "12:30",
+        "role": "lunch"
+      },
+      {
+        "poiId": "poi-333-shooting-thaphae",
+        "order": 3,
+        "time": "15:00",
+        "role": "class"
+      },
+      {
+        "poiId": "poi-wat-srisuphan",
+        "order": 4,
+        "time": "17:00",
+        "role": "landmark"
+      },
+      {
+        "poiId": "poi-wualai-walking-street",
+        "order": 5,
+        "time": "17:30",
+        "role": "night-market"
+      }
+    ],
+    "candidates": [
+      "poi-khun-churn",
+      "poi-fern-forest-cafe"
+    ],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-thapae-twins",
+        "toPoiId": "poi-jing-jai",
+        "mode": "Grab",
+        "minutes": 15,
+        "label": "酒店到 JJ 市集约 15 分钟"
+      },
+      {
+        "fromPoiId": "poi-jing-jai",
+        "toPoiId": "poi-khao-soi-khun-yai",
+        "mode": "Grab",
+        "minutes": 15,
+        "label": "JJ 市集到咖喱面店约 15 分钟"
+      },
+      {
+        "fromPoiId": "poi-khao-soi-khun-yai",
+        "toPoiId": "poi-333-shooting-thaphae",
+        "mode": "Grab",
+        "minutes": 10,
+        "label": "午餐后回古城，打车约 10 分钟"
+      },
+      {
+        "fromPoiId": "poi-333-shooting-thaphae",
+        "toPoiId": "poi-wat-srisuphan",
+        "mode": "Grab",
+        "minutes": 15,
+        "label": "射击场到银庙约 15 分钟"
+      },
+      {
+        "fromPoiId": "poi-wat-srisuphan",
+        "toPoiId": "poi-wualai-walking-street",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "银庙旁即是 Wualai 夜市"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "预约 333 射击（至少提前 1 小时）",
+        "due": "9/26 14:00 前",
+        "detail": "电话 064-495-6815 或平台预约，确认 15:00 场次",
+        "status": "todo"
+      }
+    ]
+  },
+  {
+    "id": "day-3",
+    "date": "2026-09-27",
+    "title": "身心慢日 · 瑜伽 + 中古店 + 周日夜市",
+    "city": "Chiang Mai",
+    "summary": "上午一节古城瑜伽，中午米其林烤鸡，下午逛二手古着，傍晚周日夜市，夜里去北门听爵士。",
+    "anchors": [
+      "poi-wild-rose-yoga",
+      "poi-sunday-walking-street",
+      "poi-north-gate-jazz"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-thapae-twins",
+        "order": 0,
+        "time": "09:00",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-wild-rose-yoga",
+        "order": 1,
+        "time": "09:30",
+        "role": "class"
+      },
+      {
+        "poiId": "poi-sp-chicken",
+        "order": 2,
+        "time": "12:00",
+        "role": "lunch"
+      },
+      {
+        "poiId": "poi-pm2-vintage",
+        "order": 3,
+        "time": "14:00",
+        "role": "shopping"
+      },
+      {
+        "poiId": "poi-sunday-walking-street",
+        "order": 4,
+        "time": "17:00",
+        "role": "night-market"
+      },
+      {
+        "poiId": "poi-north-gate-jazz",
+        "order": 5,
+        "time": "21:00",
+        "role": "night"
+      }
+    ],
+    "candidates": [
+      "poi-fern-forest-cafe"
+    ],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-thapae-twins",
+        "toPoiId": "poi-wild-rose-yoga",
+        "mode": "步行",
+        "minutes": 12,
+        "label": "沿 Phra Pok Klao 路步行约 10–12 分钟"
+      },
+      {
+        "fromPoiId": "poi-wild-rose-yoga",
+        "toPoiId": "poi-sp-chicken",
+        "mode": "Grab",
+        "minutes": 10,
+        "label": "古城东侧到西侧 Samlan 路约 10 分钟"
+      },
+      {
+        "fromPoiId": "poi-sp-chicken",
+        "toPoiId": "poi-pm2-vintage",
+        "mode": "Grab",
+        "minutes": 10,
+        "label": "到北区 Si Phum 的 Wiang Kaew 路约 10 分钟"
+      },
+      {
+        "fromPoiId": "poi-pm2-vintage",
+        "toPoiId": "poi-sunday-walking-street",
+        "mode": "步行",
+        "minutes": 15,
+        "label": "向南走到 Ratchadamnoen 主街"
+      },
+      {
+        "fromPoiId": "poi-sunday-walking-street",
+        "toPoiId": "poi-north-gate-jazz",
+        "mode": "步行",
+        "minutes": 15,
+        "label": "沿主街向北走到北门附近"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "预约 Wild Rose 瑜伽 09:30 课",
+        "due": "提前 1 天",
+        "detail": "电话/到店确认课程，约 350 泰铢/课",
+        "status": "todo"
+      }
+    ]
+  },
+  {
+    "id": "day-4",
+    "date": "2026-09-28",
+    "title": "兴趣班日 · 泰餐课 + 复古市集 + 拉丁舞",
+    "city": "Chiang Mai",
+    "summary": "上午上一堂完整的泰餐课，下午歇脚，傍晚逛 One Nimman 复古市集，晚上去学 Bachata/Salsa。",
+    "anchors": [
+      "poi-mama-noi",
+      "poi-one-nimman",
+      "poi-bailamos"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-thapae-twins",
+        "order": 0,
+        "time": "08:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-mama-noi",
+        "order": 1,
+        "time": "09:00",
+        "role": "class"
+      },
+      {
+        "poiId": "poi-one-nimman",
+        "order": 2,
+        "time": "17:00",
+        "role": "market"
+      },
+      {
+        "poiId": "poi-fairy-garden",
+        "order": 3,
+        "time": "18:00",
+        "role": "shopping"
+      },
+      {
+        "poiId": "poi-bailamos",
+        "order": 4,
+        "time": "19:30",
+        "role": "class"
+      }
+    ],
+    "candidates": [
+      "poi-graph-one-nimman",
+      "poi-nara-thai-nimman"
+    ],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-thapae-twins",
+        "toPoiId": "poi-mama-noi",
+        "mode": "学校接送车",
+        "minutes": 30,
+        "label": "上午班 09:00–09:30 酒店接人"
+      },
+      {
+        "fromPoiId": "poi-mama-noi",
+        "toPoiId": "poi-one-nimman",
+        "mode": "学校送回+打车",
+        "minutes": 30,
+        "label": "约 13:30–14:30 送回酒店休息，17:00 打车到宁曼一号"
+      },
+      {
+        "fromPoiId": "poi-one-nimman",
+        "toPoiId": "poi-fairy-garden",
+        "mode": "步行",
+        "minutes": 10,
+        "label": "同属宁曼街区，步行可达"
+      },
+      {
+        "fromPoiId": "poi-fairy-garden",
+        "toPoiId": "poi-bailamos",
+        "mode": "Grab",
+        "minutes": 10,
+        "label": "按工作室确认地址打车前往"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "预约 Mama Noi 泰餐课（上午班）",
+        "due": "提前 1–2 天",
+        "detail": "确认集合时间与接送；含市场参观与午餐",
+        "status": "todo"
+      },
+      {
+        "label": "确认 Bailamos 当周舞课班次",
+        "due": "D4 前 1 天",
+        "detail": "周一 Open-Level 或约私教；若仅周三有课则改 D11 晚",
+        "status": "todo"
+      }
+    ]
+  },
+  {
+    "id": "day-5",
+    "date": "2026-09-29",
+    "title": "转场合艾 · 夜市之夜",
+    "city": "Hat Yai",
+    "summary": "上午退房飞合艾，下午入住安纳琳，傍晚逛 Kim Yong 市场，晚上在 ASEAN 夜市吃海鲜烧烤。",
+    "anchors": [
+      "poi-analynn",
+      "poi-kim-yong",
+      "poi-asean-bazaar"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-thapae-twins",
+        "order": 0,
+        "time": "08:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-cnx-airport",
+        "order": 1,
+        "time": "10:00",
+        "role": "flight"
+      },
+      {
+        "poiId": "poi-hdy-airport",
+        "order": 2,
+        "time": "13:30",
+        "role": "flight"
+      },
+      {
+        "poiId": "poi-analynn",
+        "order": 0,
+        "time": "15:00",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-kim-yong",
+        "order": 3,
+        "time": "16:30",
+        "role": "market"
+      },
+      {
+        "poiId": "poi-asean-bazaar",
+        "order": 4,
+        "time": "18:30",
+        "role": "dinner"
+      }
+    ],
+    "candidates": [],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-thapae-twins",
+        "toPoiId": "poi-cnx-airport",
+        "mode": "Grab/出租车",
+        "minutes": 25,
+        "label": "09:30 前从酒店出发去清迈机场"
+      },
+      {
+        "fromPoiId": "poi-cnx-airport",
+        "toPoiId": "poi-hdy-airport",
+        "mode": "飞机 FD157",
+        "minutes": 120,
+        "label": "11:25 起飞、13:30 落地合艾"
+      },
+      {
+        "fromPoiId": "poi-hdy-airport",
+        "toPoiId": "poi-analynn",
+        "mode": "出租车",
+        "minutes": 35,
+        "label": "机场到市区酒店约 30–40 分钟"
+      },
+      {
+        "fromPoiId": "poi-analynn",
+        "toPoiId": "poi-kim-yong",
+        "mode": "步行",
+        "minutes": 10,
+        "label": "酒店在 Vongvanit 路，步行可达市场"
+      },
+      {
+        "fromPoiId": "poi-kim-yong",
+        "toPoiId": "poi-asean-bazaar",
+        "mode": "步行",
+        "minutes": 15,
+        "label": "傍晚步行去夜市"
+      }
+    ]
+  },
+  {
+    "id": "day-6",
+    "date": "2026-09-30",
+    "title": "上岛 · 丽贝日落",
+    "city": "Koh Lipe",
+    "summary": "上午车船联程上岛，下午入住十月夕阳别墅，傍晚在日落沙滩等日落，晚上步行街吃海鲜。",
+    "anchors": [
+      "poi-ten-moons",
+      "poi-lipe-sunset-beach",
+      "poi-rak-lay"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-analynn",
+        "order": 0,
+        "time": "07:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-pakbara-pier",
+        "order": 1,
+        "time": "09:30",
+        "role": "transfer"
+      },
+      {
+        "poiId": "poi-ten-moons",
+        "order": 0,
+        "time": "14:00",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-lipe-sunset-beach",
+        "order": 2,
+        "time": "17:30",
+        "role": "sunset"
+      },
+      {
+        "poiId": "poi-rak-lay",
+        "order": 3,
+        "time": "19:00",
+        "role": "dinner"
+      }
+    ],
+    "candidates": [],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-analynn",
+        "toPoiId": "poi-pakbara-pier",
+        "mode": "面包车/包车",
+        "minutes": 120,
+        "label": "合艾到 Pak Bara 码头约 2 小时"
+      },
+      {
+        "fromPoiId": "poi-pakbara-pier",
+        "toPoiId": "poi-ten-moons",
+        "mode": "快艇+岛内接驳",
+        "minutes": 120,
+        "label": "快艇约 1.5–2 小时，低季可能改日出沙滩上下船"
+      },
+      {
+        "fromPoiId": "poi-ten-moons",
+        "toPoiId": "poi-lipe-sunset-beach",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "别墅就在日落沙滩边"
+      },
+      {
+        "fromPoiId": "poi-lipe-sunset-beach",
+        "toPoiId": "poi-rak-lay",
+        "mode": "步行",
+        "minutes": 15,
+        "label": "穿过沙滩到步行街中段"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "确认 9/30 合艾 ⇄ Pak Bara 车船",
+        "due": "出发前 1–2 天",
+        "detail": "低季快艇可能取消或改日出沙滩上下船，与船公司/酒店确认",
+        "status": "todo"
+      }
+    ]
+  },
+  {
+    "id": "day-7",
+    "date": "2026-10-01",
+    "title": "灵活出海日 · 看海况决定浮潜",
+    "city": "Koh Lipe",
+    "summary": "早上问海况：能出海就近岸包船浮潜，不能就在日出沙滩与拖尾沙滩慢玩；晚上步行街泰餐。",
+    "anchors": [
+      "poi-lipe-snorkel",
+      "poi-lipe-sunrise-beach"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-ten-moons",
+        "order": 0,
+        "time": "08:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-lipe-snorkel",
+        "order": 1,
+        "time": "09:00",
+        "role": "activity"
+      },
+      {
+        "poiId": "poi-lipe-sunrise-beach",
+        "order": 2,
+        "time": "14:00",
+        "role": "beach"
+      },
+      {
+        "poiId": "poi-lipe-north-point",
+        "order": 3,
+        "time": "16:30",
+        "role": "sunset"
+      },
+      {
+        "poiId": "poi-nee-papaya",
+        "order": 4,
+        "time": "19:00",
+        "role": "dinner"
+      }
+    ],
+    "candidates": [],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-ten-moons",
+        "toPoiId": "poi-lipe-snorkel",
+        "mode": "包船/长尾船",
+        "minutes": 30,
+        "label": "视海况决定是否出海与出海范围"
+      },
+      {
+        "fromPoiId": "poi-lipe-snorkel",
+        "toPoiId": "poi-lipe-sunrise-beach",
+        "mode": "长尾船/步行",
+        "minutes": 30,
+        "label": "浮潜结束后回到日出沙滩休整"
+      },
+      {
+        "fromPoiId": "poi-lipe-sunrise-beach",
+        "toPoiId": "poi-lipe-north-point",
+        "mode": "步行",
+        "minutes": 20,
+        "label": "沿海岸线往北走到拖尾沙滩"
+      },
+      {
+        "fromPoiId": "poi-lipe-north-point",
+        "toPoiId": "poi-nee-papaya",
+        "mode": "步行",
+        "minutes": 15,
+        "label": "往步行街方向走，餐厅在街尾靠近日出沙滩端"
+      }
+    ]
+  },
+  {
+    "id": "day-8",
+    "date": "2026-10-02",
+    "title": "离岛 · 合艾休整",
+    "city": "Hat Yai",
+    "summary": "上午快艇返程，下午入住 Z Sleep，傍晚逛 Central Festival，晚上在周五最热闹的 ASEAN 夜市收尾。",
+    "anchors": [
+      "poi-z-sleep",
+      "poi-central-festival",
+      "poi-asean-bazaar"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-ten-moons",
+        "order": 0,
+        "time": "07:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-pakbara-pier",
+        "order": 1,
+        "time": "10:30",
+        "role": "transfer"
+      },
+      {
+        "poiId": "poi-z-sleep",
+        "order": 0,
+        "time": "15:00",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-central-festival",
+        "order": 2,
+        "time": "16:30",
+        "role": "shopping"
+      },
+      {
+        "poiId": "poi-asean-bazaar",
+        "order": 3,
+        "time": "18:30",
+        "role": "dinner"
+      }
+    ],
+    "candidates": [],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-ten-moons",
+        "toPoiId": "poi-pakbara-pier",
+        "mode": "快艇",
+        "minutes": 120,
+        "label": "上午快艇回 Pak Bara，提前一晚与酒店确认船班"
+      },
+      {
+        "fromPoiId": "poi-pakbara-pier",
+        "toPoiId": "poi-z-sleep",
+        "mode": "面包车/包车",
+        "minutes": 120,
+        "label": "码头回合艾市区约 2 小时"
+      },
+      {
+        "fromPoiId": "poi-z-sleep",
+        "toPoiId": "poi-central-festival",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "酒店紧邻 Central Festival"
+      },
+      {
+        "fromPoiId": "poi-central-festival",
+        "toPoiId": "poi-asean-bazaar",
+        "mode": "Grab",
+        "minutes": 10,
+        "label": "商场到夜市约 10 分钟"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "确认 10/2 丽贝回程快艇班次",
+        "due": "10/1 上午",
+        "detail": "在岛上与船公司/酒店前台确认次日回 Pak Bara 时间",
+        "status": "todo"
+      }
+    ]
+  },
+  {
+    "id": "day-9",
+    "date": "2026-10-03",
+    "title": "回清迈 · 宁曼之夜",
+    "city": "Chiang Mai",
+    "summary": "下午飞回清迈，入住 Bed Changkian，晚上在宁曼路吃第一顿并散步。",
+    "anchors": [
+      "poi-bed-changkian",
+      "poi-nimman-avenue"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-z-sleep",
+        "order": 0,
+        "time": "10:00",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-hdy-airport",
+        "order": 1,
+        "time": "12:00",
+        "role": "flight"
+      },
+      {
+        "poiId": "poi-cnx-airport",
+        "order": 2,
+        "time": "16:00",
+        "role": "flight"
+      },
+      {
+        "poiId": "poi-bed-changkian",
+        "order": 0,
+        "time": "16:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-nimman-avenue",
+        "order": 3,
+        "time": "18:30",
+        "role": "dinner-walk"
+      }
+    ],
+    "candidates": [
+      "poi-ristr8to-original",
+      "poi-nara-thai-nimman",
+      "poi-kao-soy-nimman"
+    ],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-z-sleep",
+        "toPoiId": "poi-hdy-airport",
+        "mode": "出租车",
+        "minutes": 30,
+        "label": "12:00 前从酒店出发去合艾机场"
+      },
+      {
+        "fromPoiId": "poi-hdy-airport",
+        "toPoiId": "poi-cnx-airport",
+        "mode": "飞机 FD158",
+        "minutes": 120,
+        "label": "14:00 起飞、16:00 落地清迈"
+      },
+      {
+        "fromPoiId": "poi-cnx-airport",
+        "toPoiId": "poi-bed-changkian",
+        "mode": "Grab",
+        "minutes": 25,
+        "label": "机场到 Chang Phueak 酒店约 20–25 分钟"
+      },
+      {
+        "fromPoiId": "poi-bed-changkian",
+        "toPoiId": "poi-nimman-avenue",
+        "mode": "步行/Grab",
+        "minutes": 10,
+        "label": "酒店距宁曼路约 1 公里，可步行或打车"
+      }
+    ]
+  },
+  {
+    "id": "day-10",
+    "date": "2026-10-04",
+    "title": "大象日 · 公益象园半天",
+    "city": "Chiang Mai",
+    "summary": "上午去大象自然公园喂食看洗澡，下午回 Bed Changkian 附近上 COTU 游泳私教课，晚上去宁曼听现场乐队。",
+    "anchors": [
+      "poi-enp",
+      "poi-cotu-swim",
+      "poi-warm-up"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-bed-changkian",
+        "order": 0,
+        "time": "06:45",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-enp",
+        "order": 1,
+        "time": "07:00",
+        "role": "activity"
+      },
+      {
+        "poiId": "poi-cotu-swim",
+        "order": 2,
+        "time": "15:00",
+        "role": "class"
+      },
+      {
+        "poiId": "poi-warm-up",
+        "order": 3,
+        "time": "20:00",
+        "role": "night"
+      }
+    ],
+    "candidates": [
+      "poi-sunday-walking-street",
+      "poi-baristotel"
+    ],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-bed-changkian",
+        "toPoiId": "poi-enp",
+        "mode": "园区接驳车",
+        "minutes": 60,
+        "label": "ENP 上午 07:00 酒店接送，约 13:00 返回"
+      },
+      {
+        "fromPoiId": "poi-enp",
+        "toPoiId": "poi-cotu-swim",
+        "mode": "接驳车 + 步行/Grab",
+        "minutes": 90,
+        "label": "从象园返回后步行/Grab 到 COTU 泳校"
+      },
+      {
+        "fromPoiId": "poi-cotu-swim",
+        "toPoiId": "poi-warm-up",
+        "mode": "Grab",
+        "minutes": 10,
+        "label": "泳课后回酒店洗澡，再打车去 Warm Up"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "预约 ENP 大象自然公园半天",
+        "due": "提前 1 天",
+        "detail": "含酒店接送与素食午餐，确认 07:00 集合点",
+        "status": "todo"
+      },
+      {
+        "label": "预约 COTU 游泳私教（15:00）",
+        "due": "提前 1–3 天",
+        "detail": "邮件或电话 053-327-808 预约，约 800–1500 泰铢/小时；太赶可改 D11 上午",
+        "status": "todo"
+      }
+    ]
+  },
+  {
+    "id": "day-11",
+    "date": "2026-10-05",
+    "title": "北线自然 + 手作 · 大象粑粑造纸 & 黏黏瀑布",
+    "city": "Chiang Mai",
+    "summary": "上午在湄林体验大象粑粑造纸，下午去湄登爬黏黏瀑布，晚上可补一节拉丁舞。",
+    "anchors": [
+      "poi-poopoo-paper",
+      "poi-bua-tong"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-bed-changkian",
+        "order": 0,
+        "time": "08:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-poopoo-paper",
+        "order": 1,
+        "time": "09:00",
+        "role": "class"
+      },
+      {
+        "poiId": "poi-bua-tong",
+        "order": 2,
+        "time": "13:30",
+        "role": "nature"
+      }
+    ],
+    "candidates": [
+      "poi-bailamos",
+      "poi-graph-ground"
+    ],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-bed-changkian",
+        "toPoiId": "poi-poopoo-paper",
+        "mode": "包车",
+        "minutes": 40,
+        "label": "市区到湄林造纸园约 30–40 分钟"
+      },
+      {
+        "fromPoiId": "poi-poopoo-paper",
+        "toPoiId": "poi-bua-tong",
+        "mode": "包车",
+        "minutes": 40,
+        "label": "湄林到湄登黏黏瀑布约 40 分钟"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "确认 Bailamos 备选舞课班次",
+        "due": "D11 前",
+        "detail": "若 D4 已上拉丁舞可跳过；上备选课需先看当周课表或约私教",
+        "status": "todo"
+      }
+    ]
+  },
+  {
+    "id": "day-12",
+    "date": "2026-10-06",
+    "title": "艺术村 + 手信收尾",
+    "city": "Chiang Mai",
+    "summary": "上午逛班康瓦艺术村，下午在瓦洛洛市场集中买手信，晚上吃告别餐（可选按摩）。",
+    "anchors": [
+      "poi-baan-kang-wat",
+      "poi-warorot"
+    ],
+    "routeStops": [
+      {
+        "poiId": "poi-bed-changkian",
+        "order": 0,
+        "time": "09:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-baan-kang-wat",
+        "order": 1,
+        "time": "10:00",
+        "role": "art-village"
+      },
+      {
+        "poiId": "poi-warorot",
+        "order": 2,
+        "time": "14:30",
+        "role": "market"
+      }
+    ],
+    "candidates": [
+      "poi-chiangmai-farewell",
+      "poi-grand-canyon",
+      "poi-doi-suthep",
+      "poi-woo-cafe"
+    ],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-bed-changkian",
+        "toPoiId": "poi-baan-kang-wat",
+        "mode": "Grab",
+        "minutes": 15,
+        "label": "Chang Phueak 到 Suthep 艺术村约 15 分钟"
+      },
+      {
+        "fromPoiId": "poi-baan-kang-wat",
+        "toPoiId": "poi-warorot",
+        "mode": "Grab",
+        "minutes": 20,
+        "label": "艺术村到古城东侧瓦洛洛约 20 分钟"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "预订告别晚餐（可加按摩）",
+        "due": "D11 前",
+        "detail": "热门餐厅建议提前 1 天订位；按摩店具体信息待补",
+        "status": "todo"
+      }
+    ]
+  },
+  {
+    "id": "day-13",
+    "date": "2026-10-07",
+    "title": "返程 · 清迈 → 昆明 → 上海",
+    "city": "Chiang Mai",
+    "summary": "10:05 清迈起飞，13:00 到昆明，16:00 转上海虹桥，18:55 落地。",
+    "anchors": [],
+    "routeStops": [
+      {
+        "poiId": "poi-bed-changkian",
+        "order": 0,
+        "time": "07:30",
+        "role": "lodging-anchor"
+      },
+      {
+        "poiId": "poi-cnx-airport",
+        "order": 1,
+        "time": "08:30",
+        "role": "flight"
+      },
+      {
+        "poiId": "poi-kmg-airport",
+        "order": 2,
+        "time": "13:00",
+        "role": "transit"
+      }
+    ],
+    "candidates": [],
+    "transitSegments": [
+      {
+        "fromPoiId": "poi-bed-changkian",
+        "toPoiId": "poi-cnx-airport",
+        "mode": "Grab/出租车",
+        "minutes": 25,
+        "label": "08:00 前出发，10:05 起飞前 2 小时到机场"
+      },
+      {
+        "fromPoiId": "poi-cnx-airport",
+        "toPoiId": "poi-kmg-airport",
+        "mode": "飞机 MU9640",
+        "minutes": 180,
+        "label": "10:05 起飞、13:00 落地昆明；16:00 转 FM9454"
+      }
+    ]
+  }
+]
