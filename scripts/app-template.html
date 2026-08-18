@@ -217,7 +217,10 @@ body.map-hidden .content{width:100%;max-width:none;}
 .leaflet-container{font:inherit;}
 .leaflet-popup-content{font-size:13px;line-height:1.4;}
 .pin{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--c,#0a84ff);display:flex;align-items:center;justify-content:center;box-shadow:0 2px 6px rgba(0,0,0,.3);}
-.pin span{transform:rotate(45deg);font-size:13px;line-height:1;}
+.pin span{transform:rotate(45deg);font-size:13px;line-height:1;font-weight:800;}
+.pin-w{display:flex;flex-direction:column;align-items:center;filter:drop-shadow(0 1px 1px rgba(0,0,0,.2));}
+.pin-label{background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:6px;padding:1px 5px;font-size:10px;font-weight:700;color:var(--text);white-space:nowrap;margin-top:2px;max-width:130px;overflow:hidden;text-overflow:ellipsis;}
+.map-hint{font-size:11px;color:var(--text2);padding:5px 12px 7px;background:#fff;border-bottom:.5px solid var(--line);}
 .leaflet-div-icon{background:transparent;border:none;}
 </style>
 </head>
@@ -243,6 +246,7 @@ body.map-hidden .content{width:100%;max-width:none;}
       <button class="map-toggle" id="mapToggle">收起地图 ▾</button>
     </div>
     <div class="map-tools" id="mapTools"></div>
+    <div class="map-hint">🔢 数字 = 当日顺序 · 虚线 = 行程连线（示意，非导航路线）</div>
     <div id="map"></div>
   </aside>
 
@@ -543,25 +547,51 @@ function ensureMap(){
   layer = L.layerGroup().addTo(map);
   state.mapReady = true;
 }
+function haversineKm(a, b){
+  var R = 6371, d2r = Math.PI/180;
+  var dLat = (b[0]-a[0])*d2r, dLng = (b[1]-a[1])*d2r;
+  var s = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(a[0]*d2r)*Math.cos(b[0]*d2r)*Math.sin(dLng/2)*Math.sin(dLng/2);
+  return R*2*Math.atan2(Math.sqrt(s), Math.sqrt(1-s));
+}
 function renderMapDay(day){
   if (!map || !day) return;
   layer.clearLayers();
-  var bounds = [];
-  day.stops.forEach(function(st){
+  var pts = [];
+  day.stops.forEach(function(st, idx){
     var poi = st.poi;
     if (!poi || !poi.coords) return;
     var meta = ROLE[st.role] || CAT[poi.category] || { icon:"📍", color:"#8e8e93", label:"" };
+    var n = idx + 1;
+    var label = poi.name_zh || poi.name;
     var icon = L.divIcon({
-      className: "", iconSize: [30,30], iconAnchor: [15, 26], popupAnchor: [0, -24],
-      html: '<div class="pin" style="--c:'+meta.color+'"><span>'+meta.icon+'</span></div>'
+      className: "", iconSize: [0,0], iconAnchor: [13, 26], popupAnchor: [0, -34],
+      html: '<div class="pin-w"><div class="pin" style="--c:'+meta.color+'"><span>'+n+'</span></div>' +
+            '<div class="pin-label">'+esc(label)+'</div></div>'
     });
     L.marker(poi.coords, { icon: icon })
       .addTo(layer)
-      .bindPopup('<b>'+esc(poi.name_zh||poi.name)+'</b><br>'+(st.time?esc(st.time)+' ':"")+esc(meta.label||""));
-    bounds.push(poi.coords);
+      .bindPopup('<b>'+n+'. '+esc(label)+'</b><br>'+(st.time?esc(st.time)+' ':"")+esc(meta.label||""));
+    pts.push({ c: poi.coords, n: n });
   });
-  if (bounds.length > 1){ map.fitBounds(L.latLngBounds(bounds).pad(0.22)); }
-  else if (bounds.length === 1){ map.setView(bounds[0], 14); }
+  if (!pts.length) return;
+  // 顺序连线：跳过跨城长距离段（如航班），避免一条直线跨过全国
+  for (var i = 1; i < pts.length; i++){
+    if (haversineKm(pts[i-1].c, pts[i].c) <= 60){
+      L.polyline([pts[i-1].c, pts[i].c], { color: day.color, weight: 3, opacity: .85, dashArray: "6 8" }).addTo(layer);
+    }
+  }
+  // 聚焦当日主要活动区：有跨城长段时聚焦最大连续簇
+  var clusters = [], cur = [pts[0]];
+  for (var j = 1; j < pts.length; j++){
+    if (haversineKm(cur[cur.length-1].c, pts[j].c) > 60){ clusters.push(cur); cur = [pts[j]]; }
+    else cur.push(pts[j]);
+  }
+  clusters.push(cur);
+  var best = clusters[0];
+  for (var k = 1; k < clusters.length; k++){ if (clusters[k].length > best.length) best = clusters[k]; }
+  var view = best.map(function(p){ return p.c; });
+  if (view.length > 1){ map.fitBounds(L.latLngBounds(view).pad(0.28)); }
+  else if (view.length === 1){ map.setView(view[0], 14); }
   setTimeout(function(){ map.invalidateSize(); }, 60);
 }
 

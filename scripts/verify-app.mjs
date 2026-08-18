@@ -68,6 +68,8 @@ async function run() {
   const d2Title = (await page.locator(".day-head h2").textContent()).trim();
   const d2Reminders = await page.locator("#dayPanel .reminder-item").count();
   const d2Shooting = await page.locator("#dayPanel .tl-body", { hasText: "333" }).count();
+  const pinLabels = await page.locator(".pin-label").count();
+  const routeLines = await page.evaluate(() => document.querySelectorAll(".leaflet-overlay-pane path.leaflet-interactive").length);
 
   // 选择 9/28（D4 泰餐+舞课）看预约提醒
   const tab928 = page.locator(".day-tab", { hasText: "9/28" });
@@ -125,7 +127,7 @@ async function run() {
   await pageM.close();
 
   const result = { title, countdown, routeCards, flightRows, buyCols, prepCols, memberChips, ovScrollX,
-    dayTabs, markers, mapVisible, mapHiddenClass, chips, googleActive, providerStored, amapActive, d2Title, d2Reminders, d2Shooting, d10Title, d10Cotu, d10Reminders,
+    dayTabs, markers, mapVisible, mapHiddenClass, chips, googleActive, providerStored, amapActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d10Title, d10Cotu, d10Reminders,
     d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX, mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
