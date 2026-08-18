@@ -42,7 +42,7 @@ button{font-family:inherit;cursor:pointer;}
 
 /* ── 布局 ── */
 .layout{display:flex;flex-direction:column;min-height:calc(100vh - 100px);}
-.map-panel{position:relative;background:#e9edf1;border-bottom:.5px solid var(--line);}
+.map-panel{position:relative;background:#e9edf1;border-bottom:.5px solid var(--line);display:flex;flex-direction:column;}
 .map-bar{
   display:flex;align-items:center;justify-content:space-between;gap:8px;
   padding:7px 12px;background:#fff;border-bottom:.5px solid var(--line);
@@ -52,13 +52,16 @@ button{font-family:inherit;cursor:pointer;}
   border:1px solid var(--line);background:#fff;border-radius:980px;padding:5px 12px;
   font-size:12px;font-weight:600;color:var(--text);white-space:nowrap;
 }
-#map{width:100%;height:38vh;min-height:250px;z-index:1;}
+.map-tools{display:flex;gap:6px;padding:6px 12px;background:#fff;border-bottom:.5px solid var(--line);flex-wrap:wrap;}
+.mchip{border:1px solid var(--line);background:#fff;border-radius:980px;padding:4px 11px;font-size:12px;font-weight:600;color:var(--text2);transition:.15s;}
+.mchip.active{background:var(--accent);border-color:var(--accent);color:#fff;}
+#map{width:100%;height:34vh;min-height:240px;z-index:1;}
 .content{flex:1;padding:14px 14px calc(24px + var(--safe-bottom));width:100%;}
 
 @media (min-width:900px){
   .layout{flex-direction:row;align-items:stretch;}
   .map-panel{width:46%;position:sticky;top:0;height:100vh;border-bottom:none;border-right:.5px solid var(--line);}
-  #map{height:calc(100vh - 46px);}
+  #map{height:auto;flex:1;min-height:0;}
   .content{width:54%;max-width:860px;padding:20px 24px calc(32px + var(--safe-bottom));}
 }
 body.map-hidden .map-panel{display:none;}
@@ -239,6 +242,7 @@ body.map-hidden .content{width:100%;max-width:none;}
       <span class="ttl">🗺️ 行程地图</span>
       <button class="map-toggle" id="mapToggle">收起地图 ▾</button>
     </div>
+    <div class="map-tools" id="mapTools"></div>
     <div id="map"></div>
   </aside>
 
@@ -271,7 +275,7 @@ DATA.categories.forEach(function(c){ CAT[c.id] = c; });
 var ROLE = {};
 DATA.roles.forEach(function(r){ ROLE[r.id] = r; });
 
-var state = { module:"overview", dayId:null, mapHidden:false, userCollapsed:false, mapReady:false };
+var state = { module:"overview", dayId:null, mapHidden:false, userCollapsed:false, mapReady:false, provider:"amap" };
 
 /* ---------- 工具 ---------- */
 function todayStr(d){
@@ -498,15 +502,43 @@ function selectDay(id, fromUser){
   window.scrollTo({ top:0, behavior:"smooth" });
 }
 
+/* ---------- 底图切换（高德 / Google / OSM） ---------- */
+var TILE_PROVIDERS = {
+  amap: { name:"高德地图", subdomains:"1234", maxZoom:18, url:"https://webrd0{s}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&scale=1&style=8&x={x}&y={y}&z={z}", attribution:"© 高德地图" },
+  amap_sat: { name:"高德卫星", subdomains:"1234", maxZoom:18, url:"https://webst0{s}.is.autonavi.com/appmaptile?style=6&x={x}&y={y}&z={z}", attribution:"© 高德地图" },
+  google: { name:"Google 地图", subdomains:"0123", maxZoom:20, url:"https://mt{s}.google.com/vt/lyrs=m&x={x}&y={y}&z={z}", attribution:"© Google" },
+  google_sat: { name:"Google 卫星", subdomains:"0123", maxZoom:20, url:"https://mt{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}", attribution:"© Google" },
+  osm: { name:"OSM", subdomains:"", maxZoom:19, url:"https://tile.openstreetmap.org/{z}/{x}/{y}.png", attribution:"© OpenStreetMap" }
+};
+var tileLayer = null;
+function providerKey(){
+  try { var k = localStorage.getItem("tripMapProvider"); if (TILE_PROVIDERS[k]) return k; } catch(e){}
+  return "amap";
+}
+function renderMapTools(){
+  $("#mapTools").innerHTML = Object.keys(TILE_PROVIDERS).map(function(k){
+    return '<button class="mchip'+(k===state.provider?" active":"")+'" data-key="'+k+'">'+TILE_PROVIDERS[k].name+'</button>';
+  }).join("");
+}
+function setTileProvider(key){
+  if (!TILE_PROVIDERS[key]) return;
+  state.provider = key;
+  if (!map) return;
+  if (tileLayer) map.removeLayer(tileLayer);
+  var p = TILE_PROVIDERS[key];
+  tileLayer = L.tileLayer(p.url, { subdomains: p.subdomains || "abc", maxZoom: p.maxZoom || 19, attribution: p.attribution }).addTo(map);
+  $$("#mapTools .mchip").forEach(function(c){ c.classList.toggle("active", c.dataset.key === key); });
+  try { localStorage.setItem("tripMapProvider", key); } catch(e){}
+}
+
 /* ---------- 地图 ---------- */
 var map = null, layer = null;
 function ensureMap(){
   if (map) return;
   map = L.map("map", { zoomControl: true });
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-  }).addTo(map);
+  state.provider = providerKey();
+  renderMapTools();
+  setTileProvider(state.provider);
   map.setView([18.80, 98.97], 12);
   layer = L.layerGroup().addTo(map);
   state.mapReady = true;
@@ -585,6 +617,10 @@ $("#mapToggle").addEventListener("click", function(){
 $("#mapShowBtn").addEventListener("click", function(){
   state.userCollapsed = false;
   setMapHidden(false);
+});
+$("#mapTools").addEventListener("click", function(e){
+  var c = e.target.closest(".mchip");
+  if (c) setTileProvider(c.dataset.key);
 });
 $("#dayTabs").addEventListener("click", function(e){
   var t = e.target.closest(".day-tab");

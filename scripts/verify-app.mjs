@@ -52,6 +52,14 @@ async function run() {
   const markers = await page.locator(".leaflet-marker-icon").count();
   const mapVisible = await page.locator("#mapPanel").isVisible();
   const mapHiddenClass = await page.evaluate(() => document.body.classList.contains("map-hidden"));
+  const chips = await page.locator("#mapTools .mchip").count();
+  await page.click('#mapTools .mchip[data-key="google"]');
+  await page.waitForTimeout(700);
+  const googleActive = await page.evaluate(() => document.querySelector('#mapTools .mchip[data-key="google"]')?.classList.contains("active"));
+  const providerStored = await page.evaluate(() => localStorage.getItem("tripMapProvider"));
+  await page.click('#mapTools .mchip[data-key="amap"]');
+  await page.waitForTimeout(400);
+  const amapActive = await page.evaluate(() => document.querySelector('#mapTools .mchip[data-key="amap"]')?.classList.contains("active"));
 
   // 选择 9/26（D2 射击）
   const tab926 = page.locator(".day-tab", { hasText: "9/26" });
@@ -117,7 +125,7 @@ async function run() {
   await pageM.close();
 
   const result = { title, countdown, routeCards, flightRows, buyCols, prepCols, memberChips, ovScrollX,
-    dayTabs, markers, mapVisible, mapHiddenClass, d2Title, d2Reminders, d2Shooting, d10Title, d10Cotu, d10Reminders,
+    dayTabs, markers, mapVisible, mapHiddenClass, chips, googleActive, providerStored, amapActive, d2Title, d2Reminders, d2Shooting, d10Title, d10Cotu, d10Reminders,
     d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX, mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
