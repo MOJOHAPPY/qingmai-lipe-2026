@@ -958,6 +958,35 @@ body.map-hidden .content{width:100%;max-width:none;}
 #syncClose{border:none;background:none;font-size:16px;color:var(--text2);padding:4px 8px;}
 .sync-status{font-size:13px;color:var(--text2);}
 .sync-hint{font-size:12px;color:var(--text2);background:#f6f6f8;border-radius:10px;padding:9px 11px;margin-top:12px;line-height:1.6;}
+/* ── 总览优化 ── */
+.card-h{display:flex;align-items:center;gap:8px;width:100%;}
+.card-h .t{flex:1;}
+.card-tools{display:flex;gap:6px;flex-wrap:wrap;}
+.member-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 14px;}
+.member-row .m-label{font-size:12px;font-weight:700;color:var(--text2);}
+.ov-nav-card{margin-bottom:14px;}
+#ovNav .chip{cursor:pointer;}
+.prep-col li.todo::before{content:none;}
+.prep-col li.todo.done{color:var(--text2);text-decoration:line-through;}
+.prep-col li.todo.done::before{content:none;}
+.todo-box{display:inline-block;width:16px;cursor:pointer;color:var(--amber);font-size:13px;margin-right:2px;user-select:none;}
+.todo-box.done{color:var(--green);}
+.li-del{background:none;border:none;color:var(--text2);font-size:15px;font-weight:700;margin-left:4px;cursor:pointer;padding:0 3px;line-height:1;}
+.li-del:hover{color:var(--red);}
+/* ── 添加地点 / Google ── */
+.g-detail{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin-top:8px;}
+.gd-name{font-size:14px;font-weight:800;margin-bottom:4px;}
+.gd-row{font-size:12px;color:var(--text2);margin:2px 0;}
+.g-detail .btn{margin-top:8px;}
+.g-row{cursor:pointer;}
+.rec-group{margin-top:10px;}
+.rec-label{font-size:12px;font-weight:800;color:var(--accent);margin:8px 0 4px;}
+.tl-edit-form input[type=text]{width:110px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:12px;}
+/* ── 花费优化 ── */
+.exp-sum-grid.cols2{grid-template-columns:1fr 1fr;}
+.exp-inline{grid-column:1/-1;background:#fafafa;border-top:.5px solid var(--line);padding:10px 2px 2px;display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.fx-arrow{margin:0 6px;color:var(--text2);}
+.fx-result{font-size:14px;font-weight:800;color:var(--accent);}
 </style>
 </head>
 <body>
@@ -1114,14 +1143,15 @@ function renderOverview(){
       '</div>' +
     '</div>';
 
-  var statChips = '<div class="chips">' +
+  var stats = '<div class="chips">' +
     '<span class="chip">🗓️ '+d.totalDays+' 天</span>' +
     '<span class="chip">👥 '+d.members.length+' 人</span>' +
+  '</div>';
+  var memberRow = '<div class="member-row"><span class="m-label">成员</span>' +
     d.members.map(function(m){ return '<span class="chip avatar">👤 '+esc(m)+'</span>'; }).join("") +
-    '</div>';
+  '</div>';
 
-  var prep = '' +
-    '<div class="card"><h2><span class="ic">🎒</span>行前准备</h2>' +
+  var prep = '<div class="card" id="sec-prep">' + cardHead("🎒", "行前准备", "prep") +
     '<div class="prep-grid">' +
       '<div class="prep-col"><h3>🧳 必备行李</h3><ul>' +
         renderListItems("prep.packing", "") +
@@ -1136,7 +1166,7 @@ function renderOverview(){
     '</div></div>';
 
   var flights = '' +
-    '<div class="card"><h2><span class="ic">✈️</span>航班信息概览</h2>' +
+    '<div class="card" id="sec-flights"><h2><span class="ic">✈️</span>航班信息概览</h2>' +
     '<div class="section-desc">已出票 · 截图提示航班已调整，出发前以航司订单复核最终时刻</div>' +
     d.flights.map(function(f){
       return '<div class="row"><div class="ric">✈️</div><div class="rbody">' +
@@ -1147,7 +1177,7 @@ function renderOverview(){
     }).join("") + '</div>';
 
   var lodgings = '' +
-    '<div class="card"><h2><span class="ic">🏨</span>住宿信息概览</h2>' +
+    '<div class="card" id="sec-lodgings"><h2><span class="ic">🏨</span>住宿信息概览</h2>' +
     d.lodgings.map(function(l){
       var badge = l.booked ? '<span class="badge booked">已订</span>' : '<span class="badge todo">待订</span>';
       return '<div class="row"><div class="ric">🏨</div><div class="rbody">' +
@@ -1156,9 +1186,7 @@ function renderOverview(){
       '</div></div>';
     }).join("") + '</div>';
 
-  var buy = '' +
-    '<div class="card"><h2><span class="ic">🛍️</span>清迈必买品</h2>' +
-    '<div class="section-desc">常见清单，现场看生产日期、比价（瓦洛洛可砍价）；711 红黑榜详见小红书收藏夹</div>' +
+  var buy = '<div class="card" id="sec-buy">' + cardHead("🛍️", "清迈必买品", "buy", "常见清单，现场看生产日期、比价（瓦洛洛可砍价）；711 红黑榜详见小红书收藏夹") +
     '<div class="buy-grid">' +
       '<div class="buy-col"><h3>🏪 711</h3><ul>' +
         renderListItems("mustBuy.seven", "") +
@@ -1169,7 +1197,7 @@ function renderOverview(){
     '</div></div>';
 
   var route = '' +
-    '<div class="card"><h2><span class="ic">🗺️</span>路线概览</h2>' +
+    '<div class="card" id="sec-route"><h2><span class="ic">🗺️</span>路线概览</h2>' +
     '<div class="section-desc">点击任意一天跳到计划详情</div>' +
     '<div class="route-grid">' +
     d.days.map(function(day){
@@ -1182,11 +1210,15 @@ function renderOverview(){
       '</button>';
     }).join("") + '</div></div>';
 
-  var ovTools = '<div class="ov-tools">' +
-    '<button class="btn mini'+(OVERVIEW_EDIT?' primary':'')+'" id="ovEditToggle">'+(OVERVIEW_EDIT?'✅ 完成':'✏️ 编辑清单')+'</button>' +
-    (OVERVIEW_EDIT ? '<button class="btn mini danger" id="ovResetLists">🔄 恢复默认</button>' : '') +
-  '</div>';
-  $("#module-overview").innerHTML = hero + statChips + ovTools + prep + flights + lodgings + buy + route;
+  var nav = '<div class="card ov-nav-card"><div class="chips" id="ovNav">' +
+    '<button class="chip" data-goto="sec-prep">🎒 行前准备</button>' +
+    '<button class="chip" data-goto="sec-flights">✈️ 航班</button>' +
+    '<button class="chip" data-goto="sec-lodgings">🏨 住宿</button>' +
+    '<button class="chip" data-goto="sec-buy">🛍️ 必买</button>' +
+    '<button class="chip" data-goto="sec-route">🗺️ 路线</button>' +
+  '</div></div>';
+
+  $("#module-overview").innerHTML = hero + stats + memberRow + prep + flights + lodgings + buy + route + nav;
   renderCountdown();
 }
 
@@ -1215,6 +1247,22 @@ function renderDay(day){
     (day.edited ? '<span class="badge todo">✏️ 已编辑</span>' : '') +
   '</div>';
 
+  var picker = "";
+  if (EDIT_PICKER){
+    picker = '<div class="card" id="addCard">' +
+      '<h2 class="card-h"><span class="ic">➕</span><span class="t">添加地点</span><span class="card-tools"><button class="btn mini" id="addClose">✕</button></span></h2>' +
+      '<div class="f-row"><span class="f-lbl">加到</span>' +
+        '<select id="addDay">' + dayOptions(day.id) + '</select>' +
+        '<input type="text" id="addNote" placeholder="备注（可选）" maxlength="60" style="flex:1;min-width:120px">' +
+      '</div>' +
+      '<div class="chips" id="addTabs">' +
+        '<button class="mchip2 active" data-addtab="pool">📍 地点池</button>' +
+        '<button class="mchip2" data-addtab="google">🔍 Google 搜索</button>' +
+      '</div>' +
+      '<div id="addPanel">' + addPoolHtml(day, "") + '</div>' +
+    '</div>';
+  }
+
   var reminders = "";
   if (day.reminders && day.reminders.length){
     reminders = '<div class="reminder-bar"><div class="rt">🔔 预约提醒</div>' +
@@ -1236,13 +1284,15 @@ function renderDay(day){
       ctrl = '<div class="tl-edit">' +
         '<button class="btn mini" data-edit="up" title="上移">↑</button>' +
         '<button class="btn mini" data-edit="down" title="下移">↓</button>' +
-        '<button class="btn mini" data-edit="time">🕐 时间/类型</button>' +
+        '<button class="btn mini" data-edit="time">🕐 时间/日期/类型</button>' +
         '<button class="btn mini danger" data-edit="del">🗑 删除</button>' +
       '</div>';
       if (EDIT_TARGET === idx){
         ctrl += '<div class="tl-edit-form">' +
           '<input type="text" id="editTime" value="'+esc(st.time||"")+'" placeholder="时间，如 15:00">' +
           '<select id="editRole">' + roleOptions(st.role) + '</select>' +
+          '<select id="editDay">' + dayOptions(day.id) + '</select>' +
+          '<input type="text" id="editNote" value="'+esc(st.note||"")+'" placeholder="备注（可选）" maxlength="60">' +
           '<button class="btn mini primary" id="editSave">保存</button>' +
           '<button class="btn mini" id="editCancel">取消</button>' +
         '</div>';
@@ -1254,6 +1304,7 @@ function renderDay(day){
       '<div class="tl-body">' +
         '<div class="t">'+esc(poi.name_zh||poi.name)+'</div>' +
         '<div class="s">'+esc(meta.label||"")+' · '+esc(poi.area||"")+'</div>' +
+        (st.note ? '<div class="tip">📝 '+esc(st.note)+'</div>' : "") +
         (poi.tip ? '<div class="tip">'+esc(poi.tip)+'</div>' : "") +
         resv +
         '<div class="tl-links">'+navLinks(poi, true)+'</div>' +
@@ -1274,14 +1325,7 @@ function renderDay(day){
       day.candidates.map(function(poi){ return poiCard(poi); }).join("") + '</div>';
   }
 
-  var picker = "";
-  if (EDIT_PICKER){
-    picker = '<div class="card"><h2><span class="ic">➕</span>添加地点（从已有地点池选择）</h2>' +
-      '<input type="text" id="pickerSearch" placeholder="搜索地点（名称/分类）…">' +
-      '<div class="picker-list" id="pickerList">' + pickerListHtml("") + '</div></div>';
-  }
-
-  $("#dayPanel").innerHTML = head + editBar + reminders + tl + transit + cands + picker;
+  $("#dayPanel").innerHTML = head + editBar + picker + reminders + tl + transit + cands;
 }
 
 function selectDay(id, fromUser){
@@ -1472,6 +1516,12 @@ function toast(msg){
   el.textContent = msg; el.classList.add("show");
   clearTimeout(toast._t); toast._t = setTimeout(function(){ el.classList.remove("show"); }, 1800);
 }
+function expCurOpts(sel){
+  return '<option value="CNY"'+(sel==="CNY"?' selected':'')+'>¥ 人民币</option><option value="THB"'+(sel==="THB"?' selected':'')+'>฿ 泰铢</option>';
+}
+function expCatChipsHtml(sel){
+  return EXP_CATS.map(function(c){ return '<button type="button" class="mchip2" data-cat="'+c.id+'"'+(c.id===sel?' style="background:var(--accent);border-color:var(--accent);color:#fff"':'')+'>'+c.icon+' '+c.name+'</button>'; }).join("");
+}
 function expRowHtml(it){
   var cat = expCat(it.category);
   var day = it.dayId ? expDayLabel(it.dayId) : null;
@@ -1483,8 +1533,7 @@ function expRowHtml(it){
     : '<span class="badge todo">👤 '+esc(it.person||"")+'</span>';
   var orig = (it.currency === "THB" ? "฿" : "¥") + (Math.round(it.amount*100)/100);
   var dateTag = it.date ? '<span class="rd">'+esc(it.date)+'</span>' : "";
-  return '<div class="exp-item" data-id="'+it.id+'">' +
-    '<div class="ei-ic">'+cat.icon+'</div>' +
+  var head = '<div class="ei-ic">'+cat.icon+'</div>' +
     '<div class="ei-body">' +
       '<div class="ei-t">'+esc(it.name)+' '+typeTag+' '+badge+'</div>' +
       '<div class="ei-s">'+cat.name+' · '+orig+' · 折合 '+expFmt(expToCNY(it))+' '+dateTag+'</div>' +
@@ -1492,27 +1541,25 @@ function expRowHtml(it){
     '<div class="ei-actions">' +
       '<button class="btn mini" data-act="edit">编辑</button>' +
       '<button class="btn mini danger" data-act="del">删除</button>' +
-    '</div></div>';
-}
-function fillExpForm(it){
-  $("#expName").value = it.name || "";
-  $("#expAmount").value = it.amount != null ? it.amount : "";
-  $("#expCurrency").value = it.currency || "CNY";
-  $("#expDate").value = it.date || "";
-  $$("#expCatChips .mchip2").forEach(function(c){ c.classList.toggle("active", c.dataset.cat === it.category); });
-  $$(".exp-type").forEach(function(c){ c.classList.toggle("active", c.dataset.type === it.type); });
-  $("#expPersonRow").style.display = it.type === "personal" ? "flex" : "none";
-  $("#expPerson").value = it.person || "";
-  $("#expDay").value = it.dayId || "";
-  var sel = $("#expPoi");
-  if (it.dayId){
-    var day = expDayLabel(it.dayId); sel.disabled = false;
-    var opts = ['<option value="">（仅关联到当天）</option>'];
-    if (day){ day.stops.forEach(function(st){ var poi = st.poi; if (poi) opts.push('<option value="'+poi.id+'">'+esc(poi.name_zh||poi.name)+'</option>'); }); }
-    sel.innerHTML = opts.join(""); sel.value = it.poiId || "";
-  } else {
-    sel.disabled = true; sel.innerHTML = '<option value="">选择当天地点…</option>';
+    '</div>';
+  var edit = "";
+  if (EXP_EDIT_ID === it.id){
+    edit = '<div class="exp-inline">' +
+      '<div class="f-row"><input type="text" id="eiName" value="'+esc(it.name)+'" placeholder="项目名称" maxlength="40">' +
+        '<input type="number" id="eiAmount" value="'+it.amount+'" step="0.01" style="width:100px">' +
+        '<select id="eiCurrency">' + expCurOpts(it.currency) + '</select>' +
+        '<input type="date" id="eiDate" value="'+esc(it.date||"")+'">' +
+      '</div>' +
+      '<div class="f-row"><span class="f-lbl">分类</span><div class="chips" id="eiCatChips">' + expCatChipsHtml(it.category) + '</div></div>' +
+      '<div class="f-row"><span class="f-lbl">类型</span><div class="chips">' +
+        '<button class="mchip2 ei-type'+(it.type==="shared"?' active':'')+'" data-type="shared">👥 公共</button>' +
+        '<button class="mchip2 ei-type'+(it.type==="personal"?' active':'')+'" data-type="personal">👤 个人</button>' +
+      '</div></div>' +
+      '<div class="f-row" id="eiPersonRow"'+(it.type==="personal"?'':' style="display:none"')+'><span class="f-lbl">人员</span><input type="text" id="eiPerson" value="'+esc(it.person||"")+'" placeholder="必填" maxlength="20"></div>' +
+      '<div class="f-row"><button class="btn primary" data-act="save-edit">保存</button><button class="btn mini" data-act="cancel-edit">取消</button></div>' +
+    '</div>';
   }
+  return '<div class="exp-item" data-id="'+it.id+'">' + head + edit + '</div>';
 }
 function saveExpense(){
   var name = ($("#expName").value||"").trim();
@@ -1529,15 +1576,28 @@ function saveExpense(){
   if (!name){ toast("请填写项目名称"); return; }
   if (!(amount > 0)){ toast("金额需大于 0"); return; }
   if (type === "personal" && !person){ toast("个人花销必须填写人员名称"); return; }
-  var wasEdit = !!EXP_EDIT_ID;
-  if (wasEdit){
-    var it = expFind(EXP_EDIT_ID);
-    if (it){ it.name=name; it.amount=amount; it.currency=currency; it.date=date; it.category=category; it.type=type; it.person=person; it.dayId=dayId; it.poiId=poiId; }
-  } else {
-    EXP.items.push({ id:"e"+Date.now()+"-"+Math.floor(Math.random()*1e6), name:name, amount:amount, currency:currency, date:date, category:category, type:type, person:person, dayId:dayId, poiId:poiId, createdAt:Date.now() });
-  }
+  EXP.items.push({ id:"e"+Date.now()+"-"+Math.floor(Math.random()*1e6), name:name, amount:amount, currency:currency, date:date, category:category, type:type, person:person, dayId:dayId, poiId:poiId, createdAt:Date.now() });
+  saveExpenses();
+  toast("已添加");
+  renderExpenses();
+}
+function saveInlineEdit(id){
+  var it = expFind(id); if (!it) return;
+  var name = ($("#eiName").value||"").trim();
+  var amount = parseFloat($("#eiAmount").value);
+  var currency = $("#eiCurrency").value;
+  var date = $("#eiDate").value || "";
+  var catEl = $("#eiCatChips .mchip2.active");
+  var category = catEl ? catEl.dataset.cat : it.category;
+  var typeEl = $("#module-expenses .ei-type.active");
+  var type = typeEl ? typeEl.dataset.type : it.type;
+  var person = type === "personal" ? ($("#eiPerson").value||"").trim() : "";
+  if (!name){ toast("请填写项目名称"); return; }
+  if (!(amount > 0)){ toast("金额需大于 0"); return; }
+  if (type === "personal" && !person){ toast("个人花销必须填写人员名称"); return; }
+  it.name=name; it.amount=amount; it.currency=currency; it.date=date; it.category=category; it.type=type; it.person=person;
   saveExpenses(); EXP_EDIT_ID = null;
-  toast(wasEdit ? "已保存修改" : "已添加");
+  toast("已保存修改");
   renderExpenses();
 }
 function bindExpForm(){
@@ -1563,45 +1623,27 @@ function bindExpForm(){
   });
   var saveBtn = $("#expSave");
   if (saveBtn) saveBtn.addEventListener("click", saveExpense);
-  var cancelBtn = $("#expCancel");
-  if (cancelBtn) cancelBtn.addEventListener("click", function(){ EXP_EDIT_ID = null; renderExpenses(); });
-  var exBtn = $("#expExport");
-  if (exBtn) exBtn.addEventListener("click", function(){
-    var blob = new Blob([JSON.stringify({ app:"qingmai-lipe-expenses", exportedAt:new Date().toISOString(), rate:EXP.rate, items:EXP.items }, null, 2)], { type:"application/json" });
-    var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "qingmai-lipe-花费记录.json";
-    document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  });
-  var imBtn = $("#expImportBtn");
-  if (imBtn) imBtn.addEventListener("click", function(){ var fi = $("#expImportFile"); if (fi) fi.click(); });
-  var fi = $("#expImportFile");
-  if (fi) fi.addEventListener("change", function(){
-    if (this.files && this.files[0]) importExpenses(this.files[0]);
-    this.value = "";
-  });
   var rateEl = $("#expRate");
   if (rateEl) rateEl.addEventListener("change", function(){
     var v = parseFloat(this.value);
     if (v > 0){ EXP.rate = v; saveExpenses(); renderExpenses(); }
   });
+  var fx = $("#fxAmount");
+  if (fx) fx.addEventListener("input", updateFx);
+  var fxFrom = $("#fxFrom");
+  if (fxFrom) fxFrom.addEventListener("change", updateFx);
+  function updateFx(){
+    var a = parseFloat(($("#fxAmount").value) || "0");
+    var from = $("#fxFrom").value;
+    var resEl = $("#fxResult"); if (!resEl) return;
+    if (from === "CNY"){ resEl.textContent = "≈ ฿" + (Math.round(a * EXP.rate * 100) / 100); }
+    else { resEl.textContent = "≈ ¥" + (Math.round(a / EXP.rate * 100) / 100); }
+  }
   var fltEls = $$("#expFilter .mchip2");
   fltEls.forEach(function(c){ c.addEventListener("click", function(){
     fltEls.forEach(function(x){ x.classList.remove("active"); }); c.classList.add("active");
     EXP_FILTER = c.dataset.filter; renderExpenses();
   }); });
-}
-function importExpenses(file){
-  var reader = new FileReader();
-  reader.onload = function(){
-    try {
-      var d = JSON.parse(reader.result);
-      if (!d || !Array.isArray(d.items)){ toast("导入失败：格式不正确"); return; }
-      var valid = d.items.filter(function(it){ return it && typeof it.name === "string" && Number(it.amount) > 0; });
-      EXP.items = EXP.items.concat(valid);
-      if (typeof d.rate === "number" && d.rate > 0) EXP.rate = d.rate;
-      saveExpenses(); toast("已导入 "+valid.length+" 笔（合并）"); renderExpenses();
-    } catch(e){ toast("导入失败：无法解析文件"); }
-  };
-  reader.readAsText(file);
 }
 function renderExpenses(){
   var shared = 0, personal = 0;
@@ -1621,17 +1663,21 @@ function renderExpenses(){
   var sharePer = shared / Math.max(1, DATA.members.length);
   var html = "";
   html += '<div class="card"><h2><span class="ic">💰</span>花费统计</h2>' +
-    '<div class="exp-rate">合计换算汇率：1 ¥ = <input type="number" id="expRate" min="0.1" step="0.1" value="'+EXP.rate+'"> ฿ <span class="hint">只影响合计，不改原记录</span></div>' +
-    '<div class="exp-sum-grid">' +
-      '<div class="exp-sum"><div class="k">👥 公共花销</div><div class="v">'+expFmt(shared)+'</div><div class="s">'+EXP.items.filter(function(i){return i.type==="shared";}).length+' 笔</div></div>' +
-      '<div class="exp-sum alt"><div class="k">👤 个人花销</div><div class="v">'+expFmt(personal)+'</div><div class="s">'+EXP.items.filter(function(i){return i.type==="personal";}).length+' 笔</div></div>' +
-      '<div class="exp-sum total"><div class="k">合计</div><div class="v">'+expFmt(shared+personal)+'</div><div class="s">'+EXP.items.length+' 笔</div></div>' +
+    '<div class="exp-sum-grid cols2">' +
+      '<div class="exp-sum"><div class="k">👥 公共花销</div><div class="v">'+expFmt(shared)+'</div></div>' +
+      '<div class="exp-sum total"><div class="k">💰 总合计</div><div class="v">'+expFmt(shared+personal)+'</div></div>' +
     '</div>' +
     '<div class="exp-per">' + perMember.map(function(m){
       return '<div class="exp-per-item"><span class="n">'+esc(m.name)+'</span><b>'+expFmt(m.total)+'</b><span class="s">个人 '+expFmt(m.own)+' + 公共均摊 '+expFmt(sharePer)+'</span></div>';
     }).join("") + '</div>' +
   '</div>';
-  html += '<div class="card"><h2><span class="ic">'+(EXP_EDIT_ID?"✏️":"➕")+'</span>'+(EXP_EDIT_ID?"编辑花销":"新增花销")+'</h2>' +
+  html += '<div class="card"><h2><span class="ic">🧮</span>汇率计算</h2>' +
+    '<div class="f-row"><span class="f-lbl">汇率</span><input type="number" id="expRate" min="0.1" step="0.1" value="'+EXP.rate+'" style="width:80px"><span class="hint">1 ¥ = ? ฿（改后自动保存）</span></div>' +
+    '<div class="f-row"><span class="f-lbl">金额</span><input type="number" id="fxAmount" placeholder="输入金额" step="0.01" style="width:120px">' +
+      '<select id="fxFrom"><option value="CNY">¥ 人民币</option><option value="THB">฿ 泰铢</option></select>' +
+      '<span class="fx-arrow">→</span><b id="fxResult" class="fx-result">—</b></div>' +
+  '</div>';
+  html += '<div class="card"><h2><span class="ic">➕</span>新增花销</h2>' +
     '<div class="exp-form">' +
       '<div class="f-row"><input type="text" id="expName" placeholder="项目名称（如：泰餐课 Mama Noi）" maxlength="40"></div>' +
       '<div class="f-row">' +
@@ -1655,14 +1701,7 @@ function renderExpenses(){
         '<select id="expDay"><option value="">不关联</option>'+DATA.days.map(function(d){ return '<option value="'+d.id+'">'+d.label+' · '+esc(d.title)+'</option>'; }).join("")+'</select>' +
         '<select id="expPoi" disabled><option value="">选择当天地点…</option></select>' +
       '</div>' +
-      '<div class="f-row">' +
-        '<button class="btn primary" id="expSave">'+(EXP_EDIT_ID?"保存修改":"添加花销")+'</button>' +
-        (EXP_EDIT_ID?'<button class="btn" id="expCancel">取消</button>':"") +
-        '<span class="spacer"></span>' +
-        '<button class="btn" id="expExport">⬇ 导出</button>' +
-        '<button class="btn" id="expImportBtn">⬆ 导入</button>' +
-        '<input type="file" id="expImportFile" accept="application/json,.json" style="display:none">' +
-      '</div>' +
+      '<div class="f-row"><button class="btn primary" id="expSave">添加花销</button></div>' +
     '</div></div>';
   html += '<div class="card"><h2><span class="ic">📋</span>花销明细</h2>' +
     '<div class="chips" id="expFilter">' +
@@ -1673,11 +1712,8 @@ function renderExpenses(){
     (visible.length ? '<div class="exp-list">' + visible.map(expRowHtml).join("") + '</div>' : '<div class="empty">还没有花销记录，先在上面添加一笔吧～</div>') +
   '</div>';
   $("#module-expenses").innerHTML = html;
-  if (EXP_EDIT_ID){ var it = expFind(EXP_EDIT_ID); if (it) fillExpForm(it); }
-  else {
-    var fc = $("#expCatChips .mchip2"); if (fc) fc.classList.add("active");
-    var dt = $("#expDate"); if (dt && !dt.value) dt.value = todayStr();
-  }
+  var fc = $("#expCatChips .mchip2"); if (fc) fc.classList.add("active");
+  var dt = $("#expDate"); if (dt && !dt.value) dt.value = todayStr();
   bindExpForm();
 }
 
@@ -1688,7 +1724,104 @@ var POI_MAP = {};
 var EDIT_MODE = false;
 var EDIT_PICKER = false;
 var EDIT_TARGET = null;
-var OVERVIEW_EDIT = false;
+var EDIT_CARD = null;
+function qsa(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
+var GOOGLE_PLACES_KEY = "";
+function dayOptions(sel){
+  return DATA.days.map(function(d){ return '<option value="'+d.id+'"'+(d.id===sel?' selected':'')+'>'+d.label+' · '+esc(d.title)+'</option>'; }).join("");
+}
+function addPoolHtml(day, q){
+  var html = '<input type="text" id="addSearch" placeholder="搜索地点（名称/分类）…" value="'+esc(q)+'">' +
+    '<div class="picker-list" id="addSearchList">' + pickerListHtml(q) + '</div>';
+  return html + nearbyHtml(day);
+}
+function addGoogleHtml(){
+  if (!GOOGLE_PLACES_KEY){
+    return '<div class="empty">未配置 Google Places API Key。启用方法：Google Cloud 开启 Places API → 创建 API Key（限制仅本域名）→ 把 Key 发给 Codex 填入。当前可先用「地点池」搜索。</div>';
+  }
+  return '<input type="text" id="gSearch" placeholder="输入关键词，如 Ristr8to、宁曼咖啡…">' +
+    '<div class="picker-list" id="gList"></div>' +
+    '<div id="gDetail"></div>';
+}
+function nearbyHtml(day){
+  var hotel = null;
+  day.stops.forEach(function(st){ if (st.order === 0 && st.poi && st.poi.category === "hotel") hotel = st.poi; });
+  if (!hotel) return "";
+  var used = {}; day.stops.forEach(function(st){ used[st.poiId] = true; });
+  var groups = {};
+  Object.keys(POI_MAP).forEach(function(id){
+    var p = POI_MAP[id];
+    if (!p || used[p.id] || p.id === hotel.id || !(p.rating >= 4.4) || !p.coords) return;
+    var km = haversineKm(hotel.coords, p.coords);
+    if (km > 6) return;
+    var cat = CAT[p.category] || { label:"其他", icon:"📍" };
+    var key = cat.label || "其他";
+    (groups[key] = groups[key] || []).push({ p: p, km: km });
+  });
+  var keys = Object.keys(groups);
+  if (!keys.length) return "";
+  var html = '<div class="section-title">🏨 今日酒店附近 · 高分推荐（<6km）</div>';
+  keys.forEach(function(k){
+    groups[k].sort(function(a, b){ return (b.p.rating || 0) - (a.p.rating || 0); });
+    var items = groups[k].slice(0, 4).map(function(o){
+      return '<div class="picker-row"><span class="pic">'+(CAT[o.p.category]||{icon:"📍"}).icon+'</span><span class="pn">'+esc(o.p.name_zh||o.p.name)+'</span><span class="pc">★'+(o.p.rating||"")+' · '+o.km.toFixed(1)+'km</span><button class="btn mini primary picker-add" data-poi="'+o.p.id+'">加入</button></div>';
+    }).join("");
+    html += '<div class="rec-group"><div class="rec-label">'+esc(k)+'</div>' + items + '</div>';
+  });
+  return html;
+}
+function gAuto(q){
+  var url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + encodeURIComponent(q) + "&key=" + GOOGLE_PLACES_KEY + "&language=zh-CN";
+  return fetch(url).then(function(r){ return r.json(); });
+}
+function gDetails(placeId){
+  var url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + encodeURIComponent(placeId) + "&fields=name,formatted_address,rating,user_ratings_total,opening_hours,geometry,formatted_phone_number,website&key=" + GOOGLE_PLACES_KEY + "&language=zh-CN";
+  return fetch(url).then(function(r){ return r.json(); });
+}
+function renderGList(results){
+  var el = document.getElementById("gList");
+  if (!el) return;
+  if (!results || !results.length){ el.innerHTML = '<div class="empty">没有匹配结果</div>'; return; }
+  el.innerHTML = results.map(function(it){
+    return '<div class="picker-row g-row" data-place="'+esc(it.place_id)+'"><span class="pic">📍</span><span class="pn">'+esc(it.description||"")+'</span></div>';
+  }).join("");
+}
+function showGDetail(placeId){
+  gDetails(placeId).then(function(res){
+    var r = res && res.result;
+    var el = document.getElementById("gDetail");
+    if (!el) return;
+    if (!r){ el.innerHTML = '<div class="empty">获取地点信息失败</div>'; return; }
+    var hours = "";
+    if (r.opening_hours && r.opening_hours.weekday_text && r.opening_hours.weekday_text.length){ hours = r.opening_hours.weekday_text.join("；").slice(0, 180); }
+    el.innerHTML = '<div class="g-detail">' +
+      '<div class="gd-name">'+esc(r.name)+'</div>' +
+      (r.rating ? '<div class="gd-row">⭐ '+r.rating+(r.user_ratings_total?'（'+r.user_ratings_total+' 条评价）':"")+'</div>' : "") +
+      (r.formatted_address ? '<div class="gd-row">📍 '+esc(r.formatted_address)+'</div>' : "") +
+      (hours ? '<div class="gd-row">🕐 '+esc(hours)+'</div>' : "") +
+      '<button class="btn primary" data-gadd="'+esc(placeId)+'">➕ 加入行程</button>' +
+    '</div>';
+  });
+}
+function addGooglePlace(placeId){
+  gDetails(placeId).then(function(res){
+    var r = res && res.result;
+    if (!r){ toast("获取地点信息失败"); return; }
+    var pid = "g-" + placeId;
+    var hours = "";
+    if (r.opening_hours && r.opening_hours.weekday_text){ hours = r.opening_hours.weekday_text.join("；").slice(0, 160); }
+    POI_MAP[pid] = {
+      id: pid, name: r.name, name_zh: r.name, city: "Chiang Mai", area: r.vicinity || "",
+      category: "spot", coords: [r.geometry.location.lat, r.geometry.location.lng],
+      note: r.formatted_address || "", tip: hours || "",
+      rating: r.rating, hours: hours,
+      mapUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(r.name),
+      contentTier: "compact", sourceIds: [], themeTags: ["google"]
+    };
+    var dsel = document.getElementById("addDay"); var nsel = document.getElementById("addNote");
+    addStopToDay(pid, dsel ? dsel.value : null, "", "landmark", nsel ? nsel.value.trim() : "");
+  });
+}
 function buildPoiMap(){
   POI_MAP = {};
   DATA.days.forEach(function(d){
@@ -1698,7 +1831,7 @@ function buildPoiMap(){
 }
 function cloneDay(d){
   return { id:d.id, date:d.date, label:d.label, weekday:d.weekday, short:d.short, title:d.title, city:d.city, summary:d.summary, color:d.color,
-    stops: d.stops.map(function(st){ return { poiId:st.poiId, time:st.time, role:st.role, order:st.order, poi:st.poi }; }),
+    stops: d.stops.map(function(st){ return { poiId:st.poiId, time:st.time, role:st.role, order:st.order, poi:st.poi, note:st.note || "" }; }),
     transit: (d.transit||[]).map(function(t){ return { fromPoiId:t.fromPoiId, toPoiId:t.toPoiId, mode:t.mode, minutes:t.minutes, label:t.label, fromName:t.fromName, toName:t.toName }; }),
     candidates: (d.candidates||[]).slice(), reminders: (d.reminders||[]).slice(), edited:false };
 }
@@ -1714,7 +1847,7 @@ function applyOverrides(){
     var stops = [];
     o.routeStops.forEach(function(rs){
       var poi = POI_MAP[rs.poiId];
-      if (poi) stops.push({ poiId: rs.poiId, time: rs.time || "", role: rs.role || "landmark", order: rs.order != null ? rs.order : stops.length, poi: poi });
+      if (poi) stops.push({ poiId: rs.poiId, time: rs.time || "", role: rs.role || "landmark", order: rs.order != null ? rs.order : stops.length, poi: poi, note: rs.note || "" });
     });
     d.stops = stops;
     d.transit = Array.isArray(o.transitSegments) ? o.transitSegments : recomputeTransit(d);
@@ -1734,7 +1867,7 @@ function recomputeTransit(day){
   return segs;
 }
 function daySnapshot(day){
-  return { routeStops: day.stops.map(function(st, idx){ return { poiId:st.poiId, time:st.time || "", role:st.role || "landmark", order:idx }; }), transitSegments: day.transit || [] };
+  return { routeStops: day.stops.map(function(st, idx){ return { poiId:st.poiId, time:st.time || "", role:st.role || "landmark", order:idx, note:st.note || "" }; }), transitSegments: day.transit || [] };
 }
 function pushHistory(dayId, ov, beforeSnap){
   ov.history = ov.history || {};
@@ -1792,13 +1925,16 @@ function resetDayEdit(dayId){
   toast("已恢复默认行程");
   refreshAfterEdit();
 }
-function addStopToDay(poiId){
-  var day = currentDay(); if (!day) return;
+function addStopToDay(poiId, dayId, time, role, note){
+  var day = DATA.days.filter(function(x){ return x.id === (dayId || state.dayId); })[0] || currentDay();
+  if (!day) return;
   var poi = POI_MAP[poiId]; if (!poi) return;
   var before = daySnapshot(day);
-  day.stops.push({ poiId:poiId, time:"", role:"landmark", order:day.stops.length, poi:poi });
+  day.stops.push({ poiId: poiId, time: time || "", role: role || "landmark", order: day.stops.length, poi: poi, note: note || "" });
   syncDayNumbers(day); saveDayOverride(day.id, before);
-  EDIT_PICKER = false; toast("已加入： " + (poi.name_zh || poi.name)); refreshAfterEdit();
+  EDIT_PICKER = false;
+  toast("已加入： " + (poi.name_zh || poi.name));
+  refreshAfterEdit();
 }
 function removeStopFromDay(idx){
   var day = currentDay(); if (!day) return;
@@ -1818,8 +1954,26 @@ function applyStopEdit(idx){
   var day = currentDay(); if (!day) return;
   var st = day.stops[idx]; if (!st) return;
   var before = daySnapshot(day);
-  var t = document.getElementById("editTime"); var r = document.getElementById("editRole");
-  if (t) st.time = t.value.trim(); if (r) st.role = r.value || "landmark";
+  var t = document.getElementById("editTime"), r = document.getElementById("editRole"), d2 = document.getElementById("editDay"), n = document.getElementById("editNote");
+  var newDayId = d2 ? d2.value : day.id;
+  if (t) st.time = t.value.trim();
+  if (r) st.role = r.value || "landmark";
+  if (n) st.note = n.value.trim();
+  if (newDayId && newDayId !== day.id){
+    var target = DATA.days.filter(function(x){ return x.id === newDayId; })[0];
+    if (target){
+      var beforeTgt = daySnapshot(target);
+      day.stops.splice(idx, 1);
+      syncDayNumbers(day); saveDayOverride(day.id, before);
+      target.stops.push(st);
+      syncDayNumbers(target); saveDayOverride(target.id, beforeTgt);
+      EDIT_TARGET = null; EDIT_PICKER = false;
+      state.dayId = target.id;
+      toast("已移动到 " + target.label);
+      refreshAfterEdit();
+      return;
+    }
+  }
   syncDayNumbers(day); saveDayOverride(day.id, before);
   EDIT_TARGET = null; toast("已保存修改"); refreshAfterEdit();
 }
@@ -1843,6 +1997,7 @@ function pickerListHtml(q){
 function loadListOverrides(){ try { var raw = localStorage.getItem("tripListOverrides"); if (raw){ var o = JSON.parse(raw); if (o) return o; } } catch(e){} return {}; }
 function saveListOverrides(){ try { localStorage.setItem("tripListOverrides", JSON.stringify(LIST_OV)); } catch(e){} }
 var LIST_OV = loadListOverrides();
+var LIST_UNDO = {};
 function defaultList(key){
   var parts = key.split("."); var obj = DATA;
   for (var i = 0; i < parts.length; i++){ obj = obj[parts[i]]; }
@@ -1850,14 +2005,41 @@ function defaultList(key){
 }
 function getList(key){ return LIST_OV[key] || defaultList(key); }
 function setList(key, arr){ LIST_OV[key] = arr.slice(); saveListOverrides(); markDirty(); }
+function pushListUndo(key){ LIST_UNDO[key] = LIST_UNDO[key] || []; LIST_UNDO[key].push(JSON.parse(JSON.stringify(getList(key)))); if (LIST_UNDO[key].length > 10) LIST_UNDO[key].shift(); }
+function undoListCard(cardKey){
+  var keys = cardKey === "prep" ? ["prep.packing","prep.notes","prep.todos"] : ["mustBuy.seven","mustBuy.stores"];
+  var popped = false;
+  keys.forEach(function(k){ var h = LIST_UNDO[k] || []; if (h.length){ setList(k, h.pop()); popped = true; } });
+  toast(popped ? "已撤销" : "没有可撤销的操作");
+  renderOverview();
+}
+function resetListCard(cardKey){
+  var keys = cardKey === "prep" ? ["prep.packing","prep.notes","prep.todos"] : ["mustBuy.seven","mustBuy.stores"];
+  keys.forEach(function(k){ delete LIST_OV[k]; delete LIST_UNDO[k]; });
+  saveListOverrides(); markDirty(); toast("已恢复默认"); renderOverview();
+}
+function cardHead(icon, title, cardKey, desc){
+  var editing = EDIT_CARD === cardKey;
+  var h = '<h2 class="card-h"><span class="ic">'+icon+'</span><span class="t">'+title+'</span><span class="card-tools">' +
+    '<button class="btn mini'+(editing?' primary':'')+'" data-cardtoggle="'+cardKey+'">'+(editing?'✅ 完成':'✏️ 编辑')+'</button>' +
+    (editing ? '<button class="btn mini" data-cardundo="'+cardKey+'">↩️ 撤销</button>' : '') +
+    (editing ? '<button class="btn mini danger" data-cardreset="'+cardKey+'">🔄 默认</button>' : '') +
+  '</span></h2>';
+  return h + (desc ? '<div class="section-desc">'+desc+'</div>' : "");
+}
 function renderListItems(key, cls){
   var items = getList(key);
-  var html = items.map(function(x, i){
-    return '<li class="'+cls+'">'+esc(x)+(OVERVIEW_EDIT ? ' <button class="li-del" data-list="'+key+'" data-idx="'+i+'" title="删除">✕</button>' : "")+'</li>';
-  }).join("");
-  if (OVERVIEW_EDIT){
-    html += '<li class="li-add"><input type="text" data-addlist="'+key+'" placeholder="新增一项…" maxlength="40"><button class="btn mini" data-addbtn="'+key+'">＋ 添加</button></li>';
+  var editing = key.indexOf("prep.") === 0 ? EDIT_CARD === "prep" : EDIT_CARD === "buy";
+  var html = "";
+  if (editing){
+    html += '<li class="li-add"><input type="text" data-addlist="'+key+'" placeholder="新增一项…" maxlength="40"><button class="btn mini" data-addbtn="'+key+'">＋</button></li>';
   }
+  html += items.map(function(x, i){
+    var text = typeof x === "string" ? x : (x.t || "");
+    var done = typeof x === "string" ? false : !!x.done;
+    var box = cls === "todo" ? '<span class="todo-box'+(done?' done':'')+'" data-list="'+key+'" data-idx="'+i+'" title="点击切换完成">'+(done?'☑':'☐')+'</span>' : "";
+    return '<li class="'+cls+(done?' done':'')+'">'+box+esc(text)+(editing ? ' <button class="li-del" data-list="'+key+'" data-idx="'+i+'" title="删除">−</button>' : "")+'</li>';
+  }).join("");
   return html;
 }
 
@@ -1995,6 +2177,8 @@ $("#module-expenses").addEventListener("click", function(e){
   var row = e.target.closest(".exp-item"); if (!row) return;
   if (b.dataset.act === "edit"){ EXP_EDIT_ID = row.dataset.id; renderExpenses(); }
   else if (b.dataset.act === "del"){ EXP.items = EXP.items.filter(function(it){ return it.id !== row.dataset.id; }); saveExpenses(); toast("已删除"); renderExpenses(); }
+  else if (b.dataset.act === "save-edit"){ saveInlineEdit(row.dataset.id); }
+  else if (b.dataset.act === "cancel-edit"){ EXP_EDIT_ID = null; renderExpenses(); }
 });
 $("#dayPanel").addEventListener("click", function(e){
   var t = e.target.closest("#editToggle");
@@ -2005,8 +2189,16 @@ $("#dayPanel").addEventListener("click", function(e){
   if (u){ undoDayEdit(state.dayId); return; }
   var r = e.target.closest("#editReset");
   if (r){ resetDayEdit(state.dayId); return; }
+  var ac = e.target.closest("#addClose");
+  if (ac){ EDIT_PICKER = false; refreshAfterEdit(); return; }
+  var at = e.target.closest("[data-addtab]");
+  if (at){ qsa("#addTabs .mchip2").forEach(function(x){ x.classList.remove("active"); }); at.classList.add("active"); var ap = document.getElementById("addPanel"); if (ap) ap.innerHTML = at.dataset.addtab === "google" ? addGoogleHtml() : addPoolHtml(currentDay(), ""); return; }
+  var gr = e.target.closest(".g-row");
+  if (gr){ showGDetail(gr.dataset.place); return; }
+  var ga = e.target.closest("[data-gadd]");
+  if (ga){ addGooglePlace(ga.dataset.gadd); return; }
   var pa = e.target.closest(".picker-add");
-  if (pa){ addStopToDay(pa.dataset.poi); return; }
+  if (pa){ var dsel = document.getElementById("addDay"); var nsel = document.getElementById("addNote"); addStopToDay(pa.dataset.poi, dsel ? dsel.value : null, "", "landmark", nsel ? nsel.value.trim() : ""); return; }
   var sv = e.target.closest("#editSave");
   if (sv && EDIT_TARGET != null){ applyStopEdit(EDIT_TARGET); return; }
   var cc = e.target.closest("#editCancel");
@@ -2028,25 +2220,40 @@ $("#dayPanel").addEventListener("click", function(e){
   }
 });
 $("#dayPanel").addEventListener("input", function(e){
-  if (e.target && e.target.id === "pickerSearch"){
-    var pl = document.getElementById("pickerList");
-    if (pl) pl.innerHTML = pickerListHtml(e.target.value);
+  var id = e.target && e.target.id;
+  if (id === "addSearch"){
+    var list = document.getElementById("addSearchList");
+    if (list) list.innerHTML = pickerListHtml(e.target.value);
+    return;
+  }
+  if (id === "gSearch"){
+    var q = e.target.value.trim();
+    var gl = document.getElementById("gList");
+    if (!q){ if (gl) gl.innerHTML = ""; return; }
+    clearTimeout(e.target._t);
+    e.target._t = setTimeout(function(){ gAuto(q).then(function(d){ renderGList(d.predictions || []); }); }, 500);
   }
 });
 $("#module-overview").addEventListener("click", function(e){
-  var tg = e.target.closest("#ovEditToggle");
-  if (tg){ OVERVIEW_EDIT = !OVERVIEW_EDIT; renderOverview(); return; }
-  var rs = e.target.closest("#ovResetLists");
-  if (rs){ LIST_OV = {}; saveListOverrides(); OVERVIEW_EDIT = false; toast("已恢复默认清单"); renderOverview(); return; }
+  var g = e.target.closest("[data-goto]");
+  if (g){ var el = document.getElementById(g.dataset.goto); if (el) el.scrollIntoView({ behavior:"smooth", block:"start" }); return; }
+  var tg = e.target.closest("[data-cardtoggle]");
+  if (tg){ EDIT_CARD = (EDIT_CARD === tg.dataset.cardtoggle ? null : tg.dataset.cardtoggle); renderOverview(); return; }
+  var u = e.target.closest("[data-cardundo]");
+  if (u){ undoListCard(u.dataset.cardundo); return; }
+  var rs = e.target.closest("[data-cardreset]");
+  if (rs){ resetListCard(rs.dataset.cardreset); return; }
+  var tb = e.target.closest(".todo-box");
+  if (tb){ var key = tb.dataset.list; var idx = parseInt(tb.dataset.idx, 10); var arr = getList(key).slice(); var it = arr[idx]; if (typeof it === "string") it = { t: it, done: false }; it.done = !it.done; arr[idx] = it; setList(key, arr); renderOverview(); return; }
   var del = e.target.closest(".li-del");
-  if (del){ var key = del.dataset.list; var idx = parseInt(del.dataset.idx, 10); var arr = getList(key).slice(); arr.splice(idx, 1); setList(key, arr); renderOverview(); return; }
+  if (del){ var key2 = del.dataset.list; var idx2 = parseInt(del.dataset.idx, 10); pushListUndo(key2); var arr2 = getList(key2).slice(); arr2.splice(idx2, 1); setList(key2, arr2); renderOverview(); return; }
   var add = e.target.closest("[data-addbtn]");
-  if (add){ var key2 = add.dataset.addbtn; var inp = add.closest(".li-add").querySelector("input"); var v = (inp.value||"").trim(); if (v){ var arr2 = getList(key2).slice(); arr2.push(v); setList(key2, arr2); renderOverview(); } return; }
+  if (add){ var key3 = add.dataset.addbtn; var inp = add.closest(".li-add").querySelector("input"); var v = (inp.value||"").trim(); if (v){ pushListUndo(key3); var arr3 = getList(key3).slice(); arr3.push(v); setList(key3, arr3); renderOverview(); } return; }
 });
 $("#module-overview").addEventListener("keydown", function(e){
   if (e.key === "Enter" && e.target && e.target.dataset && e.target.dataset.addlist){
     var key = e.target.dataset.addlist; var v = (e.target.value||"").trim();
-    if (v){ var arr = getList(key).slice(); arr.push(v); setList(key, arr); renderOverview(); }
+    if (v){ pushListUndo(key); var arr = getList(key).slice(); arr.push(v); setList(key, arr); renderOverview(); }
   }
 });
 $("#dayTabs").addEventListener("click", function(e){

@@ -140,12 +140,12 @@ async function run() {
   const expList2 = await page.locator(".exp-item").count();
   const jiaoTotal = (await page.locator(".exp-per-item", { hasText: "娇娇" }).first().textContent()).replace(/\s+/g, " ");
 
-  // 编辑第一条金额（种子第一条 = Bed Changkian 1500 → 500）
+  // 编辑第一条金额（原位编辑：Bed Changkian 1500 → 500）
   await page.locator(".exp-item").first().locator('[data-act="edit"]').click();
   await page.waitForTimeout(400);
-  const editAmount = await page.locator("#expAmount").inputValue();
-  await page.fill("#expAmount", "500");
-  await page.click("#expSave");
+  const editAmount = await page.locator("#eiAmount").inputValue();
+  await page.fill("#eiAmount", "500");
+  await page.locator('[data-act="save-edit"]').click();
   await page.waitForTimeout(500);
   const expList3 = await page.locator(".exp-item").count();
 
@@ -163,13 +163,6 @@ async function run() {
   await page.waitForTimeout(500);
   const expListAfterReload = await page.locator(".exp-item").count();
 
-  // 导入合并
-  const importFile = path.join(shots, "import-test.json");
-  fs.writeFileSync(importFile, JSON.stringify({ app: "test", rate: 5, items: [{ id: "t1", name: "导入测试", amount: 99, currency: "CNY", category: "other", type: "shared", person: "", dayId: null, poiId: null, date: "", createdAt: 1 }] }));
-  await page.setInputFiles("#expImportFile", importFile);
-  await page.waitForTimeout(700);
-  const expListAfterImport = await page.locator(".exp-item").count();
-
   /* ── 行程编辑 ── */
   await page.click('.module-btn[data-module="detail"]');
   await page.waitForSelector("#module-detail:not(.hidden)", { timeout: 10000 });
@@ -184,7 +177,7 @@ async function run() {
   // 添加地点（搜索素贴 → 素贴山）
   await page.click("#editAdd");
   await page.waitForTimeout(400);
-  await page.fill("#pickerSearch", "素贴");
+  await page.fill("#addSearch", "素贴");
   await page.waitForTimeout(400);
   const pickerRows = await page.locator(".picker-row").count();
   await page.locator(".picker-add").first().click();
@@ -223,7 +216,7 @@ async function run() {
   await page.click('.module-btn[data-module="overview"]');
   await page.waitForTimeout(500);
   const seven0 = await page.locator(".buy-col").first().locator("li").count();
-  await page.click("#ovEditToggle");
+  await page.click('[data-cardtoggle="buy"]');
   await page.waitForTimeout(300);
   await page.fill('.buy-col input[data-addlist="mustBuy.seven"]', "测试清单项");
   await page.keyboard.press("Enter");
@@ -232,7 +225,7 @@ async function run() {
   await page.locator('.li-del[data-list="mustBuy.seven"]').first().click();
   await page.waitForTimeout(500);
   const seven2 = await page.locator(".buy-col").first().locator("li").count();
-  await page.click("#ovEditToggle");
+  await page.click('[data-cardtoggle="buy"]');
   await page.waitForTimeout(300);
 
   /* ── 刷新后行程覆盖持久化 ── */
@@ -280,6 +273,44 @@ async function run() {
   await page.evaluate(async (r) => { try { await fetch("https://qingmai-lipe-2026-default-rtdb.firebaseio.com/rooms/" + encodeURIComponent(r) + ".json", { method: "DELETE" }); } catch (e) {} }, room);
   await page.click("#syncClose").catch(() => {});
 
+  /* ── 优化项抽查 ── */
+  await page.click('.module-btn[data-module="overview"]');
+  await page.waitForTimeout(500);
+  const memberChipsRow = await page.locator(".member-row .chip").count();
+  const navChips = await page.locator("#ovNav .chip").count();
+  await page.click('#ovNav .chip[data-goto="sec-buy"]');
+  await page.waitForTimeout(400);
+  // 待办勾选
+  await page.click('[data-cardtoggle="prep"]');
+  await page.waitForTimeout(300);
+  const todoBoxes = await page.locator(".todo-box").count();
+  await page.locator(".todo-box").first().click();
+  await page.waitForTimeout(300);
+  const todoDone = await page.locator(".todo-box.done").count();
+  await page.click('[data-cardtoggle="prep"]');
+  await page.waitForTimeout(300);
+  // 汇率工具
+  await page.click('.module-btn[data-module="expenses"]');
+  await page.waitForTimeout(500);
+  await page.fill("#fxAmount", "100");
+  await page.waitForTimeout(300);
+  const fxResult = (await page.locator("#fxResult").textContent()).replace(/\s+/g, " ").trim();
+  // 跨日移动：D2 第一个地点移到 D3
+  await page.click('.module-btn[data-module="detail"]');
+  await page.waitForTimeout(400);
+  await page.locator(".day-tab", { hasText: "9/26" }).first().click();
+  await page.waitForTimeout(400);
+  await page.click("#editToggle");
+  await page.waitForTimeout(300);
+  await page.locator(".tl-item").first().locator('[data-edit="time"]').click();
+  await page.waitForTimeout(300);
+  await page.selectOption("#editDay", "day-3");
+  await page.click("#editSave");
+  await page.waitForTimeout(700);
+  const movedDayTitle = (await page.locator(".day-head h2").textContent()).trim();
+  await page.click("#editToggle");
+  await page.waitForTimeout(200);
+
   /* ── 移动端 ── */
   const pageM = await browser.newPage({ viewport: { width: 390, height: 844 } });
   attach(pageM, "mobile");
@@ -304,10 +335,11 @@ async function run() {
     dayTabs, markers, mapVisible, mapHiddenClass, chips, googleActive, providerStored, amapActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d10Title, d10Cotu, d10Reminders,
     d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX,
     expSums, expPer, expList0, sharedSeed, expList1, sharedAfter1, expListBlocked, expList2, jiaoTotal,
-    editAmount, expList3, expList4, expListAfterReload, expListAfterImport,
+    editAmount, expList3, expList4, expListAfterReload,
     tl0, editControls, pickerRows, tl1, transitSegs1, mapMarkersAfterAdd, pendingTransit, tl2, tl3, tl4, tl5, editedBadge,
     seven0, seven1, seven2, tlPersist0, tlPersist1, editedTabMark,
     syncStatus, syncDot, cloudHasData,
+    memberChipsRow, navChips, todoBoxes, todoDone, fxResult, movedDayTitle,
     mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
