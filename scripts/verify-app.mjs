@@ -53,13 +53,8 @@ async function run() {
   const mapVisible = await page.locator("#mapPanel").isVisible();
   const mapHiddenClass = await page.evaluate(() => document.body.classList.contains("map-hidden"));
   const chips = await page.locator("#mapTools .mchip").count();
-  await page.click('#mapTools .mchip[data-key="google"]');
-  await page.waitForTimeout(700);
+  const defaultProvider = await page.evaluate(() => document.querySelector("#mapTools .mchip.active")?.dataset.key || "");
   const googleActive = await page.evaluate(() => document.querySelector('#mapTools .mchip[data-key="google"]')?.classList.contains("active"));
-  const providerStored = await page.evaluate(() => localStorage.getItem("tripMapProvider"));
-  await page.click('#mapTools .mchip[data-key="amap"]');
-  await page.waitForTimeout(400);
-  const amapActive = await page.evaluate(() => document.querySelector('#mapTools .mchip[data-key="amap"]')?.classList.contains("active"));
 
   // 选择 9/26（D2 射击）
   const tab926 = page.locator(".day-tab", { hasText: "9/26" });
@@ -311,6 +306,40 @@ async function run() {
   await page.click("#editToggle");
   await page.waitForTimeout(200);
 
+  /* ── 截图识别 OCR ── */
+  await page.click('.module-btn[data-module="detail"]');
+  await page.waitForTimeout(400);
+  await page.locator(".day-tab", { hasText: "9/26" }).first().click();
+  await page.waitForTimeout(400);
+  await page.click("#editToggle");
+  await page.waitForTimeout(300);
+  await page.click("#editAdd");
+  await page.waitForTimeout(400);
+  await page.click('[data-addtab="ocr"]');
+  await page.waitForTimeout(500);
+  const tesseractLoaded = await page.evaluate(() => typeof Tesseract !== "undefined");
+  const imgBuf = await page.evaluate(() => {
+    const c = document.createElement("canvas"); c.width = 900; c.height = 220;
+    const ctx = c.getContext("2d");
+    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, 900, 220);
+    ctx.fillStyle = "#000000"; ctx.font = "bold 72px Arial"; ctx.textBaseline = "middle";
+    ctx.fillText("Ristr8to", 60, 110);
+    return c.toDataURL("image/png").split(",")[1];
+  });
+  await page.setInputFiles("#ocrFile", { name: "test.png", mimeType: "image/png", buffer: Buffer.from(imgBuf, "base64") });
+  await page.waitForTimeout(400);
+  await page.click("#ocrStart");
+  let ocrPicked = false;
+  try { await page.waitForSelector(".ocr-pick", { timeout: 150000 }); ocrPicked = true; } catch (e) { ocrPicked = false; }
+  const ocrCands = await page.locator(".ocr-pick").count();
+  const ocrHasRistr = await page.locator(".ocr-pick", { hasText: "Ristr8to" }).count();
+  if (ocrCands){ await page.locator(".ocr-pick").first().click(); await page.waitForTimeout(2500); }
+  const ocrMatches = await page.locator("#ocrMatches .o-add").count();
+  if (ocrMatches){ await page.locator("#ocrMatches .o-add").first().click(); await page.waitForTimeout(900); }
+  const ocrTl = await page.locator(".tl-item").count();
+  await page.click("#editToggle");
+  await page.waitForTimeout(200);
+
   /* ── 移动端 ── */
   const pageM = await browser.newPage({ viewport: { width: 390, height: 844 } });
   attach(pageM, "mobile");
@@ -332,7 +361,7 @@ async function run() {
   await pageM.close();
 
   const result = { title, countdown, routeCards, flightRows, buyCols, prepCols, memberChips, ovScrollX,
-    dayTabs, markers, mapVisible, mapHiddenClass, chips, googleActive, providerStored, amapActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d10Title, d10Cotu, d10Reminders,
+    dayTabs, markers, mapVisible, mapHiddenClass, chips, defaultProvider, googleActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d10Title, d10Cotu, d10Reminders,
     d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX,
     expSums, expPer, expList0, sharedSeed, expList1, sharedAfter1, expListBlocked, expList2, jiaoTotal,
     editAmount, expList3, expList4, expListAfterReload,
@@ -340,6 +369,7 @@ async function run() {
     seven0, seven1, seven2, tlPersist0, tlPersist1, editedTabMark,
     syncStatus, syncDot, cloudHasData,
     memberChipsRow, navChips, todoBoxes, todoDone, fxResult, movedDayTitle,
+    tesseractLoaded, ocrPicked, ocrCands, ocrHasRistr, ocrMatches, ocrTl,
     mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
