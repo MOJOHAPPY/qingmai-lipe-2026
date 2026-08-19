@@ -170,6 +170,97 @@ async function run() {
   await page.waitForTimeout(700);
   const expListAfterImport = await page.locator(".exp-item").count();
 
+  /* ── 行程编辑 ── */
+  await page.click('.module-btn[data-module="detail"]');
+  await page.waitForSelector("#module-detail:not(.hidden)", { timeout: 10000 });
+  const tab926b = page.locator(".day-tab", { hasText: "9/26" });
+  await tab926b.first().click();
+  await page.waitForTimeout(800);
+  const tl0 = await page.locator(".tl-item").count();
+  // 进入编辑模式
+  await page.click("#editToggle");
+  await page.waitForTimeout(400);
+  const editControls = await page.locator("#dayPanel [data-edit]").count();
+  // 添加地点（搜索素贴 → 素贴山）
+  await page.click("#editAdd");
+  await page.waitForTimeout(400);
+  await page.fill("#pickerSearch", "素贴");
+  await page.waitForTimeout(400);
+  const pickerRows = await page.locator(".picker-row").count();
+  await page.locator(".picker-add").first().click();
+  await page.waitForTimeout(600);
+  const tl1 = await page.locator(".tl-item").count();
+  const transitSegs1 = await page.locator("#dayPanel .tseg").count();
+  const mapMarkersAfterAdd = await page.locator(".leaflet-marker-icon").count();
+  const pendingTransit = await page.locator("#dayPanel .tseg", { hasText: "待复核" }).count();
+  // 删除第一条
+  await page.locator(".tl-item").first().locator('[data-edit="del"]').click();
+  await page.waitForTimeout(600);
+  const tl2 = await page.locator(".tl-item").count();
+  // 撤销 → 回到 7
+  await page.click("#editUndo");
+  await page.waitForTimeout(500);
+  const tl3 = await page.locator(".tl-item").count();
+  // 再撤销 → 回到原始 6
+  await page.click("#editUndo");
+  await page.waitForTimeout(500);
+  const tl4 = await page.locator(".tl-item").count();
+  // 恢复默认
+  await page.locator(".tl-item").first().locator('[data-edit="time"]').click();
+  await page.waitForTimeout(400);
+  await page.fill("#editTime", "16:30");
+  await page.click("#editSave");
+  await page.waitForTimeout(500);
+  await page.click("#editReset");
+  await page.waitForTimeout(500);
+  const tl5 = await page.locator(".tl-item").count();
+  const editedBadge = await page.locator("#dayPanel .badge", { hasText: "已编辑" }).count();
+  // 退出编辑
+  await page.click("#editToggle");
+  await page.waitForTimeout(300);
+
+  /* ── 总览清单编辑 ── */
+  await page.click('.module-btn[data-module="overview"]');
+  await page.waitForTimeout(500);
+  const seven0 = await page.locator(".buy-col").first().locator("li").count();
+  await page.click("#ovEditToggle");
+  await page.waitForTimeout(300);
+  await page.fill('.buy-col input[data-addlist="mustBuy.seven"]', "测试清单项");
+  await page.keyboard.press("Enter");
+  await page.waitForTimeout(500);
+  const seven1 = await page.locator(".buy-col").first().locator("li").count();
+  await page.locator('.li-del[data-list="mustBuy.seven"]').first().click();
+  await page.waitForTimeout(500);
+  const seven2 = await page.locator(".buy-col").first().locator("li").count();
+  await page.click("#ovEditToggle");
+  await page.waitForTimeout(300);
+
+  /* ── 刷新后行程覆盖持久化 ── */
+  await page.click('.module-btn[data-module="detail"]');
+  await page.waitForTimeout(400);
+  const tabd = page.locator(".day-tab", { hasText: "9/26" });
+  await tabd.first().click();
+  await page.waitForTimeout(400);
+  await page.click("#editToggle");
+  await page.waitForTimeout(300);
+  await page.click("#editAdd");
+  await page.waitForTimeout(300);
+  await page.locator(".picker-add").first().click();
+  await page.waitForTimeout(500);
+  const tlPersist0 = await page.locator(".tl-item").count();
+  await page.click("#editToggle");
+  await page.waitForTimeout(200);
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.waitForSelector("#module-overview:not(.hidden)", { timeout: 20000 });
+  await page.waitForTimeout(700);
+  await page.click('.module-btn[data-module="detail"]');
+  await page.waitForTimeout(400);
+  const tabd2 = page.locator(".day-tab", { hasText: "9/26" });
+  await tabd2.first().click();
+  await page.waitForTimeout(500);
+  const tlPersist1 = await page.locator(".tl-item").count();
+  const editedTabMark = await page.locator('.day-tab', { hasText: "✏️" }).count();
+
   /* ── 移动端 ── */
   const pageM = await browser.newPage({ viewport: { width: 390, height: 844 } });
   attach(pageM, "mobile");
@@ -195,6 +286,8 @@ async function run() {
     d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX,
     expSums, expPer, expList0, sharedSeed, expList1, sharedAfter1, expListBlocked, expList2, jiaoTotal,
     editAmount, expList3, expList4, expListAfterReload, expListAfterImport,
+    tl0, editControls, pickerRows, tl1, transitSegs1, mapMarkersAfterAdd, pendingTransit, tl2, tl3, tl4, tl5, editedBadge,
+    seven0, seven1, seven2, tlPersist0, tlPersist1, editedTabMark,
     mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
