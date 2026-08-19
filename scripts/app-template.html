@@ -283,6 +283,20 @@ body.map-hidden .content{width:100%;max-width:none;}
 .picker-row .pn{flex:1;font-size:13px;font-weight:600;}
 .picker-row .pc{font-size:11px;color:var(--text2);}
 #pickerSearch{width:100%;padding:8px 10px;border:1px solid var(--line);border-radius:10px;font-size:13px;}
+/* ── 云端同步 ── */
+#syncBtn{position:absolute;right:12px;top:calc(6px + var(--safe-top));border:1px solid var(--line);background:#fff;border-radius:980px;width:38px;height:38px;font-size:17px;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow);}
+#syncBtn .dot{position:absolute;top:3px;right:3px;width:9px;height:9px;border-radius:50%;background:#c7c7cc;border:1.5px solid #fff;}
+#syncBtn .dot.ok{background:#34c759;}
+#syncBtn .dot.syncing{background:#ff9f0a;}
+#syncBtn .dot.error{background:#ff3b30;}
+.sheet{position:fixed;inset:0;background:rgba(0,0,0,.35);z-index:500;display:none;align-items:flex-end;justify-content:center;}
+.sheet.open{display:flex;}
+.sheet-card{background:#fff;width:100%;max-width:560px;border-radius:18px 18px 0 0;padding:16px 16px calc(18px + var(--safe-bottom));max-height:80vh;overflow-y:auto;box-shadow:0 -6px 30px rgba(0,0,0,.18);}
+@media (min-width:900px){ .sheet{align-items:center;} .sheet-card{border-radius:18px;} }
+.sheet-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;font-size:16px;font-weight:700;}
+#syncClose{border:none;background:none;font-size:16px;color:var(--text2);padding:4px 8px;}
+.sync-status{font-size:13px;color:var(--text2);}
+.sync-hint{font-size:12px;color:var(--text2);background:#f6f6f8;border-radius:10px;padding:9px 11px;margin-top:12px;line-height:1.6;}
 </style>
 </head>
 <body>
@@ -294,6 +308,7 @@ body.map-hidden .content{width:100%;max-width:none;}
       <div class="sub">兴趣班 · 市集 · 吃喝 · 3 人同行 · 2026 中秋国庆</div>
     </div>
   </div>
+  <button id="syncBtn" title="云端同步"><span class="dot off"></span>☁️</button>
   <nav class="module-nav">
     <button class="module-btn active" data-module="overview">📋 总览</button>
     <button class="module-btn" data-module="detail">🗓️ 计划详情</button>
@@ -326,6 +341,13 @@ body.map-hidden .content{width:100%;max-width:none;}
 </main>
 
 <button id="mapShowBtn">🗺️ 显示地图</button>
+
+<div id="syncSheet" class="sheet">
+  <div class="sheet-card">
+    <div class="sheet-head"><b>☁️ 云端同步</b><button id="syncClose">✕</button></div>
+    <div id="syncPanelBody"></div>
+  </div>
+</div>
 
 <script type="application/json" id="app-data">__APP_DATA__</script>
 <script id="leaflet-js">__LEAFLET_JS__</script>
@@ -740,6 +762,7 @@ var EXP_CATS = [
 function seedExpensesIfEmpty(){
   try {
     if (localStorage.getItem("tripExpenses")) return;
+    SEEDING = true;
     EXP.items = [
       { id:"seed-1", name:"国际机票 上海⇄清迈（4程）· 已确认", amount:11935, currency:"CNY", date:"", category:"flight", type:"shared", person:"", dayId:"day-1", poiId:"poi-cnx-airport", createdAt:1 },
       { id:"seed-2", name:"亚航 清迈⇄合艾 + 20kg 行李 · 估算", amount:1800, currency:"CNY", date:"", category:"flight", type:"shared", person:"", dayId:"day-5", poiId:"poi-cnx-airport", createdAt:2 },
@@ -750,7 +773,8 @@ function seedExpensesIfEmpty(){
       { id:"seed-7", name:"Bed Changkian 4 晚 · 估算", amount:1500, currency:"CNY", date:"", category:"hotel", type:"shared", person:"", dayId:"day-9", poiId:"poi-bed-changkian", createdAt:7 }
     ];
     saveExpenses();
-  } catch(e){}
+    SEEDING = false;
+  } catch(e){ SEEDING = false; }
 }
 function loadExpenses(){
   try {
@@ -763,6 +787,7 @@ function loadExpenses(){
 }
 function saveExpenses(){
   try { localStorage.setItem("tripExpenses", JSON.stringify({ items: EXP.items, rate: EXP.rate })); } catch(e){}
+  if (!SEEDING) markDirty();
 }
 function expToCNY(it){ return it.currency === "THB" ? it.amount / EXP.rate : it.amount; }
 function expFmt(n){ return "¥" + (Math.round(n*100)/100).toLocaleString("zh-CN"); }
@@ -992,6 +1017,7 @@ function renderExpenses(){
 
 /* ---------- 行程编辑 / 清单编辑 ---------- */
 var ORIG_DAYS = null;
+var PRISTINE_DAYS = null;
 var POI_MAP = {};
 var EDIT_MODE = false;
 var EDIT_PICKER = false;
@@ -1011,10 +1037,10 @@ function cloneDay(d){
     candidates: (d.candidates||[]).slice(), reminders: (d.reminders||[]).slice(), edited:false };
 }
 function loadOverrides(){ try { var raw = localStorage.getItem("tripOverrides"); if (raw){ var o = JSON.parse(raw); if (o && o.days) return o; } } catch(e){} return { days:{}, history:{} }; }
-function saveOverrides(o){ try { localStorage.setItem("tripOverrides", JSON.stringify(o)); } catch(e){} }
+function saveOverrides(o){ try { localStorage.setItem("tripOverrides", JSON.stringify(o)); } catch(e){} markDirty(); }
 function applyOverrides(){
-  buildPoiMap();
-  ORIG_DAYS = DATA.days.map(cloneDay);
+  if (!PRISTINE_DAYS){ buildPoiMap(); PRISTINE_DAYS = DATA.days.map(cloneDay); }
+  ORIG_DAYS = PRISTINE_DAYS;
   var ov = loadOverrides();
   DATA.days.forEach(function(d){
     var o = ov.days[d.id];
@@ -1157,7 +1183,7 @@ function defaultList(key){
   return Array.isArray(obj) ? obj : [];
 }
 function getList(key){ return LIST_OV[key] || defaultList(key); }
-function setList(key, arr){ LIST_OV[key] = arr.slice(); saveListOverrides(); }
+function setList(key, arr){ LIST_OV[key] = arr.slice(); saveListOverrides(); markDirty(); }
 function renderListItems(key, cls){
   var items = getList(key);
   var html = items.map(function(x, i){
@@ -1168,6 +1194,99 @@ function renderListItems(key, cls){
   }
   return html;
 }
+
+/* ---------- 云端同步（Firebase Realtime Database） ---------- */
+var SYNC = { room:"", localUpdatedAt:0, lastSyncAt:0, status:"off", panel:false, _t:null };
+var SEEDING = false;
+var SYNC_DB = "https://qingmai-lipe-2026-default-rtdb.firebaseio.com";
+function loadSyncMeta(){
+  try { var m = JSON.parse(localStorage.getItem("tripSyncMeta") || "{}");
+    if (m && typeof m === "object"){ SYNC.room = m.room || ""; SYNC.localUpdatedAt = m.localUpdatedAt || 0; SYNC.lastSyncAt = m.lastSyncAt || 0; }
+  } catch(e){}
+}
+function saveSyncMeta(){ try { localStorage.setItem("tripSyncMeta", JSON.stringify({ room:SYNC.room, localUpdatedAt:SYNC.localUpdatedAt, lastSyncAt:SYNC.lastSyncAt })); } catch(e){} }
+function markDirty(){ SYNC.localUpdatedAt = Date.now(); saveSyncMeta(); if (SYNC.room){ if (SYNC._t) clearTimeout(SYNC._t); SYNC._t = setTimeout(doSync, 1500); } }
+function syncUrl(){ return SYNC_DB + "/rooms/" + encodeURIComponent(SYNC.room) + "/data.json"; }
+function setSyncStatus(st){ SYNC.status = st; renderSyncStatus(); }
+function renderSyncStatus(){
+  var b = document.getElementById("syncBtn");
+  if (b){ var dot = b.querySelector(".dot"); if (dot) dot.className = "dot " + SYNC.status; }
+  var p = document.getElementById("syncStatus");
+  if (p){
+    var map = { "off":"尚未连接云端", "no-room":"未设置房间号", "syncing":"正在同步…", "ok":"已连接 · 上次同步 " + (SYNC.lastSyncAt ? new Date(SYNC.lastSyncAt).toLocaleTimeString("zh-CN", { hour:"2-digit", minute:"2-digit" }) : "—"), "error":"同步失败（请检查网络/规则）" };
+    p.textContent = map[SYNC.status] || "—";
+  }
+}
+var DOT = String.fromCharCode(46); var TIL = String.fromCharCode(126); function encodeListKeys(o){ var r = {}; Object.keys(o || {}).forEach(function(k){ r[k.split(DOT).join(TIL)] = o[k]; }); return r; }
+function decodeListKeys(o){ var r = {}; Object.keys(o || {}).forEach(function(k){ r[k.split(TIL).join(DOT)] = o[k]; }); return r; }
+function buildLocalBlob(){
+  var ov = loadOverrides();
+  var expRaw = {};
+  try { expRaw = JSON.parse(localStorage.getItem("tripExpenses") || "{}"); } catch(e){}
+  return { v:1, updatedAt: Math.max(SYNC.localUpdatedAt, Date.now()), overrides:{ days: ov.days }, lists: encodeListKeys(LIST_OV), expenses: expRaw };
+}
+function pushLocal(){
+  var blob = buildLocalBlob();
+  SYNC.localUpdatedAt = blob.updatedAt; saveSyncMeta();
+  return fetch(syncUrl(), { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(blob) })
+    .then(function(r){ if (!r.ok) throw new Error("http " + r.status); SYNC.lastSyncAt = Date.now(); saveSyncMeta(); setSyncStatus("ok"); renderSyncPanel(); })
+    .catch(function(){ setSyncStatus("error"); });
+}
+function applyRemoteBlob(blob){
+  if (!blob) return;
+  if (blob.overrides && blob.overrides.days){ localStorage.setItem("tripOverrides", JSON.stringify({ days: blob.overrides.days, history: {} })); }
+  if (blob.lists){ localStorage.setItem("tripListOverrides", JSON.stringify(decodeListKeys(blob.lists))); }
+  if (blob.expenses){ localStorage.setItem("tripExpenses", JSON.stringify(blob.expenses)); }
+  EXP = { items: [], rate: 5 }; loadExpenses();
+  LIST_OV = loadListOverrides();
+  applyOverrides();
+  renderExpenses(); renderOverview(); renderDayTabs();
+  var day = currentDay(); if (day){ renderDay(day); renderMapDay(day); }
+  toast("已同步云端数据");
+}
+function doSync(){
+  if (!SYNC.room){ setSyncStatus("no-room"); return; }
+  if (SYNC.status === "syncing") return;
+  setSyncStatus("syncing");
+  fetch(syncUrl()).then(function(r){ return r.json(); }).then(function(remote){
+    if (remote == null){ return pushLocal(); }
+    var rUpd = remote.updatedAt || 0;
+    if (SYNC.localUpdatedAt > rUpd){ return pushLocal(); }
+    if (rUpd > SYNC.localUpdatedAt){ applyRemoteBlob(remote); SYNC.localUpdatedAt = rUpd; }
+    SYNC.lastSyncAt = Date.now(); saveSyncMeta(); setSyncStatus("ok"); renderSyncPanel();
+  }).catch(function(){ setSyncStatus("error"); });
+}
+function renderSyncPanel(){
+  var p = document.getElementById("syncPanelBody");
+  if (!p) return;
+  p.innerHTML = '' +
+    '<div class="f-row"><span class="f-lbl">房间号</span>' +
+      '<input type="text" id="syncRoom" value="'+esc(SYNC.room)+'" placeholder="三台手机填同一个房间号" maxlength="40">' +
+      '<button class="btn mini" id="syncSaveRoom">保存</button>' +
+      '<button class="btn mini" id="syncCopyRoom">复制</button>' +
+    '</div>' +
+    '<div class="f-row"><span class="f-lbl">状态</span><span id="syncStatus" class="sync-status">—</span></div>' +
+    '<div class="f-row">' +
+      '<button class="btn primary" id="syncNow">🔄 立即同步</button>' +
+      '<button class="btn mini" id="syncGenRoom">🎲 生成新房间号</button>' +
+    '</div>' +
+    '<div class="sync-hint">三台手机填同一个房间号即互通：任一方修改行程/清单/花费，其他手机约 20 秒内自动更新；以最后修改为准。数据存 Firebase（公开规则 + 随机房间号），仅你们这个房间可读写。</div>';
+  renderSyncStatus();
+}
+function openSyncPanel(){ SYNC.panel = true; renderSyncPanel(); var sh = document.getElementById("syncSheet"); if (sh) sh.classList.add("open"); }
+function closeSyncPanel(){ SYNC.panel = false; var sh = document.getElementById("syncSheet"); if (sh) sh.classList.remove("open"); }
+document.getElementById("syncBtn").addEventListener("click", function(){ if (SYNC.panel) closeSyncPanel(); else openSyncPanel(); });
+document.getElementById("syncSheet").addEventListener("click", function(e){
+  if (e.target.id === "syncSheet" || e.target.id === "syncClose"){ closeSyncPanel(); return; }
+  var sv = e.target.closest("#syncSaveRoom");
+  if (sv){ SYNC.room = (document.getElementById("syncRoom").value || "").trim(); saveSyncMeta(); closeSyncPanel(); toast("房间号已保存"); doSync(); return; }
+  var cp = e.target.closest("#syncCopyRoom");
+  if (cp){ if (navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(SYNC.room).then(function(){ toast("已复制房间号"); }); } else { toast("请手动复制：" + SYNC.room); } return; }
+  var gn = e.target.closest("#syncGenRoom");
+  if (gn){ SYNC.room = "t" + Math.random().toString(36).slice(2, 8); saveSyncMeta(); renderSyncPanel(); toast("已生成新房间号"); return; }
+  var now = e.target.closest("#syncNow");
+  if (now){ doSync(); return; }
+});
 
 /* ---------- 事件 ---------- */
 $$(".module-btn").forEach(function(b){
@@ -1273,6 +1392,7 @@ window.addEventListener("resize", function(){
 });
 
 /* ---------- 初始化 ---------- */
+loadSyncMeta();
 applyOverrides();
 seedExpensesIfEmpty();
 loadExpenses();
@@ -1289,6 +1409,11 @@ if (!initial) initial = DATA.days[1] ? DATA.days[1].id : DATA.days[0].id;
 selectDay(initial, false);
 setModule("overview");
 setInterval(renderCountdown, 60000);
+renderSyncStatus();
+if (SYNC.room){ setTimeout(doSync, 800); }
+setInterval(doSync, 20000);
+window.addEventListener("focus", function(){ doSync(); });
+document.addEventListener("visibilitychange", function(){ if (document.visibilityState === "visible") doSync(); });
 })();
 </script>
 </body>

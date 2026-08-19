@@ -261,6 +261,25 @@ async function run() {
   const tlPersist1 = await page.locator(".tl-item").count();
   const editedTabMark = await page.locator('.day-tab', { hasText: "✏️" }).count();
 
+  /* ── 云端同步 ── */
+  await page.click("#syncBtn");
+  await page.waitForSelector("#syncSheet.open", { timeout: 5000 });
+  const room = "vrtest" + Math.floor(Math.random() * 1e6);
+  await page.fill("#syncRoom", room);
+  await page.click("#syncSaveRoom");
+  await page.waitForTimeout(4000);
+  const syncStatus = (await page.locator("#syncStatus").textContent().catch(() => "")).replace(/\s+/g, " ").trim();
+  const syncDot = await page.evaluate(() => document.querySelector("#syncBtn .dot").className);
+  const cloud = await page.evaluate(async (r) => {
+    try {
+      const res = await fetch("https://qingmai-lipe-2026-default-rtdb.firebaseio.com/rooms/" + encodeURIComponent(r) + "/data.json");
+      return await res.json();
+    } catch (e) { return { err: String(e) }; }
+  }, room);
+  const cloudHasData = !!(cloud && (cloud.overrides || cloud.lists || cloud.expenses));
+  await page.evaluate(async (r) => { try { await fetch("https://qingmai-lipe-2026-default-rtdb.firebaseio.com/rooms/" + encodeURIComponent(r) + ".json", { method: "DELETE" }); } catch (e) {} }, room);
+  await page.click("#syncClose").catch(() => {});
+
   /* ── 移动端 ── */
   const pageM = await browser.newPage({ viewport: { width: 390, height: 844 } });
   attach(pageM, "mobile");
@@ -288,6 +307,7 @@ async function run() {
     editAmount, expList3, expList4, expListAfterReload, expListAfterImport,
     tl0, editControls, pickerRows, tl1, transitSegs1, mapMarkersAfterAdd, pendingTransit, tl2, tl3, tl4, tl5, editedBadge,
     seven0, seven1, seven2, tlPersist0, tlPersist1, editedTabMark,
+    syncStatus, syncDot, cloudHasData,
     mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
