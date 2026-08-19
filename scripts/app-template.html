@@ -591,7 +591,8 @@ function renderDay(day){
       '</div>' +
       '<div class="chips" id="addTabs">' +
         '<button class="mchip2 active" data-addtab="pool">📍 地点池</button>' +
-        '<button class="mchip2" data-addtab="google">🔍 Google 搜索</button>' +
+        '<button class="mchip2" data-addtab="amap">🗺️ 高德搜索</button>' +
+        '<button class="mchip2" data-addtab="osm">🌍 全球搜索</button>' +
       '</div>' +
       '<div id="addPanel">' + addPoolHtml(day, "") + '</div>' +
     '</div>';
@@ -1060,7 +1061,7 @@ var EDIT_PICKER = false;
 var EDIT_TARGET = null;
 var EDIT_CARD = null;
 function qsa(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
-var GOOGLE_PLACES_KEY = "";
+var AMAP_WEB_KEY = "";
 function dayOptions(sel){
   return DATA.days.map(function(d){ return '<option value="'+d.id+'"'+(d.id===sel?' selected':'')+'>'+d.label+' · '+esc(d.title)+'</option>'; }).join("");
 }
@@ -1069,13 +1070,17 @@ function addPoolHtml(day, q){
     '<div class="picker-list" id="addSearchList">' + pickerListHtml(q) + '</div>';
   return html + nearbyHtml(day);
 }
-function addGoogleHtml(){
-  if (!GOOGLE_PLACES_KEY){
-    return '<div class="empty">未配置 Google Places API Key。启用方法：Google Cloud 开启 Places API → 创建 API Key（限制仅本域名）→ 把 Key 发给 Codex 填入。当前可先用「地点池」搜索。</div>';
+function addAmapHtml(){
+  if (!AMAP_WEB_KEY){
+    return '<div class="empty">未配置高德 Web服务 Key。启用：高德开放平台（lbs.amap.com）注册 → 应用管理 → 创建应用 → 添加 Key（服务平台选「Web服务」）→ 把 Key 发给 Codex 填入。注意：高德 POI 主要覆盖中国大陆，清迈可能搜不到，可改用「🌍 全球搜索」。</div>';
   }
-  return '<input type="text" id="gSearch" placeholder="输入关键词，如 Ristr8to、宁曼咖啡…">' +
-    '<div class="picker-list" id="gList"></div>' +
-    '<div id="gDetail"></div>';
+  return '<input type="text" id="aSearch" placeholder="输入关键词，如 Ristr8to、宁曼…">' +
+    '<div class="picker-list" id="aList"></div>';
+}
+function addOsmHtml(){
+  return '<input type="text" id="oSearch" placeholder="输入关键词，如 Ristr8to、宁曼、Chiang Mai…">' +
+    '<div class="picker-list" id="oList"></div>' +
+    '<div class="sync-hint" style="margin-top:8px">数据来源 OpenStreetMap（Photon 服务，无需 Key、全球覆盖）。搜索结果含名称/地址/坐标；评分与营业时间请以「地点池」已核实卡片为准，或自行补充备注。</div>';
 }
 function nearbyHtml(day){
   var hotel = null;
@@ -1104,57 +1109,57 @@ function nearbyHtml(day){
   });
   return html;
 }
-function gAuto(q){
-  var url = "https://maps.googleapis.com/maps/api/place/autocomplete/json?input=" + encodeURIComponent(q) + "&key=" + GOOGLE_PLACES_KEY + "&language=zh-CN";
-  return fetch(url).then(function(r){ return r.json(); });
-}
-function gDetails(placeId){
-  var url = "https://maps.googleapis.com/maps/api/place/details/json?place_id=" + encodeURIComponent(placeId) + "&fields=name,formatted_address,rating,user_ratings_total,opening_hours,geometry,formatted_phone_number,website&key=" + GOOGLE_PLACES_KEY + "&language=zh-CN";
-  return fetch(url).then(function(r){ return r.json(); });
-}
-function renderGList(results){
-  var el = document.getElementById("gList");
+function renderAList(data){
+  var el = document.getElementById("aList");
   if (!el) return;
-  if (!results || !results.length){ el.innerHTML = '<div class="empty">没有匹配结果</div>'; return; }
-  el.innerHTML = results.map(function(it){
-    return '<div class="picker-row g-row" data-place="'+esc(it.place_id)+'"><span class="pic">📍</span><span class="pn">'+esc(it.description||"")+'</span></div>';
+  var tips = data && data.tips ? data.tips : [];
+  if (!tips.length){ el.innerHTML = '<div class="empty">没有匹配结果（高德主要覆盖中国大陆）</div>'; return; }
+  el.innerHTML = tips.map(function(t){
+    var addr = t.address || t.district || "";
+    return '<div class="picker-row"><span class="pic">📍</span><span class="pn">'+esc(t.name||"")+'</span><span class="pc">'+esc(addr)+'</span>' +
+      '<button class="btn mini primary a-add" data-aname="'+esc(t.name||"")+'" data-aloc="'+esc(t.location||"")+'" data-aaddr="'+esc(addr)+'">加入</button></div>';
   }).join("");
 }
-function showGDetail(placeId){
-  gDetails(placeId).then(function(res){
-    var r = res && res.result;
-    var el = document.getElementById("gDetail");
-    if (!el) return;
-    if (!r){ el.innerHTML = '<div class="empty">获取地点信息失败</div>'; return; }
-    var hours = "";
-    if (r.opening_hours && r.opening_hours.weekday_text && r.opening_hours.weekday_text.length){ hours = r.opening_hours.weekday_text.join("；").slice(0, 180); }
-    el.innerHTML = '<div class="g-detail">' +
-      '<div class="gd-name">'+esc(r.name)+'</div>' +
-      (r.rating ? '<div class="gd-row">⭐ '+r.rating+(r.user_ratings_total?'（'+r.user_ratings_total+' 条评价）':"")+'</div>' : "") +
-      (r.formatted_address ? '<div class="gd-row">📍 '+esc(r.formatted_address)+'</div>' : "") +
-      (hours ? '<div class="gd-row">🕐 '+esc(hours)+'</div>' : "") +
-      '<button class="btn primary" data-gadd="'+esc(placeId)+'">➕ 加入行程</button>' +
-    '</div>';
-  });
+function addAmapPlace(name, loc, addr){
+  var parts = String(loc||"").split(",");
+  var lng = parseFloat(parts[0]), lat = parseFloat(parts[1]);
+  if (!(lng && lat)){ toast("该地点缺少坐标"); return; }
+  var pid = "a-" + Math.random().toString(36).slice(2, 10);
+  POI_MAP[pid] = {
+    id: pid, name: name, name_zh: name, city: "Chiang Mai", area: addr, category: "spot",
+    coords: [lat, lng], note: addr || "", tip: "", rating: undefined, hours: "",
+    mapUrl: "https://uri.amap.com/marker?position=" + lng + "," + lat + "&name=" + encodeURIComponent(name),
+    contentTier: "compact", sourceIds: [], themeTags: ["amap"]
+  };
+  var dsel = document.getElementById("addDay"); var nsel = document.getElementById("addNote");
+  addStopToDay(pid, dsel ? dsel.value : null, "", "landmark", nsel ? nsel.value.trim() : "");
 }
-function addGooglePlace(placeId){
-  gDetails(placeId).then(function(res){
-    var r = res && res.result;
-    if (!r){ toast("获取地点信息失败"); return; }
-    var pid = "g-" + placeId;
-    var hours = "";
-    if (r.opening_hours && r.opening_hours.weekday_text){ hours = r.opening_hours.weekday_text.join("；").slice(0, 160); }
-    POI_MAP[pid] = {
-      id: pid, name: r.name, name_zh: r.name, city: "Chiang Mai", area: r.vicinity || "",
-      category: "spot", coords: [r.geometry.location.lat, r.geometry.location.lng],
-      note: r.formatted_address || "", tip: hours || "",
-      rating: r.rating, hours: hours,
-      mapUrl: "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(r.name),
-      contentTier: "compact", sourceIds: [], themeTags: ["google"]
-    };
-    var dsel = document.getElementById("addDay"); var nsel = document.getElementById("addNote");
-    addStopToDay(pid, dsel ? dsel.value : null, "", "landmark", nsel ? nsel.value.trim() : "");
-  });
+function renderOList(data){
+  var el = document.getElementById("oList");
+  if (!el) return;
+  var feats = data && data.features ? data.features : [];
+  if (!feats.length){ el.innerHTML = '<div class="empty">没有匹配结果</div>'; return; }
+  el.innerHTML = feats.map(function(f){
+    var p = f.properties || {}; var g = f.geometry || {};
+    var coords = g.coordinates || [];
+    var nm = p.name || "";
+    var addr = [p.street || "", p.city || "", p.country || ""].filter(Boolean).join("，");
+    return '<div class="picker-row"><span class="pic">📍</span><span class="pn">'+esc(nm)+'</span><span class="pc">'+esc(addr)+'</span>' +
+      '<button class="btn mini primary o-add" data-oname="'+esc(nm)+'" data-olng="'+esc(coords[0]||"")+'" data-olat="'+esc(coords[1]||"")+'" data-oaddr="'+esc(addr)+'">加入</button></div>';
+  }).join("");
+}
+function addOsmPlace(name, lng, lat, addr){
+  lng = parseFloat(lng); lat = parseFloat(lat);
+  if (!(lng && lat)){ toast("该地点缺少坐标"); return; }
+  var pid = "o-" + Math.random().toString(36).slice(2, 10);
+  POI_MAP[pid] = {
+    id: pid, name: name, name_zh: name, city: "Chiang Mai", area: addr, category: "spot",
+    coords: [lat, lng], note: addr || "", tip: "", rating: undefined, hours: "",
+    mapUrl: "https://www.openstreetmap.org/?mlat=" + lat + "&mlon=" + lng + "#map=16/" + lat + "/" + lng,
+    contentTier: "compact", sourceIds: [], themeTags: ["osm"]
+  };
+  var dsel = document.getElementById("addDay"); var nsel = document.getElementById("addNote");
+  addStopToDay(pid, dsel ? dsel.value : null, "", "landmark", nsel ? nsel.value.trim() : "");
 }
 function buildPoiMap(){
   POI_MAP = {};
@@ -1526,11 +1531,11 @@ $("#dayPanel").addEventListener("click", function(e){
   var ac = e.target.closest("#addClose");
   if (ac){ EDIT_PICKER = false; refreshAfterEdit(); return; }
   var at = e.target.closest("[data-addtab]");
-  if (at){ qsa("#addTabs .mchip2").forEach(function(x){ x.classList.remove("active"); }); at.classList.add("active"); var ap = document.getElementById("addPanel"); if (ap) ap.innerHTML = at.dataset.addtab === "google" ? addGoogleHtml() : addPoolHtml(currentDay(), ""); return; }
-  var gr = e.target.closest(".g-row");
-  if (gr){ showGDetail(gr.dataset.place); return; }
-  var ga = e.target.closest("[data-gadd]");
-  if (ga){ addGooglePlace(ga.dataset.gadd); return; }
+  if (at){ qsa("#addTabs .mchip2").forEach(function(x){ x.classList.remove("active"); }); at.classList.add("active"); var ap = document.getElementById("addPanel"); if (ap) ap.innerHTML = at.dataset.addtab === "amap" ? addAmapHtml() : at.dataset.addtab === "osm" ? addOsmHtml() : addPoolHtml(currentDay(), ""); return; }
+  var aa = e.target.closest(".a-add");
+  if (aa){ addAmapPlace(aa.dataset.aname, aa.dataset.aloc, aa.dataset.aaddr); return; }
+  var oa = e.target.closest(".o-add");
+  if (oa){ addOsmPlace(oa.dataset.oname, oa.dataset.olng, oa.dataset.olat, oa.dataset.oaddr); return; }
   var pa = e.target.closest(".picker-add");
   if (pa){ var dsel = document.getElementById("addDay"); var nsel = document.getElementById("addNote"); addStopToDay(pa.dataset.poi, dsel ? dsel.value : null, "", "landmark", nsel ? nsel.value.trim() : ""); return; }
   var sv = e.target.closest("#editSave");
@@ -1560,12 +1565,25 @@ $("#dayPanel").addEventListener("input", function(e){
     if (list) list.innerHTML = pickerListHtml(e.target.value);
     return;
   }
-  if (id === "gSearch"){
-    var q = e.target.value.trim();
-    var gl = document.getElementById("gList");
-    if (!q){ if (gl) gl.innerHTML = ""; return; }
+  if (id === "aSearch"){
+    var q1 = e.target.value.trim();
+    var al = document.getElementById("aList");
+    if (!q1){ if (al) al.innerHTML = ""; return; }
     clearTimeout(e.target._t);
-    e.target._t = setTimeout(function(){ gAuto(q).then(function(d){ renderGList(d.predictions || []); }); }, 500);
+    e.target._t = setTimeout(function(){
+      if (!AMAP_WEB_KEY){ if (al) al.innerHTML = '<div class="empty">未配置高德 Key</div>'; return; }
+      fetch("https://restapi.amap.com/v3/assistant/inputtips?keywords=" + encodeURIComponent(q1) + "&key=" + AMAP_WEB_KEY + "&datatype=poi").then(function(r){ return r.json(); }).then(renderAList);
+    }, 500);
+    return;
+  }
+  if (id === "oSearch"){
+    var q2 = e.target.value.trim();
+    var ol = document.getElementById("oList");
+    if (!q2){ if (ol) ol.innerHTML = ""; return; }
+    clearTimeout(e.target._t);
+    e.target._t = setTimeout(function(){
+      fetch("https://photon.komoot.io/api/?q=" + encodeURIComponent(q2) + "&limit=10").then(function(r){ return r.json(); }).then(renderOList);
+    }, 500);
   }
 });
 $("#module-overview").addEventListener("click", function(e){
