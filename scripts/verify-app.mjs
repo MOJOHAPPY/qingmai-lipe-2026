@@ -106,6 +106,70 @@ async function run() {
   const autoCollapsed = await page.evaluate(() => document.body.classList.contains("map-hidden"));
   const detailScrollX = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
 
+  /* ── 花费统计 ── */
+  await page.click('.module-btn[data-module="expenses"]');
+  await page.waitForSelector("#module-expenses:not(.hidden)", { timeout: 10000 });
+  await page.waitForTimeout(500);
+  const expSums = await page.locator(".exp-sum").count();
+  const expPer = await page.locator(".exp-per-item").count();
+  const expList0 = await page.locator(".exp-item").count();
+  const sharedSeed = (await page.locator(".exp-sum").first().textContent()).replace(/\s+/g, " ");
+
+  // 新增公共花销 ¥300
+  await page.fill("#expName", "泰餐课 Mama Noi");
+  await page.fill("#expAmount", "300");
+  await page.selectOption("#expCurrency", "CNY");
+  await page.click("#expSave");
+  await page.waitForTimeout(500);
+  const expList1 = await page.locator(".exp-item").count();
+  const sharedAfter1 = (await page.locator(".exp-sum").first().textContent()).replace(/\s+/g, " ");
+
+  // 个人花销：不填人员应被拦截
+  await page.click('#module-expenses .exp-type[data-type="personal"]');
+  await page.waitForTimeout(200);
+  await page.fill("#expName", "娇娇的按摩");
+  await page.fill("#expAmount", "150");
+  await page.click("#expSave");
+  await page.waitForTimeout(400);
+  const expListBlocked = await page.locator(".exp-item").count();
+
+  // 填写人员后保存
+  await page.fill("#expPerson", "娇娇");
+  await page.click("#expSave");
+  await page.waitForTimeout(500);
+  const expList2 = await page.locator(".exp-item").count();
+  const jiaoTotal = (await page.locator(".exp-per-item", { hasText: "娇娇" }).first().textContent()).replace(/\s+/g, " ");
+
+  // 编辑第一条金额（种子第一条 = Bed Changkian 1500 → 500）
+  await page.locator(".exp-item").first().locator('[data-act="edit"]').click();
+  await page.waitForTimeout(400);
+  const editAmount = await page.locator("#expAmount").inputValue();
+  await page.fill("#expAmount", "500");
+  await page.click("#expSave");
+  await page.waitForTimeout(500);
+  const expList3 = await page.locator(".exp-item").count();
+
+  // 删除一条
+  await page.locator(".exp-item").first().locator('[data-act="del"]').click();
+  await page.waitForTimeout(500);
+  const expList4 = await page.locator(".exp-item").count();
+
+  // 刷新后持久化（不应重新预填）
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.waitForSelector("#module-overview:not(.hidden)", { timeout: 20000 });
+  await page.waitForTimeout(600);
+  await page.click('.module-btn[data-module="expenses"]');
+  await page.waitForSelector("#module-expenses:not(.hidden)", { timeout: 10000 });
+  await page.waitForTimeout(500);
+  const expListAfterReload = await page.locator(".exp-item").count();
+
+  // 导入合并
+  const importFile = path.join(shots, "import-test.json");
+  fs.writeFileSync(importFile, JSON.stringify({ app: "test", rate: 5, items: [{ id: "t1", name: "导入测试", amount: 99, currency: "CNY", category: "other", type: "shared", person: "", dayId: null, poiId: null, date: "", createdAt: 1 }] }));
+  await page.setInputFiles("#expImportFile", importFile);
+  await page.waitForTimeout(700);
+  const expListAfterImport = await page.locator(".exp-item").count();
+
   /* ── 移动端 ── */
   const pageM = await browser.newPage({ viewport: { width: 390, height: 844 } });
   attach(pageM, "mobile");
@@ -128,7 +192,10 @@ async function run() {
 
   const result = { title, countdown, routeCards, flightRows, buyCols, prepCols, memberChips, ovScrollX,
     dayTabs, markers, mapVisible, mapHiddenClass, chips, googleActive, providerStored, amapActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d10Title, d10Cotu, d10Reminders,
-    d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX, mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
+    d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX,
+    expSums, expPer, expList0, sharedSeed, expList1, sharedAfter1, expListBlocked, expList2, jiaoTotal,
+    editAmount, expList3, expList4, expListAfterReload, expListAfterImport,
+    mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
   if (errors.length) process.exit(1);

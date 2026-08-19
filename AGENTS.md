@@ -121,3 +121,4 @@ guides/<trip-slug>/
 - 构建链：`scripts/patch-app-data.mjs`（幂等补丁：新增 POI/来源/动线/提醒，数据仍统一维护在 `data/*.json`）→ skill `validate-trip-data.js --require-route-evidence --strict-routes` → `node scripts/build-app.mjs`（模板 `scripts/app-template.html` + 内联资源 → 生成单文件）→ `node scripts/verify-app.mjs`（Edge headless 桌面+移动验证与截图）。
 - 新 POI 含射击（D2 15:00，333 塔佩门店，提前≥1h）与 COTU 游泳私教（D10 15:00，邮件预约）；咖啡馆/餐厅备选均带 Google 评分或「高分」标注与导航链接，进入 `data/pois.json` 的 `reservation` 字段驱动预约提醒。
 - 旧文件不覆盖：`清迈丽贝·悠闲版地图.html` / `build-map.mjs` 保持原状。
+- 花费统计（2026-08-19）：`💰 花费` 模块在浏览器 localStorage（键 tripExpenses）记账，首次打开自动预填已确认/估算机酒 7 笔（合计约 ¥19,185，数据来自《预算-悠闲版.md》①+②）；支持公共/个人花销、人员必填、关联行程、导出/导入 JSON；数据不进 Git。
