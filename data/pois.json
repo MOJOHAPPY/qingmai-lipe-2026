@@ -509,7 +509,11 @@
     "themeTags": [
       "market",
       "weekend"
-    ]
+    ],
+    "mustVisit": true,
+    "sourceTag": "google合集",
+    "rating": 4.6,
+    "hours": "周六–周日 06:00–14:00"
   },
   {
     "id": "poi-khao-soi-khun-yai",
@@ -819,7 +823,11 @@
       "market",
       "night",
       "weekend"
-    ]
+    ],
+    "mustVisit": true,
+    "sourceTag": "google合集",
+    "rating": 4.6,
+    "hours": "周日 16:00–22:00（约）"
   },
   {
     "id": "poi-north-gate-jazz",
@@ -868,7 +876,11 @@
       "bar",
       "live-music",
       "night"
-    ]
+    ],
+    "mustVisit": true,
+    "sourceTag": "google合集",
+    "rating": 4.7,
+    "hours": "每日 20:00–深夜"
   },
   {
     "id": "poi-mama-noi",
@@ -1630,7 +1642,11 @@
       "class",
       "eco",
       "mae-rim"
-    ]
+    ],
+    "mustVisit": true,
+    "sourceTag": "google合集",
+    "rating": 4.5,
+    "hours": "09:00–17:00"
   },
   {
     "id": "poi-bua-tong",
@@ -1641,8 +1657,8 @@
     "category": "nature",
     "priority": "preferred",
     "coords": [
-      19.292,
-      98.884
+      19.176,
+      98.871
     ],
     "note": "石灰岩不滑、可以攀爬的免费瀑布。",
     "plan": "D11 下午 13:30–16:30 攀爬玩水，随后回城。",
@@ -1683,7 +1699,11 @@
       "nature",
       "waterfall",
       "mae-taeng"
-    ]
+    ],
+    "mustVisit": true,
+    "sourceTag": "google合集",
+    "rating": 4.7,
+    "hours": "08:30–16:30"
   },
   {
     "id": "poi-baan-kang-wat",
@@ -1768,7 +1788,10 @@
       "market",
       "shopping",
       "souvenir"
-    ]
+    ],
+    "sourceTag": "google合集",
+    "rating": 4.5,
+    "hours": "约 07:00–18:00"
   },
   {
     "id": "poi-grand-canyon",
@@ -1897,7 +1920,10 @@
       "leadTime": "至少提前 1 小时",
       "contact": "064-495-6815",
       "tip": "平台下单后建议再电话确认当日场次"
-    }
+    },
+    "sourceTag": "google合集",
+    "rating": 4.6,
+    "hours": "10:00–18:00"
   },
   {
     "id": "poi-cotu-swim",
@@ -2199,5 +2225,1914 @@
       "food",
       "nimman"
     ]
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-chiangmai-cosmetics",
+    "name": "Chiang Mai Cosmetics",
+    "name_zh": "Chiang Mai Cosmetics（塔佩店）",
+    "area": "Old City / Tha Phae",
+    "category": "shopping",
+    "coords": [
+      18.788,
+      98.991
+    ],
+    "rating": 4.6,
+    "hours": "11:00–21:00",
+    "note": "塔佩门附近的本地化妆品/药妆店，护肤彩妆、零食与本地特产都有，标价实在、可退税。",
+    "plan": "D1 抵达寄存行李后先来这里买化妆品与护肤品，赶在 15:00 入住前完成首轮采购。",
+    "tip": "塔佩店约 11:00–21:00；满 2000 泰铢可退税，尽量 20:30 前办妥退税单。",
+    "whyWorthIt": "到清迈第一天先解决化妆品与护肤品采购，是这趟行程的既定安排：这家店在塔佩门一带，离酒店近、品类全、价格比国内便宜，正好利用入住前的空档。",
+    "detailSections": [
+      {
+        "title": "买什么",
+        "items": [
+          "本地护肤彩妆品牌、防晒与日常补货，比国内专柜便宜",
+          "顺手带点零食与本地特产，同一家店一次买齐"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "满 2000 泰铢可退税，结账时主动要求开退税单",
+          "畅销单品可能断货，看到就拿下，别等回头"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-chiangmai-cosmetics"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Chiang+Mai+Cosmetics+Thapae+Chiang+Mai",
+    "source": "src-gm-chiangmai-cosmetics"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-win-hualin",
+    "name": "Win Cosmetics Hualin Corner",
+    "name_zh": "Win Cosmetics（长华林店·塔佩）",
+    "area": "Old City / Tha Phae",
+    "category": "shopping",
+    "coords": [
+      18.7888,
+      98.992
+    ],
+    "rating": 4.5,
+    "hours": "约 09:00–21:00",
+    "note": "塔佩门旁的两层药妆店：一楼护肤彩妆、二楼洗护，另有一区零食，是清迈买化妆品最顺手的店之一。",
+    "plan": "D1 上午与 Chiang Mai Cosmetics 一起逛，购物集中在一段路内完成。",
+    "tip": "比价小贴士：瓦洛洛总店最全最便宜，但这家长华林店离酒店最近，先在这里买齐主力。",
+    "whyWorthIt": "买化妆品衣服是抵达日的主线，长华林店就在塔佩门商圈，一层护肤彩妆二层洗护还有零食区，三个人一次能把清单买齐，不用在到达日到处跑。",
+    "detailSections": [
+      {
+        "title": "怎么逛",
+        "items": [
+          "一楼看护肤与彩妆，二楼看洗护用品",
+          "零食区可以顺手补旅行干粮"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "退税单与购物清单当天整理好",
+          "重货与大批量采购留到瓦洛洛总店更划算"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-win-cosmetics"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Win+Cosmetics+Hualin+Corner+Chiang+Mai",
+    "source": "src-gm-win-cosmetics"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-big-big-shabu",
+    "name": "Big Big Shabu",
+    "name_zh": "Big Big Shabu（北门自助火锅）",
+    "area": "Chang Phueak",
+    "category": "food",
+    "coords": [
+      18.7968,
+      98.9845
+    ],
+    "rating": 4.3,
+    "hours": "16:00–04:00",
+    "note": "古城北门附近的老牌任食火锅+烧烤，约 219 泰铢/人起，本地人宵夜最爱，性价比很高。",
+    "plan": "D1 晚餐在北门店吃自助火锅烧烤，饭后步行 5 分钟到 North Gate Jazz 听爵士。",
+    "tip": "晚间营业到凌晨；人多吃得热闹，建议 18:30 前到避开高峰。",
+    "whyWorthIt": "三个人第一晚吃一顿 219 泰铢起的自助火锅加烧烤，热热闹闹又便宜，位置就在北门，吃完走几步就是 North Gate Jazz，晚餐和夜生活无缝衔接。",
+    "detailSections": [
+      {
+        "title": "怎么吃",
+        "items": [
+          "任食火锅+烧烤，蘸料和小菜自助",
+          "海鲜和肉类按盘取，注意别浪费"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "营业 16:00–04:00，晚餐早到人少",
+          "部分分店只收现金，先确认支付方式"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-big-big-shabu"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Big+Big+Shabu+Chiang+Mai",
+    "source": "src-gm-big-big-shabu"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-khoei",
+    "name": "Khoei Chiang Mai - Northern Food",
+    "name_zh": "Khoei 泰北菜（Santitham）",
+    "area": "Santitham",
+    "category": "food",
+    "coords": [
+      18.8025,
+      98.9825
+    ],
+    "rating": 4.8,
+    "hours": "约 11:00–21:00",
+    "note": "Santitham 路上的在地泰北菜，Google 高分（约 4.8），香肠、炸鸡翅、臭虾酱炒空心菜都是招牌。",
+    "plan": "D2 从 JJ 市集出来后顺路午餐，就在市集旁的生活区。",
+    "tip": "饭点人多，建议 12:00 前后到；菜单有图，点菜不慌。",
+    "whyWorthIt": "逛完 JJ 市集正好到 Santitham 吃一顿本地人排队的泰北菜，香肠和炸鸡翅口碑极好，价格实在，是市集日最顺路的午餐选择。",
+    "detailSections": [
+      {
+        "title": "推荐菜",
+        "items": [
+          "泰北香肠、黄金虾饼、炸鸡翅",
+          "臭虾酱炒空心菜，重口味星人必点"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "营业从 11:00 开始，午餐别去太早",
+          "高峰期可能需要等位，可先取号"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-khoei"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Khoei+Chiang+Mai+Northern+Food",
+    "source": "src-gm-khoei"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-tok-sen",
+    "name": "Tok Sen Wat Srisuphan (NUN TOK SEN)",
+    "name_zh": "Tok Sen 银庙按摩（NUN TOK SEN）",
+    "area": "Wua Lai",
+    "category": "spa",
+    "coords": [
+      18.7795,
+      98.9855
+    ],
+    "rating": 4.6,
+    "hours": "约 10:00–20:00",
+    "note": "银庙（Wat Srisuphan）里的传统 Tok Sen 木槌敲打按摩，用柚木锤沿经络敲打放松，是清迈特色体验。",
+    "plan": "D2 傍晚在 Wua Lai 一带做完按摩，再回塔佩路上摇摆舞课。",
+    "tip": "建议提前半天电话预约；可先逛银庙再按摩，一次满足参观+体验。",
+    "whyWorthIt": "Tok Sen 是清迈特有的木槌敲打按摩，这家就在银庙里，做完浑身松快，比普通泰式按摩更有仪式感，适合射击日走了一天之后放松。",
+    "detailSections": [
+      {
+        "title": "体验流程",
+        "items": [
+          "换好衣服后躺下，技师用柚木锤沿背部经络敲打",
+          "全程约 60–90 分钟，力道可随时沟通"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "建议提前电话预约时段",
+          "银庙大殿女性需注意着装，按摩项目不受影响"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-tok-sen"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Tok+Sen+Wat+Srisuphan+Chiang+Mai",
+    "reservation": {
+      "required": true,
+      "method": "电话预约",
+      "leadTime": "提前半天",
+      "contact": "以 Google 地图电话为准",
+      "tip": "下午时段较满，建议 D2 上午就约"
+    },
+    "source": "src-gm-tok-sen"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-rong-sa-dang",
+    "name": "Rong Sa Dang Chiang Mai",
+    "name_zh": "Rong Sa Dang（塔佩路摇摆舞）",
+    "area": "Old City / Tha Phae",
+    "category": "bar",
+    "coords": [
+      18.7884,
+      98.9915
+    ],
+    "rating": 4.7,
+    "hours": "周六摇摆舞 20:00–23:00",
+    "note": "63 Tha Phae Rd 的演出场地，清迈摇摆舞社区每周六晚在此办新手课+社交舞会，新手也能跳。",
+    "plan": "D2 晚上 20:00 上新手课（约 200 泰铢），21:00 起参加社交舞会，体验摇摆舞。",
+    "tip": "周六新手课 20:00–20:45 约 200 泰铢，社交舞会 21:00–23:00；穿舒服的鞋。",
+    "whyWorthIt": "你点名的必去体验：周六晚的摇摆舞社交夜对新手很友好，先上一节 200 泰铢的新手课再直接跳社交舞，现场乐队伴奏，是清迈最有氛围的夜晚之一。",
+    "detailSections": [
+      {
+        "title": "怎么参加",
+        "items": [
+          "20:00 前到场，参加新手基础课约 200 泰铢",
+          "21:00 起自由社交舞，可一直跳到 23:00"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "穿轻便好活动的鞋",
+          "酒水在场地内单点，入场以现场为准"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-rong-sa-dang"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Rong+Sa+Dang+Chiang+Mai",
+    "reservation": {
+      "required": false,
+      "method": "现场参加",
+      "leadTime": "建议 19:45 前到",
+      "tip": "周六固定举办；若当周取消以场地公告为准"
+    },
+    "source": "src-gm-rong-sa-dang"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-nong-buak",
+    "name": "Nong Buak Haad Public Park",
+    "name_zh": "Nong Buak Haad 公园",
+    "area": "Old City / South",
+    "category": "nature",
+    "coords": [
+      18.7802,
+      98.9838
+    ],
+    "rating": 4.6,
+    "hours": "全天开放",
+    "note": "古城西南角的公共公园，有大草坪、湖与晨练人群，适合早晨散步或自己做公园瑜伽。",
+    "plan": "D3 早上 8 点前到公园晨走+公园瑜伽，随后去 Artisan 面包店吃早餐。",
+    "tip": "清晨凉快人少；自带瑜伽垫在草坪上练即可，免费。",
+    "whyWorthIt": "不想赶景点，就用公园瑜伽打开一天：古城西南的这片大草坪清晨特别安静，铺开垫子就能自己练，慢节奏正好契合这趟清迈的基调。",
+    "detailSections": [
+      {
+        "title": "怎么玩",
+        "items": [
+          "清晨在草坪晨走或铺垫练瑜伽",
+          "湖边树荫下乘凉、看本地人晨练"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "清晨凉爽但注意防蚊",
+          "公共公园免费，无需门票"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-nong-buak"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Nong+Buak+Haad+Public+Park+Chiang+Mai",
+    "source": "src-gm-nong-buak"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-artisan-sourdough",
+    "name": "Artisan Sourdough by Apple Fahey",
+    "name_zh": "Artisan 酸种面包（Apple Fahey）",
+    "area": "Suthep / Wat Umong",
+    "category": "cafe",
+    "coords": [
+      18.785,
+      98.9635
+    ],
+    "rating": 4.7,
+    "hours": "08:00–16:30（周三至周日）",
+    "note": "素贴山脚下的口碑酸种面包店，欧式田园小院，面包是清迈的『天花板』级别，常常早去才买得到。",
+    "plan": "D3 从公园瑜伽后过来吃面包早餐，喝咖啡歇脚。",
+    "tip": "周三至周日营业、周一/周二休；热门款可能售罄，建议 9 点前到。",
+    "whyWorthIt": "你点名的必去面包店：藏在素贴山脚下的小院里，手工酸种面包是清迈公认的顶流，早上过来配咖啡当早餐，是公园瑜伽后最治愈的一站。",
+    "detailSections": [
+      {
+        "title": "吃什么",
+        "items": [
+          "招牌酸种面包、可颂与季节限定口味",
+          "配一杯手冲或冰美式慢慢坐"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "周三至周日营业，周一/周二休息",
+          "建议 9:00 前到，热门款容易售罄"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-artisan-sourdough"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Artisan+Sourdough+by+Apple+Fahey+Chiang+Mai",
+    "source": "src-gm-artisan-sourdough"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-lanna-artisans",
+    "name": "Lanna Artisans Art Gallery",
+    "name_zh": "Lanna Artisans 银器工坊",
+    "area": "Wua Lai",
+    "category": "sight",
+    "coords": [
+      18.7795,
+      98.986
+    ],
+    "rating": 4.6,
+    "hours": "每日 09:00–18:00（约）",
+    "note": "Wua Lai 路上的兰纳手工艺体验空间，可以看银器/铜器匠人现场打制，也能亲手做小饰品。",
+    "plan": "D3 上午参观+体验银器小件制作，与银庙、按摩串成一条银饰街区动线。",
+    "tip": "现场有师傅演示，DIY 价格按项目计；不用预约，随到随体验。",
+    "whyWorthIt": "你点名的必去体验：在瓦莱银器街亲手敲一件银铜小物，看匠人现场打制，比单纯逛街更有参与感，做完正好带走当旅行纪念。",
+    "detailSections": [
+      {
+        "title": "怎么体验",
+        "items": [
+          "看匠人现场打制银器铜器",
+          "选小件 DIY，师傅手把手带"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "体验区为半户外，注意防晒补水",
+          "成品制作需 30–60 分钟，预留时间"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-lanna-artisans"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Lanna+Artisans+Art+Gallery+Chiang+Mai",
+    "source": "src-gm-lanna-artisans"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-bamboo-market",
+    "name": "Bamboo Family Market",
+    "name_zh": "Bamboo 竹林家庭市集",
+    "area": "San Kamphaeng",
+    "category": "market",
+    "coords": [
+      18.747,
+      99.115
+    ],
+    "rating": 4.6,
+    "hours": "周末 09:00–16:00",
+    "note": "San Kamphaeng 的竹林市集，主打本地手作、有机小农与现场弹唱，比 JJ 更 local、更安静。",
+    "plan": "D3 中午从古城包车/打车过来逛 2 小时，再回古城赶周日夜市。",
+    "tip": "通常周六/周日 9:00–16:00 营业；出发前看官方 FB/IG 确认当周场次。",
+    "whyWorthIt": "你点名的必去市集：藏在一片竹林里的家庭市集，手作和有机小摊比 JJ 更本地，现场还有弹唱，周末专程跑一趟很值。",
+    "detailSections": [
+      {
+        "title": "逛什么",
+        "items": [
+          "本地手作、织物与竹编",
+          "有机蔬果与现做小吃，现场弹唱"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "周六/周日营业，周五偶有加场",
+          "出发前看 FB/IG 确认，避免扑空"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-bamboo"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Bamboo+Family+Market+Chiang+Mai",
+    "source": "src-gm-bamboo"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-mahoree",
+    "name": "MaHoRee City of Music",
+    "name_zh": "MaHoRee 音乐之城",
+    "area": "Old City / Prapokklao",
+    "category": "bar",
+    "coords": [
+      18.7895,
+      98.986
+    ],
+    "rating": 4.6,
+    "hours": "18:30–00:00",
+    "note": "古城 Prapokklao 路上的现场爵士/世界音乐酒吧，氛围私密，是清迈 top 级别的 live 现场。",
+    "plan": "D3 周日夜市逛到后半段，拐进 Prapokklao 路听一场现场爵士收尾。",
+    "tip": "18:30 开门，周末人多建议早点到占座；低消一杯酒水。",
+    "whyWorthIt": "你点名的必去夜场：在古城中心听一场高质量现场爵士，和白天逛市集完全是两种节奏，是周日夜市之后最理想的收尾。",
+    "detailSections": [
+      {
+        "title": "怎么体验",
+        "items": [
+          "点一杯酒或软饮，听现场乐队演出",
+          "节目以当天排期为准，通常每晚都有 live"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "18:30 开始营业，建议 20:30 前到占座",
+          "周末人多，低声聊天保持现场氛围"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-mahoree"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=MaHoRee+City+of+Music+Chiang+Mai",
+    "source": "src-gm-mahoree"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-skyline",
+    "name": "Skyline Adventure (Doi Saket)",
+    "name_zh": "Skyline 丛林飞跃（Doi Saket）",
+    "area": "Doi Saket",
+    "category": "activity",
+    "coords": [
+      18.872,
+      99.135
+    ],
+    "rating": 4.8,
+    "hours": "半日（含接送）",
+    "note": "Doi Saket 的丛林飞跃，900 米超长滑索+21 条滑索 38 个平台，还有丛林滑车，刺激又安全。",
+    "plan": "D4 上午 08:00 酒店接送出发，约 13:30 返回市区，下午安排按摩与市集。",
+    "tip": "需提前预约并确认接送时间；穿运动鞋长裤，手机挂绳。",
+    "whyWorthIt": "你点名的必去户外项目：在清迈东部森林里飞越 900 米长滑索，教练带队、装备专业，半日含接送不占整天，下午还能继续逛市集。",
+    "detailSections": [
+      {
+        "title": "怎么玩",
+        "items": [
+          "酒店接送至 Doi Saket 营地，教练讲解后开飞",
+          "21 条滑索+巨型秋千+丛林滑车，约 3 小时"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "穿运动鞋、长裤，长发扎起",
+          "手机相机用挂绳固定，贵重物品少带"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-skyline"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Skyline+Adventure+Doi+Saket+Chiang+Mai",
+    "reservation": {
+      "required": true,
+      "method": "平台/官网预约",
+      "leadTime": "提前 1 天确认接送",
+      "tip": "D4 上午 08:00 出发，约 13:30 返回"
+    },
+    "source": "src-gm-skyline"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-square-massage",
+    "name": "The Square Massage",
+    "name_zh": "The Square Massage（宁曼）",
+    "area": "Nimman Soi 11",
+    "category": "spa",
+    "coords": [
+      18.7975,
+      98.9705
+    ],
+    "rating": 4.6,
+    "hours": "约 12:00–24:00",
+    "note": "宁曼 Soi 11 的专业按摩店，泰式/精油/椰子油按摩口碑好，环境干净。",
+    "plan": "D4 从 Skyline 回来后下午做 90 分钟精油按摩放松。",
+    "tip": "GoWabi 可预约，建议提前 2 小时以上订；两人同行可选双人套餐。",
+    "whyWorthIt": "上午飞完丛林，下午正好用一场宁曼的专业按摩回血；这家在 Soi 11，离 One Nimman 和晚餐都很近，动线顺。",
+    "detailSections": [
+      {
+        "title": "怎么约",
+        "items": [
+          "GoWabi 提前预约，选精油或椰子油按摩",
+          "90 分钟套餐最舒服，做完全身轻松"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "提前 2 小时以上预约更稳",
+          "女生结伴可约双人房"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-square"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=The+Square+Massage+Chiang+Mai",
+    "reservation": {
+      "required": true,
+      "method": "GoWabi / 电话预约",
+      "leadTime": "提前 2 小时以上",
+      "tip": "D4 下午 15:00 场次"
+    },
+    "source": "src-gm-square"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-shinawatra-silk",
+    "name": "S.Shinawatra Thai Silk",
+    "name_zh": "S.Shinawatra 泰丝",
+    "area": "Huay Kaew",
+    "category": "shopping",
+    "coords": [
+      18.806,
+      98.965
+    ],
+    "rating": 4.4,
+    "hours": "09:00–17:00",
+    "note": "清迈老牌泰丝品牌，Huay Kaew 路分店有围巾、布料与定制衣物，工艺讲究。",
+    "plan": "D4 下午顺路逛泰丝店，给家人带丝巾或面料。",
+    "tip": "营业约 09:00–17:00；可买围巾/领带当手信，支持退税。",
+    "whyWorthIt": "泰丝是清迈最有代表性的手信之一，这家老字号在 Huay Kaew 路上，从宁曼过去很近，丝巾质感好又不重，适合带回国。",
+    "detailSections": [
+      {
+        "title": "买什么",
+        "items": [
+          "丝巾、领带、布料与定制衣物",
+          "小件织品适合当伴手礼"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "营业约 09:00–17:00",
+          "满额可退税，结账时询问"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-shinawatra"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=S.Shinawatra+Thai+Silk+Chiang+Mai",
+    "source": "src-gm-shinawatra"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-vintage-market",
+    "name": "Vintage Market (One Nimman)",
+    "name_zh": "宁曼 One Nimman 复古市集",
+    "area": "Nimman / One Nimman",
+    "category": "market",
+    "coords": [
+      18.7987,
+      98.9688
+    ],
+    "rating": 4.5,
+    "hours": "周一/周二 16:00–22:00",
+    "note": "One Nimman 旁的复古市集，主打中古衣物、手作与小吃，每周一/二傍晚开。",
+    "plan": "D4 傍晚 17:00 到 One Nimman 逛复古市集，顺路解决晚餐。",
+    "tip": "周一/二 16:00–22:00；中古好货靠淘，早去选择多。",
+    "whyWorthIt": "你点名的必去市集：中古爱好者的宝藏场，正好开在 D4 周一晚上，从 Skyline 回来逛一圈，淘中古衣物的同时把晚餐也解决了。",
+    "detailSections": [
+      {
+        "title": "逛什么",
+        "items": [
+          "中古衣物、古着与手作饰品",
+          "小吃摊位可以边逛边吃"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "周一/周二 16:00–22:00 营业",
+          "早去选择多，砍价看心情"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-vintage-market"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=One+Nimman+Vintage+Market+Chiang+Mai",
+    "source": "src-gm-vintage-market"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-toen",
+    "name": "TOEN Thai Food & Restaurant",
+    "name_zh": "TOEN 泰餐（宁曼）",
+    "area": "Nimman",
+    "category": "food",
+    "coords": [
+      18.7995,
+      98.97
+    ],
+    "rating": 4.5,
+    "hours": "约 11:00–21:00",
+    "note": "宁曼一带的本地泰餐小馆，家常口味、价格实在，适合逛完市集吃顿安稳饭。",
+    "plan": "D4 逛完 Vintage 市集后在宁曼吃晚餐。",
+    "tip": "饭点人多，可先到店取号再去市集逛一圈。",
+    "whyWorthIt": "逛完 One Nimman 复古市集，就近在宁曼吃一顿家常泰餐，不用折返古城，价格和口味都稳，是市集日的省心晚餐。",
+    "detailSections": [
+      {
+        "title": "点什么",
+        "items": [
+          "冬阴功、打抛猪肉、泰式炒河粉",
+          "三人点 4–5 个菜分量刚好"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "饭点可能需要等位",
+          "支持现金与多数电子支付"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-toen"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=TOEN+Thai+Food+Chiang+Mai",
+    "source": "src-gm-toen"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-ekachan",
+    "name": "Ekachan The Wisdom of Ethnic Thai Cuisine",
+    "name_zh": "Ekachan 民族泰餐（米其林必比登）",
+    "area": "Chang Khlan",
+    "category": "food",
+    "coords": [
+      18.7855,
+      98.9965
+    ],
+    "rating": 4.6,
+    "hours": "11:00–14:30 / 17:00–21:30",
+    "note": "长康路的米其林必比登泰餐厅，用有机在地食材做精致泰味，2023/2024 连续上榜。",
+    "plan": "D9 回清迈当晚在长康路吃晚餐，饭后去河畔爵士吧。",
+    "tip": "晚市 17:00 开始，建议提前订位；人均中等偏上。",
+    "whyWorthIt": "回清迈第一晚吃顿正经的米其林必比登，用在地有机食材重新演绎泰味，位置又在长康路，和后面的 Noir、Bar.San 河畔双吧正好一条动线。",
+    "detailSections": [
+      {
+        "title": "怎么吃",
+        "items": [
+          "点招牌套餐或几道主厨推荐",
+          "晚市 17:00 起，建议 18:00 前到"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "热门时段建议提前订位",
+          "人均比街边小店高，属精致泰餐"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-ekachan"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ekachan+The+Wisdom+of+Ethnic+Thai+Cuisine+Chiang+Mai",
+    "reservation": {
+      "required": false,
+      "method": "电话订位（建议）",
+      "leadTime": "提前 1 天",
+      "contact": "097-962-6445",
+      "tip": "D9 晚市约 18:30 入座"
+    },
+    "source": "src-gm-ekachan"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-noir",
+    "name": "Noir cmi",
+    "name_zh": "Noir cmi 爵士鸡尾酒吧",
+    "area": "Riverside",
+    "category": "bar",
+    "coords": [
+      18.784,
+      98.9975
+    ],
+    "rating": 4.7,
+    "hours": "19:00–01:00（周一休）",
+    "note": "河畔的隐蔽爵士酒吧，水泥墙+暖光，每晚（除周一）有现场爵士，鸡尾酒向爵士大师致敬。",
+    "plan": "D9 晚饭后 20:30 来喝一杯听爵士，随后去隔壁 Bar.San.。",
+    "tip": "周一休息；19:00 开门，20:30 后有现场，低消一杯。",
+    "whyWorthIt": "你点名的必去酒吧：藏在河畔水泥墙里的爵士吧，氛围清迈独一份，和隔壁 Bar.San. 是同一批人开的，一晚连喝两家刚好。",
+    "detailSections": [
+      {
+        "title": "怎么喝",
+        "items": [
+          "点招牌爵士主题鸡尾酒",
+          "20:30 后现场乐队开演"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "周一休息，D9 周日正好营业",
+          "周末人多，建议 20:00 前到"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-noir"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Noir+cmi+Chiang+Mai",
+    "source": "src-gm-noir"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-bar-san",
+    "name": "Bar.San.",
+    "name_zh": "Bar.San. 调酒酒吧",
+    "area": "Riverside",
+    "category": "bar",
+    "coords": [
+      18.7835,
+      98.9978
+    ],
+    "rating": 4.8,
+    "hours": "18:00–00:00",
+    "note": "河畔极简日式北欧风的鸡尾酒吧，清迈最佳酒吧之一，调酒师手艺极佳，氛围安静。",
+    "plan": "D9 从 Noir 出来步行 5 分钟到 Bar.San. 续摊。",
+    "tip": "18:00 开门；座位不多，进店后先找吧台位。",
+    "whyWorthIt": "你点名的必去酒吧：清迈公认的 top 级鸡尾酒吧，日式北欧极简风，和 Noir 是姐妹店，一晚连喝两家是河畔夜游的完整安排。",
+    "detailSections": [
+      {
+        "title": "怎么喝",
+        "items": [
+          "点一杯当日特调或经典鸡尾酒",
+          "吧台位可以看调酒师表演"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "座位有限，晚到可能要等",
+          "适合安静小酌，不宜大声喧哗"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-bar-san"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Bar.San.+Chiang+Mai",
+    "source": "src-gm-bar-san"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-teetee",
+    "name": "TeeTee Elephant Home",
+    "name_zh": "TeeTee 弟弟象营",
+    "area": "Mae Taeng",
+    "category": "activity",
+    "coords": [
+      19.14,
+      98.95
+    ],
+    "rating": 4.9,
+    "hours": "半日（含接送）",
+    "note": "湄登的道德象营，不骑象不表演，喂食、做维他命球、散步、洗澡，半天体验含酒店接送。",
+    "plan": "D10 上午 07:00 接送出发，约 13:00 返回，下午逛博物馆与静心湖。",
+    "tip": "名额很紧张，务必提前约 20 天预约；含素食午餐。",
+    "whyWorthIt": "你点名的必去象营：不骑象不表演的道德体验，喂食、做维他命球、陪象散步洗澡，半天含接送，和原来的公益象园体验一脉相承。",
+    "detailSections": [
+      {
+        "title": "怎么体验",
+        "items": [
+          "喂食水果、做维他命球",
+          "陪大象散步、河边洗澡，听象夫讲每头象的故事"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "务必提前约 20 天预约，名额紧张",
+          "穿可弄脏的衣物与防滑鞋"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-teetee"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=TeeTee+Elephant+Home+Chiang+Mai",
+    "reservation": {
+      "required": true,
+      "method": "官网/Klook 等平台预约",
+      "leadTime": "提前约 20 天",
+      "tip": "D10 上午 07:00 酒店接送"
+    },
+    "source": "src-gm-teetee"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-lanna-house-museum",
+    "name": "Lanna Traditional House Museum",
+    "name_zh": "兰纳传统民居博物馆",
+    "area": "Huay Kaew / CMU",
+    "category": "sight",
+    "coords": [
+      18.8065,
+      98.9645
+    ],
+    "rating": 4.5,
+    "hours": "08:30–16:30",
+    "note": "清迈大学旁的露天博物馆，14 栋上百年兰纳木构民居迁建于此，门票 100 泰铢。",
+    "plan": "D10 下午从象营回来后逛 1.5 小时，随后去静心湖散步。",
+    "tip": "08:30–16:30 开放，门票 100 泰铢；树荫多，慢慢走。",
+    "whyWorthIt": "你点名的必去人文点：在宁曼隔壁的露天博物馆一次看够 14 栋百年兰纳木屋，建筑细节和园林氛围都很好，是象营日之后的安静下午。",
+    "detailSections": [
+      {
+        "title": "怎么看",
+        "items": [
+          "沿动线看各栋民居与谷仓结构",
+          "留意木雕与兰纳建筑细节"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "08:30–16:30 开放，门票 100 泰铢",
+          "属室外展区，注意防晒"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-lanna-house"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Lanna+Traditional+House+Museum+Chiang+Mai",
+    "source": "src-gm-lanna-house"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-cmu-lake",
+    "name": "Ang Kaew Reservoir (CMU Lake)",
+    "name_zh": "清迈大学静心湖",
+    "area": "CMU",
+    "category": "nature",
+    "coords": [
+      18.805,
+      98.953
+    ],
+    "rating": 4.5,
+    "hours": "全天",
+    "note": "清迈大学内的静心湖，环湖步道与草坪，黄昏看落日尤其舒服，免费。",
+    "plan": "D10 从博物馆步行/打车过来环湖散步，等一场湖景日落。",
+    "tip": "免费开放；黄昏最出片，注意防蚊。",
+    "whyWorthIt": "看完博物馆顺路到清迈大学静心湖环湖走走，黄昏光线落在湖面很出片，是象营日傍晚最放松的一站。",
+    "detailSections": [
+      {
+        "title": "怎么玩",
+        "items": [
+          "环湖步道散步或草坪坐一会儿",
+          "黄昏时段光线最好，适合拍照"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "免费开放",
+          "傍晚蚊虫多，喷好驱蚊液"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-cmu-lake"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Ang+Kaew+Reservoir+Chiang+Mai",
+    "source": "src-gm-cmu-lake"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-6ixcret",
+    "name": "6ixcret Show",
+    "name_zh": "6ixcret 变装秀",
+    "area": "Night Bazaar",
+    "category": "bar",
+    "coords": [
+      18.787,
+      98.997
+    ],
+    "rating": 4.7,
+    "hours": "19:00–00:30",
+    "note": "Night Bazaar 二楼的『清迈女王』变装秀，舞台效果华丽，是清迈口碑很好的夜间表演。",
+    "plan": "D10 晚上到 Night Bazaar 看秀，晚餐在附近长康路解决。",
+    "tip": "19:00 开演，建议提前到场选座或订座；演出约 1–2 小时。",
+    "whyWorthIt": "你点名的必看表演：号称『清迈女王』的变装秀舞台感十足，是三个人晚上一起大笑的好去处，看完还能在夜市散散步。",
+    "detailSections": [
+      {
+        "title": "怎么看",
+        "items": [
+          "提前到场或平台订座，点一杯饮品看秀",
+          "演出约 1–2 小时，中途可拍照"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "19:00 开演，建议 18:40 前到",
+          "若周日不营业，顺延 D4 晚"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-6ixcret"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=6ixcret+Show+Chiang+Mai",
+    "reservation": {
+      "required": false,
+      "method": "现场购票 / 平台订座",
+      "leadTime": "建议提前订座",
+      "tip": "D10 晚间场"
+    },
+    "source": "src-gm-6ixcret"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-changthong",
+    "name": "Changthong Heritage Park",
+    "name_zh": "Changthong 古树公园",
+    "area": "San Phi Suea",
+    "category": "nature",
+    "coords": [
+      18.85,
+      98.965
+    ],
+    "rating": 4.7,
+    "hours": "09:30–16:30",
+    "note": "泰国首座『古树博物馆』，12 英亩园区里有两千多棵古树、小瀑布与步道，像走进一座活的森林档案馆。",
+    "plan": "D11 从黏黏瀑布回程顺路逛 1.5 小时，再回城吃晚餐。",
+    "tip": "每日 9:30–16:30 开放，门票以现场为准；树荫多，适合慢走。",
+    "whyWorthIt": "你点名的必去自然点：泰国第一座古树博物馆，两千多棵古树配小瀑布和步道，回程顺路停一站，把北线自然日收在树荫里。",
+    "detailSections": [
+      {
+        "title": "怎么逛",
+        "items": [
+          "沿步道看古树与小瀑布",
+          "草坪和亭子适合坐下来发呆"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "每日 09:30–16:30 开放",
+          "部分区域在树荫里，仍建议防晒"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-changthong"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Changthong+Heritage+Park+Chiang+Mai",
+    "source": "src-gm-changthong"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-krua-chalong",
+    "name": "Krua Chalong",
+    "name_zh": "Krua Chalong 泰餐（北城）",
+    "area": "Chang Phueak / Chotana",
+    "category": "food",
+    "coords": [
+      18.806,
+      98.978
+    ],
+    "rating": 4.5,
+    "hours": "10:00–21:00",
+    "note": "Chotana 路上的老牌泰餐，蟹肉煎蛋是招牌，本地人也常来吃晚餐。",
+    "plan": "D11 北线一日结束后在回城路上吃晚餐。",
+    "tip": "10:00–21:00 营业；蟹肉煎蛋必点，趁热吃。",
+    "whyWorthIt": "北线开了一天车，回城前在 Chotana 吃顿老牌泰餐，招牌蟹肉煎蛋分量足，正好补充体力又不绕路。",
+    "detailSections": [
+      {
+        "title": "点什么",
+        "items": [
+          "招牌蟹肉煎蛋、泰式炒菜",
+          "米饭+汤+煎蛋的三件套很舒服"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "营业 10:00–21:00",
+          "晚餐高峰可先取号"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-krua-chalong"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Krua+Chalong+Chiang+Mai",
+    "source": "src-gm-krua-chalong"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": true,
+    "id": "poi-gm-haripunchai",
+    "name": "Wat Phra That Haripunchai Woramahawihan",
+    "name_zh": "哈里奔猜大舍利寺（南奔）",
+    "area": "Lamphun",
+    "category": "sight",
+    "coords": [
+      18.577,
+      99.008
+    ],
+    "rating": 4.8,
+    "hours": "约 06:00–18:00",
+    "note": "南奔府千年古寺，供奉佛舍利的大佛塔与红亭建筑群，是泰北最重要的圣迹之一。",
+    "plan": "D12 上午包车去南奔，逛寺约 2 小时，中午吃 Lamphun 鸡饭。",
+    "tip": "着装注意：长裤/过膝裙+包肩；进大殿脱鞋。",
+    "whyWorthIt": "你点名的必去古寺：南奔千年的佛舍利圣地，佛塔和红亭建筑很有味道，从清迈过去约 40 分钟，正好串成南奔一日。",
+    "detailSections": [
+      {
+        "title": "怎么逛",
+        "items": [
+          "绕大佛塔顺时针参观，看红亭与古佛像",
+          "赶上节庆会非常热闹"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "着装需长裤/过膝裙与包肩",
+          "进入殿堂脱鞋，保持安静"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-haripunchai"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Wat+Phra+That+Haripunchai+Lamphun",
+    "source": "src-gm-haripunchai"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-chicken-rice-lamphun",
+    "name": "Thailand Chicken Rice Lamphun",
+    "name_zh": "南奔海南鸡饭",
+    "area": "Lamphun",
+    "category": "food",
+    "coords": [
+      18.58,
+      99.012
+    ],
+    "rating": 4.6,
+    "hours": "约 10:00–15:00",
+    "note": "南奔有名的鸡饭，鸡肉嫩、饭香，配汤和蘸料，本地人排队的午餐店。",
+    "plan": "D12 看完古寺后步行来吃午饭。",
+    "tip": "午市营业，卖完就收；点招牌鸡饭+鸡杂汤。",
+    "whyWorthIt": "逛完南奔古寺正好吃一顿当地鸡饭，鸡肉嫩饭香，价格便宜，是南奔一日里最顺路的午餐。",
+    "detailSections": [
+      {
+        "title": "点什么",
+        "items": [
+          "招牌鸡饭配汤和蘸料",
+          "加一份鸡杂汤更满足"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "午市营业，卖完即止",
+          "小店环境简单，味道很稳"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-chicken-rice"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Thailand+Chicken+Rice+Lamphun",
+    "source": "src-gm-chicken-rice"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-judys",
+    "name": "Judy's Home Café",
+    "name_zh": "Judy's Home Café（南奔河畔）",
+    "area": "Lamphun",
+    "category": "cafe",
+    "coords": [
+      18.574,
+      99.004
+    ],
+    "rating": 4.6,
+    "hours": "08:30–17:00",
+    "note": "南奔 Kuang 河畔的温馨小院咖啡馆，有可爱的大鹅和超大花园草坪，从清迈市区过来约 30 分钟。",
+    "plan": "D12 午餐后到河畔咖啡歇脚，再回清迈。",
+    "tip": "每日 08:30–17:00 营业；院子里的大鹅是明星员工。",
+    "whyWorthIt": "南奔线中间用河畔咖啡店缓冲一下，花园草坪和大鹅很治愈，让南奔一日不只是赶路，多一分慢下来的松弛。",
+    "detailSections": [
+      {
+        "title": "怎么坐",
+        "items": [
+          "点杯咖啡在花园草坪坐一会儿",
+          "和大鹅合影但别追它"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "每日 08:30–17:00 营业",
+          "户外座位多，注意防晒防蚊"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-judys"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Judy%27s+Home+Cafe+Lamphun",
+    "source": "src-gm-judys"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-muse-massage",
+    "name": "Muse Massage & Spa Nimman 17",
+    "name_zh": "Muse 按摩（宁曼 17 巷）",
+    "area": "Nimman Soi 17",
+    "category": "spa",
+    "coords": [
+      18.801,
+      98.967
+    ],
+    "rating": 4.6,
+    "hours": "约 10:00–22:00",
+    "note": "宁曼 17 巷的按摩店，泰式与精油按摩口碑好，离 Bed Changkian 很近。",
+    "plan": "D12 晚上回宁曼做告别按摩，结束旅行。",
+    "tip": "建议提前预约；选 60–90 分钟泰式或精油。",
+    "whyWorthIt": "最后一晚在酒店旁边的宁曼 17 巷做场告别按摩，把 13 天的疲惫都按掉，第二天一早赶飞机也从容。",
+    "detailSections": [
+      {
+        "title": "怎么约",
+        "items": [
+          "电话/到店预约 60–90 分钟泰式或精油",
+          "两人可约双人房"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "晚上时段较满，建议下午先约",
+          "可让店家安排轻柔力度"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-muse"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Muse+Massage+And+Spa+Nimman+17+Chiang+Mai",
+    "reservation": {
+      "required": true,
+      "method": "电话/到店预约",
+      "leadTime": "提前几小时",
+      "tip": "D12 晚间 18:30"
+    },
+    "source": "src-gm-muse"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-aiyaret",
+    "name": "Aiyaret Massage",
+    "name_zh": "艾雅瑞放松按摩馆（长康路）",
+    "area": "Chang Khlan",
+    "category": "spa",
+    "coords": [
+      18.7872,
+      98.996
+    ],
+    "rating": 5,
+    "hours": "10:00–21:00",
+    "note": "长康路的放松按摩馆，评分很高，环境干净，适合夜市/河畔动线顺路按。",
+    "tip": "建议提前电话预约；晚间时段较满。",
+    "source": "src-gm-aiyaret",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Aiyaret+Massage+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-aiyaret"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-heng-heng",
+    "name": "Heng Heng Thai Massage",
+    "name_zh": "Heng Heng 泰式按摩（宁曼 Soi 13）",
+    "area": "Nimman Soi 13",
+    "category": "spa",
+    "coords": [
+      18.799,
+      98.9685
+    ],
+    "rating": 4.5,
+    "hours": "约 11:00–22:00",
+    "note": "宁曼 Soi 13 的泰式按摩，GoWabi 可预约。",
+    "tip": "GoWabi 预约需提前 2 小时以上。",
+    "source": "src-gm-heng-heng",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Heng+Heng+Thai+Massage+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-heng-heng"
+    ],
+    "reservation": {
+      "required": true,
+      "method": "GoWabi / 电话预约",
+      "leadTime": "提前 2 小时以上"
+    },
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-retreat-nimman",
+    "name": "Retreat Nimman Massage & Spa",
+    "name_zh": "Retreat 宁曼按摩 SPA",
+    "area": "Nimman Soi 17",
+    "category": "spa",
+    "coords": [
+      18.8012,
+      98.9672
+    ],
+    "rating": 4.6,
+    "hours": "约 10:00–22:00",
+    "note": "宁曼 Soi 17 的按摩 SPA，热石、精油口碑好。",
+    "tip": "GoWabi 可预约。",
+    "source": "src-gm-retreat",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Retreat+Nimman+Massage+Spa+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-retreat"
+    ],
+    "reservation": {
+      "required": true,
+      "method": "GoWabi / 电话预约",
+      "leadTime": "提前 2 小时以上"
+    },
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-700year-shooting",
+    "name": "700 Year Shooting Range",
+    "name_zh": "700 年纪念射击场",
+    "area": "700 Year Stadium",
+    "category": "activity",
+    "coords": [
+      18.813,
+      98.977
+    ],
+    "rating": 4.6,
+    "hours": "周二至周日 09:00–18:00（周一休）",
+    "note": "清迈大型专业射击场，东南亚运动会指定场地，枪型选择多。",
+    "tip": "周一休息；最晚 16:00 前进场，需预约。",
+    "source": "src-gm-700year",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=700+Year+Shooting+Range+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-700year"
+    ],
+    "reservation": {
+      "required": true,
+      "method": "电话/平台预约",
+      "leadTime": "提前半天"
+    },
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-archery",
+    "name": "The Arrow Rest (Chiang Mai Archery)",
+    "name_zh": "Chiang Mai Archery 射箭（The Arrow Rest）",
+    "area": "Fa Ham",
+    "category": "activity",
+    "coords": [
+      18.821,
+      98.993
+    ],
+    "rating": 4.7,
+    "hours": "约 09:00–18:00",
+    "note": "古城东北 Fa Ham 的射箭场，新手友好，约 270 泰铢/小时含装备。",
+    "tip": "建议提前联系确认营业；教练会带新手。",
+    "source": "src-gm-archery",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=The+Arrow+Rest+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-archery"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-night-safari",
+    "name": "Chiang Mai Night Safari",
+    "name_zh": "清迈夜间动物园",
+    "area": "Hang Dong",
+    "category": "nature",
+    "coords": [
+      18.717,
+      98.918
+    ],
+    "rating": 4.5,
+    "hours": "11:00–22:00",
+    "note": "杭东的夜间动物园，封闭电车近距离看夜行动物，电车服务 17:30–20:00。",
+    "tip": "适合傍晚去，门票可线上买。",
+    "source": "src-gm-night-safari",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Chiang+Mai+Night+Safari",
+    "sourceIds": [
+      "src-gm-night-safari"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-mae-tia",
+    "name": "Mae Tia Waterfall",
+    "name_zh": "Mae Tia 瀑布（宗通）",
+    "area": "Chom Thong",
+    "category": "nature",
+    "coords": [
+      18.42,
+      98.68
+    ],
+    "rating": 4.7,
+    "hours": "08:30–16:30",
+    "note": "Ob Luang 国家公园内 80 米双层瀑布，清迈最壮观瀑布之一。",
+    "tip": "门票约 200 泰铢；路程较远，适合留整天。",
+    "source": "src-gm-mae-tia",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mae+Tia+Waterfall+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-mae-tia"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-mae-ho-phra",
+    "name": "Mae Ho Phra",
+    "name_zh": "Mae Ho Phra（南奔一带，待核）",
+    "area": "Lamphun",
+    "category": "sight",
+    "coords": [
+      18.58,
+      99
+    ],
+    "rating": null,
+    "hours": "待核",
+    "note": "合集地点，具体地址待核；出发前用 App 内全球搜索复核后再安排。",
+    "tip": "不确定是否值得专程去，先放备选。",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mae+Ho+Phra+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-mae-ho-phra"
+    ],
+    "source": "src-gm-mae-ho-phra",
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-maha-larb",
+    "name": "Maha Larb CNX",
+    "name_zh": "Maha Larb 伊善凉拌（清迈）",
+    "area": "Nimman / Old City",
+    "category": "food",
+    "coords": [
+      18.793,
+      98.986
+    ],
+    "rating": 4.5,
+    "hours": "约 11:00–22:00",
+    "note": "伊善（Isan）larb 凉拌专门店，酸辣开胃，人均 50–80 泰铢起。",
+    "tip": "位置待核，出发前用全球搜索确认。",
+    "source": "src-gm-maha-larb",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Maha+Larb+CNX+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-maha-larb"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-apollo-cafe",
+    "name": "ApolloCafe",
+    "name_zh": "ApolloCafe（待核）",
+    "area": "待核",
+    "category": "cafe",
+    "coords": [
+      18.79,
+      98.985
+    ],
+    "rating": null,
+    "hours": "待核",
+    "note": "合集里的咖啡馆，具体位置待核；出发前用 App 内全球搜索复核。",
+    "tip": "先放备选。",
+    "source": "src-gm-apollo",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=ApolloCafe+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-apollo"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-nicha-cotton",
+    "name": "Nicha Chiangmai Natural Cotton",
+    "name_zh": "Nicha 天然棉织品（待核）",
+    "area": "待核",
+    "category": "shopping",
+    "coords": [
+      18.793,
+      98.988
+    ],
+    "rating": 4.5,
+    "hours": "待核",
+    "note": "天然棉织品店，位置待核；适合 D1 顺路买衣服。",
+    "tip": "出发前用全球搜索确认后决定是否专程去。",
+    "source": "src-gm-nicha",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton",
+    "sourceIds": [
+      "src-gm-nicha"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-mee-an-ja-kin",
+    "name": "Mee An Ja Kin Cafe & Restaurant",
+    "name_zh": "Mee An Ja Kin（平河畔）",
+    "area": "Pa Daet",
+    "category": "cafe",
+    "coords": [
+      18.781,
+      98.994
+    ],
+    "rating": 4.5,
+    "hours": "每日 10:00–24:00",
+    "note": "平河畔的舒适咖啡馆兼餐厅，每日 10:00 至午夜。",
+    "tip": "适合 D9 河畔晚餐备选。",
+    "source": "src-gm-mee-an-ja-kin",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mee+An+Ja+Kin+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-mee-an-ja-kin"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-kinlarb",
+    "name": "KINLARB CHIANG MAI",
+    "name_zh": "KINLARB 伊善凉拌（宁曼）",
+    "area": "Nimman / Sirimangkalajarn",
+    "category": "food",
+    "coords": [
+      18.798,
+      98.9695
+    ],
+    "rating": 4.6,
+    "hours": "约 11:00–23:00",
+    "note": "宁曼 Sirimangkalajarn 路的 larb 店，酸辣下饭。",
+    "tip": "位置规划级，出发前可复核。",
+    "source": "src-gm-kinlarb",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=KINLARB+CHIANG+MAI",
+    "sourceIds": [
+      "src-gm-kinlarb"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-pakorns",
+    "name": "Pakorn's Kitchen",
+    "name_zh": "Pakorn's Kitchen（长康）",
+    "area": "Kampangdin / Hai Ya",
+    "category": "food",
+    "coords": [
+      18.784,
+      98.994
+    ],
+    "rating": 4.7,
+    "hours": "约 14:00–22:00",
+    "note": "古城东南的本地人气泰餐，Google 约 4.7，饭点要排队，招牌泰式家常菜。",
+    "plan": "D10 晚上看 6ixcret 前在长康路吃晚餐。",
+    "tip": "约 14:00–22:00 营业；饭点排队，建议 18:00 前到。",
+    "whyWorthIt": "看 6ixcret 变装秀前，在长康路吃一顿本地人排队的泰餐，Google 评分 4.7、菜品家常扎实，正好填饱肚子再上楼看秀。",
+    "detailSections": [
+      {
+        "title": "点什么",
+        "items": [
+          "冬阴功、泰式炒菜与招牌家常菜",
+          "三人点 4–5 个菜，配米饭分量刚好"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "饭点人多需要等位",
+          "位置在长康路，离 Night Bazaar 很近"
+        ]
+      }
+    ],
+    "source": "src-gm-pakorns",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Pakorn%27s+Kitchen+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-pakorns"
+    ]
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-khao-tom-nai-dam",
+    "name": "Khao Tom Nai Dam 2 (ข้าวต้มนายดำ 2)",
+    "name_zh": "นายดำ 粥店二分店（素帖路）",
+    "area": "Suthep Rd",
+    "category": "food",
+    "coords": [
+      18.787,
+      98.98
+    ],
+    "rating": 4.5,
+    "hours": "约 06:00–14:00 / 17:00–22:00",
+    "note": "古城西素帖路的粥店，猪杂粥配咸蛋是招牌，适合早餐或夜宵。",
+    "tip": "D1 或 D3 早餐备选。",
+    "source": "src-gm-khao-tom",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Khao+Tom+Nai+Dam+2+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-khao-tom"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-win-onenimman",
+    "name": "Win Cosmetics One Nimman",
+    "name_zh": "Win Cosmetics（One Nimman 店）",
+    "area": "Nimman / One Nimman",
+    "category": "shopping",
+    "coords": [
+      18.7985,
+      98.969
+    ],
+    "rating": 4.5,
+    "hours": "约 10:00–22:00",
+    "note": "One Nimman 里的 Win 药妆分店，逛复古市集时顺路补货。",
+    "tip": "D4 逛市集时顺路买。",
+    "source": "src-gm-win-cosmetics",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Win+Cosmetics+One+Nimman+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-win-cosmetics"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-mango-sticky",
+    "name": "Mango Sticky Rice",
+    "name_zh": "芒果糯米在對面",
+    "area": "Warorot / Tha Phae",
+    "category": "food",
+    "coords": [
+      18.789,
+      98.9985
+    ],
+    "rating": 4.6,
+    "hours": "约 16:00–22:00",
+    "note": "Blue coffee/7-11 对面的芒果糯米饭小摊，现做现卖，下午 4 点后出摊。",
+    "tip": "D12 瓦洛洛手信日顺路当甜品。",
+    "source": "src-gm-mango-sticky",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mango+Sticky+Rice+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-mango-sticky"
+    ],
+    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
   }
 ]

@@ -752,5 +752,689 @@
       "location",
       "rating"
     ]
+  },
+  {
+    "id": "src-gm-aiyaret",
+    "title": "Aiyaret Massage（携程攻略）",
+    "url": "https://you.ctrip.com/sight/chiangmai209/4865815.html",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "187/10 Chang Klan Rd，约 10:00–21:00，评分约 5.0。"
+  },
+  {
+    "id": "src-gm-archery",
+    "title": "The Arrow Rest / Chiang Mai Archery（Thailand Tourist Places）",
+    "url": "https://thailandtouristplaces.com/tag/chiang-mai-old-city/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "84 Fa Ham；射箭约 270 泰铢/小时，坐标规划级。"
+  },
+  {
+    "id": "src-gm-6ixcret",
+    "title": "6ixcret Show（Thailand.org / Trip.com）",
+    "url": "https://www.thailand.org/REVIEWS-6ixcret-show-15471-l.html",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "Night Bazaar 2F，19:00–00:30 变装秀。"
+  },
+  {
+    "id": "src-gm-rong-sa-dang",
+    "title": "Chiang Mai Swing @ Rong Sa Dang（ToDo.Today）",
+    "url": "https://todo.today/chiang-mai/2026/06/20/chiang-mai-swing-dance-night-4",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "hours",
+      "location"
+    ],
+    "notes": "63 Tha Phae Rd；周六新手课 20:00–20:45 约 200 泰铢，社交舞 21:00–23:00。"
+  },
+  {
+    "id": "src-gm-nong-buak",
+    "title": "Nong Buak Haad Public Park（地图平台）",
+    "url": "https://www.google.com/maps/search/?api=1&query=Nong+Buak+Haad+Public+Park+Chiang+Mai",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location"
+    ],
+    "notes": "古城西南角公共公园，全天开放、免费。"
+  },
+  {
+    "id": "src-gm-lanna-house",
+    "title": "Lanna Traditional House Museum（Trip.com）",
+    "url": "https://www.trip.com/moments/poi-lanna-traditional-house-museum-22950822/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "ticket"
+    ],
+    "notes": "239 Huay Kaew Rd，约 08:30–16:30，门票 100 泰铢。"
+  },
+  {
+    "id": "src-gm-700year",
+    "title": "清迈 700 年射击场（大众点评海外）",
+    "url": "https://osm.dianping.com/os/web/detail?skuId=1698570#/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "hours",
+      "location"
+    ],
+    "notes": "周二至周日 09:00–18:00，周一休息。"
+  },
+  {
+    "id": "src-gm-cmu-lake",
+    "title": "清迈大学静心湖（Ang Kaew Reservoir，Trip.com）",
+    "url": "https://tw.trip.com/moments/detail/chiang-mai-209-142699867/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location"
+    ],
+    "notes": "清迈大学内环湖步道，免费、全天。"
+  },
+  {
+    "id": "src-gm-tok-sen",
+    "title": "Tok Sen Wat Srisuphan NUN TOK SEN（Trip.com 银庙）",
+    "url": "https://tw.trip.com/moments/theme/poi-wat-sri-suphan-91841-attraction-993137",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "银庙内 Tok Sen 木槌按摩；营业约 10:00–20:00。"
+  },
+  {
+    "id": "src-gm-heng-heng",
+    "title": "Heng Heng Thai Massage（GoWabi）",
+    "url": "https://www.gowabi.com/en/organization_services/thai-massage-120-min-please-make-a-reservation-at-least-2-hours-in-advance",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "reservation"
+    ],
+    "notes": "12/4 宁曼 Soi 13；GoWabi 预约需提前 2 小时以上。"
+  },
+  {
+    "id": "src-gm-mango-sticky",
+    "title": "Mango Sticky Rice 芒果糯米在對面（Wanderlog）",
+    "url": "https://wanderlog.com/zh/place/details/9082845/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "Blue coffee/7-11 对面摊位，约下午 4 点后出摊。"
+  },
+  {
+    "id": "src-gm-square",
+    "title": "The Square Massage（GoWabi / Klook）",
+    "url": "https://www.gowabi.com/zh-CN/organization_services/couple-organic-coconut-oil-massage-90-min",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "reservation"
+    ],
+    "notes": "5 宁曼 Soi 11；约 12:00–24:00，可预约。"
+  },
+  {
+    "id": "src-gm-retreat",
+    "title": "Retreat Nimman Massage & Spa（GoWabi）",
+    "url": "https://www.gowabi.com/zh-CN/organization_services/foot-massage-60-min-2a31b2df-7a18-4d4d-b11e-83b1ed2e3e6e",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "reservation"
+    ],
+    "notes": "宁曼 Soi 17；可预约。"
+  },
+  {
+    "id": "src-gm-lanna-artisans",
+    "title": "Lanna Artisans Art Gallery 银器工坊（Trip.com）",
+    "url": "https://tw.trip.com/moments/detail/chiang-mai-209-148020063/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "25/1 Wua Lai Rd；每日约 09:00 起，银铜器手作体验。"
+  },
+  {
+    "id": "src-gm-night-safari",
+    "title": "清迈夜间动物园（携程）",
+    "url": "https://you.ctrip.com/sight/hangdong14934/8175.html",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "hours",
+      "ticket"
+    ],
+    "notes": "杭东，11:00–22:00，夜游电车 17:30–20:00。"
+  },
+  {
+    "id": "src-gm-bamboo",
+    "title": "Bamboo Family Market（Visit Thailand Today / HappyCow）",
+    "url": "https://www.visitthailandtoday.com/markets-shopping/chiang-mai/bamboo-family-market",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "hours",
+      "location"
+    ],
+    "notes": "San Kamphaeng；周五/六/日约 09:00–16:00，以官方 FB/IG 为准。"
+  },
+  {
+    "id": "src-gm-changthong",
+    "title": "Changthong Heritage Park 古树公园（Trip.com）",
+    "url": "https://au.trip.com/moments/poi-changthong-heritage-park-149801908",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "hours",
+      "location"
+    ],
+    "notes": "San Phi Suea 三环；每日约 09:30–16:30。"
+  },
+  {
+    "id": "src-gm-khao-tom",
+    "title": "ข้าวต้มนายดำ 2 粥店（MapMyThai / Trip.com）",
+    "url": "https://mapmythai.com/mueang-chiang-mai-district/khaawtmnaaydam-2/5579654",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "素帖路军机岔口附近，粥店。"
+  },
+  {
+    "id": "src-gm-artisan-sourdough",
+    "title": "Artisan Sourdough by Apple Fahey（Trip.com / 马蜂窝）",
+    "url": "https://www.trip.com/moments/detail/chiang-mai-209-149126938/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "hours",
+      "location"
+    ],
+    "notes": "Soi 16 Chanhom, Suthep（乌蒙一带）；08:00–16:30，周三至周日营业（周一/周二休）。"
+  },
+  {
+    "id": "src-gm-toen",
+    "title": "TOEN Thai Food & Restaurant（Trip.com / Hotels.com 周边）",
+    "url": "https://ca.hotels.com/ho737262880/buchita-nimman-chiang-mai-thailand/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location"
+    ],
+    "notes": "宁曼一带泰餐，坐标规划级。"
+  },
+  {
+    "id": "src-gm-teetee",
+    "title": "TeeTee Elephant Home 弟弟象营（什么值得买 / Klook）",
+    "url": "https://post.smzdm.com/p/az8x2855/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "reservation",
+      "location",
+      "hours"
+    ],
+    "notes": "湄登；半日含接送，约提前 20 天预约、名额紧张。"
+  },
+  {
+    "id": "src-gm-maha-larb",
+    "title": "Maha Larb CNX（Trip.com）",
+    "url": "https://in.trip.com/moments/detail/chiang-mai-209-136987188",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "rating"
+    ],
+    "notes": "伊善 larb 餐厅，坐标待核。"
+  },
+  {
+    "id": "src-gm-mahoree",
+    "title": "MaHoRee City of Music（Wanderlog / Top-Rated）",
+    "url": "https://wanderlog.com/place/details/5184484/mahoree-city-of-music",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "208/1 Prapokklao Rd；18:30–00:00，评分约 4.6。"
+  },
+  {
+    "id": "src-gm-mee-an-ja-kin",
+    "title": "Mee An Ja Kin Cafe & Restaurant（Trip.com）",
+    "url": "https://tw.trip.com/moments/detail/chiang-mai-209-135590051/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "Pa Daet 河畔；每日约 10:00–24:00。"
+  },
+  {
+    "id": "src-gm-khoei",
+    "title": "Khoei Chiang Mai - Northern Food（Trip.com）",
+    "url": "https://in.trip.com/moments/detail/chiang-mai-209-144488892",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "14 Santitham Rd；约 11:00 起，评分约 4.8。"
+  },
+  {
+    "id": "src-gm-pakorns",
+    "title": "Pakorn's Kitchen（Trip.com / 携程）",
+    "url": "https://www.trip.com/restaurant/thailand/chiang-mai/detail/pakorn-s-kitchen-31299249/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "186/7 Kampangdin Rd, Hai Ya；约 14:00–22:00，评分约 4.7。"
+  },
+  {
+    "id": "src-gm-krua-chalong",
+    "title": "Krua Chalong（Time Out / Airbnb）",
+    "url": "https://www.timeout.com/chiang-mai/restaurants/krua-chalong",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "Chotana Rd；每日 10:00–21:00，招牌蟹肉煎蛋。"
+  },
+  {
+    "id": "src-gm-muse",
+    "title": "Muse Massage & Spa Nimman 17（Google 地图贡献 / Klook）",
+    "url": "https://www.klook.cn/zh-CN/activity/156468-vintage-thai-massage-nimman-17-experience-in-chiang-mai/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "reservation"
+    ],
+    "notes": "12/3 宁曼 17 巷；可预约。"
+  },
+  {
+    "id": "src-gm-ekachan",
+    "title": "Ekachan The Wisdom of Ethnic Thai Cuisine（Trip.com / Time Out）",
+    "url": "https://tw.trip.com/moments/detail/chiang-mai-209-128977326/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "95 Chang Khlan Rd；11:00–14:30 / 17:00–21:30，米其林必比登。"
+  },
+  {
+    "id": "src-gm-skyline",
+    "title": "Skyline Adventure Doi Saket（Trip.com / Klook）",
+    "url": "https://sg.trip.com/moments/poi-skyline-adventure-chiang-mai-33764405",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "reservation"
+    ],
+    "notes": "29 Moo 3 Thep Sadet, Doi Saket；半日含接送，需预约。"
+  },
+  {
+    "id": "src-gm-mae-tia",
+    "title": "Mae Tia Waterfall（Thailand Tourism Directory / Trip.com）",
+    "url": "https://thailandtourismdirectory.go.th/en/attraction/5145",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "ticket"
+    ],
+    "notes": "宗通 Ob Luang 国家公园；约 08:30–16:30，门票约 200 泰铢。"
+  },
+  {
+    "id": "src-gm-haripunchai",
+    "title": "Wat Phra That Haripunchai（Trip.com 南奔 / 永安）",
+    "url": "https://tw.trip.com/moments/poi-wat-phra-that-haripunchai-woramahawihan-38612777/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "南奔府城；千年古寺，约 06:00–18:00。"
+  },
+  {
+    "id": "src-gm-vintage-market",
+    "title": "宁曼路复古市集 One Nimman（Vision Thai 看见泰国）",
+    "url": "https://visionthai.net/zh-hans/article/thai-chiang-mai-10-markets-tourist-attraction/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "hours",
+      "location"
+    ],
+    "notes": "One Nimman 旁；周一/二 16:00–22:00。"
+  },
+  {
+    "id": "src-gm-judys",
+    "title": "Judy's Home Café（Trip.com 南奔）",
+    "url": "https://th.trip.com/moments/detail/lamphun-1447102-125835775",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "南奔 Kuang 河畔；每日 08:30–17:00。"
+  },
+  {
+    "id": "src-gm-chicken-rice",
+    "title": "Thailand Chicken Rice Lamphun 南奔鸡饭（Trip.com）",
+    "url": "https://tw.trip.com/moments/detail/lamphun-1447102-132302928/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "南奔鸡饭店，午市营业。"
+  },
+  {
+    "id": "src-gm-big-big-shabu",
+    "title": "Big Big Shabu（Chiang Mai Citylife / Locator）",
+    "url": "https://www.chiangmaicitylife.com/citynow/social-life/live-events/opening-of-new-big-big-shabu/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "77 Sri Phum Rd 北门；16:00–04:00，任食约 219 泰铢起。"
+  },
+  {
+    "id": "src-gm-kinlarb",
+    "title": "KINLARB CHIANG MAI（Trip.com）",
+    "url": "https://tw.trip.com/moments/detail/chiang-mai-209-136987188/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location"
+    ],
+    "notes": "宁曼 Sirimangkalajarn 路 larb 店，坐标规划级。"
+  },
+  {
+    "id": "src-gm-apollo",
+    "title": "ApolloCafe（待核）",
+    "url": "https://www.google.com/maps/search/?api=1&query=ApolloCafe+Chiang+Mai",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location"
+    ],
+    "notes": "位置待核，出发前用 App 内全球搜索复核。"
+  },
+  {
+    "id": "src-gm-noir",
+    "title": "Noir cmi（Trip.com / The Infatuation）",
+    "url": "https://sg.trip.com/moments/poi-noir-cmi-140500131/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "33/11 Charoen Prathet Rd；19:00–01:00，周一休息。"
+  },
+  {
+    "id": "src-gm-bar-san",
+    "title": "Bar.San.（Time Out / Trip.com）",
+    "url": "https://www.timeout.com/chiang-mai/news/chiang-mai-takes-2-spots-on-thailands-20-best-bars-list-101425",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "73/1 Charoen Prathet Rd；18:00–00:00。"
+  },
+  {
+    "id": "src-gm-shinawatra",
+    "title": "S.Shinawatra Thai Silk（Wanderlog / CMHY）",
+    "url": "https://wanderlog.com/place/details/1760408",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "18 Huay Kaew Rd；约 09:00–17:00。"
+  },
+  {
+    "id": "src-gm-win-cosmetics",
+    "title": "Win Cosmetics 长华林店（穷游 / 十六番）",
+    "url": "https://place.qyer.com/poi/V2UJYFFnBz5TZFI_Cms/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "塔佩门一带；一楼护肤彩妆、二楼洗护+零食。"
+  },
+  {
+    "id": "src-gm-chiangmai-cosmetics",
+    "title": "Chiang Mai Cosmetics（携程 / 十六番）",
+    "url": "https://you.ctrip.com/shopping/chiangmai209/1728549.html",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours"
+    ],
+    "notes": "帕辛寺对面 + 塔佩店；塔佩店约 11:00–21:00。"
+  },
+  {
+    "id": "src-gm-nicha",
+    "title": "Nicha Chiangmai Natural Cotton（待核）",
+    "url": "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location"
+    ],
+    "notes": "天然棉织品店，位置待核。"
+  },
+  {
+    "id": "src-gm-mae-ho-phra",
+    "title": "Mae Ho Phra（待核）",
+    "url": "https://www.google.com/maps/search/?api=1&query=Mae+Ho+Phra+Chiang+Mai",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location"
+    ],
+    "notes": "合集地点，地址待核；出发前用全球搜索复核后再安排。"
   }
 ]

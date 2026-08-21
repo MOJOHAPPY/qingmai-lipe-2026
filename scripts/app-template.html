@@ -255,7 +255,7 @@ body.map-hidden .content{width:100%;max-width:none;}
 .btn.danger:hover{background:#fff0ef;}
 .spacer{flex:1;}
 .exp-list{display:flex;flex-direction:column;gap:8px;margin-top:10px;}
-.exp-item{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 12px;}
+.exp-item{display:flex;flex-wrap:wrap;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:9px 12px;}
 .exp-item .ei-ic{width:34px;height:34px;border-radius:10px;background:#f0f0f3;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
 .exp-item .ei-body{flex:1;min-width:0;}
 .exp-item .ei-t{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:6px;flex-wrap:wrap;}
@@ -275,6 +275,10 @@ body.map-hidden .content{width:100%;max-width:none;}
 .tl-edit{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
 .tl-edit-form{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;align-items:center;}
 .tl-edit-form input[type=text]{width:110px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:12px;}
+.tl-body .meta{color:var(--amber);font-size:12px;margin-top:2px;}
+.poi-sections{background:#fafafa;border:1px solid var(--line);border-radius:8px;padding:6px 9px;margin-top:6px;}
+.poi-sections .ps-title{font-size:12px;font-weight:800;color:var(--accent);margin-top:4px;}
+.poi-sections .ps-item{font-size:12px;color:var(--text2);line-height:1.5;}
 .tl-edit-form select{padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:12px;}
 .picker-list{max-height:320px;overflow-y:auto;margin-top:8px;border:1px solid var(--line);border-radius:10px;}
 .picker-row{display:flex;gap:8px;align-items:center;padding:8px 10px;border-bottom:.5px solid var(--line);}
@@ -304,6 +308,8 @@ body.map-hidden .content{width:100%;max-width:none;}
 .member-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:10px 0 14px;}
 .member-row .m-label{font-size:12px;font-weight:700;color:var(--text2);}
 .ov-nav-card{margin-bottom:14px;}
+.f-row input.f-input{flex:1;min-width:120px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff;color:var(--text);outline:none;}
+.f-row input.f-input:focus{border-color:var(--accent);}
 #ovNav .chip{cursor:pointer;}
 .prep-col li.todo::before{content:none;}
 .prep-col li.todo.done{color:var(--text2);text-decoration:line-through;}
@@ -323,16 +329,10 @@ body.map-hidden .content{width:100%;max-width:none;}
 .tl-edit-form input[type=text]{width:110px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:12px;}
 /* ── 花费优化 ── */
 .exp-sum-grid.cols2{grid-template-columns:1fr 1fr;}
-.exp-inline{grid-column:1/-1;background:#fafafa;border-top:.5px solid var(--line);padding:10px 2px 2px;display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.exp-inline{flex:1 1 100%;width:100%;background:#fafafa;border-top:.5px solid var(--line);padding:10px 2px 2px;display:flex;flex-direction:column;gap:8px;margin-top:8px;}
 .fx-arrow{margin:0 6px;color:var(--text2);}
 .fx-result{font-size:14px;font-weight:800;color:var(--accent);}
-/* ── 截图识别 ── */
-.ocr-preview img{max-width:100%;max-height:220px;border-radius:10px;border:1px solid var(--line);margin-top:8px;object-fit:contain;}
-.ocr-progress{font-size:13px;color:var(--text2);margin:8px 0;}
-.ocr-cands{margin:6px 0;}
-.ocr-refs{background:#fafafa;border:1px solid var(--line);border-radius:10px;padding:8px 10px;margin-top:6px;}
 </style>
-<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
 <body>
 <header class="app-header">
@@ -463,8 +463,8 @@ function poiCard(poi, opts){
   return '<div class="cand-card">' +
     '<div class="cic" style="background:'+cat.color+'">'+cat.icon+'</div>' +
     '<div class="cbody">' +
-      '<div class="ct">'+esc(poi.name_zh||poi.name)+' '+rating+' '+resv+'</div>' +
-      '<div class="cnote">'+esc(poi.note||"")+'</div>' +
+      '<div class="ct">'+esc(poi.name_zh||poi.name)+' '+rating+' '+resv+(poi.mustVisit?' <span class="alt-tag">⭐ 必去</span>':'')+'</div>' +
+      '<div class="cnote">'+esc(poi.note||"")+'</div>' + (poi.hours?'<div class="cnote">🕐 '+esc(poi.hours)+'</div>':"") +
       '<div class="clinks">'+navLinks(poi)+'</div>' +
     '</div></div>';
 }
@@ -501,9 +501,16 @@ function renderOverview(){
       '</ul></div>' +
       '<div class="prep-col"><h3>✅ 待办事项</h3><ul>' +
         renderListItems("prep.todos", "todo") +
-        d.dayReminders.map(function(r){ return '<li class="todo">'+esc(r)+'</li>'; }).join("") +
       '</ul></div>' +
     '</div></div>';
+
+  var reminders = '<div class="card" id="sec-reminders"><h2 class="card-h"><span class="ic">🔔</span><span class="t">预约提醒</span></h2>' +
+    '<div class="section-desc">需要预约/订位的事项，勾选代表已完成（仅保存在本机）</div><ul class="rem-list">' +
+    (d.dayReminders && d.dayReminders.length ? d.dayReminders.map(function(r){
+      var done = !!REM_CHECKS[r.id];
+      return '<li class="todo'+(done?' done':'')+'"><span class="todo-box'+(done?' done':'')+'" data-rem="'+esc(r.id)+'" title="点击切换完成">'+(done?'☑':'☐')+'</span>'+esc(r.text)+'</li>';
+    }).join("") : '<li class="muted">暂无预约事项</li>') +
+    '</ul></div>';
 
   var flights = '' +
     '<div class="card" id="sec-flights"><h2><span class="ic">✈️</span>航班信息概览</h2>' +
@@ -545,20 +552,21 @@ function renderOverview(){
         '<div class="rd"><span class="dnum" style="background:'+day.color+'">'+esc(day.short)+'</span>' +
         '<span class="ddate">'+esc(day.date)+' · '+esc(day.weekday)+'</span>' +
         (day.city ? '<span class="ddate">· '+esc(day.city)+'</span>' : "") + '</div>' +
-        '<div class="rtitle">'+esc(day.title)+(day.edited?' ✏️':'')+'</div>' +
+        '<div class="rtitle">'+esc(day.title)+'</div>' +
         '<div class="rsum">'+esc(day.summary)+'</div>' +
       '</button>';
     }).join("") + '</div></div>';
 
   var nav = '<div class="card ov-nav-card"><div class="chips" id="ovNav">' +
     '<button class="chip" data-goto="sec-prep">🎒 行前准备</button>' +
+    '<button class="chip" data-goto="sec-reminders">🔔 预约</button>' +
     '<button class="chip" data-goto="sec-flights">✈️ 航班</button>' +
     '<button class="chip" data-goto="sec-lodgings">🏨 住宿</button>' +
     '<button class="chip" data-goto="sec-buy">🛍️ 必买</button>' +
     '<button class="chip" data-goto="sec-route">🗺️ 路线</button>' +
   '</div></div>';
 
-  $("#module-overview").innerHTML = hero + stats + memberRow + prep + flights + lodgings + buy + route + nav;
+  $("#module-overview").innerHTML = hero + stats + memberRow + nav + reminders + prep + flights + lodgings + buy + route;
   renderCountdown();
 }
 
@@ -566,7 +574,7 @@ function renderOverview(){
 function renderDayTabs(){
   $("#dayTabs").innerHTML = DATA.days.map(function(day){
     return '<button class="day-tab'+(state.dayId===day.id?' active':'')+'" data-id="'+esc(day.id)+'" title="'+esc(day.date+' '+day.weekday+' · '+day.title)+'">' +
-      esc(day.label) + ' <span class="w">'+esc(day.weekday)+'</span>' + (day.edited?' ✏️':'') + '</button>';
+      esc(day.label) + ' <span class="w">'+esc(day.weekday)+'</span>' + '</button>';
   }).join("");
 }
 function renderDay(day){
@@ -584,7 +592,6 @@ function renderDay(day){
     (EDIT_MODE ? '<button class="btn mini" id="editAdd">➕ 添加地点</button>' +
       '<button class="btn mini" id="editUndo">↩️ 撤销</button>' +
       '<button class="btn mini danger" id="editReset">🔄 恢复默认</button>' : '') +
-    (day.edited ? '<span class="badge todo">✏️ 已编辑</span>' : '') +
   '</div>';
 
   var picker = "";
@@ -598,7 +605,6 @@ function renderDay(day){
       '<div class="chips" id="addTabs">' +
         '<button class="mchip2 active" data-addtab="pool">📍 地点池</button>' +
         '<button class="mchip2" data-addtab="osm">🌍 全球搜索</button>' +
-        '<button class="mchip2" data-addtab="ocr">📷 截图识别</button>' +
       '</div>' +
       '<div id="addPanel">' + addPoolHtml(day, "") + '</div>' +
     '</div>';
@@ -645,9 +651,13 @@ function renderDay(day){
       '<div class="tl-body">' +
         '<div class="t">'+esc(poi.name_zh||poi.name)+'</div>' +
         '<div class="s">'+esc(meta.label||"")+' · '+esc(poi.area||"")+'</div>' +
+        (poi.rating || poi.hours || poi.mustVisit ? '<div class="s meta">' + (poi.rating ? '⭐ '+poi.rating : '') + (poi.rating && poi.hours ? ' · ' : '') + (poi.hours ? '🕐 '+esc(poi.hours) : '') + (poi.mustVisit ? ' · ⭐ 必去' : '') + '</div>' : "") +
         (st.note ? '<div class="tip">📝 '+esc(st.note)+'</div>' : "") +
         (poi.tip ? '<div class="tip">'+esc(poi.tip)+'</div>' : "") +
         resv +
+        (poi.detailSections && poi.detailSections.length ? '<div class="poi-sections">' + poi.detailSections.map(function(sec){
+          return '<div class="ps-title">'+esc(sec.title||"")+'</div>' + (sec.items||[]).map(function(it){ return '<div class="ps-item">· '+esc(it)+'</div>'; }).join("");
+        }).join("") + '</div>' : "") +
         '<div class="tl-links">'+navLinks(poi, true)+'</div>' +
         ctrl +
       '</div></div>';
@@ -662,8 +672,17 @@ function renderDay(day){
 
   var cands = "";
   if (day.candidates && day.candidates.length){
-    cands = '<div class="section-title">📍 备选 · 不占主路线</div><div class="cand-grid">' +
-      day.candidates.map(function(poi){ return poiCard(poi); }).join("") + '</div>';
+    var groups = {};
+    day.candidates.forEach(function(poi){
+      var cat = CAT[poi.category] || { label:"其他", icon:"📍" };
+      var key = cat.label || "其他";
+      (groups[key] = groups[key] || []).push(poi);
+    });
+    cands = '<div class="section-title">📍 备选 · 不占主路线（按类型分组）</div>' +
+      Object.keys(groups).map(function(k){
+        return '<div class="rec-group"><div class="rec-label">'+esc(k)+'</div><div class="cand-grid">' +
+          groups[k].map(function(poi){ return poiCard(poi); }).join("") + '</div></div>';
+      }).join("");
   }
 
   $("#dayPanel").innerHTML = head + editBar + picker + reminders + tl + transit + cands;
@@ -1064,53 +1083,20 @@ var EDIT_MODE = false;
 var EDIT_PICKER = false;
 var EDIT_TARGET = null;
 var EDIT_CARD = null;
+var REM_CHECKS = {};
+function loadRemChecks(){ try { REM_CHECKS = JSON.parse(localStorage.getItem("tripReminderChecks") || "{}") || {}; } catch(e){ REM_CHECKS = {}; } }
+function saveRemChecks(){ try { localStorage.setItem("tripReminderChecks", JSON.stringify(REM_CHECKS)); } catch(e){} }
 function qsa(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
 function dayOptions(sel){
   return DATA.days.map(function(d){ return '<option value="'+d.id+'"'+(d.id===sel?' selected':'')+'>'+d.label+' · '+esc(d.title)+'</option>'; }).join("");
 }
 function addPoolHtml(day, q){
-  var html = '<input type="text" id="addSearch" placeholder="搜索地点（名称/分类）…" value="'+esc(q)+'">' +
+  var html = '<div class="f-row"><span class="f-lbl">🔍</span><input type="text" id="addSearch" class="f-input" placeholder="搜索地点（名称/分类）…" value="'+esc(q)+'"></div>' +
     '<div class="picker-list" id="addSearchList">' + pickerListHtml(q) + '</div>';
   return html + nearbyHtml(day);
 }
-var OCR_STOPWORDS = ["路线","导航","收藏","分享","评分","评论","营业中","营业时间","电话","网站","搜索","详情","添加","地址","查看","行车","步行","预览","放大","缩小","位置","公里","小时","分钟","今天","明天","复制","更多","筛选","类别","关闭","返回","确定","取消","距","约","☆","★"];
-var OCR_FILE = null;
-function addOcrHtml(){
-  var tReady = (typeof Tesseract !== "undefined");
-  var html = '<div class="f-row"><input type="file" id="ocrFile" accept="image/*">' +
-    '<button class="btn primary" id="ocrStart"'+(tReady?'':' disabled')+'>🔍 开始识别</button></div>' +
-    '<div class="ocr-preview" id="ocrPreview"></div>' +
-    '<div class="ocr-progress" id="ocrProgress" style="display:none">识别中 <span id="ocrPct">0%</span>（首次需下载识别包，约 20MB，之后有缓存）</div>' +
-    '<div id="ocrResult"></div>';
-  if (!tReady){
-    html = '<div class="empty">OCR 组件加载失败（需访问 jsdelivr CDN，国内偶尔慢）。请刷新重试，或改用「🌍 全球搜索」手动搜索。</div>' + html;
-  }
-  return html;
-}
-function runOcr(){
-  if (!OCR_FILE){ toast("请先选择截图"); return; }
-  if (typeof Tesseract === "undefined"){ toast("OCR 组件未加载，请刷新重试"); return; }
-  var prog = document.getElementById("ocrProgress"), pct = document.getElementById("ocrPct");
-  if (prog) prog.style.display = "block";
-  var run = function(lang){
-    return Tesseract.recognize(OCR_FILE, lang, { logger: function(m){ if (m && m.status === "recognizing text" && pct){ pct.textContent = Math.round((m.progress||0)*100) + "%"; } } });
-  };
-  run("chi_sim+eng").then(function(res){
-    if (prog) prog.style.display = "none";
-    renderOcrResult((res && res.data && res.data.text) || "");
-  }).catch(function(){
-    return run("eng").then(function(res){
-      if (prog) prog.style.display = "none";
-      renderOcrResult((res && res.data && res.data.text) || "");
-    }).catch(function(e){
-      if (prog) prog.style.display = "none";
-      var el = document.getElementById("ocrResult");
-      if (el) el.innerHTML = '<div class="empty">识别失败：'+esc(String((e && e.message) || e))+'。可改用「🌍 全球搜索」。</div>';
-    });
-  });
-}
 function addOsmHtml(){
-  return '<input type="text" id="oSearch" placeholder="输入关键词，如 Ristr8to、宁曼、Chiang Mai…">' +
+  return '<div class="f-row"><span class="f-lbl">🔍</span><input type="text" id="oSearch" class="f-input" placeholder="输入关键词，如 Ristr8to、宁曼、Chiang Mai…"></div>' +
     '<div class="picker-list" id="oList"></div>' +
     '<div class="sync-hint" style="margin-top:8px">数据来源 OpenStreetMap（Photon 服务，无需 Key、全球覆盖）。搜索结果含名称/地址/坐标；评分与营业时间请以「地点池」已核实卡片为准，或自行补充备注。</div>';
 }
@@ -1140,50 +1126,6 @@ function nearbyHtml(day){
     html += '<div class="rec-group"><div class="rec-label">'+esc(k)+'</div>' + items + '</div>';
   });
   return html;
-}
-function renderOcrResult(text){
-  var el = document.getElementById("ocrResult");
-  if (!el) return;
-  var lines = String(text||"").split("\n").map(function(x){ return x.trim(); }).filter(Boolean);
-  var candidates = [], refs = [];
-  lines.forEach(function(line){
-    if (line.length < 2) return;
-    if (/^[\d\s.,:：%\-—+]+$/.test(line)) return;
-    if (/[★☆]|评分|营业|小时|公里|评价/.test(line)){ refs.push(line); return; }
-    var hit = false;
-    for (var i=0;i<OCR_STOPWORDS.length;i++){ if (line.indexOf(OCR_STOPWORDS[i]) >= 0){ hit = true; break; } }
-    if (!hit) candidates.push(line);
-  });
-  candidates = candidates.filter(function(v,i,a){ return a.indexOf(v) === i; }).sort(function(a,b){ return b.length - a.length; }).slice(0,8);
-  var html = '<div class="section-title">📝 识别出的候选名称（请点选正确那条）</div>';
-  if (!candidates.length){ html += '<div class="empty">没有识别到候选名称，可改用「🌍 全球搜索」手动搜索。</div>'; }
-  else {
-    html += '<div class="ocr-cands">' + candidates.map(function(c){
-      return '<div class="picker-row"><span class="pn">'+esc(c)+'</span><button class="btn mini primary ocr-pick" data-name="'+esc(c)+'">用此名称搜索</button></div>';
-    }).join("") + '</div>';
-  }
-  html += '<div class="f-row"><span class="f-lbl">名称</span><input type="text" id="ocrName" placeholder="点选后也可手动修改"><button class="btn primary" id="ocrSearch">🔍 全球搜索</button></div>';
-  html += '<div id="ocrMatches"></div>';
-  if (refs.length){
-    html += '<div class="section-title">ℹ️ 参考信息（评分/营业时间，来自截图，未核实）</div><div class="ocr-refs">' + refs.map(function(r){ return '<div class="gd-row">'+esc(r)+'</div>'; }).join("") + '</div>';
-  }
-  el.innerHTML = html;
-}
-function ocrSearchName(){
-  var name = (document.getElementById("ocrName").value || "").trim();
-  if (!name){ toast("请先点选或输入名称"); return; }
-  fetch("https://photon.komoot.io/api/?q=" + encodeURIComponent(name) + "&limit=5").then(function(r){ return r.json(); }).then(function(d){
-    var el = document.getElementById("ocrMatches");
-    if (!el) return;
-    var feats = d && d.features ? d.features : [];
-    if (!feats.length){ el.innerHTML = '<div class="empty">没有匹配，可换个名称再搜</div>'; return; }
-    el.innerHTML = '<div class="section-title">匹配结果（点「加入」写入行程）</div>' + feats.map(function(f){
-      var p = f.properties || {}; var g = f.geometry || {}; var coords = g.coordinates || [];
-      var nm = p.name || ""; var addr = [p.street||"", p.city||"", p.country||""].filter(Boolean).join("，");
-      return '<div class="picker-row"><span class="pn">'+esc(nm)+'</span><span class="pc">'+esc(addr)+'</span>' +
-        '<button class="btn mini primary o-add" data-oname="'+esc(nm)+'" data-olng="'+esc(coords[0]||"")+'" data-olat="'+esc(coords[1]||"")+'" data-oaddr="'+esc(addr)+'">加入</button></div>';
-    }).join("");
-  }).catch(function(){ var el = document.getElementById("ocrMatches"); if (el) el.innerHTML = '<div class="empty">搜索失败，请检查网络</div>'; });
 }
 function renderOList(data){
   var el = document.getElementById("oList");
@@ -1582,13 +1524,7 @@ $("#dayPanel").addEventListener("click", function(e){
   var ac = e.target.closest("#addClose");
   if (ac){ EDIT_PICKER = false; refreshAfterEdit(); return; }
   var at = e.target.closest("[data-addtab]");
-  if (at){ qsa("#addTabs .mchip2").forEach(function(x){ x.classList.remove("active"); }); at.classList.add("active"); var ap = document.getElementById("addPanel"); if (ap) ap.innerHTML = at.dataset.addtab === "osm" ? addOsmHtml() : at.dataset.addtab === "ocr" ? addOcrHtml() : addPoolHtml(currentDay(), ""); return; }
-  var os = e.target.closest("#ocrStart");
-  if (os){ runOcr(); return; }
-  var op = e.target.closest(".ocr-pick");
-  if (op){ var ni = document.getElementById("ocrName"); if (ni) ni.value = op.dataset.name; ocrSearchName(); return; }
-  var oq = e.target.closest("#ocrSearch");
-  if (oq){ ocrSearchName(); return; }
+  if (at){ qsa("#addTabs .mchip2").forEach(function(x){ x.classList.remove("active"); }); at.classList.add("active"); var ap = document.getElementById("addPanel"); if (ap) ap.innerHTML = at.dataset.addtab === "osm" ? addOsmHtml() : addPoolHtml(currentDay(), ""); return; }
   var oa = e.target.closest(".o-add");
   if (oa){ addOsmPlace(oa.dataset.oname, oa.dataset.olng, oa.dataset.olat, oa.dataset.oaddr); return; }
   var pa = e.target.closest(".picker-add");
@@ -1610,17 +1546,6 @@ $("#dayPanel").addEventListener("click", function(e){
         else if (act === "time"){ EDIT_TARGET = (EDIT_TARGET === idx ? null : idx); refreshAfterEdit(); }
         return;
       }
-    }
-  }
-});
-$("#dayPanel").addEventListener("change", function(e){
-  if (e.target && e.target.id === "ocrFile"){
-    var file = e.target.files && e.target.files[0];
-    if (file){
-      OCR_FILE = file;
-      var rd = new FileReader();
-      rd.onload = function(){ var pv = document.getElementById("ocrPreview"); if (pv) pv.innerHTML = '<img src="'+rd.result+'" alt="预览">'; };
-      rd.readAsDataURL(file);
     }
   }
 });
@@ -1651,6 +1576,8 @@ $("#module-overview").addEventListener("click", function(e){
   var rs = e.target.closest("[data-cardreset]");
   if (rs){ resetListCard(rs.dataset.cardreset); return; }
   var tb = e.target.closest(".todo-box");
+  var rm = e.target.closest("[data-rem]");
+  if (rm){ REM_CHECKS[rm.dataset.rem] = !REM_CHECKS[rm.dataset.rem]; saveRemChecks(); renderOverview(); return; }
   if (tb){ var key = tb.dataset.list; var idx = parseInt(tb.dataset.idx, 10); var arr = getList(key).slice(); var it = arr[idx]; if (typeof it === "string") it = { t: it, done: false }; it.done = !it.done; arr[idx] = it; setList(key, arr); renderOverview(); return; }
   var del = e.target.closest(".li-del");
   if (del){ var key2 = del.dataset.list; var idx2 = parseInt(del.dataset.idx, 10); pushListUndo(key2); var arr2 = getList(key2).slice(); arr2.splice(idx2, 1); setList(key2, arr2); renderOverview(); return; }
@@ -1673,6 +1600,7 @@ window.addEventListener("resize", function(){
 
 /* ---------- 初始化 ---------- */
 loadSyncMeta();
+loadRemChecks();
 applyOverrides();
 seedExpensesIfEmpty();
 loadExpenses();

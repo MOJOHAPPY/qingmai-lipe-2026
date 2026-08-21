@@ -76,7 +76,7 @@ async function run() {
   await tab1004.first().click();
   await page.waitForTimeout(1200);
   const d10Title = (await page.locator(".day-head h2").textContent()).trim();
-  const d10Cotu = await page.locator("#dayPanel .tl-body", { hasText: "COTU" }).count();
+  const d10TeeTee = await page.locator("#dayPanel .tl-body", { hasText: "TeeTee" }).count();
   const d10Reminders = await page.locator("#dayPanel .reminder-item").count();
   await page.screenshot({ path: path.join(shots, "a2-day1004-desktop.png"), fullPage: false });
 
@@ -279,9 +279,9 @@ async function run() {
   await page.click('[data-cardtoggle="prep"]');
   await page.waitForTimeout(300);
   const todoBoxes = await page.locator(".todo-box").count();
-  await page.locator(".todo-box").first().click();
+  await page.locator("#sec-prep .todo-box").first().click();
   await page.waitForTimeout(300);
-  const todoDone = await page.locator(".todo-box.done").count();
+  const todoDone = await page.locator("#sec-prep .todo-box.done").count();
   await page.click('[data-cardtoggle="prep"]');
   await page.waitForTimeout(300);
   // 汇率工具
@@ -306,7 +306,7 @@ async function run() {
   await page.click("#editToggle");
   await page.waitForTimeout(200);
 
-  /* ── 截图识别 OCR ── */
+  /* ── 添加地点：无 OCR 页签 + 全球搜索样式统一 ── */
   await page.click('.module-btn[data-module="detail"]');
   await page.waitForTimeout(400);
   await page.locator(".day-tab", { hasText: "9/26" }).first().click();
@@ -315,30 +315,41 @@ async function run() {
   await page.waitForTimeout(300);
   await page.click("#editAdd");
   await page.waitForTimeout(400);
-  await page.click('[data-addtab="ocr"]');
-  await page.waitForTimeout(500);
-  const tesseractLoaded = await page.evaluate(() => typeof Tesseract !== "undefined");
-  const imgBuf = await page.evaluate(() => {
-    const c = document.createElement("canvas"); c.width = 900; c.height = 220;
-    const ctx = c.getContext("2d");
-    ctx.fillStyle = "#ffffff"; ctx.fillRect(0, 0, 900, 220);
-    ctx.fillStyle = "#000000"; ctx.font = "bold 72px Arial"; ctx.textBaseline = "middle";
-    ctx.fillText("Ristr8to", 60, 110);
-    return c.toDataURL("image/png").split(",")[1];
-  });
-  await page.setInputFiles("#ocrFile", { name: "test.png", mimeType: "image/png", buffer: Buffer.from(imgBuf, "base64") });
+  const addTabs = await page.locator("#addTabs .mchip2").count();
+  const ocrTabCount = await page.locator('[data-addtab="ocr"]').count();
+  await page.click('[data-addtab="osm"]');
   await page.waitForTimeout(400);
-  await page.click("#ocrStart");
-  let ocrPicked = false;
-  try { await page.waitForSelector(".ocr-pick", { timeout: 150000 }); ocrPicked = true; } catch (e) { ocrPicked = false; }
-  const ocrCands = await page.locator(".ocr-pick").count();
-  const ocrHasRistr = await page.locator(".ocr-pick", { hasText: "Ristr8to" }).count();
-  if (ocrCands){ await page.locator(".ocr-pick").first().click(); await page.waitForTimeout(2500); }
-  const ocrMatches = await page.locator("#ocrMatches .o-add").count();
-  if (ocrMatches){ await page.locator("#ocrMatches .o-add").first().click(); await page.waitForTimeout(900); }
-  const ocrTl = await page.locator(".tl-item").count();
+  const osmInputClass = await page.evaluate(() => { const el = document.getElementById("oSearch"); return el ? el.className : ""; });
+  await page.click("#addClose");
+  await page.waitForTimeout(300);
   await page.click("#editToggle");
   await page.waitForTimeout(200);
+
+  /* ── 总览：导航上移 + 预约卡片可勾选并持久化 + 花费编辑不错位 ── */
+  await page.click('.module-btn[data-module="overview"]');
+  await page.waitForTimeout(500);
+  const navBeforePrep = await page.evaluate(() => {
+    const nav = document.getElementById("ovNav"); const prep = document.getElementById("sec-prep");
+    return nav && prep ? (nav.compareDocumentPosition(prep) & Node.DOCUMENT_POSITION_FOLLOWING) : false;
+  });
+  const remCardItems = await page.locator("#sec-reminders li.todo").count();
+  await page.locator("#sec-reminders .todo-box").first().click();
+  await page.waitForTimeout(300);
+  const remDone = await page.locator("#sec-reminders .todo-box.done").count();
+  await page.reload({ waitUntil: "domcontentloaded" });
+  await page.waitForSelector("#module-overview:not(.hidden)", { timeout: 20000 });
+  await page.waitForTimeout(600);
+  const remAfterReload = await page.locator("#sec-reminders .todo-box.done").count();
+  await page.click('.module-btn[data-module="expenses"]');
+  await page.waitForTimeout(500);
+  await page.locator(".exp-item").first().locator('[data-act="edit"]').click();
+  await page.waitForTimeout(400);
+  const expInlineOverflowX = await page.evaluate(() => {
+    const el = document.querySelector(".exp-inline"); if (!el) return false;
+    return el.scrollWidth > el.clientWidth + 1;
+  });
+  await page.locator('[data-act="cancel-edit"]').click();
+  await page.waitForTimeout(300);
 
   /* ── 移动端 ── */
   const pageM = await browser.newPage({ viewport: { width: 390, height: 844 } });
@@ -361,7 +372,7 @@ async function run() {
   await pageM.close();
 
   const result = { title, countdown, routeCards, flightRows, buyCols, prepCols, memberChips, ovScrollX,
-    dayTabs, markers, mapVisible, mapHiddenClass, chips, defaultProvider, googleActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d10Title, d10Cotu, d10Reminders,
+    dayTabs, markers, mapVisible, mapHiddenClass, chips, defaultProvider, googleActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d10Title, d10TeeTee, d10Reminders,
     d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX,
     expSums, expPer, expList0, sharedSeed, expList1, sharedAfter1, expListBlocked, expList2, jiaoTotal,
     editAmount, expList3, expList4, expListAfterReload,
@@ -369,10 +380,13 @@ async function run() {
     seven0, seven1, seven2, tlPersist0, tlPersist1, editedTabMark,
     syncStatus, syncDot, cloudHasData,
     memberChipsRow, navChips, todoBoxes, todoDone, fxResult, movedDayTitle,
-    tesseractLoaded, ocrPicked, ocrCands, ocrHasRistr, ocrMatches, ocrTl,
+    addTabs, ocrTabCount, osmInputClass, navBeforePrep, remCardItems, remDone, remAfterReload, expInlineOverflowX,
     mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
   if (errors.length) process.exit(1);
 }
 run().catch((e) => { console.error("VERIFY FAILED:", e); process.exit(1); });
+
+
+

@@ -32,6 +32,7 @@ const CATEGORIES = [
   { id:"cafe", icon:"☕", label:"咖啡", color:"#a2845e" },
   { id:"market", icon:"🧺", label:"市集", color:"#ffb340" },
   { id:"activity", icon:"🎯", label:"兴趣班", color:"#34c759" },
+  { id:"spa", icon:"💆", label:"按摩", color:"#e05a92" },
   { id:"shopping", icon:"🛍️", label:"购物", color:"#af52de" },
   { id:"bar", icon:"🎸", label:"酒吧", color:"#5856d6" },
   { id:"nature", icon:"🌿", label:"自然", color:"#30b0c7" },
@@ -81,7 +82,7 @@ const days = itinerary.map((d) => {
 
 const dayReminders = [];
 days.forEach((d) => {
-  (d.reminders || []).forEach((r) => { dayReminders.push(`${d.label} · ${r.label}（${r.due}）`); });
+  (d.reminders || []).forEach((r, i) => { dayReminders.push({ id: `${d.id}-r${i}`, text: `${d.label} · ${r.label}（${r.due}）` }); });
 });
 
 /* ---------- 总览内容（已核实事实） ---------- */
@@ -175,3 +176,4 @@ for (const [ph, val] of [["__LEAFLET_CSS__", css], ["__LEAFLET_JS__", leafletJs]
 const out = path.join(root, "清迈丽贝·旅行助手.html");
 fs.writeFileSync(out, template, "utf8");
 console.log("app written:", out, "bytes=", template.length);
+

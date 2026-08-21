@@ -24,13 +24,13 @@
   {
     "id": "day-1",
     "date": "2026-09-25",
-    "title": "抵达清迈 · 古城轻开局",
+    "title": "抵达清迈 · 先买化妆品与衣服",
     "city": "Chiang Mai",
-    "summary": "09:15 落地清迈，寄存行李后在塔佩门与柴迪隆寺慢慢走，晚上用一顿花园创意泰餐开场。",
+    "summary": "09:15 落地清迈，寄存行李后直奔塔佩路的 Chiang Mai Cosmetics 与 Win Cosmetics 买化妆品、衣服（赶在 15:00 入住前），晚上北门吃自助火锅烧烤、听爵士。",
     "anchors": [
-      "poi-thapae-twins",
-      "poi-wat-chedi-luang",
-      "poi-house-by-ginger"
+      "poi-gm-chiangmai-cosmetics",
+      "poi-gm-win-hualin",
+      "poi-north-gate-jazz"
     ],
     "routeStops": [
       {
@@ -40,88 +40,108 @@
         "role": "arrival"
       },
       {
+        "poiId": "poi-gm-chiangmai-cosmetics",
+        "order": 2,
+        "time": "11:00",
+        "role": "shopping"
+      },
+      {
+        "poiId": "poi-gm-win-hualin",
+        "order": 3,
+        "time": "12:30",
+        "role": "shopping"
+      },
+      {
         "poiId": "poi-thapae-twins",
         "order": 0,
         "time": "15:00",
         "role": "lodging-anchor"
       },
       {
-        "poiId": "poi-tha-phae-gate",
-        "order": 2,
-        "time": "15:30",
-        "role": "landmark"
-      },
-      {
-        "poiId": "poi-wat-chedi-luang",
-        "order": 3,
-        "time": "16:30",
-        "role": "landmark"
-      },
-      {
-        "poiId": "poi-house-by-ginger",
+        "poiId": "poi-gm-big-big-shabu",
         "order": 4,
         "time": "18:30",
         "role": "dinner"
+      },
+      {
+        "poiId": "poi-north-gate-jazz",
+        "order": 5,
+        "time": "20:30",
+        "role": "night"
       }
     ],
-    "candidates": [],
+    "candidates": [
+      "poi-tha-phae-gate",
+      "poi-gm-khao-tom-nai-dam",
+      "poi-gm-apollo-cafe",
+      "poi-gm-nicha-cotton",
+      "poi-gm-archery"
+    ],
     "transitSegments": [
       {
         "fromPoiId": "poi-cnx-airport",
-        "toPoiId": "poi-thapae-twins",
+        "toPoiId": "poi-gm-chiangmai-cosmetics",
         "mode": "Grab/出租车",
         "minutes": 25,
-        "label": "机场到古城塔佩门一带约 20–25 分钟"
+        "label": "机场到塔佩一带，先到酒店寄存行李再购物"
+      },
+      {
+        "fromPoiId": "poi-gm-chiangmai-cosmetics",
+        "toPoiId": "poi-gm-win-hualin",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "两家店都在塔佩路一带，步行即到"
+      },
+      {
+        "fromPoiId": "poi-gm-win-hualin",
+        "toPoiId": "poi-thapae-twins",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "购物后回酒店办理入住（15:00）"
       },
       {
         "fromPoiId": "poi-thapae-twins",
-        "toPoiId": "poi-tha-phae-gate",
+        "toPoiId": "poi-gm-big-big-shabu",
+        "mode": "Grab",
+        "minutes": 10,
+        "label": "打车到古城北门 Sri Phum 路"
+      },
+      {
+        "fromPoiId": "poi-gm-big-big-shabu",
+        "toPoiId": "poi-north-gate-jazz",
         "mode": "步行",
         "minutes": 5,
-        "label": "酒店就在塔佩门旁，寄存行李后步行即到"
-      },
-      {
-        "fromPoiId": "poi-tha-phae-gate",
-        "toPoiId": "poi-wat-chedi-luang",
-        "mode": "步行",
-        "minutes": 15,
-        "label": "沿 Ratchadamnoen 路向西直走约 1 公里"
-      },
-      {
-        "fromPoiId": "poi-wat-chedi-luang",
-        "toPoiId": "poi-house-by-ginger",
-        "mode": "步行",
-        "minutes": 12,
-        "label": "往东北方向穿古城到 Moon Muang 路"
+        "label": "北门爵士吧就在火锅店旁"
       }
-    ]
+    ],
+    "reminders": []
   },
   {
     "id": "day-2",
     "date": "2026-09-26",
-    "title": "市集日 · JJ 早市 + 银庙周六夜市",
+    "title": "市集 + 射击 + 摇摆舞 · 周六",
     "city": "Chiang Mai",
-    "summary": "上午去清迈最大的周末创意市集，中午吃咖喱面，下午回酒店午休后去 333 射击场，傍晚在银庙与 Wualai 夜市收尾。",
+    "summary": "上午 JJ 市集吃早餐逛手作，中午 Santitham 吃泰北菜，下午 333 射击，傍晚银庙做 Tok Sen 按摩，晚上到 Rong Sa Dang 上摇摆舞新手课并跳社交舞。",
     "anchors": [
       "poi-jing-jai",
       "poi-333-shooting-thaphae",
-      "poi-wualai-walking-street"
+      "poi-gm-rong-sa-dang"
     ],
     "routeStops": [
       {
         "poiId": "poi-thapae-twins",
         "order": 0,
-        "time": "08:30",
+        "time": "08:00",
         "role": "lodging-anchor"
       },
       {
         "poiId": "poi-jing-jai",
         "order": 1,
-        "time": "09:00",
+        "time": "08:30",
         "role": "market"
       },
       {
-        "poiId": "poi-khao-soi-khun-yai",
+        "poiId": "poi-gm-khoei",
         "order": 2,
         "time": "12:30",
         "role": "lunch"
@@ -133,21 +153,25 @@
         "role": "class"
       },
       {
-        "poiId": "poi-wat-srisuphan",
+        "poiId": "poi-gm-tok-sen",
         "order": 4,
         "time": "17:00",
-        "role": "landmark"
+        "role": "activity"
       },
       {
-        "poiId": "poi-wualai-walking-street",
+        "poiId": "poi-gm-rong-sa-dang",
         "order": 5,
-        "time": "17:30",
-        "role": "night-market"
+        "time": "20:00",
+        "role": "night"
       }
     ],
     "candidates": [
-      "poi-khun-churn",
-      "poi-fern-forest-cafe"
+      "poi-khao-soi-khun-yai",
+      "poi-wat-srisuphan",
+      "poi-wualai-walking-street",
+      "poi-gm-700year-shooting",
+      "poi-fern-forest-cafe",
+      "poi-khun-churn"
     ],
     "transitSegments": [
       {
@@ -159,31 +183,31 @@
       },
       {
         "fromPoiId": "poi-jing-jai",
-        "toPoiId": "poi-khao-soi-khun-yai",
+        "toPoiId": "poi-gm-khoei",
         "mode": "Grab",
-        "minutes": 15,
-        "label": "JJ 市集到咖喱面店约 15 分钟"
+        "minutes": 10,
+        "label": "JJ 市集到 Santitham 泰北菜约 10 分钟"
       },
       {
-        "fromPoiId": "poi-khao-soi-khun-yai",
+        "fromPoiId": "poi-gm-khoei",
         "toPoiId": "poi-333-shooting-thaphae",
         "mode": "Grab",
         "minutes": 10,
-        "label": "午餐后回古城，打车约 10 分钟"
+        "label": "午餐后回古城塔佩门店"
       },
       {
         "fromPoiId": "poi-333-shooting-thaphae",
-        "toPoiId": "poi-wat-srisuphan",
+        "toPoiId": "poi-gm-tok-sen",
         "mode": "Grab",
-        "minutes": 15,
-        "label": "射击场到银庙约 15 分钟"
+        "minutes": 12,
+        "label": "到古城西南银庙"
       },
       {
-        "fromPoiId": "poi-wat-srisuphan",
-        "toPoiId": "poi-wualai-walking-street",
-        "mode": "步行",
-        "minutes": 5,
-        "label": "银庙旁即是 Wualai 夜市"
+        "fromPoiId": "poi-gm-tok-sen",
+        "toPoiId": "poi-gm-rong-sa-dang",
+        "mode": "Grab",
+        "minutes": 10,
+        "label": "回塔佩路 63 号"
       }
     ],
     "reminders": [
@@ -192,103 +216,130 @@
         "due": "9/26 14:00 前",
         "detail": "电话 064-495-6815 或平台预约，确认 15:00 场次",
         "status": "todo"
+      },
+      {
+        "label": "Rong Sa Dang 周六摇摆舞课",
+        "due": "9/26 19:45 前到",
+        "detail": "新手课 20:00–20:45 约 200 泰铢，社交舞 21:00 起",
+        "status": "todo"
       }
     ]
   },
   {
     "id": "day-3",
     "date": "2026-09-27",
-    "title": "身心慢日 · 瑜伽 + 中古店 + 周日夜市",
+    "title": "公园瑜伽 + 手工市集 + 周日夜市",
     "city": "Chiang Mai",
-    "summary": "上午一节古城瑜伽，中午米其林烤鸡，下午逛二手古着，傍晚周日夜市，夜里去北门听爵士。",
+    "summary": "早上到 Nong Buak Haad 公园晨走/公园瑜伽，去 Artisan sourdough 吃面包早餐，上午逛 Lanna Artisans 银器工坊，中午跑 San Kamphaeng 的 Bamboo 竹林市集，傍晚逛周日夜市，晚上到 MaHoRee 听现场爵士。",
     "anchors": [
-      "poi-wild-rose-yoga",
+      "poi-gm-bamboo-market",
       "poi-sunday-walking-street",
-      "poi-north-gate-jazz"
+      "poi-gm-mahoree"
     ],
     "routeStops": [
       {
         "poiId": "poi-thapae-twins",
         "order": 0,
-        "time": "09:00",
+        "time": "07:30",
         "role": "lodging-anchor"
       },
       {
-        "poiId": "poi-wild-rose-yoga",
+        "poiId": "poi-gm-nong-buak",
         "order": 1,
-        "time": "09:30",
-        "role": "class"
+        "time": "08:00",
+        "role": "nature"
       },
       {
-        "poiId": "poi-sp-chicken",
+        "poiId": "poi-gm-artisan-sourdough",
         "order": 2,
-        "time": "12:00",
-        "role": "lunch"
+        "time": "09:00",
+        "role": "cafe"
       },
       {
-        "poiId": "poi-pm2-vintage",
+        "poiId": "poi-gm-lanna-artisans",
         "order": 3,
-        "time": "14:00",
-        "role": "shopping"
+        "time": "10:30",
+        "role": "sight"
+      },
+      {
+        "poiId": "poi-gm-bamboo-market",
+        "order": 4,
+        "time": "12:30",
+        "role": "market"
       },
       {
         "poiId": "poi-sunday-walking-street",
-        "order": 4,
-        "time": "17:00",
-        "role": "night-market"
+        "order": 5,
+        "time": "17:30",
+        "role": "market"
       },
       {
-        "poiId": "poi-north-gate-jazz",
-        "order": 5,
-        "time": "21:00",
+        "poiId": "poi-gm-mahoree",
+        "order": 6,
+        "time": "20:30",
         "role": "night"
       }
     ],
     "candidates": [
-      "poi-fern-forest-cafe"
+      "poi-wild-rose-yoga",
+      "poi-pm2-vintage",
+      "poi-sp-chicken"
     ],
     "transitSegments": [
       {
         "fromPoiId": "poi-thapae-twins",
-        "toPoiId": "poi-wild-rose-yoga",
-        "mode": "步行",
-        "minutes": 12,
-        "label": "沿 Phra Pok Klao 路步行约 10–12 分钟"
-      },
-      {
-        "fromPoiId": "poi-wild-rose-yoga",
-        "toPoiId": "poi-sp-chicken",
+        "toPoiId": "poi-gm-nong-buak",
         "mode": "Grab",
         "minutes": 10,
-        "label": "古城东侧到西侧 Samlan 路约 10 分钟"
+        "label": "古城东到西南角公园"
       },
       {
-        "fromPoiId": "poi-sp-chicken",
-        "toPoiId": "poi-pm2-vintage",
+        "fromPoiId": "poi-gm-nong-buak",
+        "toPoiId": "poi-gm-artisan-sourdough",
+        "mode": "Grab",
+        "minutes": 8,
+        "label": "公园到素贴/乌蒙一带面包店"
+      },
+      {
+        "fromPoiId": "poi-gm-artisan-sourdough",
+        "toPoiId": "poi-gm-lanna-artisans",
         "mode": "Grab",
         "minutes": 10,
-        "label": "到北区 Si Phum 的 Wiang Kaew 路约 10 分钟"
+        "label": "回 Wua Lai 银器工坊"
       },
       {
-        "fromPoiId": "poi-pm2-vintage",
+        "fromPoiId": "poi-gm-lanna-artisans",
+        "toPoiId": "poi-gm-bamboo-market",
+        "mode": "Grab/包车",
+        "minutes": 35,
+        "label": "跨城到 San Kamphaeng 竹林市集"
+      },
+      {
+        "fromPoiId": "poi-gm-bamboo-market",
         "toPoiId": "poi-sunday-walking-street",
-        "mode": "步行",
-        "minutes": 15,
-        "label": "向南走到 Ratchadamnoen 主街"
+        "mode": "Grab/包车",
+        "minutes": 30,
+        "label": "回古城 Ratchadamnoen 周日夜市"
       },
       {
         "fromPoiId": "poi-sunday-walking-street",
-        "toPoiId": "poi-north-gate-jazz",
+        "toPoiId": "poi-gm-mahoree",
         "mode": "步行",
-        "minutes": 15,
-        "label": "沿主街向北走到北门附近"
+        "minutes": 5,
+        "label": "夜市走到 Prapokklao 路爵士吧"
       }
     ],
     "reminders": [
       {
-        "label": "预约 Wild Rose 瑜伽 09:30 课",
-        "due": "提前 1 天",
-        "detail": "电话/到店确认课程，约 350 泰铢/课",
+        "label": "Artisan 面包店营业日确认",
+        "due": "D3 当天 9:00 前",
+        "detail": "周三至周日营业（周一/二休）；建议早去防售罄",
+        "status": "todo"
+      },
+      {
+        "label": "Bamboo 周末场次确认",
+        "due": "出发前 1 天",
+        "detail": "看官方 FB/IG 确认当周周六/日营业",
         "status": "todo"
       }
     ]
@@ -296,91 +347,116 @@
   {
     "id": "day-4",
     "date": "2026-09-28",
-    "title": "兴趣班日 · 泰餐课 + 复古市集 + 拉丁舞",
+    "title": "丛林飞跃 + 复古市集 · 周一",
     "city": "Chiang Mai",
-    "summary": "上午上一堂完整的泰餐课，下午歇脚，傍晚逛 One Nimman 复古市集，晚上去学 Bachata/Salsa。",
+    "summary": "上午到 Doi Saket 玩 Skyline 丛林飞跃（半日含接送），下午宁曼做按摩、逛 S.Shinawatra 泰丝店，傍晚逛 One Nimman 复古市集，晚上在宁曼吃 TOEN 泰餐。",
     "anchors": [
-      "poi-mama-noi",
-      "poi-one-nimman",
-      "poi-bailamos"
+      "poi-gm-skyline",
+      "poi-gm-vintage-market"
     ],
     "routeStops": [
       {
         "poiId": "poi-thapae-twins",
         "order": 0,
-        "time": "08:30",
+        "time": "07:30",
         "role": "lodging-anchor"
       },
       {
-        "poiId": "poi-mama-noi",
+        "poiId": "poi-gm-skyline",
         "order": 1,
-        "time": "09:00",
-        "role": "class"
+        "time": "08:00",
+        "role": "activity"
       },
       {
-        "poiId": "poi-one-nimman",
+        "poiId": "poi-gm-square-massage",
         "order": 2,
-        "time": "17:00",
-        "role": "market"
+        "time": "15:00",
+        "role": "activity"
       },
       {
-        "poiId": "poi-fairy-garden",
+        "poiId": "poi-gm-shinawatra-silk",
         "order": 3,
-        "time": "18:00",
+        "time": "16:30",
         "role": "shopping"
       },
       {
-        "poiId": "poi-bailamos",
+        "poiId": "poi-gm-vintage-market",
         "order": 4,
+        "time": "17:30",
+        "role": "market"
+      },
+      {
+        "poiId": "poi-gm-toen",
+        "order": 5,
         "time": "19:30",
-        "role": "class"
+        "role": "dinner"
       }
     ],
     "candidates": [
+      "poi-mama-noi",
+      "poi-bailamos",
+      "poi-one-nimman",
+      "poi-fairy-garden",
+      "poi-ristr8to-original",
       "poi-graph-one-nimman",
-      "poi-nara-thai-nimman"
+      "poi-nara-thai-nimman",
+      "poi-gm-win-onenimman",
+      "poi-gm-heng-heng"
     ],
     "transitSegments": [
       {
         "fromPoiId": "poi-thapae-twins",
-        "toPoiId": "poi-mama-noi",
-        "mode": "学校接送车",
-        "minutes": 30,
-        "label": "上午班 09:00–09:30 酒店接人"
+        "toPoiId": "poi-gm-skyline",
+        "mode": "接送车",
+        "minutes": 60,
+        "label": "Skyline 提供酒店接送，约 08:00 出发"
       },
       {
-        "fromPoiId": "poi-mama-noi",
-        "toPoiId": "poi-one-nimman",
-        "mode": "学校送回+打车",
-        "minutes": 30,
-        "label": "约 13:30–14:30 送回酒店休息，17:00 打车到宁曼一号"
+        "fromPoiId": "poi-gm-skyline",
+        "toPoiId": "poi-gm-square-massage",
+        "mode": "接送车 + Grab",
+        "minutes": 60,
+        "label": "约 13:30 送回市区，打车到宁曼 Soi 11"
       },
       {
-        "fromPoiId": "poi-one-nimman",
-        "toPoiId": "poi-fairy-garden",
-        "mode": "步行",
-        "minutes": 10,
-        "label": "同属宁曼街区，步行可达"
-      },
-      {
-        "fromPoiId": "poi-fairy-garden",
-        "toPoiId": "poi-bailamos",
+        "fromPoiId": "poi-gm-square-massage",
+        "toPoiId": "poi-gm-shinawatra-silk",
         "mode": "Grab",
-        "minutes": 10,
-        "label": "按工作室确认地址打车前往"
+        "minutes": 8,
+        "label": "宁曼到 Huay Kaew 泰丝店"
+      },
+      {
+        "fromPoiId": "poi-gm-shinawatra-silk",
+        "toPoiId": "poi-gm-vintage-market",
+        "mode": "Grab",
+        "minutes": 8,
+        "label": "到 One Nimman 复古市集"
+      },
+      {
+        "fromPoiId": "poi-gm-vintage-market",
+        "toPoiId": "poi-gm-toen",
+        "mode": "步行",
+        "minutes": 8,
+        "label": "宁曼 Soi 一带晚餐"
       }
     ],
     "reminders": [
       {
-        "label": "预约 Mama Noi 泰餐课（上午班）",
-        "due": "提前 1–2 天",
-        "detail": "确认集合时间与接送；含市场参观与午餐",
+        "label": "Skyline 丛林飞跃预约接送",
+        "due": "提前 1 天",
+        "detail": "确认 D4 08:00 酒店接送时间与集合点",
         "status": "todo"
       },
       {
-        "label": "确认 Bailamos 当周舞课班次",
-        "due": "D4 前 1 天",
-        "detail": "周一 Open-Level 或约私教；若仅周三有课则改 D11 晚",
+        "label": "The Square 按摩预约",
+        "due": "D4 12:00 前",
+        "detail": "GoWabi 提前 2 小时以上预约 15:00 场次",
+        "status": "todo"
+      },
+      {
+        "label": "Vintage 市集时间确认",
+        "due": "D4 当天",
+        "detail": "One Nimman 复古市集周一 16:00–22:00",
         "status": "todo"
       }
     ]
@@ -716,12 +792,12 @@
   {
     "id": "day-9",
     "date": "2026-10-03",
-    "title": "回清迈 · 宁曼之夜",
+    "title": "回清迈 · 河畔爵士双吧之夜",
     "city": "Chiang Mai",
-    "summary": "下午飞回清迈，入住 Bed Changkian，晚上在宁曼路吃第一顿并散步。",
+    "summary": "14:00 从合艾飞回清迈，16:00 落地入住 Bed Changkian；晚上到长康路吃米其林必比登 Ekachan，然后去河畔的 Noir cmi 与 Bar.San. 连喝两家。",
     "anchors": [
-      "poi-bed-changkian",
-      "poi-nimman-avenue"
+      "poi-gm-noir",
+      "poi-gm-bar-san"
     ],
     "routeStops": [
       {
@@ -749,16 +825,30 @@
         "role": "lodging-anchor"
       },
       {
-        "poiId": "poi-nimman-avenue",
+        "poiId": "poi-gm-ekachan",
         "order": 3,
         "time": "18:30",
-        "role": "dinner-walk"
+        "role": "dinner"
+      },
+      {
+        "poiId": "poi-gm-noir",
+        "order": 4,
+        "time": "20:30",
+        "role": "night"
+      },
+      {
+        "poiId": "poi-gm-bar-san",
+        "order": 5,
+        "time": "22:00",
+        "role": "night"
       }
     ],
     "candidates": [
+      "poi-nimman-avenue",
       "poi-ristr8to-original",
-      "poi-nara-thai-nimman",
-      "poi-kao-soy-nimman"
+      "poi-kao-soy-nimman",
+      "poi-gm-aiyaret",
+      "poi-gm-mee-an-ja-kin"
     ],
     "transitSegments": [
       {
@@ -780,92 +870,145 @@
         "toPoiId": "poi-bed-changkian",
         "mode": "Grab",
         "minutes": 25,
-        "label": "机场到 Chang Phueak 酒店约 20–25 分钟"
+        "label": "机场到 Chang Phueak 酒店"
       },
       {
         "fromPoiId": "poi-bed-changkian",
-        "toPoiId": "poi-nimman-avenue",
-        "mode": "步行/Grab",
-        "minutes": 10,
-        "label": "酒店距宁曼路约 1 公里，可步行或打车"
+        "toPoiId": "poi-gm-ekachan",
+        "mode": "Grab",
+        "minutes": 15,
+        "label": "到长康路/河畔"
+      },
+      {
+        "fromPoiId": "poi-gm-ekachan",
+        "toPoiId": "poi-gm-noir",
+        "mode": "步行",
+        "minutes": 8,
+        "label": "同属河畔，步行即到"
+      },
+      {
+        "fromPoiId": "poi-gm-noir",
+        "toPoiId": "poi-gm-bar-san",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "两家相邻"
+      }
+    ],
+    "reminders": [
+      {
+        "label": "Ekachan 订位",
+        "due": "提前 1 天",
+        "detail": "电话 097-962-6445，确认 D9 晚市约 18:30",
+        "status": "todo"
       }
     ]
   },
   {
     "id": "day-10",
     "date": "2026-10-04",
-    "title": "大象日 · 公益象园半天",
+    "title": "弟弟象营 + 兰纳民居博物馆",
     "city": "Chiang Mai",
-    "summary": "上午去大象自然公园喂食看洗澡，下午回 Bed Changkian 附近上 COTU 游泳私教课，晚上去宁曼听现场乐队。",
+    "summary": "上午去湄登 TeeTee 弟弟象营喂象、洗澡（半日含接送），下午逛清迈大学的兰纳传统民居博物馆与静心湖，晚上到 Night Bazaar 看 6ixcret 变装秀，晚餐吃 Pakorn's。",
     "anchors": [
-      "poi-enp",
-      "poi-cotu-swim",
-      "poi-warm-up"
+      "poi-gm-teetee",
+      "poi-gm-lanna-house-museum",
+      "poi-gm-6ixcret"
     ],
     "routeStops": [
       {
         "poiId": "poi-bed-changkian",
         "order": 0,
-        "time": "06:45",
+        "time": "07:00",
         "role": "lodging-anchor"
       },
       {
-        "poiId": "poi-enp",
+        "poiId": "poi-gm-teetee",
         "order": 1,
-        "time": "07:00",
+        "time": "07:30",
         "role": "activity"
       },
       {
-        "poiId": "poi-cotu-swim",
+        "poiId": "poi-gm-lanna-house-museum",
         "order": 2,
-        "time": "15:00",
-        "role": "class"
+        "time": "14:00",
+        "role": "sight"
       },
       {
-        "poiId": "poi-warm-up",
+        "poiId": "poi-gm-cmu-lake",
         "order": 3,
+        "time": "15:30",
+        "role": "nature"
+      },
+      {
+        "poiId": "poi-gm-pakorns",
+        "order": 4,
+        "time": "18:00",
+        "role": "dinner"
+      },
+      {
+        "poiId": "poi-gm-6ixcret",
+        "order": 5,
         "time": "20:00",
         "role": "night"
       }
     ],
     "candidates": [
-      "poi-sunday-walking-street",
-      "poi-baristotel"
+      "poi-enp",
+      "poi-cotu-swim",
+      "poi-warm-up",
+      "poi-baristotel",
+      "poi-gm-retreat-nimman",
+      "poi-gm-kinlarb",
+      "poi-sunday-walking-street"
     ],
     "transitSegments": [
       {
         "fromPoiId": "poi-bed-changkian",
-        "toPoiId": "poi-enp",
-        "mode": "园区接驳车",
+        "toPoiId": "poi-gm-teetee",
+        "mode": "营区接驳车",
+        "minutes": 70,
+        "label": "07:00 酒店接送，约 13:00 返回"
+      },
+      {
+        "fromPoiId": "poi-gm-teetee",
+        "toPoiId": "poi-gm-lanna-house-museum",
+        "mode": "接驳车 + Grab",
         "minutes": 60,
-        "label": "ENP 上午 07:00 酒店接送，约 13:00 返回"
+        "label": "回城后打车到 Huay Kaew 博物馆"
       },
       {
-        "fromPoiId": "poi-enp",
-        "toPoiId": "poi-cotu-swim",
-        "mode": "接驳车 + 步行/Grab",
-        "minutes": 90,
-        "label": "从象园返回后步行/Grab 到 COTU 泳校"
-      },
-      {
-        "fromPoiId": "poi-cotu-swim",
-        "toPoiId": "poi-warm-up",
+        "fromPoiId": "poi-gm-lanna-house-museum",
+        "toPoiId": "poi-gm-cmu-lake",
         "mode": "Grab",
-        "minutes": 10,
-        "label": "泳课后回酒店洗澡，再打车去 Warm Up"
+        "minutes": 8,
+        "label": "博物馆到清迈大学静心湖"
+      },
+      {
+        "fromPoiId": "poi-gm-cmu-lake",
+        "toPoiId": "poi-gm-pakorns",
+        "mode": "Grab",
+        "minutes": 20,
+        "label": "到长康路晚餐"
+      },
+      {
+        "fromPoiId": "poi-gm-pakorns",
+        "toPoiId": "poi-gm-6ixcret",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "Night Bazaar 楼上即到"
       }
     ],
     "reminders": [
       {
-        "label": "预约 ENP 大象自然公园半天",
-        "due": "提前 1 天",
-        "detail": "含酒店接送与素食午餐，确认 07:00 集合点",
+        "label": "预约 TeeTee 弟弟象营（约提前 20 天）",
+        "due": "尽早（名额紧张）",
+        "detail": "官网/Klook 预约 D10 上午 07:00 接送，确认人数",
         "status": "todo"
       },
       {
-        "label": "预约 COTU 游泳私教（15:00）",
-        "due": "提前 1–3 天",
-        "detail": "邮件或电话 053-327-808 预约，约 800–1500 泰铢/小时；太赶可改 D11 上午",
+        "label": "6ixcret 订座/购票",
+        "due": "D10 当天",
+        "detail": "若周日不营业则顺延 D4 晚；建议提前订座",
         "status": "todo"
       }
     ]
@@ -873,12 +1016,13 @@
   {
     "id": "day-11",
     "date": "2026-10-05",
-    "title": "北线自然 + 手作 · 大象粑粑造纸 & 黏黏瀑布",
+    "title": "北线一日 · 造纸园 + 黏黏瀑布 + 古树公园",
     "city": "Chiang Mai",
-    "summary": "上午在湄林体验大象粑粑造纸，下午去湄登爬黏黏瀑布，晚上可补一节拉丁舞。",
+    "summary": "包车北线一日：上午湄林大象粑粑造纸园 DIY，下午湄登爬黏黏瀑布，回程顺路逛 Changthong 古树公园，晚上回北城吃 Krua Chalong 泰餐。",
     "anchors": [
       "poi-poopoo-paper",
-      "poi-bua-tong"
+      "poi-bua-tong",
+      "poi-gm-changthong"
     ],
     "routeStops": [
       {
@@ -890,19 +1034,35 @@
       {
         "poiId": "poi-poopoo-paper",
         "order": 1,
-        "time": "09:00",
+        "time": "09:30",
         "role": "class"
       },
       {
         "poiId": "poi-bua-tong",
         "order": 2,
-        "time": "13:30",
+        "time": "13:00",
         "role": "nature"
+      },
+      {
+        "poiId": "poi-gm-changthong",
+        "order": 3,
+        "time": "15:30",
+        "role": "nature"
+      },
+      {
+        "poiId": "poi-gm-krua-chalong",
+        "order": 4,
+        "time": "18:00",
+        "role": "dinner"
       }
     ],
     "candidates": [
       "poi-bailamos",
-      "poi-graph-ground"
+      "poi-graph-ground",
+      "poi-gm-700year-shooting",
+      "poi-gm-night-safari",
+      "poi-gm-maha-larb",
+      "poi-gm-kinlarb"
     ],
     "transitSegments": [
       {
@@ -918,13 +1078,33 @@
         "mode": "包车",
         "minutes": 40,
         "label": "湄林到湄登黏黏瀑布约 40 分钟"
+      },
+      {
+        "fromPoiId": "poi-bua-tong",
+        "toPoiId": "poi-gm-changthong",
+        "mode": "包车",
+        "minutes": 40,
+        "label": "回程顺路 San Phi Suea 古树公园"
+      },
+      {
+        "fromPoiId": "poi-gm-changthong",
+        "toPoiId": "poi-gm-krua-chalong",
+        "mode": "包车",
+        "minutes": 20,
+        "label": "到 Chotana 北城晚餐"
       }
     ],
     "reminders": [
       {
-        "label": "确认 Bailamos 备选舞课班次",
-        "due": "D11 前",
-        "detail": "若 D4 已上拉丁舞可跳过；上备选课需先看当周课表或约私教",
+        "label": "确认北线包车",
+        "due": "提前 1 天",
+        "detail": "全天包车或参加一日游，确认司机与集合时间",
+        "status": "todo"
+      },
+      {
+        "label": "Changthong 开放时间",
+        "due": "D11 当天",
+        "detail": "每日 09:30–16:30，控制回程时间",
         "status": "todo"
       }
     ]
@@ -932,34 +1112,56 @@
   {
     "id": "day-12",
     "date": "2026-10-06",
-    "title": "艺术村 + 手信收尾",
+    "title": "南奔古寺 + 瓦洛洛手信收尾",
     "city": "Chiang Mai",
-    "summary": "上午逛班康瓦艺术村，下午在瓦洛洛市场集中买手信，晚上吃告别餐（可选按摩）。",
+    "summary": "上午包车去南奔逛千年古寺 Wat Phra That Haripunchai，中午吃 Lamphun 鸡饭，下午河畔 Judy's 咖啡歇脚，回清迈后到瓦洛洛市场集中买手信，晚上做告别按摩。",
     "anchors": [
-      "poi-baan-kang-wat",
+      "poi-gm-haripunchai",
       "poi-warorot"
     ],
     "routeStops": [
       {
         "poiId": "poi-bed-changkian",
         "order": 0,
-        "time": "09:30",
+        "time": "08:30",
         "role": "lodging-anchor"
       },
       {
-        "poiId": "poi-baan-kang-wat",
+        "poiId": "poi-gm-haripunchai",
         "order": 1,
-        "time": "10:00",
-        "role": "art-village"
+        "time": "09:30",
+        "role": "sight"
+      },
+      {
+        "poiId": "poi-gm-chicken-rice-lamphun",
+        "order": 2,
+        "time": "12:00",
+        "role": "lunch"
+      },
+      {
+        "poiId": "poi-gm-judys",
+        "order": 3,
+        "time": "13:30",
+        "role": "cafe"
       },
       {
         "poiId": "poi-warorot",
-        "order": 2,
-        "time": "14:30",
+        "order": 4,
+        "time": "15:30",
         "role": "market"
+      },
+      {
+        "poiId": "poi-gm-muse-massage",
+        "order": 5,
+        "time": "18:30",
+        "role": "activity"
       }
     ],
     "candidates": [
+      "poi-gm-mango-sticky",
+      "poi-gm-mae-tia",
+      "poi-gm-mae-ho-phra",
+      "poi-baan-kang-wat",
       "poi-chiangmai-farewell",
       "poi-grand-canyon",
       "poi-doi-suthep",
@@ -968,24 +1170,51 @@
     "transitSegments": [
       {
         "fromPoiId": "poi-bed-changkian",
-        "toPoiId": "poi-baan-kang-wat",
-        "mode": "Grab",
-        "minutes": 15,
-        "label": "Chang Phueak 到 Suthep 艺术村约 15 分钟"
+        "toPoiId": "poi-gm-haripunchai",
+        "mode": "包车/Grab",
+        "minutes": 45,
+        "label": "清迈到南奔古寺约 40–45 分钟"
       },
       {
-        "fromPoiId": "poi-baan-kang-wat",
-        "toPoiId": "poi-warorot",
+        "fromPoiId": "poi-gm-haripunchai",
+        "toPoiId": "poi-gm-chicken-rice-lamphun",
+        "mode": "步行",
+        "minutes": 5,
+        "label": "古寺旁鸡饭店"
+      },
+      {
+        "fromPoiId": "poi-gm-chicken-rice-lamphun",
+        "toPoiId": "poi-gm-judys",
         "mode": "Grab",
-        "minutes": 20,
-        "label": "艺术村到古城东侧瓦洛洛约 20 分钟"
+        "minutes": 8,
+        "label": "到南奔河畔咖啡"
+      },
+      {
+        "fromPoiId": "poi-gm-judys",
+        "toPoiId": "poi-warorot",
+        "mode": "包车/Grab",
+        "minutes": 40,
+        "label": "回清迈瓦洛洛市场"
+      },
+      {
+        "fromPoiId": "poi-warorot",
+        "toPoiId": "poi-gm-muse-massage",
+        "mode": "Grab",
+        "minutes": 15,
+        "label": "回宁曼做告别按摩"
       }
     ],
     "reminders": [
       {
-        "label": "预订告别晚餐（可加按摩）",
-        "due": "D11 前",
-        "detail": "热门餐厅建议提前 1 天订位；按摩店具体信息待补",
+        "label": "南奔古寺着装提醒",
+        "due": "D12 当天",
+        "detail": "长裤/过膝裙+包肩，进大殿脱鞋",
+        "status": "todo"
+      },
+      {
+        "label": "告别晚餐/按摩预约",
+        "due": "提前 1 天",
+        "detail": "Muse 按摩 18:30 场次提前几小时电话约",
         "status": "todo"
       }
     ]
