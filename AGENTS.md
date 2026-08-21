@@ -137,3 +137,5 @@ guides/<trip-slug>/
 - 行前准备/注意事项/待办/必买已按新行程更新（build-app.mjs TRIP）：新增溯溪鞋/可弄脏速干衣/挂脖手机绳/环保购物袋，南奔火车订票、大象营/丛林飞跃/射击安全着装、酒吧低消等注意事项，待办含南奔火车票、TeeTee 提前 20 天、Skyline 接送、老虎园等；必买商店更新为 Win 化妆品/Chiang Mai Cosmetics/泰丝/银器 DIY/复古市集/瓦洛洛手信等。
 
 - 地点位置修正（2026-08-21）：删除 Mae Ho Phra（用户确认）；按用户 Google 地图截图 OCR 定位——ApolloCafe = 南奔 18 Charoen Rat Rd（评分 4.7/136，移入 D3 南奔日备选）、Nicha 天然棉 = 清迈 56 Kuang Men Rd, Chang Moi（评分 4.7/31）、KINLARB CHIANG MAI = 宁曼 Sirimangkalajarn Rd（评分 4.9/89，标记必去）；Maha Larb CNX 保持备选。截图文件夹已加入 .gitignore。
+
+- 行前准备拆分（2026-08-21）：行前准备拆成三张可独立编辑的卡片——🧳 必备行李 / 📋 注意事项 / ✅ 待办事项（各自 ✏️编辑/↩️撤销/🔄默认，localStorage tripListOverrides 键不变，待办勾选独立持久化）；总览导航「行前准备」指向必备行李卡。

@@ -766,15 +766,11 @@ body.map-hidden .content{width:100%;max-width:none;}
 .chip .dot{width:8px;height:8px;border-radius:50%;}
 
 /* prep grid */
-.prep-grid{display:grid;grid-template-columns:1fr;gap:12px;}
-@media (min-width:640px){.prep-grid{grid-template-columns:repeat(3,1fr);}}
-.prep-col{background:#fafafa;border:1px solid var(--line);border-radius:12px;padding:12px;}
-.prep-col h3{font-size:13px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px;}
-.prep-col ul{list-style:none;}
-.prep-col li{font-size:12.5px;color:var(--text);padding:3px 0 3px 16px;position:relative;}
-.prep-col li::before{content:"•";position:absolute;left:2px;color:var(--accent);}
-.prep-col li.todo::before{content:"☐";left:0;color:var(--amber);}
-.prep-col li.done::before{content:"☑";left:0;color:var(--green);}
+.prep-list{list-style:none;margin:0;padding:0;}
+.prep-list li{font-size:12.5px;color:var(--text);padding:3px 0 3px 16px;position:relative;}
+.prep-list li::before{content:"•";position:absolute;left:2px;color:var(--accent);}
+.prep-list li.todo::before{content:"☐";left:0;color:var(--amber);}
+.prep-list li.done::before{content:"☑";left:0;color:var(--green);}
 
 /* list rows */
 .row{display:flex;align-items:flex-start;gap:10px;padding:9px 0;border-bottom:.5px solid var(--line);}
@@ -930,7 +926,7 @@ body.map-hidden .content{width:100%;max-width:none;}
 .ov-tools{display:flex;gap:8px;margin:0 0 12px;flex-wrap:wrap;}
 .li-del{background:none;border:none;color:var(--red);font-size:14px;font-weight:800;margin-left:4px;cursor:pointer;padding:0 2px;}
 .li-add{display:flex;gap:6px;align-items:center;margin-top:4px;list-style:none;}
-.prep-col li.li-add::before,.buy-col li.li-add::before{content:none !important;}
+.prep-list li.li-add::before,.buy-col li.li-add::before{content:none !important;}
 .li-add input{flex:1;min-width:0;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font-size:12px;}
 .edit-bar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:0 0 10px;}
 .tl-edit{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
@@ -972,9 +968,9 @@ body.map-hidden .content{width:100%;max-width:none;}
 .f-row input.f-input{flex:1;min-width:120px;padding:8px 10px;border:1px solid var(--line);border-radius:8px;font-size:13px;background:#fff;color:var(--text);outline:none;}
 .f-row input.f-input:focus{border-color:var(--accent);}
 #ovNav .chip{cursor:pointer;}
-.prep-col li.todo::before{content:none;}
-.prep-col li.todo.done{color:var(--text2);text-decoration:line-through;}
-.prep-col li.todo.done::before{content:none;}
+.prep-list li.todo::before{content:none;}
+.prep-list li.todo.done{color:var(--text2);text-decoration:line-through;}
+.prep-list li.todo.done::before{content:none;}
 .todo-box{display:inline-block;width:16px;cursor:pointer;color:var(--amber);font-size:13px;margin-right:2px;user-select:none;}
 .todo-box.done{color:var(--green);}
 .rem-list{list-style:none;padding:0;margin:0;}
@@ -1163,18 +1159,12 @@ function renderOverview(){
     d.members.map(function(m){ return '<span class="chip avatar">👤 '+esc(m)+'</span>'; }).join("") +
   '</div>';
 
-  var prep = '<div class="card" id="sec-prep">' + cardHead("🎒", "行前准备", "prep") +
-    '<div class="prep-grid">' +
-      '<div class="prep-col"><h3>🧳 必备行李</h3><ul>' +
-        renderListItems("prep.packing", "") +
-      '</ul></div>' +
-      '<div class="prep-col"><h3>📋 注意事项</h3><ul>' +
-        renderListItems("prep.notes", "") +
-      '</ul></div>' +
-      '<div class="prep-col"><h3>✅ 待办事项</h3><ul>' +
-        renderListItems("prep.todos", "todo") +
-      '</ul></div>' +
-    '</div></div>';
+  var prep = '<div class="card" id="sec-pack">' + cardHead("🧳", "必备行李", "packing") +
+    '<ul class="prep-list">' + renderListItems("prep.packing", "") + '</ul></div>' +
+    '<div class="card" id="sec-notes">' + cardHead("📋", "注意事项", "notes") +
+    '<ul class="prep-list">' + renderListItems("prep.notes", "") + '</ul></div>' +
+    '<div class="card" id="sec-todos">' + cardHead("✅", "待办事项", "todos") +
+    '<ul class="prep-list">' + renderListItems("prep.todos", "todo") + '</ul></div>';
 
   var remEditing = EDIT_CARD === "reminders";
   var reminders = '<div class="card" id="sec-reminders"><h2 class="card-h"><span class="ic">🔔</span><span class="t">预约提醒</span><span class="card-tools">' +
@@ -1232,7 +1222,7 @@ function renderOverview(){
     }).join("") + '</div></div>';
 
   var nav = '<div class="card ov-nav-card"><div class="chips" id="ovNav">' +
-    '<button class="chip" data-goto="sec-prep">🎒 行前准备</button>' +
+    '<button class="chip" data-goto="sec-pack">🎒 行前准备</button>' +
     '<button class="chip" data-goto="sec-reminders">🔔 预约</button>' +
     '<button class="chip" data-goto="sec-flights">✈️ 航班</button>' +
     '<button class="chip" data-goto="sec-lodgings">🏨 住宿</button>' +
@@ -2032,15 +2022,21 @@ function defaultList(key){
 function getList(key){ return LIST_OV[key] || defaultList(key); }
 function setList(key, arr){ LIST_OV[key] = arr.slice(); saveListOverrides(); markDirty(); }
 function pushListUndo(key){ LIST_UNDO[key] = LIST_UNDO[key] || []; LIST_UNDO[key].push(JSON.parse(JSON.stringify(getList(key)))); if (LIST_UNDO[key].length > 10) LIST_UNDO[key].shift(); }
+function listKeysFor(cardKey){
+  if (cardKey === "packing") return ["prep.packing"];
+  if (cardKey === "notes") return ["prep.notes"];
+  if (cardKey === "todos") return ["prep.todos"];
+  return ["mustBuy.seven","mustBuy.stores"];
+}
 function undoListCard(cardKey){
-  var keys = cardKey === "prep" ? ["prep.packing","prep.notes","prep.todos"] : ["mustBuy.seven","mustBuy.stores"];
+  var keys = listKeysFor(cardKey);
   var popped = false;
   keys.forEach(function(k){ var h = LIST_UNDO[k] || []; if (h.length){ setList(k, h.pop()); popped = true; } });
   toast(popped ? "已撤销" : "没有可撤销的操作");
   renderOverview();
 }
 function resetListCard(cardKey){
-  var keys = cardKey === "prep" ? ["prep.packing","prep.notes","prep.todos"] : ["mustBuy.seven","mustBuy.stores"];
+  var keys = listKeysFor(cardKey);
   keys.forEach(function(k){ delete LIST_OV[k]; delete LIST_UNDO[k]; });
   saveListOverrides(); markDirty(); toast("已恢复默认"); renderOverview();
 }
@@ -2055,7 +2051,7 @@ function cardHead(icon, title, cardKey, desc){
 }
 function renderListItems(key, cls){
   var items = getList(key);
-  var editing = key.indexOf("prep.") === 0 ? EDIT_CARD === "prep" : EDIT_CARD === "buy";
+  var editing = key.indexOf("prep.") === 0 ? EDIT_CARD === key.slice(5) : EDIT_CARD === "buy";
   var html = "";
   if (editing){
     html += '<li class="li-add"><input type="text" data-addlist="'+key+'" placeholder="新增一项…" maxlength="40"><button class="btn mini" data-addbtn="'+key+'">＋</button></li>';

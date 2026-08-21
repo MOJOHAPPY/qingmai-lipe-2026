@@ -38,7 +38,7 @@ async function run() {
   const routeCards = await page.locator(".route-card").count();
   const flightRows = await page.locator("#module-overview .row").count();
   const buyCols = await page.locator(".buy-col").count();
-  const prepCols = await page.locator(".prep-col").count();
+  const prepCols = await page.locator(".prep-list").count();
   const memberChips = await page.locator(".chip.avatar").count();
   const ovScrollX = await page.evaluate(() => document.documentElement.scrollWidth > document.documentElement.clientWidth);
   await page.screenshot({ path: path.join(shots, "a1-overview-desktop.png"), fullPage: false });
@@ -279,13 +279,13 @@ async function run() {
   await page.click('#ovNav .chip[data-goto="sec-buy"]');
   await page.waitForTimeout(400);
   // 待办勾选
-  await page.click('[data-cardtoggle="prep"]');
+  await page.click('[data-cardtoggle="todos"]');
   await page.waitForTimeout(300);
   const todoBoxes = await page.locator(".todo-box").count();
-  await page.locator("#sec-prep .todo-box").first().click();
+  await page.locator("#sec-todos .todo-box").first().click();
   await page.waitForTimeout(300);
-  const todoDone = await page.locator("#sec-prep .todo-box.done").count();
-  await page.click('[data-cardtoggle="prep"]');
+  const todoDone = await page.locator("#sec-todos .todo-box.done").count();
+  await page.click('[data-cardtoggle="todos"]');
   await page.waitForTimeout(300);
   // 汇率工具
   await page.click('.module-btn[data-module="expenses"]');
@@ -332,7 +332,7 @@ async function run() {
   await page.click('.module-btn[data-module="overview"]');
   await page.waitForTimeout(500);
   const navBeforePrep = await page.evaluate(() => {
-    const nav = document.getElementById("ovNav"); const prep = document.getElementById("sec-prep");
+    const nav = document.getElementById("ovNav"); const prep = document.getElementById("sec-pack");
     return nav && prep ? (nav.compareDocumentPosition(prep) & Node.DOCUMENT_POSITION_FOLLOWING) : false;
   });
   const remCardItems = await page.locator("#sec-reminders li.todo").count();
