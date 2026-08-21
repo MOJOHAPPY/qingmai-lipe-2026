@@ -73,7 +73,6 @@
     "candidates": [
       "poi-tha-phae-gate",
       "poi-gm-khao-tom-nai-dam",
-      "poi-gm-apollo-cafe",
       "poi-gm-nicha-cotton",
       "poi-gm-archery"
     ],
@@ -261,8 +260,8 @@
       }
     ],
     "candidates": [
-      "poi-gm-mae-ho-phra",
       "poi-gm-mae-tia",
+      "poi-gm-apollo-cafe",
       "poi-baan-kang-wat",
       "poi-wild-rose-yoga",
       "poi-sp-chicken"

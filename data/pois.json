@@ -3837,35 +3837,6 @@
       "google-collection"
     ],
     "mustVisit": false,
-    "id": "poi-gm-mae-ho-phra",
-    "name": "Mae Ho Phra",
-    "name_zh": "Mae Ho Phra（南奔一带，待核）",
-    "area": "Lamphun",
-    "category": "sight",
-    "coords": [
-      18.58,
-      99
-    ],
-    "rating": null,
-    "hours": "待核",
-    "note": "合集地点，具体地址待核；出发前用 App 内全球搜索复核后再安排。",
-    "tip": "不确定是否值得专程去，先放备选。",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mae+Ho+Phra+Chiang+Mai",
-    "sourceIds": [
-      "src-gm-mae-ho-phra"
-    ],
-    "source": "src-gm-mae-ho-phra",
-    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
-  },
-  {
-    "city": "Chiang Mai",
-    "priority": "nearby",
-    "contentTier": "compact",
-    "sourceTag": "google合集",
-    "themeTags": [
-      "google-collection"
-    ],
-    "mustVisit": false,
     "id": "poi-gm-maha-larb",
     "name": "Maha Larb CNX",
     "name_zh": "Maha Larb 伊善凉拌（清迈）",
@@ -3897,23 +3868,23 @@
     "mustVisit": false,
     "id": "poi-gm-apollo-cafe",
     "name": "ApolloCafe",
-    "name_zh": "ApolloCafe（待核）",
-    "area": "待核",
+    "name_zh": "ApolloCafe（南奔）",
+    "area": "Lamphun / Charoen Rat Rd",
     "category": "cafe",
     "coords": [
-      18.79,
-      98.985
+      18.5815,
+      99.0082
     ],
-    "rating": null,
-    "hours": "待核",
-    "note": "合集里的咖啡馆，具体位置待核；出发前用 App 内全球搜索复核。",
-    "tip": "先放备选。",
+    "rating": 4.7,
+    "hours": "以到店为准",
+    "note": "南奔 Charoen Rat Rd 的高分咖啡馆（Google 约 4.7 / 136 评），适合南奔火车一日游顺路喝一杯。",
+    "plan": "D3 南奔一日备选：逛完古寺/鸡饭后顺路喝咖啡。",
+    "tip": "地址 18 Charoen Rat Rd, Lamphun（街道级坐标）；电话 +66 95 242 5428。",
     "source": "src-gm-apollo",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=ApolloCafe+Chiang+Mai",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=ApolloCafe+Lamphun",
     "sourceIds": [
       "src-gm-apollo"
-    ],
-    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+    ]
   },
   {
     "city": "Chiang Mai",
@@ -3926,23 +3897,23 @@
     "mustVisit": false,
     "id": "poi-gm-nicha-cotton",
     "name": "Nicha Chiangmai Natural Cotton",
-    "name_zh": "Nicha 天然棉织品（待核）",
-    "area": "待核",
+    "name_zh": "Nicha 天然棉织品（Chang Moi）",
+    "area": "Chang Moi / Kuang Men Rd",
     "category": "shopping",
     "coords": [
-      18.793,
-      98.988
+      18.79,
+      98.997
     ],
-    "rating": 4.5,
-    "hours": "待核",
-    "note": "天然棉织品店，位置待核；适合 D1 顺路买衣服。",
-    "tip": "出发前用全球搜索确认后决定是否专程去。",
+    "rating": 4.7,
+    "hours": "以到店为准",
+    "note": "56 Kuang Men Rd 的天然棉织品店（Google 约 4.7 / 31 评），批发零售，衣服布料手感好。",
+    "plan": "D1 或 D12 顺路：离塔佩/瓦洛洛一带不远，买棉织衣物当手信。",
+    "tip": "地址 56 Kuang Men Rd, Chang Moi（街道级坐标，近瓦洛洛）；电话 +66 84 989 3524。",
     "source": "src-gm-nicha",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton",
     "sourceIds": [
       "src-gm-nicha"
-    ],
-    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+    ]
   },
   {
     "city": "Chiang Mai",
@@ -3981,22 +3952,23 @@
     "themeTags": [
       "google-collection"
     ],
-    "mustVisit": false,
+    "mustVisit": true,
     "id": "poi-gm-kinlarb",
     "name": "KINLARB CHIANG MAI",
     "name_zh": "KINLARB 伊善凉拌（宁曼）",
     "area": "Nimman / Sirimangkalajarn",
     "category": "food",
     "coords": [
-      18.798,
-      98.9695
+      18.796,
+      98.9715
     ],
-    "rating": 4.6,
+    "rating": 4.9,
     "hours": "约 11:00–23:00",
-    "note": "宁曼 Sirimangkalajarn 路的伊善 larb 凉拌店，酸辣开胃、价格实在，是告别晚餐的好选择。",
+    "googleReviews": 89,
+    "note": "宁曼 Sirimangkalajarn 路的伊善 larb 凉拌店（Google 约 4.9 / 89 评），酸辣开胃、价格实在，必去。",
     "plan": "D12 告别晚餐在宁曼吃 KINLARB，随后打车去河畔 Bar.San. 收尾。",
-    "tip": "位置为规划级坐标，出发前用 App 内全球搜索复核；饭点人多可先取号。",
-    "whyWorthIt": "最后一晚在宁曼吃一顿地道的伊善 larb 凉拌，酸辣爽口、下饭又便宜，离 Bed Changkian 不远，吃完正好打车去河畔的告别酒吧。",
+    "tip": "地址约 53 Sirimangkalajarn Rd（街道级坐标）；饭点人多可先取号。",
+    "whyWorthIt": "最后一晚在宁曼吃一顿地道的伊善 larb 凉拌，评分 4.9、酸辣爽口、下饭又便宜，离 Bed Changkian 不远，吃完正好打车去河畔的告别酒吧。",
     "detailSections": [
       {
         "title": "点什么",

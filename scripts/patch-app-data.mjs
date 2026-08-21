@@ -62,7 +62,6 @@ const newSources = [
   mkSource("src-gm-win-cosmetics", "Win Cosmetics 长华林店（穷游 / 十六番）", "https://place.qyer.com/poi/V2UJYFFnBz5TZFI_Cms/", ["location", "hours"], "塔佩门一带；一楼护肤彩妆、二楼洗护+零食。"),
   mkSource("src-gm-chiangmai-cosmetics", "Chiang Mai Cosmetics（携程 / 十六番）", "https://you.ctrip.com/shopping/chiangmai209/1728549.html", ["location", "hours"], "帕辛寺对面 + 塔佩店；塔佩店约 11:00–21:00。"),
   mkSource("src-gm-nicha", "Nicha Chiangmai Natural Cotton（待核）", "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton", ["location"], "天然棉织品店，位置待核。"),
-  mkSource("src-gm-mae-ho-phra", "Mae Ho Phra（待核）", "https://www.google.com/maps/search/?api=1&query=Mae+Ho+Phra+Chiang+Mai", ["location"], "合集地点，地址待核；出发前用全球搜索复核后再安排。"),
   mkSource("src-gm-tiger-kingdom", "Tiger Kingdom Chiang Mai（Trip.com / Pickyourtrail）", "https://sg.trip.com/moments/theme/poi-tiger-kingdom-13581840-guides-993135/", ["location", "hours", "ticket"], "Mae Rim；每日 09:00–17:00（最晚 16:30 入场），门票约 188 泰铢，1–2 小时。")
 ];
 
@@ -349,21 +348,23 @@ const collectionPois = [
     note: "杭东的夜间动物园，封闭电车近距离看夜行动物，电车服务 17:30–20:00。", tip: "适合傍晚去，门票可线上买。", source: "src-gm-night-safari", mapUrl: "https://www.google.com/maps/search/?api=1&query=Chiang+Mai+Night+Safari", sourceIds: ["src-gm-night-safari"] }),
   POI({ id: "poi-gm-mae-tia", name: "Mae Tia Waterfall", name_zh: "Mae Tia 瀑布（宗通）", area: "Chom Thong", category: "nature", priority: "nearby", contentTier: "compact", coords: [18.4200, 98.6800], rating: 4.7, hours: "08:30–16:30",
     note: "Ob Luang 国家公园内 80 米双层瀑布，清迈最壮观瀑布之一。", tip: "门票约 200 泰铢；路程较远，适合留整天。", source: "src-gm-mae-tia", mapUrl: "https://www.google.com/maps/search/?api=1&query=Mae+Tia+Waterfall+Chiang+Mai", sourceIds: ["src-gm-mae-tia"] }),
-  POI({ id: "poi-gm-mae-ho-phra", name: "Mae Ho Phra", name_zh: "Mae Ho Phra（南奔一带，待核）", area: "Lamphun", category: "sight", priority: "nearby", contentTier: "compact", coords: [18.5800, 99.0000], rating: null, hours: "待核",
-    note: "合集地点，具体地址待核；出发前用 App 内全球搜索复核后再安排。", tip: "不确定是否值得专程去，先放备选。", mapUrl: "https://www.google.com/maps/search/?api=1&query=Mae+Ho+Phra+Chiang+Mai", sourceIds: ["src-gm-mae-ho-phra"] }),
   POI({ id: "poi-gm-maha-larb", name: "Maha Larb CNX", name_zh: "Maha Larb 伊善凉拌（清迈）", area: "Nimman / Old City", category: "food", priority: "nearby", contentTier: "compact", coords: [18.7930, 98.9860], rating: 4.5, hours: "约 11:00–22:00",
     note: "伊善（Isan）larb 凉拌专门店，酸辣开胃，人均 50–80 泰铢起。", tip: "位置待核，出发前用全球搜索确认。", source: "src-gm-maha-larb", mapUrl: "https://www.google.com/maps/search/?api=1&query=Maha+Larb+CNX+Chiang+Mai", sourceIds: ["src-gm-maha-larb"] }),
-  POI({ id: "poi-gm-apollo-cafe", name: "ApolloCafe", name_zh: "ApolloCafe（待核）", area: "待核", category: "cafe", priority: "nearby", contentTier: "compact", coords: [18.7900, 98.9850], rating: null, hours: "待核",
-    note: "合集里的咖啡馆，具体位置待核；出发前用 App 内全球搜索复核。", tip: "先放备选。", source: "src-gm-apollo", mapUrl: "https://www.google.com/maps/search/?api=1&query=ApolloCafe+Chiang+Mai", sourceIds: ["src-gm-apollo"] }),
-  POI({ id: "poi-gm-nicha-cotton", name: "Nicha Chiangmai Natural Cotton", name_zh: "Nicha 天然棉织品（待核）", area: "待核", category: "shopping", priority: "nearby", contentTier: "compact", coords: [18.7930, 98.9880], rating: 4.5, hours: "待核",
-    note: "天然棉织品店，位置待核；适合 D1 顺路买衣服。", tip: "出发前用全球搜索确认后决定是否专程去。", source: "src-gm-nicha", mapUrl: "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton", sourceIds: ["src-gm-nicha"] }),
+  POI({ id: "poi-gm-apollo-cafe", name: "ApolloCafe", name_zh: "ApolloCafe（南奔）", area: "Lamphun / Charoen Rat Rd", category: "cafe", priority: "nearby", contentTier: "compact", coords: [18.5815, 99.0082], rating: 4.7, hours: "以到店为准",
+    note: "南奔 Charoen Rat Rd 的高分咖啡馆（Google 约 4.7 / 136 评），适合南奔火车一日游顺路喝一杯。",
+    plan: "D3 南奔一日备选：逛完古寺/鸡饭后顺路喝咖啡。",
+    tip: "地址 18 Charoen Rat Rd, Lamphun（街道级坐标）；电话 +66 95 242 5428。", source: "src-gm-apollo", mapUrl: "https://www.google.com/maps/search/?api=1&query=ApolloCafe+Lamphun", sourceIds: ["src-gm-apollo"] }),
+  POI({ id: "poi-gm-nicha-cotton", name: "Nicha Chiangmai Natural Cotton", name_zh: "Nicha 天然棉织品（Chang Moi）", area: "Chang Moi / Kuang Men Rd", category: "shopping", priority: "nearby", contentTier: "compact", coords: [18.7900, 98.9970], rating: 4.7, hours: "以到店为准",
+    note: "56 Kuang Men Rd 的天然棉织品店（Google 约 4.7 / 31 评），批发零售，衣服布料手感好。",
+    plan: "D1 或 D12 顺路：离塔佩/瓦洛洛一带不远，买棉织衣物当手信。",
+    tip: "地址 56 Kuang Men Rd, Chang Moi（街道级坐标，近瓦洛洛）；电话 +66 84 989 3524。", source: "src-gm-nicha", mapUrl: "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton", sourceIds: ["src-gm-nicha"] }),
   POI({ id: "poi-gm-mee-an-ja-kin", name: "Mee An Ja Kin Cafe & Restaurant", name_zh: "Mee An Ja Kin（平河畔）", area: "Pa Daet", category: "cafe", priority: "nearby", contentTier: "compact", coords: [18.7810, 98.9940], rating: 4.5, hours: "每日 10:00–24:00",
     note: "平河畔的舒适咖啡馆兼餐厅，每日 10:00 至午夜。", tip: "适合 D9 河畔晚餐备选。", source: "src-gm-mee-an-ja-kin", mapUrl: "https://www.google.com/maps/search/?api=1&query=Mee+An+Ja+Kin+Chiang+Mai", sourceIds: ["src-gm-mee-an-ja-kin"] }),
-  POI({ id: "poi-gm-kinlarb", name: "KINLARB CHIANG MAI", name_zh: "KINLARB 伊善凉拌（宁曼）", area: "Nimman / Sirimangkalajarn", category: "food", coords: [18.7980, 98.9695], rating: 4.6, hours: "约 11:00–23:00",
-    note: "宁曼 Sirimangkalajarn 路的伊善 larb 凉拌店，酸辣开胃、价格实在，是告别晚餐的好选择。",
+  POI({ id: "poi-gm-kinlarb", name: "KINLARB CHIANG MAI", name_zh: "KINLARB 伊善凉拌（宁曼）", area: "Nimman / Sirimangkalajarn", category: "food", coords: [18.7960, 98.9715], rating: 4.9, hours: "约 11:00–23:00", mustVisit: true, googleReviews: 89,
+    note: "宁曼 Sirimangkalajarn 路的伊善 larb 凉拌店（Google 约 4.9 / 89 评），酸辣开胃、价格实在，必去。",
     plan: "D12 告别晚餐在宁曼吃 KINLARB，随后打车去河畔 Bar.San. 收尾。",
-    tip: "位置为规划级坐标，出发前用 App 内全球搜索复核；饭点人多可先取号。",
-    whyWorthIt: "最后一晚在宁曼吃一顿地道的伊善 larb 凉拌，酸辣爽口、下饭又便宜，离 Bed Changkian 不远，吃完正好打车去河畔的告别酒吧。",
+    tip: "地址约 53 Sirimangkalajarn Rd（街道级坐标）；饭点人多可先取号。",
+    whyWorthIt: "最后一晚在宁曼吃一顿地道的伊善 larb 凉拌，评分 4.9、酸辣爽口、下饭又便宜，离 Bed Changkian 不远，吃完正好打车去河畔的告别酒吧。",
     detailSections: [ { title: "点什么", items: ["招牌 larb 猪肉/鸡肉/牛肉，配糯米饭", "加一份酸辣生菜包更过瘾"] }, { title: "注意", items: ["larb 偏辣，不能吃辣提前说", "营业到深夜，晚餐高峰可等位"] } ],
     source: "src-gm-kinlarb", mapUrl: "https://www.google.com/maps/search/?api=1&query=KINLARB+CHIANG+MAI", sourceIds: ["src-gm-kinlarb"] }),
   POI({ id: "poi-gm-pakorns", name: "Pakorn's Kitchen", name_zh: "Pakorn's Kitchen（长康）", area: "Kampangdin / Hai Ya", category: "food", coords: [18.7840, 98.9940], rating: 4.7, hours: "约 14:00–22:00",
@@ -430,7 +431,7 @@ function patchDays(days) {
     { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-big-big-shabu", mode: "Grab", minutes: 10, label: "打车到古城北门 Sri Phum 路" },
     { fromPoiId: "poi-gm-big-big-shabu", toPoiId: "poi-north-gate-jazz", mode: "步行", minutes: 5, label: "北门爵士吧就在火锅店旁" }
   ];
-  d1.candidates = ["poi-tha-phae-gate", "poi-gm-khao-tom-nai-dam", "poi-gm-apollo-cafe", "poi-gm-nicha-cotton", "poi-gm-archery"];
+  d1.candidates = ["poi-tha-phae-gate", "poi-gm-khao-tom-nai-dam", "poi-gm-nicha-cotton", "poi-gm-archery"];
   d1.reminders = [];
 
   const d2 = set("day-2");
@@ -475,7 +476,7 @@ function patchDays(days) {
     { fromPoiId: "poi-gm-judys", toPoiId: "poi-gm-mahoree", mode: "火车（返程 14:15）+ Grab + 步行", minutes: 150, label: "乘 14:15 返程回清迈（约 15:00），回酒店休息，晚上步行到 Prapokklao 爵士吧" },
     { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-mahoree", mode: "步行", minutes: 15, label: "古城内走到 Prapokklao 路爵士吧" }
   ];
-  d3.candidates = ["poi-gm-mae-ho-phra", "poi-gm-mae-tia", "poi-baan-kang-wat", "poi-wild-rose-yoga", "poi-sp-chicken"];
+  d3.candidates = ["poi-gm-mae-tia", "poi-gm-apollo-cafe", "poi-baan-kang-wat", "poi-wild-rose-yoga", "poi-sp-chicken"];
   d3.reminders = [
     { label: "南奔火车票（去程约 09:30 / 返程 14:15）", due: "D3 当天", detail: "清迈站现场购票带护照；到南奔站立即买返程票，错过 14:15 要等 19:15", status: "todo" },
     { label: "南奔古寺着装提醒", due: "D3 当天", detail: "长裤/过膝裙+包肩，进大殿脱鞋", status: "todo" }
@@ -623,7 +624,7 @@ function patchDays(days) {
 }
 
 /* ---------- 执行 ---------- */
-const pois = read("pois.json");
+let pois = read("pois.json");
 const sources = read("sources.json");
 const days = read("itinerary.json");
 const poisBefore = pois.length, srcBefore = sources.length;
@@ -633,6 +634,8 @@ for (const p of collectionPois) {
   const idx = pois.findIndex((x) => x.id === p.id);
   if (idx >= 0) pois[idx] = p; else pois.push(p);
 }
+/* 用户确认删除的地点（幂等） */
+pois = pois.filter((x) => x.id !== "poi-gm-mae-ho-phra");
 for (const u of updatePois) {
   const p = pois.find((x) => x.id === u.id);
   if (p) Object.assign(p, u.patch);
@@ -651,6 +654,7 @@ write("pois.json", pois);
 write("sources.json", sources);
 write("itinerary.json", daysPatched);
 console.log(`pois ${poisBefore} -> ${pois.length}; sources ${srcBefore} -> ${sources.length}; days patched: ${daysPatched.length}`);
+
 
 
 
