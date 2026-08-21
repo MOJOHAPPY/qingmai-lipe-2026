@@ -316,6 +316,12 @@ body.map-hidden .content{width:100%;max-width:none;}
 .prep-col li.todo.done::before{content:none;}
 .todo-box{display:inline-block;width:16px;cursor:pointer;color:var(--amber);font-size:13px;margin-right:2px;user-select:none;}
 .todo-box.done{color:var(--green);}
+.rem-list{list-style:none;padding:0;margin:0;}
+.rem-list li{display:flex;align-items:center;gap:6px;font-size:12.5px;color:var(--text);padding:4px 0;position:relative;}
+.rem-list li::before{content:none;}
+.rem-list li .rem-text{flex:1;line-height:1.5;}
+.rem-list li.done .rem-text{color:var(--text2);text-decoration:line-through;}
+.rem-list li.li-add::before{content:none !important;}
 .li-del{background:none;border:none;color:var(--text2);font-size:15px;font-weight:700;margin-left:4px;cursor:pointer;padding:0 3px;line-height:1;}
 .li-del:hover{color:var(--red);}
 /* ── 添加地点 / Google ── */
@@ -504,12 +510,14 @@ function renderOverview(){
       '</ul></div>' +
     '</div></div>';
 
-  var reminders = '<div class="card" id="sec-reminders"><h2 class="card-h"><span class="ic">🔔</span><span class="t">预约提醒</span></h2>' +
-    '<div class="section-desc">需要预约/订位的事项，勾选代表已完成（仅保存在本机）</div><ul class="rem-list">' +
-    (d.dayReminders && d.dayReminders.length ? d.dayReminders.map(function(r){
-      var done = !!REM_CHECKS[r.id];
-      return '<li class="todo'+(done?' done':'')+'"><span class="todo-box'+(done?' done':'')+'" data-rem="'+esc(r.id)+'" title="点击切换完成">'+(done?'☑':'☐')+'</span>'+esc(r.text)+'</li>';
-    }).join("") : '<li class="muted">暂无预约事项</li>') +
+  var remEditing = EDIT_CARD === "reminders";
+  var reminders = '<div class="card" id="sec-reminders"><h2 class="card-h"><span class="ic">🔔</span><span class="t">预约提醒</span><span class="card-tools">' +
+    '<button class="btn mini'+(remEditing?' primary':'')+'" data-cardtoggle="reminders">'+(remEditing?'✅ 完成':'✏️ 编辑')+'</button>' +
+    (remEditing ? '<button class="btn mini" data-remundo="1">↩️ 撤销</button>' : '') +
+    (remEditing ? '<button class="btn mini danger" data-remreset="1">🔄 默认</button>' : '') +
+    '</span></h2>' +
+    '<div class="section-desc">需要预约/订位的事项，勾选代表已完成；可增删，随云端同步</div><ul class="rem-list">' +
+    renderReminderItems(remEditing) +
     '</ul></div>';
 
   var flights = '' +
@@ -1083,9 +1091,29 @@ var EDIT_MODE = false;
 var EDIT_PICKER = false;
 var EDIT_TARGET = null;
 var EDIT_CARD = null;
-var REM_CHECKS = {};
-function loadRemChecks(){ try { REM_CHECKS = JSON.parse(localStorage.getItem("tripReminderChecks") || "{}") || {}; } catch(e){ REM_CHECKS = {}; } }
-function saveRemChecks(){ try { localStorage.setItem("tripReminderChecks", JSON.stringify(REM_CHECKS)); } catch(e){} }
+var REM = { items: [], _hist: [] };
+function loadReminders(){
+  try {
+    var raw = JSON.parse(localStorage.getItem("tripReminders") || "null");
+    if (raw && Array.isArray(raw.items)){ REM.items = raw.items; return; }
+  } catch(e){}
+  REM.items = (DATA.dayReminders || []).map(function(r){ return { id: r.id, text: r.text, done: false }; });
+  saveReminders();
+}
+function saveReminders(){ try { localStorage.setItem("tripReminders", JSON.stringify({ items: REM.items })); } catch(e){} markDirty(); }
+function pushRemHist(){ try { REM._hist.push(JSON.stringify(REM.items)); if (REM._hist.length > 30) REM._hist.shift(); } catch(e){} }
+function renderReminderItems(editing){
+  var html = "";
+  if (editing){
+    html += '<li class="li-add"><input type="text" data-remadd="1" placeholder="新增预约提醒…" maxlength="60"><button class="btn mini" data-remaddbtn="1">＋</button></li>';
+  }
+  html += REM.items.map(function(r){
+    var done = !!r.done;
+    return '<li class="todo'+(done?' done':'')+'"><span class="todo-box'+(done?' done':'')+'" data-rem="'+esc(r.id)+'" title="点击切换完成">'+(done?'☑':'☐')+'</span><span class="rem-text">'+esc(r.text)+'</span>'+(editing?' <button class="li-del" data-remdel="'+esc(r.id)+'" title="删除">−</button>':"")+'</li>';
+  }).join("");
+  if (!html) html = '<li class="muted">暂无预约事项</li>';
+  return html;
+}
 function qsa(s){ return Array.prototype.slice.call(document.querySelectorAll(s)); }
 function dayOptions(sel){
   return DATA.days.map(function(d){ return '<option value="'+d.id+'"'+(d.id===sel?' selected':'')+'>'+d.label+' · '+esc(d.title)+'</option>'; }).join("");
@@ -1403,7 +1431,7 @@ function buildLocalBlob(){
   var ov = loadOverrides();
   var expRaw = {};
   try { expRaw = JSON.parse(localStorage.getItem("tripExpenses") || "{}"); } catch(e){}
-  return { v:1, updatedAt: Math.max(SYNC.localUpdatedAt, Date.now()), overrides:{ days: ov.days }, lists: encodeListKeys(LIST_OV), expenses: expRaw };
+  return { v:1, updatedAt: Math.max(SYNC.localUpdatedAt, Date.now()), overrides:{ days: ov.days }, lists: encodeListKeys(LIST_OV), expenses: expRaw, reminders: { items: REM.items } };
 }
 function pushLocal(){
   var blob = buildLocalBlob();
@@ -1417,6 +1445,8 @@ function applyRemoteBlob(blob){
   if (blob.overrides && blob.overrides.days){ localStorage.setItem("tripOverrides", JSON.stringify({ days: blob.overrides.days, history: {} })); }
   if (blob.lists){ localStorage.setItem("tripListOverrides", JSON.stringify(decodeListKeys(blob.lists))); }
   if (blob.expenses){ localStorage.setItem("tripExpenses", JSON.stringify(blob.expenses)); }
+  if (blob.reminders && Array.isArray(blob.reminders.items)){ localStorage.setItem("tripReminders", JSON.stringify(blob.reminders)); }
+  loadReminders();
   EXP = { items: [], rate: 5 }; loadExpenses();
   LIST_OV = loadListOverrides();
   applyOverrides();
@@ -1577,7 +1607,15 @@ $("#module-overview").addEventListener("click", function(e){
   if (rs){ resetListCard(rs.dataset.cardreset); return; }
   var tb = e.target.closest(".todo-box");
   var rm = e.target.closest("[data-rem]");
-  if (rm){ REM_CHECKS[rm.dataset.rem] = !REM_CHECKS[rm.dataset.rem]; saveRemChecks(); renderOverview(); return; }
+  if (rm){ pushRemHist(); REM.items.forEach(function(x){ if (x.id === rm.dataset.rem) x.done = !x.done; }); saveReminders(); renderOverview(); return; }
+  var rmd = e.target.closest("[data-remdel]");
+  if (rmd){ pushRemHist(); REM.items = REM.items.filter(function(x){ return x.id !== rmd.dataset.remdel; }); saveReminders(); renderOverview(); return; }
+  var rmb = e.target.closest("[data-remaddbtn]");
+  if (rmb){ var rinp = rmb.closest(".li-add").querySelector("input"); var rv = (rinp.value||"").trim(); if (rv){ pushRemHist(); REM.items.push({ id: "r"+Date.now()+"-"+Math.floor(Math.random()*1e6), text: rv, done: false }); saveReminders(); renderOverview(); } return; }
+  var rmu = e.target.closest("[data-remundo]");
+  if (rmu){ var rprev = REM._hist.pop(); if (rprev != null){ try { REM.items = JSON.parse(rprev); } catch(e){} saveReminders(); } renderOverview(); return; }
+  var rmr = e.target.closest("[data-remreset]");
+  if (rmr){ pushRemHist(); REM.items = (DATA.dayReminders || []).map(function(r){ return { id: r.id, text: r.text, done: false }; }); saveReminders(); renderOverview(); return; }
   if (tb){ var key = tb.dataset.list; var idx = parseInt(tb.dataset.idx, 10); var arr = getList(key).slice(); var it = arr[idx]; if (typeof it === "string") it = { t: it, done: false }; it.done = !it.done; arr[idx] = it; setList(key, arr); renderOverview(); return; }
   var del = e.target.closest(".li-del");
   if (del){ var key2 = del.dataset.list; var idx2 = parseInt(del.dataset.idx, 10); pushListUndo(key2); var arr2 = getList(key2).slice(); arr2.splice(idx2, 1); setList(key2, arr2); renderOverview(); return; }
@@ -1600,7 +1638,7 @@ window.addEventListener("resize", function(){
 
 /* ---------- 初始化 ---------- */
 loadSyncMeta();
-loadRemChecks();
+loadReminders();
 applyOverrides();
 seedExpensesIfEmpty();
 loadExpenses();

@@ -3975,8 +3975,8 @@
   },
   {
     "city": "Chiang Mai",
-    "priority": "nearby",
-    "contentTier": "compact",
+    "priority": "preferred",
+    "contentTier": "standard",
     "sourceTag": "google合集",
     "themeTags": [
       "google-collection"
@@ -3993,14 +3993,31 @@
     ],
     "rating": 4.6,
     "hours": "约 11:00–23:00",
-    "note": "宁曼 Sirimangkalajarn 路的 larb 店，酸辣下饭。",
-    "tip": "位置规划级，出发前可复核。",
+    "note": "宁曼 Sirimangkalajarn 路的伊善 larb 凉拌店，酸辣开胃、价格实在，是告别晚餐的好选择。",
+    "plan": "D12 告别晚餐在宁曼吃 KINLARB，随后打车去河畔 Bar.San. 收尾。",
+    "tip": "位置为规划级坐标，出发前用 App 内全球搜索复核；饭点人多可先取号。",
+    "whyWorthIt": "最后一晚在宁曼吃一顿地道的伊善 larb 凉拌，酸辣爽口、下饭又便宜，离 Bed Changkian 不远，吃完正好打车去河畔的告别酒吧。",
+    "detailSections": [
+      {
+        "title": "点什么",
+        "items": [
+          "招牌 larb 猪肉/鸡肉/牛肉，配糯米饭",
+          "加一份酸辣生菜包更过瘾"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "larb 偏辣，不能吃辣提前说",
+          "营业到深夜，晚餐高峰可等位"
+        ]
+      }
+    ],
     "source": "src-gm-kinlarb",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=KINLARB+CHIANG+MAI",
     "sourceIds": [
       "src-gm-kinlarb"
-    ],
-    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+    ]
   },
   {
     "city": "Chiang Mai",
@@ -4108,8 +4125,8 @@
   },
   {
     "city": "Chiang Mai",
-    "priority": "nearby",
-    "contentTier": "compact",
+    "priority": "preferred",
+    "contentTier": "standard",
     "sourceTag": "google合集",
     "themeTags": [
       "google-collection"
@@ -4126,13 +4143,61 @@
     ],
     "rating": 4.6,
     "hours": "约 16:00–22:00",
-    "note": "Blue coffee/7-11 对面的芒果糯米饭小摊，现做现卖，下午 4 点后出摊。",
-    "tip": "D12 瓦洛洛手信日顺路当甜品。",
+    "note": "Blue coffee/7-11 对面的芒果糯米饭小摊，现做现卖，下午 4 点后出摊，是瓦洛洛一带的甜品招牌。",
+    "plan": "D12 瓦洛洛手信日顺路当甜品。",
+    "tip": "约 16:00 后出摊，早去可能还没开；现做的最好吃。",
+    "whyWorthIt": "逛完瓦洛洛买完手信，顺路在 7-11 对面的小摊吃一份现做的芒果糯米饭，芒果甜、糯米软、椰浆浓，是清迈手信日最顺口的收尾甜品。",
+    "detailSections": [
+      {
+        "title": "怎么点",
+        "items": [
+          "现做芒果糯米饭，按份买、趁热吃",
+          "可加椰浆或脆米，按摊主推荐"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "约 16:00 后才出摊，太早会扑空",
+          "摊位在 Blue coffee/7-11 对面，认准招牌"
+        ]
+      }
+    ],
     "source": "src-gm-mango-sticky",
     "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mango+Sticky+Rice+Chiang+Mai",
     "sourceIds": [
       "src-gm-mango-sticky"
+    ]
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "nearby",
+    "contentTier": "compact",
+    "sourceTag": "google合集",
+    "themeTags": [
+      "nature",
+      "mae-rim",
+      "user-requested"
     ],
-    "plan": "备选：按当天动线顺路安排，不占主路线；出发前用 App 内全球搜索复核坐标。"
+    "mustVisit": false,
+    "id": "poi-gm-tiger-kingdom",
+    "name": "Tiger Kingdom Chiang Mai",
+    "name_zh": "清迈老虎园（Tiger Kingdom）",
+    "area": "Mae Rim",
+    "category": "nature",
+    "coords": [
+      18.918,
+      98.946
+    ],
+    "rating": 4.4,
+    "hours": "每日 09:00–17:00（最晚 16:30 入场）",
+    "note": "Mae Rim 的老虎园，可近距离看老虎、有笼舍参观与合影项目，距大象粑粑造纸园很近，适合北线包车日顺路。",
+    "plan": "D4 北线包车日备选：包车时间充裕且想加一站时，从造纸园顺路前往。",
+    "tip": "门票约 188 泰铢起，合影/互动另计、部分需预约；动物福利有争议，去前自行评估。",
+    "source": "src-gm-tiger-kingdom",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Tiger+Kingdom+Chiang+Mai",
+    "sourceIds": [
+      "src-gm-tiger-kingdom"
+    ]
   }
 ]

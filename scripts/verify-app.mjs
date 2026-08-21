@@ -66,17 +66,20 @@ async function run() {
   const pinLabels = await page.locator(".pin-label").count();
   const routeLines = await page.evaluate(() => document.querySelectorAll(".leaflet-overlay-pane path.leaflet-interactive").length);
 
-  // 选择 9/28（D4 泰餐+舞课）看预约提醒
+  // 选择 9/28（D4 北线包车一日 · TeeTee）
   const tab928 = page.locator(".day-tab", { hasText: "9/28" });
   await tab928.first().click();
-  await page.waitForTimeout(800);
+  await page.waitForTimeout(1200);
+  const d4Title = (await page.locator(".day-head h2").textContent()).trim();
+  const d4TeeTee = await page.locator("#dayPanel .tl-body", { hasText: "TeeTee" }).count();
+  const d4Reminders = await page.locator("#dayPanel .reminder-item").count();
 
-  // 选择 10/4（D10 COTU 游泳）
+  // 选择 10/4（D10 丽贝后市集日 · Bamboo + 周日夜市）
   const tab1004 = page.locator(".day-tab", { hasText: "10/4" });
   await tab1004.first().click();
   await page.waitForTimeout(1200);
   const d10Title = (await page.locator(".day-head h2").textContent()).trim();
-  const d10TeeTee = await page.locator("#dayPanel .tl-body", { hasText: "TeeTee" }).count();
+  const d10Bamboo = await page.locator("#dayPanel .tl-body", { hasText: "Bamboo" }).count();
   const d10Reminders = await page.locator("#dayPanel .reminder-item").count();
   await page.screenshot({ path: path.join(shots, "a2-day1004-desktop.png"), fullPage: false });
 
@@ -264,7 +267,7 @@ async function run() {
       return await res.json();
     } catch (e) { return { err: String(e) }; }
   }, room);
-  const cloudHasData = !!(cloud && (cloud.overrides || cloud.lists || cloud.expenses));
+  const cloudHasData = !!(cloud && (cloud.overrides || cloud.lists || cloud.expenses || cloud.reminders));
   await page.evaluate(async (r) => { try { await fetch("https://qingmai-lipe-2026-default-rtdb.firebaseio.com/rooms/" + encodeURIComponent(r) + ".json", { method: "DELETE" }); } catch (e) {} }, room);
   await page.click("#syncClose").catch(() => {});
 
@@ -340,6 +343,22 @@ async function run() {
   await page.waitForSelector("#module-overview:not(.hidden)", { timeout: 20000 });
   await page.waitForTimeout(600);
   const remAfterReload = await page.locator("#sec-reminders .todo-box.done").count();
+  // 预约提醒编辑：添加 / 删除 / 撤销
+  await page.click('[data-cardtoggle="reminders"]');
+  await page.waitForTimeout(300);
+  const remItems0 = await page.locator("#sec-reminders li.todo").count();
+  await page.fill('#sec-reminders input[data-remadd="1"]', "测试提醒：出发前换泰铢");
+  await page.click('[data-remaddbtn="1"]');
+  await page.waitForTimeout(300);
+  const remItems1 = await page.locator("#sec-reminders li.todo").count();
+  await page.locator('#sec-reminders [data-remdel]').first().click();
+  await page.waitForTimeout(300);
+  const remItems2 = await page.locator("#sec-reminders li.todo").count();
+  await page.click('[data-remundo="1"]');
+  await page.waitForTimeout(300);
+  const remItems3 = await page.locator("#sec-reminders li.todo").count();
+  await page.click('[data-cardtoggle="reminders"]');
+  await page.waitForTimeout(200);
   await page.click('.module-btn[data-module="expenses"]');
   await page.waitForTimeout(500);
   await page.locator(".exp-item").first().locator('[data-act="edit"]').click();
@@ -372,7 +391,7 @@ async function run() {
   await pageM.close();
 
   const result = { title, countdown, routeCards, flightRows, buyCols, prepCols, memberChips, ovScrollX,
-    dayTabs, markers, mapVisible, mapHiddenClass, chips, defaultProvider, googleActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d10Title, d10TeeTee, d10Reminders,
+    dayTabs, markers, mapVisible, mapHiddenClass, chips, defaultProvider, googleActive, d2Title, d2Reminders, d2Shooting, pinLabels, routeLines, d4Title, d4TeeTee, d4Reminders, d10Title, d10Bamboo, d10Reminders,
     d9Candidates, collapsed, showBtnVisible, expanded, autoCollapsed, detailScrollX,
     expSums, expPer, expList0, sharedSeed, expList1, sharedAfter1, expListBlocked, expList2, jiaoTotal,
     editAmount, expList3, expList4, expListAfterReload,
@@ -380,7 +399,7 @@ async function run() {
     seven0, seven1, seven2, tlPersist0, tlPersist1, editedTabMark,
     syncStatus, syncDot, cloudHasData,
     memberChipsRow, navChips, todoBoxes, todoDone, fxResult, movedDayTitle,
-    addTabs, ocrTabCount, osmInputClass, navBeforePrep, remCardItems, remDone, remAfterReload, expInlineOverflowX,
+    addTabs, ocrTabCount, osmInputClass, navBeforePrep, remCardItems, remDone, remAfterReload, remItems0, remItems1, remItems2, remItems3, expInlineOverflowX,
     mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
   console.log(JSON.stringify(result, null, 2));
   await browser.close();

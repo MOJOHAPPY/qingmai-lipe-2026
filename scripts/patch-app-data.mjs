@@ -62,7 +62,8 @@ const newSources = [
   mkSource("src-gm-win-cosmetics", "Win Cosmetics 长华林店（穷游 / 十六番）", "https://place.qyer.com/poi/V2UJYFFnBz5TZFI_Cms/", ["location", "hours"], "塔佩门一带；一楼护肤彩妆、二楼洗护+零食。"),
   mkSource("src-gm-chiangmai-cosmetics", "Chiang Mai Cosmetics（携程 / 十六番）", "https://you.ctrip.com/shopping/chiangmai209/1728549.html", ["location", "hours"], "帕辛寺对面 + 塔佩店；塔佩店约 11:00–21:00。"),
   mkSource("src-gm-nicha", "Nicha Chiangmai Natural Cotton（待核）", "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton", ["location"], "天然棉织品店，位置待核。"),
-  mkSource("src-gm-mae-ho-phra", "Mae Ho Phra（待核）", "https://www.google.com/maps/search/?api=1&query=Mae+Ho+Phra+Chiang+Mai", ["location"], "合集地点，地址待核；出发前用全球搜索复核后再安排。")
+  mkSource("src-gm-mae-ho-phra", "Mae Ho Phra（待核）", "https://www.google.com/maps/search/?api=1&query=Mae+Ho+Phra+Chiang+Mai", ["location"], "合集地点，地址待核；出发前用全球搜索复核后再安排。"),
+  mkSource("src-gm-tiger-kingdom", "Tiger Kingdom Chiang Mai（Trip.com / Pickyourtrail）", "https://sg.trip.com/moments/theme/poi-tiger-kingdom-13581840-guides-993135/", ["location", "hours", "ticket"], "Mae Rim；每日 09:00–17:00（最晚 16:30 入场），门票约 188 泰铢，1–2 小时。")
 ];
 
 /* ================================================================
@@ -358,8 +359,13 @@ const collectionPois = [
     note: "天然棉织品店，位置待核；适合 D1 顺路买衣服。", tip: "出发前用全球搜索确认后决定是否专程去。", source: "src-gm-nicha", mapUrl: "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton", sourceIds: ["src-gm-nicha"] }),
   POI({ id: "poi-gm-mee-an-ja-kin", name: "Mee An Ja Kin Cafe & Restaurant", name_zh: "Mee An Ja Kin（平河畔）", area: "Pa Daet", category: "cafe", priority: "nearby", contentTier: "compact", coords: [18.7810, 98.9940], rating: 4.5, hours: "每日 10:00–24:00",
     note: "平河畔的舒适咖啡馆兼餐厅，每日 10:00 至午夜。", tip: "适合 D9 河畔晚餐备选。", source: "src-gm-mee-an-ja-kin", mapUrl: "https://www.google.com/maps/search/?api=1&query=Mee+An+Ja+Kin+Chiang+Mai", sourceIds: ["src-gm-mee-an-ja-kin"] }),
-  POI({ id: "poi-gm-kinlarb", name: "KINLARB CHIANG MAI", name_zh: "KINLARB 伊善凉拌（宁曼）", area: "Nimman / Sirimangkalajarn", category: "food", priority: "nearby", contentTier: "compact", coords: [18.7980, 98.9695], rating: 4.6, hours: "约 11:00–23:00",
-    note: "宁曼 Sirimangkalajarn 路的 larb 店，酸辣下饭。", tip: "位置规划级，出发前可复核。", source: "src-gm-kinlarb", mapUrl: "https://www.google.com/maps/search/?api=1&query=KINLARB+CHIANG+MAI", sourceIds: ["src-gm-kinlarb"] }),
+  POI({ id: "poi-gm-kinlarb", name: "KINLARB CHIANG MAI", name_zh: "KINLARB 伊善凉拌（宁曼）", area: "Nimman / Sirimangkalajarn", category: "food", coords: [18.7980, 98.9695], rating: 4.6, hours: "约 11:00–23:00",
+    note: "宁曼 Sirimangkalajarn 路的伊善 larb 凉拌店，酸辣开胃、价格实在，是告别晚餐的好选择。",
+    plan: "D12 告别晚餐在宁曼吃 KINLARB，随后打车去河畔 Bar.San. 收尾。",
+    tip: "位置为规划级坐标，出发前用 App 内全球搜索复核；饭点人多可先取号。",
+    whyWorthIt: "最后一晚在宁曼吃一顿地道的伊善 larb 凉拌，酸辣爽口、下饭又便宜，离 Bed Changkian 不远，吃完正好打车去河畔的告别酒吧。",
+    detailSections: [ { title: "点什么", items: ["招牌 larb 猪肉/鸡肉/牛肉，配糯米饭", "加一份酸辣生菜包更过瘾"] }, { title: "注意", items: ["larb 偏辣，不能吃辣提前说", "营业到深夜，晚餐高峰可等位"] } ],
+    source: "src-gm-kinlarb", mapUrl: "https://www.google.com/maps/search/?api=1&query=KINLARB+CHIANG+MAI", sourceIds: ["src-gm-kinlarb"] }),
   POI({ id: "poi-gm-pakorns", name: "Pakorn's Kitchen", name_zh: "Pakorn's Kitchen（长康）", area: "Kampangdin / Hai Ya", category: "food", coords: [18.7840, 98.9940], rating: 4.7, hours: "约 14:00–22:00",
     note: "古城东南的本地人气泰餐，Google 约 4.7，饭点要排队，招牌泰式家常菜。",
     plan: "D10 晚上看 6ixcret 前在长康路吃晚餐。",
@@ -371,8 +377,18 @@ const collectionPois = [
     note: "古城西素帖路的粥店，猪杂粥配咸蛋是招牌，适合早餐或夜宵。", tip: "D1 或 D3 早餐备选。", source: "src-gm-khao-tom", mapUrl: "https://www.google.com/maps/search/?api=1&query=Khao+Tom+Nai+Dam+2+Chiang+Mai", sourceIds: ["src-gm-khao-tom"] }),
   POI({ id: "poi-gm-win-onenimman", name: "Win Cosmetics One Nimman", name_zh: "Win Cosmetics（One Nimman 店）", area: "Nimman / One Nimman", category: "shopping", priority: "nearby", contentTier: "compact", coords: [18.7985, 98.9690], rating: 4.5, hours: "约 10:00–22:00",
     note: "One Nimman 里的 Win 药妆分店，逛复古市集时顺路补货。", tip: "D4 逛市集时顺路买。", source: "src-gm-win-cosmetics", mapUrl: "https://www.google.com/maps/search/?api=1&query=Win+Cosmetics+One+Nimman+Chiang+Mai", sourceIds: ["src-gm-win-cosmetics"] }),
-  POI({ id: "poi-gm-mango-sticky", name: "Mango Sticky Rice", name_zh: "芒果糯米在對面", area: "Warorot / Tha Phae", category: "food", priority: "nearby", contentTier: "compact", coords: [18.7890, 98.9985], rating: 4.6, hours: "约 16:00–22:00",
-    note: "Blue coffee/7-11 对面的芒果糯米饭小摊，现做现卖，下午 4 点后出摊。", tip: "D12 瓦洛洛手信日顺路当甜品。", source: "src-gm-mango-sticky", mapUrl: "https://www.google.com/maps/search/?api=1&query=Mango+Sticky+Rice+Chiang+Mai", sourceIds: ["src-gm-mango-sticky"] })
+  POI({ id: "poi-gm-mango-sticky", name: "Mango Sticky Rice", name_zh: "芒果糯米在對面", area: "Warorot / Tha Phae", category: "food", coords: [18.7890, 98.9985], rating: 4.6, hours: "约 16:00–22:00",
+    note: "Blue coffee/7-11 对面的芒果糯米饭小摊，现做现卖，下午 4 点后出摊，是瓦洛洛一带的甜品招牌。",
+    plan: "D12 瓦洛洛手信日顺路当甜品。",
+    tip: "约 16:00 后出摊，早去可能还没开；现做的最好吃。",
+    whyWorthIt: "逛完瓦洛洛买完手信，顺路在 7-11 对面的小摊吃一份现做的芒果糯米饭，芒果甜、糯米软、椰浆浓，是清迈手信日最顺口的收尾甜品。",
+    detailSections: [ { title: "怎么点", items: ["现做芒果糯米饭，按份买、趁热吃", "可加椰浆或脆米，按摊主推荐"] }, { title: "注意", items: ["约 16:00 后才出摊，太早会扑空", "摊位在 Blue coffee/7-11 对面，认准招牌"] } ],
+    source: "src-gm-mango-sticky", mapUrl: "https://www.google.com/maps/search/?api=1&query=Mango+Sticky+Rice+Chiang+Mai", sourceIds: ["src-gm-mango-sticky"] }),
+  POI({ id: "poi-gm-tiger-kingdom", name: "Tiger Kingdom Chiang Mai", name_zh: "清迈老虎园（Tiger Kingdom）", area: "Mae Rim", category: "nature", priority: "nearby", contentTier: "compact", coords: [18.9180, 98.9460], rating: 4.4, hours: "每日 09:00–17:00（最晚 16:30 入场）",
+    note: "Mae Rim 的老虎园，可近距离看老虎、有笼舍参观与合影项目，距大象粑粑造纸园很近，适合北线包车日顺路。",
+    plan: "D4 北线包车日备选：包车时间充裕且想加一站时，从造纸园顺路前往。",
+    tip: "门票约 188 泰铢起，合影/互动另计、部分需预约；动物福利有争议，去前自行评估。",
+    source: "src-gm-tiger-kingdom", mapUrl: "https://www.google.com/maps/search/?api=1&query=Tiger+Kingdom+Chiang+Mai", sourceIds: ["src-gm-tiger-kingdom"], themeTags: ["nature", "mae-rim", "user-requested"] })
 ];
 
 /* ================================================================
@@ -418,81 +434,77 @@ function patchDays(days) {
   d1.reminders = [];
 
   const d2 = set("day-2");
-  d2.title = "市集 + 射击 + 摇摆舞 · 周六";
-  d2.summary = "上午 JJ 市集吃早餐逛手作，中午 Santitham 吃泰北菜，下午 333 射击，傍晚银庙做 Tok Sen 按摩，晚上到 Rong Sa Dang 上摇摆舞新手课并跳社交舞。";
-  d2.anchors = ["poi-jing-jai", "poi-333-shooting-thaphae", "poi-gm-rong-sa-dang"];
+  d2.title = "丛林飞跃 + 射击 + 摇摆舞 · 周六";
+  d2.summary = "上午 08:00 出发去 Doi Saket 玩 Skyline 丛林飞跃（半日含接送），中午回城吃泰北菜，下午 15:30 到 333 射击，晚上 20:00 上 Rong Sa Dang 摇摆舞新手课并跳社交舞。";
+  d2.anchors = ["poi-gm-skyline", "poi-333-shooting-thaphae", "poi-gm-rong-sa-dang"];
   d2.routeStops = [
-    { poiId: "poi-thapae-twins", order: 0, time: "08:00", role: "lodging-anchor" },
-    { poiId: "poi-jing-jai", order: 1, time: "08:30", role: "market" },
-    { poiId: "poi-gm-khoei", order: 2, time: "12:30", role: "lunch" },
-    { poiId: "poi-333-shooting-thaphae", order: 3, time: "15:00", role: "class" },
-    { poiId: "poi-gm-tok-sen", order: 4, time: "17:00", role: "activity" },
-    { poiId: "poi-gm-rong-sa-dang", order: 5, time: "20:00", role: "night" }
+    { poiId: "poi-thapae-twins", order: 0, time: "07:30", role: "lodging-anchor" },
+    { poiId: "poi-gm-skyline", order: 1, time: "08:00", role: "activity" },
+    { poiId: "poi-gm-khoei", order: 2, time: "14:00", role: "lunch" },
+    { poiId: "poi-333-shooting-thaphae", order: 3, time: "15:30", role: "class" },
+    { poiId: "poi-gm-rong-sa-dang", order: 4, time: "20:00", role: "night" }
   ];
   d2.transitSegments = [
-    { fromPoiId: "poi-thapae-twins", toPoiId: "poi-jing-jai", mode: "Grab", minutes: 15, label: "酒店到 JJ 市集约 15 分钟" },
-    { fromPoiId: "poi-jing-jai", toPoiId: "poi-gm-khoei", mode: "Grab", minutes: 10, label: "JJ 市集到 Santitham 泰北菜约 10 分钟" },
+    { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-skyline", mode: "接送车", minutes: 60, label: "Skyline 08:00 酒店接送" },
+    { fromPoiId: "poi-gm-skyline", toPoiId: "poi-gm-khoei", mode: "接送车 + Grab", minutes: 60, label: "约 13:30 送回，打车到 Santitham 午餐" },
     { fromPoiId: "poi-gm-khoei", toPoiId: "poi-333-shooting-thaphae", mode: "Grab", minutes: 10, label: "午餐后回古城塔佩门店" },
-    { fromPoiId: "poi-333-shooting-thaphae", toPoiId: "poi-gm-tok-sen", mode: "Grab", minutes: 12, label: "到古城西南银庙" },
-    { fromPoiId: "poi-gm-tok-sen", toPoiId: "poi-gm-rong-sa-dang", mode: "Grab", minutes: 10, label: "回塔佩路 63 号" }
+    { fromPoiId: "poi-333-shooting-thaphae", toPoiId: "poi-gm-rong-sa-dang", mode: "Grab", minutes: 10, label: "回塔佩路 63 号" }
   ];
-  d2.candidates = ["poi-khao-soi-khun-yai", "poi-wat-srisuphan", "poi-wualai-walking-street", "poi-gm-700year-shooting", "poi-fern-forest-cafe", "poi-khun-churn"];
+  d2.candidates = ["poi-gm-tok-sen", "poi-khao-soi-khun-yai", "poi-wat-srisuphan", "poi-gm-700year-shooting", "poi-fern-forest-cafe", "poi-khun-churn"];
   d2.reminders = [
-    { label: "预约 333 射击（至少提前 1 小时）", due: "9/26 14:00 前", detail: "电话 064-495-6815 或平台预约，确认 15:00 场次", status: "todo" },
+    { label: "Skyline 丛林飞跃预约接送", due: "提前 1 天", detail: "确认 D2 08:00 酒店接送时间与集合点", status: "todo" },
+    { label: "预约 333 射击（至少提前 1 小时）", due: "9/26 14:30 前", detail: "电话 064-495-6815 或平台预约，确认 15:30 场次", status: "todo" },
     { label: "Rong Sa Dang 周六摇摆舞课", due: "9/26 19:45 前到", detail: "新手课 20:00–20:45 约 200 泰铢，社交舞 21:00 起", status: "todo" }
   ];
 
   const d3 = set("day-3");
-  d3.title = "公园瑜伽 + 手工市集 + 周日夜市";
-  d3.summary = "早上到 Nong Buak Haad 公园晨走/公园瑜伽，去 Artisan sourdough 吃面包早餐，上午逛 Lanna Artisans 银器工坊，中午跑 San Kamphaeng 的 Bamboo 竹林市集，傍晚逛周日夜市，晚上到 MaHoRee 听现场爵士。";
-  d3.anchors = ["poi-gm-bamboo-market", "poi-sunday-walking-street", "poi-gm-mahoree"];
+  d3.title = "南奔火车一日 · 千年古寺";
+  d3.summary = "早上从清迈火车站乘复古火车去南奔（约 09:30 发车、40 分钟），逛哈里奔猜大舍利寺，中午吃南奔鸡饭，下午河畔 Judy's 咖啡后乘 14:15 返程火车回清迈，晚上到 MaHoRee 听现场爵士。";
+  d3.anchors = ["poi-gm-haripunchai", "poi-gm-mahoree"];
   d3.routeStops = [
     { poiId: "poi-thapae-twins", order: 0, time: "07:30", role: "lodging-anchor" },
-    { poiId: "poi-gm-nong-buak", order: 1, time: "08:00", role: "nature" },
-    { poiId: "poi-gm-artisan-sourdough", order: 2, time: "09:00", role: "cafe" },
-    { poiId: "poi-gm-lanna-artisans", order: 3, time: "10:30", role: "sight" },
-    { poiId: "poi-gm-bamboo-market", order: 4, time: "12:30", role: "market" },
-    { poiId: "poi-sunday-walking-street", order: 5, time: "17:30", role: "market" },
-    { poiId: "poi-gm-mahoree", order: 6, time: "20:30", role: "night" }
+    { poiId: "poi-gm-haripunchai", order: 1, time: "10:15", role: "sight" },
+    { poiId: "poi-gm-chicken-rice-lamphun", order: 2, time: "12:00", role: "lunch" },
+    { poiId: "poi-gm-judys", order: 3, time: "13:15", role: "cafe" },
+    { poiId: "poi-gm-mahoree", order: 4, time: "20:00", role: "night" }
   ];
   d3.transitSegments = [
-    { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-nong-buak", mode: "Grab", minutes: 10, label: "古城东到西南角公园" },
-    { fromPoiId: "poi-gm-nong-buak", toPoiId: "poi-gm-artisan-sourdough", mode: "Grab", minutes: 8, label: "公园到素贴/乌蒙一带面包店" },
-    { fromPoiId: "poi-gm-artisan-sourdough", toPoiId: "poi-gm-lanna-artisans", mode: "Grab", minutes: 10, label: "回 Wua Lai 银器工坊" },
-    { fromPoiId: "poi-gm-lanna-artisans", toPoiId: "poi-gm-bamboo-market", mode: "Grab/包车", minutes: 35, label: "跨城到 San Kamphaeng 竹林市集" },
-    { fromPoiId: "poi-gm-bamboo-market", toPoiId: "poi-sunday-walking-street", mode: "Grab/包车", minutes: 30, label: "回古城 Ratchadamnoen 周日夜市" },
-    { fromPoiId: "poi-sunday-walking-street", toPoiId: "poi-gm-mahoree", mode: "步行", minutes: 5, label: "夜市走到 Prapokklao 路爵士吧" }
+    { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-haripunchai", mode: "火车（清迈站→南奔）+ 步行", minutes: 120, label: "07:45 到清迈火车站，乘约 09:30 班次、40 分钟到南奔，步行至古寺" },
+    { fromPoiId: "poi-gm-haripunchai", toPoiId: "poi-gm-chicken-rice-lamphun", mode: "步行", minutes: 5, label: "古寺旁鸡饭店" },
+    { fromPoiId: "poi-gm-chicken-rice-lamphun", toPoiId: "poi-gm-judys", mode: "Grab", minutes: 8, label: "到南奔河畔咖啡" },
+    { fromPoiId: "poi-gm-judys", toPoiId: "poi-gm-mahoree", mode: "火车（返程 14:15）+ Grab + 步行", minutes: 150, label: "乘 14:15 返程回清迈（约 15:00），回酒店休息，晚上步行到 Prapokklao 爵士吧" },
+    { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-mahoree", mode: "步行", minutes: 15, label: "古城内走到 Prapokklao 路爵士吧" }
   ];
-  d3.candidates = ["poi-wild-rose-yoga", "poi-pm2-vintage", "poi-sp-chicken"];
+  d3.candidates = ["poi-gm-mae-ho-phra", "poi-gm-mae-tia", "poi-baan-kang-wat", "poi-wild-rose-yoga", "poi-sp-chicken"];
   d3.reminders = [
-    { label: "Artisan 面包店营业日确认", due: "D3 当天 9:00 前", detail: "周三至周日营业（周一/二休）；建议早去防售罄", status: "todo" },
-    { label: "Bamboo 周末场次确认", due: "出发前 1 天", detail: "看官方 FB/IG 确认当周周六/日营业", status: "todo" }
+    { label: "南奔火车票（去程约 09:30 / 返程 14:15）", due: "D3 当天", detail: "清迈站现场购票带护照；到南奔站立即买返程票，错过 14:15 要等 19:15", status: "todo" },
+    { label: "南奔古寺着装提醒", due: "D3 当天", detail: "长裤/过膝裙+包肩，进大殿脱鞋", status: "todo" }
   ];
 
   const d4 = set("day-4");
-  d4.title = "丛林飞跃 + 复古市集 · 周一";
-  d4.summary = "上午到 Doi Saket 玩 Skyline 丛林飞跃（半日含接送），下午宁曼做按摩、逛 S.Shinawatra 泰丝店，傍晚逛 One Nimman 复古市集，晚上在宁曼吃 TOEN 泰餐。";
-  d4.anchors = ["poi-gm-skyline", "poi-gm-vintage-market"];
+  d4.title = "北线包车一日 · 大象营 + 瀑布 + 古树公园";
+  d4.summary = "全天包车北线：上午 TeeTee 弟弟象营喂象洗澡（07:00 接送），回程顺路大象粑粑造纸、黏黏瀑布与古树公园（顺序由司机按闭园时间优化），晚上北城吃 Krua Chalong。";
+  d4.anchors = ["poi-gm-teetee", "poi-bua-tong", "poi-gm-changthong"];
   d4.routeStops = [
-    { poiId: "poi-thapae-twins", order: 0, time: "07:30", role: "lodging-anchor" },
-    { poiId: "poi-gm-skyline", order: 1, time: "08:00", role: "activity" },
-    { poiId: "poi-gm-square-massage", order: 2, time: "15:00", role: "activity" },
-    { poiId: "poi-gm-shinawatra-silk", order: 3, time: "16:30", role: "shopping" },
-    { poiId: "poi-gm-vintage-market", order: 4, time: "17:30", role: "market" },
-    { poiId: "poi-gm-toen", order: 5, time: "19:30", role: "dinner" }
+    { poiId: "poi-thapae-twins", order: 0, time: "06:30", role: "lodging-anchor" },
+    { poiId: "poi-gm-teetee", order: 1, time: "07:00", role: "activity" },
+    { poiId: "poi-poopoo-paper", order: 2, time: "13:15", role: "class" },
+    { poiId: "poi-bua-tong", order: 3, time: "14:30", role: "nature" },
+    { poiId: "poi-gm-changthong", order: 4, time: "16:00", role: "nature" },
+    { poiId: "poi-gm-krua-chalong", order: 5, time: "17:30", role: "dinner" }
   ];
   d4.transitSegments = [
-    { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-skyline", mode: "接送车", minutes: 60, label: "Skyline 提供酒店接送，约 08:00 出发" },
-    { fromPoiId: "poi-gm-skyline", toPoiId: "poi-gm-square-massage", mode: "接送车 + Grab", minutes: 60, label: "约 13:30 送回市区，打车到宁曼 Soi 11" },
-    { fromPoiId: "poi-gm-square-massage", toPoiId: "poi-gm-shinawatra-silk", mode: "Grab", minutes: 8, label: "宁曼到 Huay Kaew 泰丝店" },
-    { fromPoiId: "poi-gm-shinawatra-silk", toPoiId: "poi-gm-vintage-market", mode: "Grab", minutes: 8, label: "到 One Nimman 复古市集" },
-    { fromPoiId: "poi-gm-vintage-market", toPoiId: "poi-gm-toen", mode: "步行", minutes: 8, label: "宁曼 Soi 一带晚餐" }
+    { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-teetee", mode: "营区接驳车", minutes: 70, label: "07:00 酒店接送，约 12:30 返至湄登" },
+    { fromPoiId: "poi-gm-teetee", toPoiId: "poi-poopoo-paper", mode: "包车", minutes: 40, label: "到湄林造纸园（午餐简餐/打包，别耽误）" },
+    { fromPoiId: "poi-poopoo-paper", toPoiId: "poi-bua-tong", mode: "包车", minutes: 40, label: "到湄登黏黏瀑布" },
+    { fromPoiId: "poi-bua-tong", toPoiId: "poi-gm-changthong", mode: "包车", minutes: 35, label: "回程顺路 San Phi Suea 古树公园（16:30 闭园，务必赶早）" },
+    { fromPoiId: "poi-gm-changthong", toPoiId: "poi-gm-krua-chalong", mode: "包车", minutes: 20, label: "到 Chotana 北城晚餐" }
   ];
-  d4.candidates = ["poi-mama-noi", "poi-bailamos", "poi-one-nimman", "poi-fairy-garden", "poi-ristr8to-original", "poi-graph-one-nimman", "poi-nara-thai-nimman", "poi-gm-win-onenimman", "poi-gm-heng-heng"];
+  d4.candidates = ["poi-gm-tiger-kingdom", "poi-gm-700year-shooting", "poi-gm-night-safari", "poi-gm-maha-larb", "poi-gm-kinlarb"];
   d4.reminders = [
-    { label: "Skyline 丛林飞跃预约接送", due: "提前 1 天", detail: "确认 D4 08:00 酒店接送时间与集合点", status: "todo" },
-    { label: "The Square 按摩预约", due: "D4 12:00 前", detail: "GoWabi 提前 2 小时以上预约 15:00 场次", status: "todo" },
-    { label: "Vintage 市集时间确认", due: "D4 当天", detail: "One Nimman 复古市集周一 16:00–22:00", status: "todo" }
+    { label: "预约 TeeTee 弟弟象营（约提前 20 天）", due: "尽早（名额紧张）", detail: "官网/Klook 预约 D4 上午 07:00 接送，确认人数", status: "todo" },
+    { label: "确认北线包车", due: "提前 1 天", detail: "全天包车，司机按闭园时间排顺序：古树公园/黏黏瀑布 16:30 前", status: "todo" },
+    { label: "老虎园（若加站）", due: "D4 当天", detail: "每日 09:00–17:00、最晚 16:30 入场，门票约 188 泰铢", status: "todo" }
   ];
 
   /* D5 转场合艾：保持现状 */
@@ -508,102 +520,103 @@ function patchDays(days) {
   ];
 
   const d9 = set("day-9");
-  d9.title = "回清迈 · 河畔爵士双吧之夜";
-  d9.summary = "14:00 从合艾飞回清迈，16:00 落地入住 Bed Changkian；晚上到长康路吃米其林必比登 Ekachan，然后去河畔的 Noir cmi 与 Bar.San. 连喝两家。";
-  d9.anchors = ["poi-gm-noir", "poi-gm-bar-san"];
+  d9.title = "回清迈 · 变装秀之夜";
+  d9.summary = "14:00 从合艾飞回清迈，16:00 落地入住 Bed Changkian；晚上到长康路吃米其林必比登 Ekachan，随后去 Night Bazaar 看 6ixcret 变装秀。";
+  d9.anchors = ["poi-gm-6ixcret"];
   d9.routeStops = [
     { poiId: "poi-z-sleep", order: 0, time: "10:00", role: "lodging-anchor" },
     { poiId: "poi-hdy-airport", order: 1, time: "12:00", role: "flight" },
     { poiId: "poi-cnx-airport", order: 2, time: "16:00", role: "flight" },
     { poiId: "poi-bed-changkian", order: 0, time: "16:30", role: "lodging-anchor" },
     { poiId: "poi-gm-ekachan", order: 3, time: "18:30", role: "dinner" },
-    { poiId: "poi-gm-noir", order: 4, time: "20:30", role: "night" },
-    { poiId: "poi-gm-bar-san", order: 5, time: "22:00", role: "night" }
+    { poiId: "poi-gm-6ixcret", order: 4, time: "20:30", role: "night" }
   ];
   d9.transitSegments = [
     { fromPoiId: "poi-z-sleep", toPoiId: "poi-hdy-airport", mode: "出租车", minutes: 30, label: "12:00 前从酒店出发去合艾机场" },
     { fromPoiId: "poi-hdy-airport", toPoiId: "poi-cnx-airport", mode: "飞机 FD158", minutes: 120, label: "14:00 起飞、16:00 落地清迈" },
     { fromPoiId: "poi-cnx-airport", toPoiId: "poi-bed-changkian", mode: "Grab", minutes: 25, label: "机场到 Chang Phueak 酒店" },
     { fromPoiId: "poi-bed-changkian", toPoiId: "poi-gm-ekachan", mode: "Grab", minutes: 15, label: "到长康路/河畔" },
-    { fromPoiId: "poi-gm-ekachan", toPoiId: "poi-gm-noir", mode: "步行", minutes: 8, label: "同属河畔，步行即到" },
-    { fromPoiId: "poi-gm-noir", toPoiId: "poi-gm-bar-san", mode: "步行", minutes: 5, label: "两家相邻" }
+    { fromPoiId: "poi-gm-ekachan", toPoiId: "poi-gm-6ixcret", mode: "步行", minutes: 8, label: "Night Bazaar 楼上即到" }
   ];
-  d9.candidates = ["poi-nimman-avenue", "poi-ristr8to-original", "poi-kao-soy-nimman", "poi-gm-aiyaret", "poi-gm-mee-an-ja-kin"];
+  d9.candidates = ["poi-gm-aiyaret", "poi-gm-mee-an-ja-kin", "poi-nimman-avenue", "poi-ristr8to-original"];
   d9.reminders = [
-    { label: "Ekachan 订位", due: "提前 1 天", detail: "电话 097-962-6445，确认 D9 晚市约 18:30", status: "todo" }
+    { label: "Ekachan 订位", due: "提前 1 天", detail: "电话 097-962-6445，确认 D9 晚市约 18:30", status: "todo" },
+    { label: "6ixcret 订座/购票", due: "D9 当天", detail: "若周六不营业则顺延 D12 晚；建议提前订座", status: "todo" }
   ];
 
   const d10 = set("day-10");
-  d10.title = "弟弟象营 + 兰纳民居博物馆";
-  d10.summary = "上午去湄登 TeeTee 弟弟象营喂象、洗澡（半日含接送），下午逛清迈大学的兰纳传统民居博物馆与静心湖，晚上到 Night Bazaar 看 6ixcret 变装秀，晚餐吃 Pakorn's。";
-  d10.anchors = ["poi-gm-teetee", "poi-gm-lanna-house-museum", "poi-gm-6ixcret"];
+  d10.title = "丽贝后市集日 · Bamboo + 周日夜市";
+  d10.summary = "早上到 San Kamphaeng 逛 Bamboo 竹林市集，下午去 Artisan 酸种面包店与 Nong Buak Haad 公园散步，傍晚逛周日夜市（古城），晚上回酒店。";
+  d10.anchors = ["poi-gm-bamboo-market", "poi-sunday-walking-street"];
   d10.routeStops = [
     { poiId: "poi-bed-changkian", order: 0, time: "07:00", role: "lodging-anchor" },
-    { poiId: "poi-gm-teetee", order: 1, time: "07:30", role: "activity" },
-    { poiId: "poi-gm-lanna-house-museum", order: 2, time: "14:00", role: "sight" },
-    { poiId: "poi-gm-cmu-lake", order: 3, time: "15:30", role: "nature" },
-    { poiId: "poi-gm-pakorns", order: 4, time: "18:00", role: "dinner" },
-    { poiId: "poi-gm-6ixcret", order: 5, time: "20:00", role: "night" }
+    { poiId: "poi-gm-bamboo-market", order: 1, time: "08:30", role: "market" },
+    { poiId: "poi-gm-artisan-sourdough", order: 2, time: "13:30", role: "cafe" },
+    { poiId: "poi-gm-nong-buak", order: 3, time: "15:15", role: "nature" },
+    { poiId: "poi-sunday-walking-street", order: 4, time: "17:30", role: "market" }
   ];
   d10.transitSegments = [
-    { fromPoiId: "poi-bed-changkian", toPoiId: "poi-gm-teetee", mode: "营区接驳车", minutes: 70, label: "07:00 酒店接送，约 13:00 返回" },
-    { fromPoiId: "poi-gm-teetee", toPoiId: "poi-gm-lanna-house-museum", mode: "接驳车 + Grab", minutes: 60, label: "回城后打车到 Huay Kaew 博物馆" },
-    { fromPoiId: "poi-gm-lanna-house-museum", toPoiId: "poi-gm-cmu-lake", mode: "Grab", minutes: 8, label: "博物馆到清迈大学静心湖" },
-    { fromPoiId: "poi-gm-cmu-lake", toPoiId: "poi-gm-pakorns", mode: "Grab", minutes: 20, label: "到长康路晚餐" },
-    { fromPoiId: "poi-gm-pakorns", toPoiId: "poi-gm-6ixcret", mode: "步行", minutes: 5, label: "Night Bazaar 楼上即到" }
+    { fromPoiId: "poi-bed-changkian", toPoiId: "poi-gm-bamboo-market", mode: "包车/Grab", minutes: 40, label: "到 San Kamphaeng 竹林市集" },
+    { fromPoiId: "poi-gm-bamboo-market", toPoiId: "poi-gm-artisan-sourdough", mode: "包车/Grab", minutes: 40, label: "回素贴/乌蒙一带面包店" },
+    { fromPoiId: "poi-gm-artisan-sourdough", toPoiId: "poi-gm-nong-buak", mode: "Grab", minutes: 8, label: "到古城西南公园" },
+    { fromPoiId: "poi-gm-nong-buak", toPoiId: "poi-sunday-walking-street", mode: "步行/双条", minutes: 10, label: "周日夜市在 Ratchadamnoen 步行街" },
+    { fromPoiId: "poi-sunday-walking-street", toPoiId: "poi-bed-changkian", mode: "Grab", minutes: 15, label: "回宁曼酒店" }
   ];
-  d10.candidates = ["poi-enp", "poi-cotu-swim", "poi-warm-up", "poi-baristotel", "poi-gm-retreat-nimman", "poi-gm-kinlarb", "poi-sunday-walking-street"];
+  d10.candidates = ["poi-jing-jai", "poi-gm-retreat-nimman", "poi-gm-pakorns", "poi-gm-kinlarb", "poi-enp", "poi-cotu-swim"];
   d10.reminders = [
-    { label: "预约 TeeTee 弟弟象营（约提前 20 天）", due: "尽早（名额紧张）", detail: "官网/Klook 预约 D10 上午 07:00 接送，确认人数", status: "todo" },
-    { label: "6ixcret 订座/购票", due: "D10 当天", detail: "若周日不营业则顺延 D4 晚；建议提前订座", status: "todo" }
+    { label: "Bamboo 周末场次确认", due: "出发前 1 天", detail: "看官方 FB/IG 确认当周周日营业", status: "todo" },
+    { label: "周日夜市", due: "D10 17:00", detail: "古城 Ratchadamnoen，穿好走的鞋慢慢逛", status: "todo" }
   ];
 
   const d11 = set("day-11");
-  d11.title = "北线一日 · 造纸园 + 黏黏瀑布 + 古树公园";
-  d11.summary = "包车北线一日：上午湄林大象粑粑造纸园 DIY，下午湄登爬黏黏瀑布，回程顺路逛 Changthong 古树公园，晚上回北城吃 Krua Chalong 泰餐。";
-  d11.anchors = ["poi-poopoo-paper", "poi-bua-tong", "poi-gm-changthong"];
+  d11.title = "博物馆 + 银器工坊 + 复古市集";
+  d11.summary = "上午逛清迈大学兰纳传统民居博物馆与静心湖，下午到 Wua Lai 的 Lanna Artisans 银器工坊亲手做小件，傍晚逛 One Nimman 复古市集（周一），晚上在宁曼吃 TOEN。";
+  d11.anchors = ["poi-gm-lanna-house-museum", "poi-gm-vintage-market"];
   d11.routeStops = [
     { poiId: "poi-bed-changkian", order: 0, time: "08:30", role: "lodging-anchor" },
-    { poiId: "poi-poopoo-paper", order: 1, time: "09:30", role: "class" },
-    { poiId: "poi-bua-tong", order: 2, time: "13:00", role: "nature" },
-    { poiId: "poi-gm-changthong", order: 3, time: "15:30", role: "nature" },
-    { poiId: "poi-gm-krua-chalong", order: 4, time: "18:00", role: "dinner" }
+    { poiId: "poi-gm-lanna-house-museum", order: 1, time: "09:30", role: "sight" },
+    { poiId: "poi-gm-cmu-lake", order: 2, time: "12:00", role: "nature" },
+    { poiId: "poi-gm-lanna-artisans", order: 3, time: "15:00", role: "sight" },
+    { poiId: "poi-gm-vintage-market", order: 4, time: "17:30", role: "market" },
+    { poiId: "poi-gm-toen", order: 5, time: "20:00", role: "dinner" }
   ];
   d11.transitSegments = [
-    { fromPoiId: "poi-bed-changkian", toPoiId: "poi-poopoo-paper", mode: "包车", minutes: 40, label: "市区到湄林造纸园约 30–40 分钟" },
-    { fromPoiId: "poi-poopoo-paper", toPoiId: "poi-bua-tong", mode: "包车", minutes: 40, label: "湄林到湄登黏黏瀑布约 40 分钟" },
-    { fromPoiId: "poi-bua-tong", toPoiId: "poi-gm-changthong", mode: "包车", minutes: 40, label: "回程顺路 San Phi Suea 古树公园" },
-    { fromPoiId: "poi-gm-changthong", toPoiId: "poi-gm-krua-chalong", mode: "包车", minutes: 20, label: "到 Chotana 北城晚餐" }
+    { fromPoiId: "poi-bed-changkian", toPoiId: "poi-gm-lanna-house-museum", mode: "Grab", minutes: 15, label: "到 Huay Kaew 博物馆" },
+    { fromPoiId: "poi-gm-lanna-house-museum", toPoiId: "poi-gm-cmu-lake", mode: "Grab", minutes: 8, label: "到清迈大学静心湖" },
+    { fromPoiId: "poi-gm-cmu-lake", toPoiId: "poi-gm-lanna-artisans", mode: "Grab", minutes: 15, label: "到 Wua Lai 银器工坊" },
+    { fromPoiId: "poi-gm-lanna-artisans", toPoiId: "poi-gm-vintage-market", mode: "Grab", minutes: 20, label: "到 One Nimman 复古市集" },
+    { fromPoiId: "poi-gm-vintage-market", toPoiId: "poi-gm-toen", mode: "步行", minutes: 8, label: "宁曼 Soi 一带晚餐" }
   ];
-  d11.candidates = ["poi-bailamos", "poi-graph-ground", "poi-gm-700year-shooting", "poi-gm-night-safari", "poi-gm-maha-larb", "poi-gm-kinlarb"];
+  d11.candidates = ["poi-gm-shinawatra-silk", "poi-gm-heng-heng", "poi-gm-retreat-nimman", "poi-gm-kinlarb", "poi-gm-maha-larb", "poi-gm-khao-tom-nai-dam", "poi-doi-suthep", "poi-grand-canyon"];
   d11.reminders = [
-    { label: "确认北线包车", due: "提前 1 天", detail: "全天包车或参加一日游，确认司机与集合时间", status: "todo" },
-    { label: "Changthong 开放时间", due: "D11 当天", detail: "每日 09:30–16:30，控制回程时间", status: "todo" }
+    { label: "兰纳民居博物馆开放时间", due: "D11 当天", detail: "08:30–16:30，门票 100 泰铢", status: "todo" },
+    { label: "Vintage 市集时间确认", due: "D11 当天", detail: "One Nimman 复古市集周一 16:00–22:00", status: "todo" }
   ];
 
   const d12 = set("day-12");
-  d12.title = "南奔古寺 + 瓦洛洛手信收尾";
-  d12.summary = "上午包车去南奔逛千年古寺 Wat Phra That Haripunchai，中午吃 Lamphun 鸡饭，下午河畔 Judy's 咖啡歇脚，回清迈后到瓦洛洛市场集中买手信，晚上做告别按摩。";
-  d12.anchors = ["poi-gm-haripunchai", "poi-warorot"];
+  d12.title = "瓦洛洛手信 + 告别之夜";
+  d12.summary = "上午在瓦洛洛市场集中买手信，顺路吃芒果糯米在對面，下午逛 S.Shinawatra 泰丝店，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。";
+  d12.anchors = ["poi-warorot", "poi-gm-bar-san"];
   d12.routeStops = [
-    { poiId: "poi-bed-changkian", order: 0, time: "08:30", role: "lodging-anchor" },
-    { poiId: "poi-gm-haripunchai", order: 1, time: "09:30", role: "sight" },
-    { poiId: "poi-gm-chicken-rice-lamphun", order: 2, time: "12:00", role: "lunch" },
-    { poiId: "poi-gm-judys", order: 3, time: "13:30", role: "cafe" },
-    { poiId: "poi-warorot", order: 4, time: "15:30", role: "market" },
-    { poiId: "poi-gm-muse-massage", order: 5, time: "18:30", role: "activity" }
+    { poiId: "poi-bed-changkian", order: 0, time: "09:30", role: "lodging-anchor" },
+    { poiId: "poi-warorot", order: 1, time: "10:00", role: "market" },
+    { poiId: "poi-gm-mango-sticky", order: 2, time: "11:30", role: "food" },
+    { poiId: "poi-gm-shinawatra-silk", order: 3, time: "14:00", role: "shopping" },
+    { poiId: "poi-gm-kinlarb", order: 4, time: "18:30", role: "dinner" },
+    { poiId: "poi-gm-bar-san", order: 5, time: "21:00", role: "night" }
   ];
   d12.transitSegments = [
-    { fromPoiId: "poi-bed-changkian", toPoiId: "poi-gm-haripunchai", mode: "包车/Grab", minutes: 45, label: "清迈到南奔古寺约 40–45 分钟" },
-    { fromPoiId: "poi-gm-haripunchai", toPoiId: "poi-gm-chicken-rice-lamphun", mode: "步行", minutes: 5, label: "古寺旁鸡饭店" },
-    { fromPoiId: "poi-gm-chicken-rice-lamphun", toPoiId: "poi-gm-judys", mode: "Grab", minutes: 8, label: "到南奔河畔咖啡" },
-    { fromPoiId: "poi-gm-judys", toPoiId: "poi-warorot", mode: "包车/Grab", minutes: 40, label: "回清迈瓦洛洛市场" },
-    { fromPoiId: "poi-warorot", toPoiId: "poi-gm-muse-massage", mode: "Grab", minutes: 15, label: "回宁曼做告别按摩" }
+    { fromPoiId: "poi-bed-changkian", toPoiId: "poi-warorot", mode: "Grab", minutes: 15, label: "到古城东瓦洛洛" },
+    { fromPoiId: "poi-warorot", toPoiId: "poi-gm-mango-sticky", mode: "步行", minutes: 5, label: "瓦洛洛/711 一带甜品摊" },
+    { fromPoiId: "poi-gm-mango-sticky", toPoiId: "poi-gm-shinawatra-silk", mode: "Grab", minutes: 10, label: "到 Huay Kaew 泰丝店" },
+    { fromPoiId: "poi-gm-shinawatra-silk", toPoiId: "poi-gm-kinlarb", mode: "Grab", minutes: 8, label: "回宁曼晚餐" },
+    { fromPoiId: "poi-gm-kinlarb", toPoiId: "poi-gm-bar-san", mode: "Grab", minutes: 15, label: "到河畔告别酒吧" }
   ];
-  d12.candidates = ["poi-gm-mango-sticky", "poi-gm-mae-tia", "poi-gm-mae-ho-phra", "poi-baan-kang-wat", "poi-chiangmai-farewell", "poi-grand-canyon", "poi-doi-suthep", "poi-woo-cafe"];
+  d12.candidates = ["poi-gm-noir", "poi-gm-muse-massage", "poi-gm-retreat-nimman", "poi-gm-aiyaret", "poi-gm-mee-an-ja-kin", "poi-chiangmai-farewell"];
   d12.reminders = [
-    { label: "南奔古寺着装提醒", due: "D12 当天", detail: "长裤/过膝裙+包肩，进大殿脱鞋", status: "todo" },
-    { label: "告别晚餐/按摩预约", due: "提前 1 天", detail: "Muse 按摩 18:30 场次提前几小时电话约", status: "todo" }
+    { label: "告别晚餐订位", due: "提前 1 天", detail: "KINLARB（宁曼）或 Maha Larb 提前订位", status: "todo" },
+    { label: "告别按摩预约（可选）", due: "D12 下午", detail: "Muse / Retreat（宁曼 Soi 17）提前几小时电话约", status: "todo" },
+    { label: "Bar.San. 营业", due: "D12 21:00", detail: "18:00 开门，21:00 后人较多；Noir 同街可替换", status: "todo" }
   ];
 
   return days;

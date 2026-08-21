@@ -1436,5 +1436,21 @@
       "location"
     ],
     "notes": "合集地点，地址待核；出发前用全球搜索复核后再安排。"
+  },
+  {
+    "id": "src-gm-tiger-kingdom",
+    "title": "Tiger Kingdom Chiang Mai（Trip.com / Pickyourtrail）",
+    "url": "https://sg.trip.com/moments/theme/poi-tiger-kingdom-13581840-guides-993135/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-21",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "ticket"
+    ],
+    "notes": "Mae Rim；每日 09:00–17:00（最晚 16:30 入场），门票约 188 泰铢，1–2 小时。"
   }
 ]
