@@ -55,6 +55,7 @@ const ROLES = [
   { id:"transfer", icon:"🚐", label:"中转", color:"#8e8e93" },
   { id:"sunset", icon:"🌅", label:"日落", color:"#ff9f0a" },
   { id:"beach", icon:"🏖️", label:"海滩", color:"#30b0c7" },
+  { id:"spa", icon:"💆", label:"按摩", color:"#e05a92" },
   { id:"activity", icon:"🎯", label:"体验", color:"#34c759" },
   { id:"art-village", icon:"🎨", label:"艺术村", color:"#af52de" }
 ];

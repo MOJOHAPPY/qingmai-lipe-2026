@@ -1083,7 +1083,7 @@
     "date": "2026-10-06",
     "title": "瓦洛洛手信 + 告别之夜",
     "city": "Chiang Mai",
-    "summary": "上午在瓦洛洛市场集中买手信，顺路吃芒果糯米在對面，下午逛 S.Shinawatra 泰丝店，傍晚到清迈大学旁的 The Market CNX 找像 LISA 的老板画海娜、顺逛中古摊，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。",
+    "summary": "上午在瓦洛洛市场集中买手信，中午到古城 Pranom 健康按摩（Google 地图：芒果糯米在對面）做一小时泰式按摩，下午逛 S.Shinawatra 泰丝店，傍晚到清迈大学旁的 The Market CNX 找像 LISA 的老板画海娜、顺逛中古摊，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。",
     "anchors": [
       "poi-warorot",
       "poi-gm-bar-san"
@@ -1105,7 +1105,7 @@
         "poiId": "poi-gm-mango-sticky",
         "order": 2,
         "time": "11:30",
-        "role": "food"
+        "role": "spa"
       },
       {
         "poiId": "poi-gm-shinawatra-silk",
@@ -1151,16 +1151,16 @@
       {
         "fromPoiId": "poi-warorot",
         "toPoiId": "poi-gm-mango-sticky",
-        "mode": "步行",
-        "minutes": 5,
-        "label": "瓦洛洛/711 一带甜品摊"
+        "mode": "Grab",
+        "minutes": 8,
+        "label": "从瓦洛洛回古城 Ratchadamnoen 路按摩"
       },
       {
         "fromPoiId": "poi-gm-mango-sticky",
         "toPoiId": "poi-gm-shinawatra-silk",
         "mode": "Grab",
         "minutes": 10,
-        "label": "到 Huay Kaew 泰丝店"
+        "label": "按摩后到 Huay Kaew 泰丝店"
       },
       {
         "fromPoiId": "poi-gm-shinawatra-silk",
@@ -1198,9 +1198,9 @@
         "status": "todo"
       },
       {
-        "label": "告别按摩预约（可选）",
-        "due": "D12 下午",
-        "detail": "Muse / Retreat（宁曼 Soi 17）提前几小时电话约",
+        "label": "Pranom 健康按摩（泰式 11:30）",
+        "due": "D12 上午",
+        "detail": "古城 Kad Klang Wiang（Ratchadamnoen 路），每日 10:00–21:00，泰式约 150 铢/时；三人建议提前电话约或早点到",
         "status": "todo"
       },
       {

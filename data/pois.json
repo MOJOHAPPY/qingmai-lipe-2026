@@ -4105,38 +4105,37 @@
     ],
     "mustVisit": false,
     "id": "poi-gm-mango-sticky",
-    "name": "Mango Sticky Rice",
-    "name_zh": "芒果糯米在對面",
-    "area": "Warorot / Tha Phae",
-    "category": "food",
+    "name": "Pranom Health Massage (ประนอม นวดเพื่อสุขภาพ)",
+    "name_zh": "Pranom 健康按摩（Google 地图：芒果糯米在對面）",
+    "area": "Old City / Ratchadamnoen",
+    "category": "spa",
     "coords": [
-      18.789,
-      98.9985
+      18.78763,
+      98.9899
     ],
-    "rating": 4.6,
-    "hours": "约 16:00–22:00",
-    "note": "Blue coffee/7-11 对面的芒果糯米饭小摊，现做现卖，下午 4 点后出摊，是瓦洛洛一带的甜品招牌。",
-    "plan": "D12 瓦洛洛手信日顺路当甜品。",
-    "tip": "约 16:00 后出摊，早去可能还没开；现做的最好吃。",
-    "whyWorthIt": "逛完瓦洛洛买完手信，顺路在 7-11 对面的小摊吃一份现做的芒果糯米饭，芒果甜、糯米软、椰浆浓，是清迈手信日最顺口的收尾甜品。",
+    "hours": "每日 10:00–21:00",
+    "note": "古城 Ratchadamnoen 路 Kad Klang Wiang 内的泰式按摩店（Google 地图上中文名显示为「芒果糯米在對面」，实为按摩店而非餐厅）；泰式按摩 1 小时约 150 泰铢，价格实在。",
+    "plan": "D12 上午逛完瓦洛洛后回古城做一小时泰式按摩（11:30），下午再逛泰丝店。",
+    "tip": "每日 10:00–21:00；一次可同时接待约 12 人，通常不用久等；泰式 150 铢/时、足底 180 铢、精油 300 铢（参考价）。",
+    "whyWorthIt": "你点名的「芒果糯米在對面」其实是古城里的 Pranom 健康按摩：泰式按摩一小时才约 150 泰铢，逛完瓦洛洛正好来放松一小时，价格实在、手法专业，是告别日上午很顺的一站。",
     "detailSections": [
       {
-        "title": "怎么点",
+        "title": "怎么按",
         "items": [
-          "现做芒果糯米饭，按份买、趁热吃",
-          "可加椰浆或脆米，按摊主推荐"
+          "泰式传统按摩 1 小时约 150 泰铢，足底 180、精油 300（参考价）",
+          "一次可同时接待约 12 人，三人同行通常不用等"
         ]
       },
       {
         "title": "注意",
         "items": [
-          "约 16:00 后才出摊，太早会扑空",
-          "摊位在 Blue coffee/7-11 对面，认准招牌"
+          "每日 10:00–21:00，位于 Kad Klang Wiang 小商圈（Ratchadamnoen 路 71 号）",
+          "进店脱鞋、会提供宽松衣裤；想指定时段建议提前电话约"
         ]
       }
     ],
     "source": "src-gm-mango-sticky",
-    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Mango+Sticky+Rice+Chiang+Mai",
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=Pranom+Health+Massage+Chiang+Mai",
     "sourceIds": [
       "src-gm-mango-sticky"
     ]

@@ -28,7 +28,7 @@ const newSources = [
   mkSource("src-gm-cmu-lake", "清迈大学静心湖（Ang Kaew Reservoir，Trip.com）", "https://tw.trip.com/moments/detail/chiang-mai-209-142699867/", ["location"], "清迈大学内环湖步道，免费、全天。"),
   mkSource("src-gm-tok-sen", "Tok Sen Wat Srisuphan NUN TOK SEN（Trip.com 银庙）", "https://tw.trip.com/moments/theme/poi-wat-sri-suphan-91841-attraction-993137", ["location", "hours", "rating"], "银庙内 Tok Sen 木槌按摩；营业约 10:00–20:00。"),
   mkSource("src-gm-heng-heng", "Heng Heng Thai Massage（GoWabi）", "https://www.gowabi.com/en/organization_services/thai-massage-120-min-please-make-a-reservation-at-least-2-hours-in-advance", ["location", "hours", "reservation"], "12/4 宁曼 Soi 13；GoWabi 预约需提前 2 小时以上。"),
-  mkSource("src-gm-mango-sticky", "Mango Sticky Rice 芒果糯米在對面（Wanderlog）", "https://wanderlog.com/zh/place/details/9082845/", ["location", "hours"], "Blue coffee/7-11 对面摊位，约下午 4 点后出摊。"),
+  mkSource("src-gm-mango-sticky", "Pranom Health Massage（ประนอม นวดเพื่อสุขภาพ）· Google 中文名「芒果糯米在對面」", "https://www.taiguo.org/REVIEWS-pranom-health-massage-17335-l.html", ["location", "hours", "pricing"], "古城 Ratchadamnoen 路 71 号 Kad Klang Wiang 内；每日 10:00–21:00；泰式按摩 1 小时约 150 泰铢、足底 180、精油 300；Mapcarta 坐标 18.78763,98.9899。", "2026-08-24"),
   mkSource("src-gm-square", "The Square Massage（GoWabi / Klook）", "https://www.gowabi.com/zh-CN/organization_services/couple-organic-coconut-oil-massage-90-min", ["location", "hours", "reservation"], "5 宁曼 Soi 11；约 12:00–24:00，可预约。"),
   mkSource("src-gm-retreat", "Retreat Nimman Massage & Spa（GoWabi）", "https://www.gowabi.com/zh-CN/organization_services/foot-massage-60-min-2a31b2df-7a18-4d4d-b11e-83b1ed2e3e6e", ["location", "reservation"], "宁曼 Soi 17；可预约。"),
   mkSource("src-gm-lanna-artisans", "Lanna Artisans Art Gallery 银器工坊（Trip.com）", "https://tw.trip.com/moments/detail/chiang-mai-209-148020063/", ["location", "hours"], "25/1 Wua Lai Rd；每日约 09:00 起，银铜器手作体验。"),
@@ -380,13 +380,13 @@ const collectionPois = [
     note: "古城西素帖路的粥店，猪杂粥配咸蛋是招牌，适合早餐或夜宵。", tip: "D1 或 D3 早餐备选。", source: "src-gm-khao-tom", mapUrl: "https://www.google.com/maps/search/?api=1&query=Khao+Tom+Nai+Dam+2+Chiang+Mai", sourceIds: ["src-gm-khao-tom"] }),
   POI({ id: "poi-gm-win-onenimman", name: "Win Cosmetics One Nimman", name_zh: "Win Cosmetics（One Nimman 店）", area: "Nimman / One Nimman", category: "shopping", priority: "nearby", contentTier: "compact", coords: [18.7985, 98.9690], rating: 4.5, hours: "约 10:00–22:00",
     note: "One Nimman 里的 Win 药妆分店，逛复古市集时顺路补货。", tip: "D4 逛市集时顺路买。", source: "src-gm-win-cosmetics", mapUrl: "https://www.google.com/maps/search/?api=1&query=Win+Cosmetics+One+Nimman+Chiang+Mai", sourceIds: ["src-gm-win-cosmetics"] }),
-  POI({ id: "poi-gm-mango-sticky", name: "Mango Sticky Rice", name_zh: "芒果糯米在對面", area: "Warorot / Tha Phae", category: "food", coords: [18.7890, 98.9985], rating: 4.6, hours: "约 16:00–22:00",
-    note: "Blue coffee/7-11 对面的芒果糯米饭小摊，现做现卖，下午 4 点后出摊，是瓦洛洛一带的甜品招牌。",
-    plan: "D12 瓦洛洛手信日顺路当甜品。",
-    tip: "约 16:00 后出摊，早去可能还没开；现做的最好吃。",
-    whyWorthIt: "逛完瓦洛洛买完手信，顺路在 7-11 对面的小摊吃一份现做的芒果糯米饭，芒果甜、糯米软、椰浆浓，是清迈手信日最顺口的收尾甜品。",
-    detailSections: [ { title: "怎么点", items: ["现做芒果糯米饭，按份买、趁热吃", "可加椰浆或脆米，按摊主推荐"] }, { title: "注意", items: ["约 16:00 后才出摊，太早会扑空", "摊位在 Blue coffee/7-11 对面，认准招牌"] } ],
-    source: "src-gm-mango-sticky", mapUrl: "https://www.google.com/maps/search/?api=1&query=Mango+Sticky+Rice+Chiang+Mai", sourceIds: ["src-gm-mango-sticky"] }),
+  POI({ id: "poi-gm-mango-sticky", name: "Pranom Health Massage (ประนอม นวดเพื่อสุขภาพ)", name_zh: "Pranom 健康按摩（Google 地图：芒果糯米在對面）", area: "Old City / Ratchadamnoen", category: "spa", coords: [18.78763, 98.9899], hours: "每日 10:00–21:00",
+    note: "古城 Ratchadamnoen 路 Kad Klang Wiang 内的泰式按摩店（Google 地图上中文名显示为「芒果糯米在對面」，实为按摩店而非餐厅）；泰式按摩 1 小时约 150 泰铢，价格实在。",
+    plan: "D12 上午逛完瓦洛洛后回古城做一小时泰式按摩（11:30），下午再逛泰丝店。",
+    tip: "每日 10:00–21:00；一次可同时接待约 12 人，通常不用久等；泰式 150 铢/时、足底 180 铢、精油 300 铢（参考价）。",
+    whyWorthIt: "你点名的「芒果糯米在對面」其实是古城里的 Pranom 健康按摩：泰式按摩一小时才约 150 泰铢，逛完瓦洛洛正好来放松一小时，价格实在、手法专业，是告别日上午很顺的一站。",
+    detailSections: [ { title: "怎么按", items: ["泰式传统按摩 1 小时约 150 泰铢，足底 180、精油 300（参考价）", "一次可同时接待约 12 人，三人同行通常不用等"] }, { title: "注意", items: ["每日 10:00–21:00，位于 Kad Klang Wiang 小商圈（Ratchadamnoen 路 71 号）", "进店脱鞋、会提供宽松衣裤；想指定时段建议提前电话约"] } ],
+    source: "src-gm-mango-sticky", mapUrl: "https://www.google.com/maps/search/?api=1&query=Pranom+Health+Massage+Chiang+Mai", sourceIds: ["src-gm-mango-sticky"] }),
   POI({ id: "poi-gm-tiger-kingdom", name: "Tiger Kingdom Chiang Mai", name_zh: "清迈老虎园（Tiger Kingdom）", area: "Mae Rim", category: "nature", priority: "nearby", contentTier: "compact", coords: [18.9180, 98.9460], rating: 4.4, hours: "每日 09:00–17:00（最晚 16:30 入场）",
     note: "Mae Rim 的老虎园，可近距离看老虎、有笼舍参观与合影项目，距大象粑粑造纸园很近，适合北线包车日顺路。",
     plan: "D4 北线包车日备选：包车时间充裕且想加一站时，从造纸园顺路前往。",
@@ -421,6 +421,17 @@ const updatePois = [
   { id: "poi-bua-tong", patch: { mustVisit: true, sourceTag: "google合集", rating: 4.7, hours: "08:30–16:30", coords: [19.176, 98.871] } },
   { id: "poi-warorot", patch: { sourceTag: "google合集", rating: 4.5, hours: "约 07:00–18:00" } },
   { id: "poi-333-shooting-thaphae", patch: { sourceTag: "google合集", rating: 4.6, hours: "10:00–18:00" } }
+];
+
+/* 来源字段更新（幂等：已存在的来源按 id 覆盖字段） */
+const updateSources = [
+  { id: "src-gm-mango-sticky", patch: {
+      title: "Pranom Health Massage（ประนอม นวดเพื่อสุขภาพ）· Google 中文名「芒果糯米在對面」",
+      url: "https://www.taiguo.org/REVIEWS-pranom-health-massage-17335-l.html",
+      supports: ["location", "hours", "pricing"],
+      notes: "古城 Ratchadamnoen 路 71 号 Kad Klang Wiang 内；每日 10:00–21:00；泰式按摩 1 小时约 150 泰铢、足底 180、精油 300；Mapcarta 坐标 18.78763,98.9899。",
+      checkedAt: "2026-08-24"
+  } }
 ];
 
 /* ================================================================
@@ -614,12 +625,12 @@ function patchDays(days) {
 
   const d12 = set("day-12");
   d12.title = "瓦洛洛手信 + 告别之夜";
-  d12.summary = "上午在瓦洛洛市场集中买手信，顺路吃芒果糯米在對面，下午逛 S.Shinawatra 泰丝店，傍晚到清迈大学旁的 The Market CNX 找像 LISA 的老板画海娜、顺逛中古摊，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。";
+  d12.summary = "上午在瓦洛洛市场集中买手信，中午到古城 Pranom 健康按摩（Google 地图：芒果糯米在對面）做一小时泰式按摩，下午逛 S.Shinawatra 泰丝店，傍晚到清迈大学旁的 The Market CNX 找像 LISA 的老板画海娜、顺逛中古摊，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。";
   d12.anchors = ["poi-warorot", "poi-gm-bar-san"];
   d12.routeStops = [
     { poiId: "poi-bed-changkian", order: 0, time: "09:30", role: "lodging-anchor" },
     { poiId: "poi-warorot", order: 1, time: "10:00", role: "market" },
-    { poiId: "poi-gm-mango-sticky", order: 2, time: "11:30", role: "food" },
+    { poiId: "poi-gm-mango-sticky", order: 2, time: "11:30", role: "spa" },
     { poiId: "poi-gm-shinawatra-silk", order: 3, time: "14:00", role: "shopping" },
     { poiId: "poi-gm-market-cnx", order: 4, time: "17:00", role: "market" },
     { poiId: "poi-gm-kinlarb", order: 5, time: "18:45", role: "dinner" },
@@ -627,8 +638,8 @@ function patchDays(days) {
   ];
   d12.transitSegments = [
     { fromPoiId: "poi-bed-changkian", toPoiId: "poi-warorot", mode: "Grab", minutes: 15, label: "到古城东瓦洛洛" },
-    { fromPoiId: "poi-warorot", toPoiId: "poi-gm-mango-sticky", mode: "步行", minutes: 5, label: "瓦洛洛/711 一带甜品摊" },
-    { fromPoiId: "poi-gm-mango-sticky", toPoiId: "poi-gm-shinawatra-silk", mode: "Grab", minutes: 10, label: "到 Huay Kaew 泰丝店" },
+    { fromPoiId: "poi-warorot", toPoiId: "poi-gm-mango-sticky", mode: "Grab", minutes: 8, label: "从瓦洛洛回古城 Ratchadamnoen 路按摩" },
+    { fromPoiId: "poi-gm-mango-sticky", toPoiId: "poi-gm-shinawatra-silk", mode: "Grab", minutes: 10, label: "按摩后到 Huay Kaew 泰丝店" },
     { fromPoiId: "poi-gm-shinawatra-silk", toPoiId: "poi-gm-market-cnx", mode: "Grab", minutes: 15, label: "从 Huay Kaew 泰丝店到清迈大学旁 Su Thep" },
     { fromPoiId: "poi-gm-market-cnx", toPoiId: "poi-gm-kinlarb", mode: "Grab", minutes: 15, label: "从 Su Thep 回宁曼 Sirimangkalajarn 告别晚餐" },
     { fromPoiId: "poi-gm-kinlarb", toPoiId: "poi-gm-bar-san", mode: "Grab", minutes: 15, label: "到河畔告别酒吧" }
@@ -637,7 +648,7 @@ function patchDays(days) {
   d12.reminders = [
     { label: "The Market CNX 营业日确认", due: "D12 当天", detail: "周二–周四 17:00–22:00，10/6 是周二；画海娜找像 LISA 的老板", status: "todo" },
     { label: "告别晚餐订位", due: "提前 1 天", detail: "KINLARB（宁曼）或 Maha Larb 提前订位", status: "todo" },
-    { label: "告别按摩预约（可选）", due: "D12 下午", detail: "Muse / Retreat（宁曼 Soi 17）提前几小时电话约", status: "todo" },
+    { label: "Pranom 健康按摩（泰式 11:30）", due: "D12 上午", detail: "古城 Kad Klang Wiang（Ratchadamnoen 路），每日 10:00–21:00，泰式约 150 铢/时；三人建议提前电话约或早点到", status: "todo" },
     { label: "Bar.San. 营业", due: "D12 21:00", detail: "18:00 开门，21:00 后人较多；Noir 同街可替换", status: "todo" }
   ];
 
@@ -664,6 +675,7 @@ for (const u of updatePois) {
 }
 sources = sources.filter((x) => x.id !== "src-gm-nimman-soi6");
 for (const s of newSources) if (!sources.some((x) => x.id === s.id)) sources.push(s);
+for (const u of updateSources) { const s = sources.find((x) => x.id === u.id); if (s) Object.assign(s, u.patch); }
 
 /* 一次性迁移：为缺失 source/plan 的 POI 补默认值（幂等） */
 for (const p of pois) {

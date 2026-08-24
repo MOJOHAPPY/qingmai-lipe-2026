@@ -907,18 +907,19 @@
   },
   {
     "id": "src-gm-mango-sticky",
-    "title": "Mango Sticky Rice 芒果糯米在對面（Wanderlog）",
-    "url": "https://wanderlog.com/zh/place/details/9082845/",
+    "title": "Pranom Health Massage（ประนอม นวดเพื่อสุขภาพ）· Google 中文名「芒果糯米在對面」",
+    "url": "https://www.taiguo.org/REVIEWS-pranom-health-massage-17335-l.html",
     "type": "platform",
     "role": "visitor-info",
     "language": "zh-CN",
-    "checkedAt": "2026-08-21",
+    "checkedAt": "2026-08-24",
     "status": "checked",
     "supports": [
       "location",
-      "hours"
+      "hours",
+      "pricing"
     ],
-    "notes": "Blue coffee/7-11 对面摊位，约下午 4 点后出摊。"
+    "notes": "古城 Ratchadamnoen 路 71 号 Kad Klang Wiang 内；每日 10:00–21:00；泰式按摩 1 小时约 150 泰铢、足底 180、精油 300；Mapcarta 坐标 18.78763,98.9899。"
   },
   {
     "id": "src-gm-square",
