@@ -1452,5 +1452,35 @@
       "ticket"
     ],
     "notes": "Mae Rim；每日 09:00–17:00（最晚 16:30 入场），门票约 188 泰铢，1–2 小时。"
+  },
+  {
+    "id": "src-gm-market-cnx",
+    "title": "Vintage Market (เท มาร์เก็ต CNX)（Trip.com 清迈市集攻略 / Mapcarta）",
+    "url": "https://tw.trip.com/moments/theme/poi-coconut-market-136623675-comprehensive-guides-993136/",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-24",
+    "status": "checked",
+    "supports": [
+      "location",
+      "hours",
+      "rating"
+    ],
+    "notes": "清迈大学旁 Su Thep；公开信息显示周二–周四 17:00–22:00（Trip.com 显示至 23:00）；Mapcarta 坐标 18.79423, 98.9646，亦称 Thae Market CNX。"
+  },
+  {
+    "id": "src-gm-daruma-japan",
+    "title": "DARUMA JAPAN CHIANGMAI（Saraphi，待核）",
+    "url": "https://www.google.com/maps/search/?api=1&query=DARUMA+JAPAN+CHIANGMAI+Saraphi",
+    "type": "platform",
+    "role": "visitor-info",
+    "language": "zh-CN",
+    "checkedAt": "2026-08-24",
+    "status": "checked",
+    "supports": [
+      "location"
+    ],
+    "notes": "用户提供地点名；Saraphi 位于清迈⇄南奔铁路沿线，具体位置/营业时间待核。"
   }
 ]

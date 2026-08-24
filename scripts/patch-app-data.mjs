@@ -13,9 +13,9 @@ const write = (f, d) => fs.writeFileSync(path.join(root, "data", f), JSON.string
    来源（Google 合集地点复核；Google 域名本环境不可访问，
    统一用可打开的第三方页面 + 搜索摘要复核，checkedAt 2026-08-21）
    ================================================================ */
-const mkSource = (id, title, url, supports = ["location", "hours", "rating"], notes = "") => ({
+const mkSource = (id, title, url, supports = ["location", "hours", "rating"], notes = "", checkedAt = "2026-08-21") => ({
   id, title, url, type: "platform", role: "visitor-info", language: "zh-CN",
-  checkedAt: "2026-08-21", status: "checked", supports, notes
+  checkedAt, status: "checked", supports, notes
 });
 const newSources = [
   mkSource("src-gm-aiyaret", "Aiyaret Massage（携程攻略）", "https://you.ctrip.com/sight/chiangmai209/4865815.html", ["location", "hours"], "187/10 Chang Klan Rd，约 10:00–21:00，评分约 5.0。"),
@@ -62,7 +62,9 @@ const newSources = [
   mkSource("src-gm-win-cosmetics", "Win Cosmetics 长华林店（穷游 / 十六番）", "https://place.qyer.com/poi/V2UJYFFnBz5TZFI_Cms/", ["location", "hours"], "塔佩门一带；一楼护肤彩妆、二楼洗护+零食。"),
   mkSource("src-gm-chiangmai-cosmetics", "Chiang Mai Cosmetics（携程 / 十六番）", "https://you.ctrip.com/shopping/chiangmai209/1728549.html", ["location", "hours"], "帕辛寺对面 + 塔佩店；塔佩店约 11:00–21:00。"),
   mkSource("src-gm-nicha", "Nicha Chiangmai Natural Cotton（待核）", "https://www.google.com/maps/search/?api=1&query=Nicha+Chiangmai+Natural+Cotton", ["location"], "天然棉织品店，位置待核。"),
-  mkSource("src-gm-tiger-kingdom", "Tiger Kingdom Chiang Mai（Trip.com / Pickyourtrail）", "https://sg.trip.com/moments/theme/poi-tiger-kingdom-13581840-guides-993135/", ["location", "hours", "ticket"], "Mae Rim；每日 09:00–17:00（最晚 16:30 入场），门票约 188 泰铢，1–2 小时。")
+  mkSource("src-gm-tiger-kingdom", "Tiger Kingdom Chiang Mai（Trip.com / Pickyourtrail）", "https://sg.trip.com/moments/theme/poi-tiger-kingdom-13581840-guides-993135/", ["location", "hours", "ticket"], "Mae Rim；每日 09:00–17:00（最晚 16:30 入场），门票约 188 泰铢，1–2 小时。", "2026-08-21"),
+  mkSource("src-gm-market-cnx", "Vintage Market (เท มาร์เก็ต CNX)（Trip.com 清迈市集攻略 / Mapcarta）", "https://tw.trip.com/moments/theme/poi-coconut-market-136623675-comprehensive-guides-993136/", ["location", "hours", "rating"], "清迈大学旁 Su Thep；公开信息显示周二–周四 17:00–22:00（Trip.com 显示至 23:00）；Mapcarta 坐标 18.79423, 98.9646，亦称 Thae Market CNX。", "2026-08-24"),
+  mkSource("src-gm-daruma-japan", "DARUMA JAPAN CHIANGMAI（Saraphi，待核）", "https://www.google.com/maps/search/?api=1&query=DARUMA+JAPAN+CHIANGMAI+Saraphi", ["location"], "用户提供地点名；Saraphi 位于清迈⇄南奔铁路沿线，具体位置/营业时间待核。", "2026-08-24")
 ];
 
 /* ================================================================
@@ -389,7 +391,23 @@ const collectionPois = [
     note: "Mae Rim 的老虎园，可近距离看老虎、有笼舍参观与合影项目，距大象粑粑造纸园很近，适合北线包车日顺路。",
     plan: "D4 北线包车日备选：包车时间充裕且想加一站时，从造纸园顺路前往。",
     tip: "门票约 188 泰铢起，合影/互动另计、部分需预约；动物福利有争议，去前自行评估。",
-    source: "src-gm-tiger-kingdom", mapUrl: "https://www.google.com/maps/search/?api=1&query=Tiger+Kingdom+Chiang+Mai", sourceIds: ["src-gm-tiger-kingdom"], themeTags: ["nature", "mae-rim", "user-requested"] })
+    source: "src-gm-tiger-kingdom", mapUrl: "https://www.google.com/maps/search/?api=1&query=Tiger+Kingdom+Chiang+Mai", sourceIds: ["src-gm-tiger-kingdom"], themeTags: ["nature", "mae-rim", "user-requested"] }),
+
+  /* ---- 用户新增：9/25 Vintage 市集 The Market CNX + 宁曼 Soi 6 周五夜市备选 + DARUMA JAPAN ---- */
+  POI({ id: "poi-gm-market-cnx", name: "Vintage Market (เท มาร์เก็ต CNX)", name_zh: "Vintage 市集 · The Market CNX（清迈大学旁）", area: "Su Thep / 清迈大学", category: "market", coords: [18.79423, 98.9646], rating: 4.3, hours: "周二–周四 17:00–22:00（Trip.com 显示至 23:00）", sourceTag: "用户新增",
+    note: "清迈大学旁（Su Thep）的复古市集，中古服饰、古着、手作与街头小吃都有；你来这主要是因为这里有一位长得像 LISA 的老板可以画海娜（Mehndi 手绘）。",
+    plan: "D12（10/6 周二）傍晚 17:00 顺路安排：找像 LISA 的老板画海娜，再顺逛中古摊与街头小吃。",
+    tip: "公开营业周二–周四 17:00–22:00，10/6 是周二；海娜画完让染料停留 2–6 小时再洗掉，期间别碰水/别摩擦，颜色才深。",
+    whyWorthIt: "这趟去 The Market CNX 主要是为了找那位长得像 LISA 的海娜老板画一个手绘：在清迈大学旁的复古市集里画完海娜，再顺路逛逛中古衣服和手作摊，给告别日添一件特别的纪念。",
+    detailSections: [ { title: "在这里做什么", items: ["找长得像 LISA 的老板画海娜（Mehndi），图案先商量好再动手", "顺逛中古服饰、古着与手作摊，晚上有街头小吃"] }, { title: "注意", items: ["公开营业周二–周四 17:00–22:00，10/6 是周二，先到先画", "画完 2–6 小时内别碰水/别摩擦，颜色才深；价格约 200–500 泰铢，以现场为准"] } ],
+    sourceIds: ["src-gm-market-cnx"], mapUrl: "https://www.google.com/maps/search/?api=1&query=%E0%B9%80%E0%B8%97+%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%95+CNX+Chiang+Mai" }),
+  POI({ id: "poi-gm-daruma-japan", name: "DARUMA JAPAN CHIANGMAI", name_zh: "DARUMA JAPAN（Saraphi 日料/日货，待核）", area: "Saraphi（清迈⇄南奔之间）", category: "food", coords: [18.7100, 99.0450], hours: "待核", sourceTag: "用户新增",
+    note: "你提供的地点名；位于清迈与南奔之间的 Saraphi，具体位置与营业时间待核（需要 Google 地图截图或地址确认）。",
+    plan: "D3 南奔线备选：若确认在 Saraphi 站附近，可乘南奔火车中途下车顺访。",
+    tip: "待核：位置与营业时间未确认，先用 Saraphi 区级坐标占位；确认后我会把它升入主路线。",
+    whyWorthIt: "你想加入的 Saraphi 日料/日货店：Saraphi 正好在清迈⇄南奔铁路沿线，若位置确认，可并进南奔一日游的顺路行程，不用单独跑一趟。",
+    detailSections: [ { title: "现状", items: ["仅有地点名，具体位置/营业时间待核", "先放在 D3 南奔日备选，确认后再升主路线"] }, { title: "待你补充", items: ["Google 地图截图或详细地址", "营业时间与是否需预约"] } ],
+    sourceIds: ["src-gm-daruma-japan"], mapUrl: "https://www.google.com/maps/search/?api=1&query=DARUMA+JAPAN+CHIANGMAI+Saraphi" })
 ];
 
 /* ================================================================
@@ -476,7 +494,7 @@ function patchDays(days) {
     { fromPoiId: "poi-gm-judys", toPoiId: "poi-gm-mahoree", mode: "火车（返程 14:15）+ Grab + 步行", minutes: 150, label: "乘 14:15 返程回清迈（约 15:00），回酒店休息，晚上步行到 Prapokklao 爵士吧" },
     { fromPoiId: "poi-thapae-twins", toPoiId: "poi-gm-mahoree", mode: "步行", minutes: 15, label: "古城内走到 Prapokklao 路爵士吧" }
   ];
-  d3.candidates = ["poi-gm-mae-tia", "poi-gm-apollo-cafe", "poi-baan-kang-wat", "poi-wild-rose-yoga", "poi-sp-chicken"];
+  d3.candidates = ["poi-gm-mae-tia", "poi-gm-apollo-cafe", "poi-baan-kang-wat", "poi-wild-rose-yoga", "poi-sp-chicken", "poi-gm-daruma-japan"];
   d3.reminders = [
     { label: "南奔火车票（去程约 09:30 / 返程 14:15）", due: "D3 当天", detail: "清迈站现场购票带护照；到南奔站立即买返程票，错过 14:15 要等 19:15", status: "todo" },
     { label: "南奔古寺着装提醒", due: "D3 当天", detail: "长裤/过膝裙+包肩，进大殿脱鞋", status: "todo" }
@@ -596,25 +614,28 @@ function patchDays(days) {
 
   const d12 = set("day-12");
   d12.title = "瓦洛洛手信 + 告别之夜";
-  d12.summary = "上午在瓦洛洛市场集中买手信，顺路吃芒果糯米在對面，下午逛 S.Shinawatra 泰丝店，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。";
+  d12.summary = "上午在瓦洛洛市场集中买手信，顺路吃芒果糯米在對面，下午逛 S.Shinawatra 泰丝店，傍晚到清迈大学旁的 The Market CNX 找像 LISA 的老板画海娜、顺逛中古摊，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。";
   d12.anchors = ["poi-warorot", "poi-gm-bar-san"];
   d12.routeStops = [
     { poiId: "poi-bed-changkian", order: 0, time: "09:30", role: "lodging-anchor" },
     { poiId: "poi-warorot", order: 1, time: "10:00", role: "market" },
     { poiId: "poi-gm-mango-sticky", order: 2, time: "11:30", role: "food" },
     { poiId: "poi-gm-shinawatra-silk", order: 3, time: "14:00", role: "shopping" },
-    { poiId: "poi-gm-kinlarb", order: 4, time: "18:30", role: "dinner" },
-    { poiId: "poi-gm-bar-san", order: 5, time: "21:00", role: "night" }
+    { poiId: "poi-gm-market-cnx", order: 4, time: "17:00", role: "market" },
+    { poiId: "poi-gm-kinlarb", order: 5, time: "18:45", role: "dinner" },
+    { poiId: "poi-gm-bar-san", order: 6, time: "21:00", role: "night" }
   ];
   d12.transitSegments = [
     { fromPoiId: "poi-bed-changkian", toPoiId: "poi-warorot", mode: "Grab", minutes: 15, label: "到古城东瓦洛洛" },
     { fromPoiId: "poi-warorot", toPoiId: "poi-gm-mango-sticky", mode: "步行", minutes: 5, label: "瓦洛洛/711 一带甜品摊" },
     { fromPoiId: "poi-gm-mango-sticky", toPoiId: "poi-gm-shinawatra-silk", mode: "Grab", minutes: 10, label: "到 Huay Kaew 泰丝店" },
-    { fromPoiId: "poi-gm-shinawatra-silk", toPoiId: "poi-gm-kinlarb", mode: "Grab", minutes: 8, label: "回宁曼晚餐" },
+    { fromPoiId: "poi-gm-shinawatra-silk", toPoiId: "poi-gm-market-cnx", mode: "Grab", minutes: 15, label: "从 Huay Kaew 泰丝店到清迈大学旁 Su Thep" },
+    { fromPoiId: "poi-gm-market-cnx", toPoiId: "poi-gm-kinlarb", mode: "Grab", minutes: 15, label: "从 Su Thep 回宁曼 Sirimangkalajarn 告别晚餐" },
     { fromPoiId: "poi-gm-kinlarb", toPoiId: "poi-gm-bar-san", mode: "Grab", minutes: 15, label: "到河畔告别酒吧" }
   ];
   d12.candidates = ["poi-gm-noir", "poi-gm-muse-massage", "poi-gm-retreat-nimman", "poi-gm-aiyaret", "poi-gm-mee-an-ja-kin", "poi-chiangmai-farewell"];
   d12.reminders = [
+    { label: "The Market CNX 营业日确认", due: "D12 当天", detail: "周二–周四 17:00–22:00，10/6 是周二；画海娜找像 LISA 的老板", status: "todo" },
     { label: "告别晚餐订位", due: "提前 1 天", detail: "KINLARB（宁曼）或 Maha Larb 提前订位", status: "todo" },
     { label: "告别按摩预约（可选）", due: "D12 下午", detail: "Muse / Retreat（宁曼 Soi 17）提前几小时电话约", status: "todo" },
     { label: "Bar.San. 营业", due: "D12 21:00", detail: "18:00 开门，21:00 后人较多；Noir 同街可替换", status: "todo" }
@@ -625,7 +646,7 @@ function patchDays(days) {
 
 /* ---------- 执行 ---------- */
 let pois = read("pois.json");
-const sources = read("sources.json");
+let sources = read("sources.json");
 const days = read("itinerary.json");
 const poisBefore = pois.length, srcBefore = sources.length;
 
@@ -636,10 +657,12 @@ for (const p of collectionPois) {
 }
 /* 用户确认删除的地点（幂等） */
 pois = pois.filter((x) => x.id !== "poi-gm-mae-ho-phra");
+pois = pois.filter((x) => x.id !== "poi-gm-nimman-soi6");
 for (const u of updatePois) {
   const p = pois.find((x) => x.id === u.id);
   if (p) Object.assign(p, u.patch);
 }
+sources = sources.filter((x) => x.id !== "src-gm-nimman-soi6");
 for (const s of newSources) if (!sources.some((x) => x.id === s.id)) sources.push(s);
 
 /* 一次性迁移：为缺失 source/plan 的 POI 补默认值（幂等） */

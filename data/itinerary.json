@@ -264,7 +264,8 @@
       "poi-gm-apollo-cafe",
       "poi-baan-kang-wat",
       "poi-wild-rose-yoga",
-      "poi-sp-chicken"
+      "poi-sp-chicken",
+      "poi-gm-daruma-japan"
     ],
     "transitSegments": [
       {
@@ -1082,7 +1083,7 @@
     "date": "2026-10-06",
     "title": "瓦洛洛手信 + 告别之夜",
     "city": "Chiang Mai",
-    "summary": "上午在瓦洛洛市场集中买手信，顺路吃芒果糯米在對面，下午逛 S.Shinawatra 泰丝店，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。",
+    "summary": "上午在瓦洛洛市场集中买手信，顺路吃芒果糯米在對面，下午逛 S.Shinawatra 泰丝店，傍晚到清迈大学旁的 The Market CNX 找像 LISA 的老板画海娜、顺逛中古摊，晚上吃告别晚餐，最后到 Bar.San. 喝一杯收尾。",
     "anchors": [
       "poi-warorot",
       "poi-gm-bar-san"
@@ -1113,14 +1114,20 @@
         "role": "shopping"
       },
       {
-        "poiId": "poi-gm-kinlarb",
+        "poiId": "poi-gm-market-cnx",
         "order": 4,
-        "time": "18:30",
+        "time": "17:00",
+        "role": "market"
+      },
+      {
+        "poiId": "poi-gm-kinlarb",
+        "order": 5,
+        "time": "18:45",
         "role": "dinner"
       },
       {
         "poiId": "poi-gm-bar-san",
-        "order": 5,
+        "order": 6,
         "time": "21:00",
         "role": "night"
       }
@@ -1157,10 +1164,17 @@
       },
       {
         "fromPoiId": "poi-gm-shinawatra-silk",
+        "toPoiId": "poi-gm-market-cnx",
+        "mode": "Grab",
+        "minutes": 15,
+        "label": "从 Huay Kaew 泰丝店到清迈大学旁 Su Thep"
+      },
+      {
+        "fromPoiId": "poi-gm-market-cnx",
         "toPoiId": "poi-gm-kinlarb",
         "mode": "Grab",
-        "minutes": 8,
-        "label": "回宁曼晚餐"
+        "minutes": 15,
+        "label": "从 Su Thep 回宁曼 Sirimangkalajarn 告别晚餐"
       },
       {
         "fromPoiId": "poi-gm-kinlarb",
@@ -1171,6 +1185,12 @@
       }
     ],
     "reminders": [
+      {
+        "label": "The Market CNX 营业日确认",
+        "due": "D12 当天",
+        "detail": "周二–周四 17:00–22:00，10/6 是周二；画海娜找像 LISA 的老板",
+        "status": "todo"
+      },
       {
         "label": "告别晚餐订位",
         "due": "提前 1 天",

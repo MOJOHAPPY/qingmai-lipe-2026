@@ -16,10 +16,26 @@ fs.mkdirSync(shots, { recursive: true });
 
 const errors = [];
 const warnings = [];
+// 外部网络依赖（地图瓦片 / Firebase / Photon 搜索）：沙箱或断网环境下失败属预期，不判为页面错误
+function isExternalNet(url) {
+  try {
+    const u = new URL(url);
+    const host = u.hostname;
+    return /(^|\.)(mt[0-9]?\.google\.com|googleapis\.com|tile\.openstreetmap\.org|firebaseio\.com|photon\.komoot\.io)$/.test(host);
+  } catch { return false; }
+}
+
 function attach(page, tag) {
-  page.on("console", (m) => { if (m.type() === "error") errors.push(tag + " console.error: " + m.text()); if (m.type() === "warning") warnings.push(tag + " console.warn: " + m.text()); });
+  page.on("console", (m) => {
+    if (m.type() === "error") {
+      // 资源加载失败由 requestfailed（带 URL）精确上报，这里忽略 Chrome 的通用提示
+      if (/^Failed to load resource: /.test(m.text())) return;
+      errors.push(tag + " console.error: " + m.text());
+    }
+    if (m.type() === "warning") warnings.push(tag + " console.warn: " + m.text());
+  });
   page.on("pageerror", (e) => errors.push(tag + " pageerror: " + e.message));
-  page.on("requestfailed", (r) => { const err = r.failure()?.errorText || ""; if (err !== "net::ERR_ABORTED") errors.push(tag + " requestfailed: " + r.url() + " -> " + err); });
+  page.on("requestfailed", (r) => { const err = r.failure()?.errorText || ""; if (err !== "net::ERR_ABORTED" && !isExternalNet(r.url())) errors.push(tag + " requestfailed: " + r.url() + " -> " + err); });
 }
 
 async function run() {

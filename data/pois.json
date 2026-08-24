@@ -4171,5 +4171,96 @@
     "sourceIds": [
       "src-gm-tiger-kingdom"
     ]
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "用户新增",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-market-cnx",
+    "name": "Vintage Market (เท มาร์เก็ต CNX)",
+    "name_zh": "Vintage 市集 · The Market CNX（清迈大学旁）",
+    "area": "Su Thep / 清迈大学",
+    "category": "market",
+    "coords": [
+      18.79423,
+      98.9646
+    ],
+    "rating": 4.3,
+    "hours": "周二–周四 17:00–22:00（Trip.com 显示至 23:00）",
+    "note": "清迈大学旁（Su Thep）的复古市集，中古服饰、古着、手作与街头小吃都有；你来这主要是因为这里有一位长得像 LISA 的老板可以画海娜（Mehndi 手绘）。",
+    "plan": "D12（10/6 周二）傍晚 17:00 顺路安排：找像 LISA 的老板画海娜，再顺逛中古摊与街头小吃。",
+    "tip": "公开营业周二–周四 17:00–22:00，10/6 是周二；海娜画完让染料停留 2–6 小时再洗掉，期间别碰水/别摩擦，颜色才深。",
+    "whyWorthIt": "这趟去 The Market CNX 主要是为了找那位长得像 LISA 的海娜老板画一个手绘：在清迈大学旁的复古市集里画完海娜，再顺路逛逛中古衣服和手作摊，给告别日添一件特别的纪念。",
+    "detailSections": [
+      {
+        "title": "在这里做什么",
+        "items": [
+          "找长得像 LISA 的老板画海娜（Mehndi），图案先商量好再动手",
+          "顺逛中古服饰、古着与手作摊，晚上有街头小吃"
+        ]
+      },
+      {
+        "title": "注意",
+        "items": [
+          "公开营业周二–周四 17:00–22:00，10/6 是周二，先到先画",
+          "画完 2–6 小时内别碰水/别摩擦，颜色才深；价格约 200–500 泰铢，以现场为准"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-market-cnx"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=%E0%B9%80%E0%B8%97+%E0%B8%A1%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B9%80%E0%B8%81%E0%B9%87%E0%B8%95+CNX+Chiang+Mai",
+    "source": "src-gm-market-cnx"
+  },
+  {
+    "city": "Chiang Mai",
+    "priority": "preferred",
+    "contentTier": "standard",
+    "sourceTag": "用户新增",
+    "themeTags": [
+      "google-collection"
+    ],
+    "mustVisit": false,
+    "id": "poi-gm-daruma-japan",
+    "name": "DARUMA JAPAN CHIANGMAI",
+    "name_zh": "DARUMA JAPAN（Saraphi 日料/日货，待核）",
+    "area": "Saraphi（清迈⇄南奔之间）",
+    "category": "food",
+    "coords": [
+      18.71,
+      99.045
+    ],
+    "hours": "待核",
+    "note": "你提供的地点名；位于清迈与南奔之间的 Saraphi，具体位置与营业时间待核（需要 Google 地图截图或地址确认）。",
+    "plan": "D3 南奔线备选：若确认在 Saraphi 站附近，可乘南奔火车中途下车顺访。",
+    "tip": "待核：位置与营业时间未确认，先用 Saraphi 区级坐标占位；确认后我会把它升入主路线。",
+    "whyWorthIt": "你想加入的 Saraphi 日料/日货店：Saraphi 正好在清迈⇄南奔铁路沿线，若位置确认，可并进南奔一日游的顺路行程，不用单独跑一趟。",
+    "detailSections": [
+      {
+        "title": "现状",
+        "items": [
+          "仅有地点名，具体位置/营业时间待核",
+          "先放在 D3 南奔日备选，确认后再升主路线"
+        ]
+      },
+      {
+        "title": "待你补充",
+        "items": [
+          "Google 地图截图或详细地址",
+          "营业时间与是否需预约"
+        ]
+      }
+    ],
+    "sourceIds": [
+      "src-gm-daruma-japan"
+    ],
+    "mapUrl": "https://www.google.com/maps/search/?api=1&query=DARUMA+JAPAN+CHIANGMAI+Saraphi",
+    "source": "src-gm-daruma-japan"
   }
 ]

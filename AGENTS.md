@@ -139,3 +139,6 @@ guides/<trip-slug>/
 - 地点位置修正（2026-08-21）：删除 Mae Ho Phra（用户确认）；按用户 Google 地图截图 OCR 定位——ApolloCafe = 南奔 18 Charoen Rat Rd（评分 4.7/136，移入 D3 南奔日备选）、Nicha 天然棉 = 清迈 56 Kuang Men Rd, Chang Moi（评分 4.7/31）、KINLARB CHIANG MAI = 宁曼 Sirimangkalajarn Rd（评分 4.9/89，标记必去）；Maha Larb CNX 保持备选。截图文件夹已加入 .gitignore。
 
 - 行前准备拆分（2026-08-21）：行前准备拆成三张可独立编辑的卡片——🧳 必备行李 / 📋 注意事项 / ✅ 待办事项（各自 ✏️编辑/↩️撤销/🔄默认，localStorage tripListOverrides 键不变，待办勾选独立持久化）；总览导航「行前准备」指向必备行李卡。
+
+- 新增路线地点（2026-08-24）：① Vintage 市集 The Market CNX（เท มาร์เก็ต CNX，清迈大学旁 Su Thep，Mapcarta 坐标 18.79423,98.9646）——用户说明来此主要是找一位像 LISA 的老板画海娜（Mehndi）；因公开营业日为周二–周四 17:00–22:00，从 D1（9/25 周五）移到 D12（10/6 周二，全行程唯一对得上营业日的日子）傍晚 17:00 作为普通一站（不改变 D12 主题/标题/主锚点），地点卡片保留海娜说明与护理提示（画完 2–6 小时不碰水，价格约 200–500 铢以现场为准）；D1 已回退为购物+晚餐+爵士原动线，并删除保险备选宁曼 Soi 6 周五夜市（poi-gm-nimman-soi6 及来源 src-gm-nimman-soi6 一并幂等移除）。② DARUMA JAPAN CHIANGMAI（Saraphi）无可靠公开信息，先以 poi-gm-daruma-japan（Saraphi 区级规划坐标 18.710,99.045，hours=待核）入 D3 南奔线备选，待用户补 Google 地图截图/地址后再升主路线。数据源：Trip.com 清迈市集攻略 / Mapcarta / chiangmailocator（checkedAt 2026-08-24）。
+- 验证脚本增强（2026-08-24）：verify-app.mjs 增加 isExternalNet() 过滤——地图瓦片（mt*.google.com / googleapis / OSM）、Firebase（firebaseio.com）、Photon（photon.komoot.io）在沙箱/断网环境下失败属预期，不计为页面错误；并忽略 Chrome 通用 'Failed to load resource' console.error（由 requestfailed 带 URL 精确上报）。
