@@ -1090,9 +1090,9 @@ function loadReminders(){
     if (raw && Array.isArray(raw.items)){ REM.items = raw.items; return; }
   } catch(e){}
   REM.items = (DATA.dayReminders || []).map(function(r){ return { id: r.id, text: r.text, done: false }; });
-  saveReminders();
+  SEEDING = true; saveReminders(); SEEDING = false;
 }
-function saveReminders(){ try { localStorage.setItem("tripReminders", JSON.stringify({ items: REM.items })); } catch(e){} markDirty(); }
+function saveReminders(){ try { localStorage.setItem("tripReminders", JSON.stringify({ items: REM.items })); } catch(e){} if (!SEEDING) markDirty(); }
 function pushRemHist(){ try { REM._hist.push(JSON.stringify(REM.items)); if (REM._hist.length > 30) REM._hist.shift(); } catch(e){} }
 function renderReminderItems(editing){
   var html = "";
@@ -1402,16 +1402,16 @@ function renderListItems(key, cls){
 }
 
 /* ---------- 云端同步（Firebase Realtime Database） ---------- */
-var SYNC = { room:"", localUpdatedAt:0, lastSyncAt:0, status:"off", panel:false, _t:null };
+var SYNC = { room:"", localUpdatedAt:0, lastSyncAt:0, hasReal:false, status:"off", panel:false, _t:null };
 var SEEDING = false;
 var SYNC_DB = "https://qingmai-lipe-2026-default-rtdb.firebaseio.com";
 function loadSyncMeta(){
   try { var m = JSON.parse(localStorage.getItem("tripSyncMeta") || "{}");
-    if (m && typeof m === "object"){ SYNC.room = m.room || ""; SYNC.localUpdatedAt = m.localUpdatedAt || 0; SYNC.lastSyncAt = m.lastSyncAt || 0; }
+    if (m && typeof m === "object"){ SYNC.room = m.room || ""; SYNC.localUpdatedAt = m.localUpdatedAt || 0; SYNC.lastSyncAt = m.lastSyncAt || 0; SYNC.hasReal = !!m.hasReal; }
   } catch(e){}
 }
-function saveSyncMeta(){ try { localStorage.setItem("tripSyncMeta", JSON.stringify({ room:SYNC.room, localUpdatedAt:SYNC.localUpdatedAt, lastSyncAt:SYNC.lastSyncAt })); } catch(e){} }
-function markDirty(){ SYNC.localUpdatedAt = Date.now(); saveSyncMeta(); if (SYNC.room){ if (SYNC._t) clearTimeout(SYNC._t); SYNC._t = setTimeout(doSync, 1500); } }
+function saveSyncMeta(){ try { localStorage.setItem("tripSyncMeta", JSON.stringify({ room:SYNC.room, localUpdatedAt:SYNC.localUpdatedAt, lastSyncAt:SYNC.lastSyncAt, hasReal:SYNC.hasReal })); } catch(e){} }
+function markDirty(){ SYNC.localUpdatedAt = Date.now(); SYNC.hasReal = true; saveSyncMeta(); if (SYNC.room){ if (SYNC._t) clearTimeout(SYNC._t); SYNC._t = setTimeout(doSync, 1500); } }
 function syncUrl(){ return SYNC_DB + "/rooms/" + encodeURIComponent(SYNC.room) + "/data.json"; }
 function setSyncStatus(st){ SYNC.status = st; renderSyncStatus(); }
 function renderSyncStatus(){
@@ -1459,8 +1459,13 @@ function doSync(){
   fetch(syncUrl()).then(function(r){ return r.json(); }).then(function(remote){
     if (remote == null){ return pushLocal(); }
     var rUpd = remote.updatedAt || 0;
-    if (SYNC.localUpdatedAt > rUpd){ return pushLocal(); }
-    if (rUpd > SYNC.localUpdatedAt){ applyRemoteBlob(remote); SYNC.localUpdatedAt = rUpd; }
+    if (SYNC.localUpdatedAt > rUpd){
+      if (SYNC.hasReal){ return pushLocal(); }
+      // 本机只有默认/播种数据（无真实修改）：不覆盖云端，改为镜像云端
+      applyRemoteBlob(remote); SYNC.localUpdatedAt = rUpd;
+    } else if (rUpd > SYNC.localUpdatedAt){
+      applyRemoteBlob(remote); SYNC.localUpdatedAt = rUpd;
+    }
     SYNC.lastSyncAt = Date.now(); saveSyncMeta(); setSyncStatus("ok"); renderSyncPanel();
   }).catch(function(){ setSyncStatus("error"); });
 }
@@ -1476,9 +1481,13 @@ function renderSyncPanel(){
     '<div class="f-row"><span class="f-lbl">状态</span><span id="syncStatus" class="sync-status">—</span></div>' +
     '<div class="f-row">' +
       '<button class="btn primary" id="syncNow">🔄 立即同步</button>' +
+      '<button class="btn mini" id="syncPush">⬆️ 强制上传</button>' +
+      '<button class="btn mini" id="syncPull">⬇️ 强制下载</button>' +
+    '</div>' +
+    '<div class="f-row">' +
       '<button class="btn mini" id="syncGenRoom">🎲 生成新房间号</button>' +
     '</div>' +
-    '<div class="sync-hint">三台手机填同一个房间号即互通：任一方修改行程/清单/花费，其他手机约 20 秒内自动更新；以最后修改为准。数据存 Firebase（公开规则 + 随机房间号），仅你们这个房间可读写。</div>';
+    '<div class="sync-hint">三台手机填同一个房间号即互通：任一方修改行程/清单/花费，其他手机约 20 秒内自动更新。新设备接入默认只下载不上传，避免空数据覆盖云端；「强制上传 / 强制下载」可手动指定方向。数据存 Firebase（公开规则 + 随机房间号），仅你们这个房间可读写。</div>';
   renderSyncStatus();
 }
 function openSyncPanel(){ SYNC.panel = true; renderSyncPanel(); var sh = document.getElementById("syncSheet"); if (sh) sh.classList.add("open"); }
@@ -1494,6 +1503,10 @@ document.getElementById("syncSheet").addEventListener("click", function(e){
   if (gn){ SYNC.room = "t" + Math.random().toString(36).slice(2, 8); saveSyncMeta(); renderSyncPanel(); toast("已生成新房间号"); return; }
   var now = e.target.closest("#syncNow");
   if (now){ doSync(); return; }
+  var up = e.target.closest("#syncPush");
+  if (up){ if (!SYNC.room){ toast("请先设置房间号"); return; } SYNC.hasReal = true; pushLocal().then(function(){ if (SYNC.status !== "error") toast("已强制上传本地数据"); }); return; }
+  var dl = e.target.closest("#syncPull");
+  if (dl){ if (!SYNC.room){ toast("请先设置房间号"); return; } setSyncStatus("syncing"); fetch(syncUrl()).then(function(r){ return r.json(); }).then(function(remote){ if (remote == null){ setSyncStatus("ok"); renderSyncPanel(); toast("云端暂无数据"); return; } applyRemoteBlob(remote); SYNC.localUpdatedAt = remote.updatedAt || 0; SYNC.lastSyncAt = Date.now(); saveSyncMeta(); setSyncStatus("ok"); renderSyncPanel(); toast("已强制下载云端数据"); }).catch(function(){ setSyncStatus("error"); toast("下载失败，请检查网络"); }); return; }
 });
 
 /* ---------- 事件 ---------- */

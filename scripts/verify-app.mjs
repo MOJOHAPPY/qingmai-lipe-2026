@@ -287,6 +287,69 @@ async function run() {
   await page.evaluate(async (r) => { try { await fetch("https://qingmai-lipe-2026-default-rtdb.firebaseio.com/rooms/" + encodeURIComponent(r) + ".json", { method: "DELETE" }); } catch (e) {} }, room);
   await page.click("#syncClose").catch(() => {});
 
+  /* ── 同步防覆盖保护（独立全新浏览器上下文，隔离 localStorage） ── */
+  const ctxP = await browser.newContext({ viewport: { width: 1280, height: 900 } });
+  const p2 = await ctxP.newPage();
+  attach(p2, "syncprotect");
+  await p2.goto(url, { waitUntil: "load", timeout: 45000 });
+  await p2.waitForSelector("#module-overview:not(.hidden)", { timeout: 20000 });
+  await p2.waitForTimeout(1500);
+  const room2 = "vrtest" + Math.floor(Math.random() * 1e6);
+  const rdbRoom = (r) => "https://qingmai-lipe-2026-default-rtdb.firebaseio.com/rooms/" + encodeURIComponent(r) + "/data.json";
+  const customNow = Date.now();
+  const customBlob = { v:1, updatedAt: customNow, overrides:{ days:{ "day-1": { routeStops: [ { poiId:"poi-cnx-airport", order:1, time:"09:15", role:"arrival", poi:{} } ], edited:true } } }, lists:{}, expenses:{ items:[ { id:"e-cloud", name:"云端自定义花费", amount:999, currency:"CNY", date:"", category:"other", type:"shared", person:"", dayId:"", poiId:"", createdAt:99 } ], rate:5 }, reminders:{ items:[ { id:"r-cloud", text:"云端自定义提醒·防覆盖测试", done:false } ] } };
+  await p2.evaluate(async ({ u, blob }) => { try { await fetch(u, { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(blob) }); } catch(e){} }, { u: rdbRoom(room2), blob: customBlob });
+  // 用例 A：新设备（pristine）接入只下载不上传
+  await p2.click("#syncBtn");
+  await p2.waitForSelector("#syncSheet.open", { timeout: 5000 });
+  await p2.fill("#syncRoom", room2);
+  await p2.click("#syncSaveRoom");
+  await p2.waitForTimeout(4000);
+  const cloudA = await p2.evaluate(async (u) => { try { const r = await fetch(u); return await r.json(); } catch(e){ return { err:String(e) }; } }, rdbRoom(room2));
+  const pristineNoOverwrite = !!(cloudA && cloudA.reminders && cloudA.reminders.items && cloudA.reminders.items[0] && cloudA.reminders.items[0].text === "云端自定义提醒·防覆盖测试");
+  const pristineDownloaded = await p2.evaluate(() => document.body.innerText.includes("云端自定义提醒·防覆盖测试"));
+  // 用例 A2：本地时间戳更新但无真实修改（hasReal=false）时，不得覆盖云端，应镜像云端
+  await p2.evaluate(({ r }) => { try { localStorage.setItem("tripSyncMeta", JSON.stringify({ room:r, localUpdatedAt: Date.now()+1000, lastSyncAt:0, hasReal:false })); } catch(e){} }, { r: room2 });
+  await p2.reload({ waitUntil: "domcontentloaded" });
+  await p2.waitForSelector("#module-overview:not(.hidden)", { timeout: 20000 });
+  await p2.waitForTimeout(600);
+  await p2.click("#syncBtn");
+  await p2.waitForSelector("#syncSheet.open", { timeout: 5000 });
+  await p2.click("#syncNow");
+  await p2.waitForTimeout(3500);
+  const cloudB = await p2.evaluate(async (u) => { try { const r = await fetch(u); return await r.json(); } catch(e){ return { err:String(e) }; } }, rdbRoom(room2));
+  const guardNoOverwrite = !!(cloudB && cloudB.reminders && cloudB.reminders.items && cloudB.reminders.items[0] && cloudB.reminders.items[0].text === "云端自定义提醒·防覆盖测试");
+  const guardMirrored = await p2.evaluate(() => document.body.innerText.includes("云端自定义提醒·防覆盖测试"));
+  // 用例 B：真实修改（hasReal=true）后，本地比云端新应上传
+  await p2.click("#syncClose").catch(() => {});
+  await p2.click('.module-btn[data-module="expenses"]');
+  await p2.waitForSelector("#module-expenses:not(.hidden)", { timeout: 10000 });
+  await p2.fill("#expName", "防覆盖测试花费");
+  await p2.fill("#expAmount", "88");
+  await p2.selectOption("#expCurrency", "CNY");
+  await p2.click("#expSave");
+  await p2.waitForTimeout(600);
+  await p2.evaluate(async (u) => { try { const r = await fetch(u); const cur = await r.json(); if (cur) cur.updatedAt = Date.now() - 60000; await fetch(u, { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(cur) }); } catch(e){} }, rdbRoom(room2));
+  await p2.click("#syncBtn");
+  await p2.waitForSelector("#syncSheet.open", { timeout: 5000 });
+  await p2.click("#syncNow");
+  await p2.waitForTimeout(3500);
+  const cloudC = await p2.evaluate(async (u) => { try { const r = await fetch(u); return await r.json(); } catch(e){ return { err:String(e) }; } }, rdbRoom(room2));
+  const realEditPushed = !!(cloudC && cloudC.expenses && cloudC.expenses.items && cloudC.expenses.items.some((it) => it.name === "防覆盖测试花费"));
+  // 用例 C：强制下载 / 强制上传按钮存在且可指定方向
+  const syncPushBtn = await p2.locator("#syncPush").count();
+  const syncPullBtn = await p2.locator("#syncPull").count();
+  await p2.evaluate(async (u) => { try { const r = await fetch(u); const cur = await r.json(); cur.reminders = { items: [ { id:"r-fp", text:"强制下载标记", done:false } ] }; cur.updatedAt = Date.now(); await fetch(u, { method:"PUT", headers:{ "Content-Type":"application/json" }, body: JSON.stringify(cur) }); } catch(e){} }, rdbRoom(room2));
+  await p2.click("#syncPull");
+  await p2.waitForTimeout(2500);
+  const forcePullOk = await p2.evaluate(() => { try { const raw = JSON.parse(localStorage.getItem("tripReminders") || "{}"); return !!(raw.items && raw.items.some((it) => it.text === "强制下载标记")); } catch(e){ return false; } });
+  await p2.click("#syncPush");
+  await p2.waitForTimeout(3000);
+  const cloudD = await p2.evaluate(async (u) => { try { const r = await fetch(u); return await r.json(); } catch(e){ return { err:String(e) }; } }, rdbRoom(room2));
+  const forcePushOk = !!(cloudD && cloudD.reminders && cloudD.reminders.items && cloudD.reminders.items.some((it) => it.text === "强制下载标记") && cloudD.updatedAt >= Date.now() - 5000);
+  await p2.evaluate(async (r) => { try { await fetch("https://qingmai-lipe-2026-default-rtdb.firebaseio.com/rooms/" + encodeURIComponent(r) + ".json", { method:"DELETE" }); } catch(e){} }, room2);
+  await ctxP.close();
+
   /* ── 优化项抽查 ── */
   await page.click('.module-btn[data-module="overview"]');
   await page.waitForTimeout(500);
@@ -414,6 +477,7 @@ async function run() {
     tl0, editControls, pickerRows, tl1, transitSegs1, mapMarkersAfterAdd, pendingTransit, tl2, tl3, tl4, tl5, editedBadge,
     seven0, seven1, seven2, tlPersist0, tlPersist1, editedTabMark,
     syncStatus, syncDot, cloudHasData,
+    pristineNoOverwrite, pristineDownloaded, guardNoOverwrite, guardMirrored, realEditPushed, syncPushBtn, syncPullBtn, forcePullOk, forcePushOk,
     memberChipsRow, navChips, todoBoxes, todoDone, fxResult, movedDayTitle,
     addTabs, ocrTabCount, osmInputClass, navBeforePrep, remCardItems, remDone, remAfterReload, remItems0, remItems1, remItems2, remItems3, expInlineOverflowX,
     mScrollX, mMapBeforeContent, mTabs, mMarkers, errors, warnings };
